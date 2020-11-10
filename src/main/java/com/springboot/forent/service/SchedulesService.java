@@ -17,8 +17,8 @@ public class SchedulesService {
 		 return (List<Schedules>) schedulesRespository.findAll();
 	}
 	
-	public void saveSchedule(Schedules schedule) {
-		schedulesRespository.save(schedule);
+	public Schedules saveSchedule(Schedules schedule) {
+		return schedulesRespository.save(schedule);
     }
 
     public Schedules getSchedule(Integer id) {

@@ -1,9 +1,11 @@
 package com.springboot.forent.controller;
 
+import java.net.URI;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -38,8 +40,17 @@ public class SchedulesController {
 	}
 	
 	@PostMapping("/schedules")
-	public void add(@RequestBody Schedules schedule) {
-        schedulesService.saveSchedule(schedule);
+	public ResponseEntity<Schedules> add(@RequestBody Schedules schedule) {
+		try {
+			
+			HttpHeaders header = new HttpHeaders();
+			header.setLocation(new URI("/schedules"));
+			Schedules response = schedulesService.saveSchedule(schedule);
+			return new ResponseEntity<Schedules>(response,header,HttpStatus.CREATED);
+		}catch(Exception ex) {
+			return new ResponseEntity<>(schedule,HttpStatus.PRECONDITION_REQUIRED);
+		}
+        
     }	
 	
     @DeleteMapping("/schedules/{id}")
