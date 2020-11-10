@@ -4,6 +4,7 @@ package com.springboot.forent.controller;
 import static org.mockito.Mockito.doReturn;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -11,7 +12,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -124,6 +124,27 @@ class UsersControllerTest {
 		
 			.andExpect(status().isCreated())
 			.andExpect(header().string(HttpHeaders.LOCATION,"/users"));
+	}
+	
+	@Test
+	@DisplayName("PUT /users/1 is SUCCESSFUL")
+	void updateUserSuccess() throws Exception{
+		Users userFind = new Users(1, "host","John", "Middle Name", "Last-Name-John", "john@gmail.com", "+6911111111111", "password123","2020-11-09 11:00:00");
+		Users userPut = new Users(1,"host","John22", "Middle Name", "Last-Name-John", "john@gmail.com", "+6911111111111", "password123","2020-11-09 11:00:00");
+		doReturn(userFind).when(service).getUser(1);
+		doReturn(userPut).when(service).saveUser(userPut);
+		
+		mockMvc.perform(put("/users/1")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(asJsonString(userPut)))
+			
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
+		
+				.andExpect(jsonPath("$.id_user").value(1))
+				.andExpect(jsonPath("$.type").value("host"))
+				.andExpect(jsonPath("$.first_name").value("John22"));
+			
 	}
 	
 	public String asJsonString(final Object obj) {

@@ -84,7 +84,7 @@ public class UsersController {
         			return new ResponseEntity<>(HttpStatus.PRECONDITION_REQUIRED);
         		}		
             }
-            return new ResponseEntity<Users>(user,HttpStatus.CREATED);
+            return new ResponseEntity<Users>(user,HttpStatus.OK);
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
