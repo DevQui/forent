@@ -20,7 +20,7 @@ public class UsersService {
 		return (List<Users>) usersRepository.findAll();
 	}
 	
-	public void saveUser(Users user) {
+	public Users saveUser(Users user) {
 		OffsetDateTime current = OffsetDateTime.now();
 		String created_datetime = current.toString();	
 		user.setCreated_datetime(created_datetime);
@@ -29,7 +29,8 @@ public class UsersService {
 				StringUtils.isEmpty(user.getUser_password())) {
     		throw new NoSuchElementException();
     	}
-        usersRepository.save(user);
+		
+        return usersRepository.save(user);
     }
 
     public Users getUser(Integer id) {

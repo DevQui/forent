@@ -20,7 +20,6 @@
 /home/devorh/Documents/Proj/forent/src/main/java/com/springboot/forent/model/Location.java
 /home/devorh/Documents/Proj/forent/src/main/java/com/springboot/forent/controller/SchedulesController.java
 /home/devorh/Documents/Proj/forent/src/main/java/com/springboot/forent/service/AmenitiesService.java
-/home/devorh/Documents/Proj/forent/src/main/java/com/springboot/forent/config/UserNotFoundException.java
 /home/devorh/Documents/Proj/forent/src/main/java/com/springboot/forent/config/GlobalExceptionHandler.java
 /home/devorh/Documents/Proj/forent/src/main/java/com/springboot/forent/repository/FavoritesRepository.java
 /home/devorh/Documents/Proj/forent/src/main/java/com/springboot/forent/controller/ReviewsController.java

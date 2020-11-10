@@ -1,6 +1,3 @@
-com/springboot/forent/ReviewsTest.class
-com/springboot/forent/PropertiesTest.class
 com/springboot/forent/ForentApplicationTests.class
-com/springboot/forent/UsersTest.class
-com/springboot/forent/FavoritesTest.class
-com/springboot/forent/SchedulesTest.class
+com/springboot/forent/service/UsersServiceTest.class
+com/springboot/forent/controller/UsersControllerTest.class

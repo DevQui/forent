@@ -1,10 +1,12 @@
 package com.springboot.forent.controller;
 
+import java.net.URI;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,7 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.forent.model.Users;
@@ -36,8 +37,17 @@ public class UsersController {
     }
 	
 	@PostMapping("/users")
-	public void add(@RequestBody Users user) {
-        usersService.saveUser(user);
+	public ResponseEntity<Users> add(@RequestBody Users user) {
+        //return usersService.saveUser(user);
+		try {
+			HttpHeaders header = new HttpHeaders();
+			header.setLocation(new URI("/users"));
+			Users response = usersService.saveUser(user);
+			return new ResponseEntity<Users>(response,header,HttpStatus.CREATED);
+		}catch(Exception ex) {
+			return new ResponseEntity<>(user,HttpStatus.PRECONDITION_REQUIRED);
+		}
+        
     }
 	
 	@GetMapping("/users/{id}")
@@ -74,7 +84,7 @@ public class UsersController {
         			return new ResponseEntity<>(HttpStatus.PRECONDITION_REQUIRED);
         		}		
             }
-            return new ResponseEntity<Users>(user,HttpStatus.OK);
+            return new ResponseEntity<Users>(user,HttpStatus.CREATED);
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
