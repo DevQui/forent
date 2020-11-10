@@ -1,0 +1,22 @@
+-------------------------------------------------------------------------------
+Test set: com.springboot.forent.PropertiesTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 0, Errors: 4, Skipped: 0, Time elapsed: 13.869 s <<< FAILURE! - in com.springboot.forent.PropertiesTest
+testPutProperty  Time elapsed: 0.537 s  <<< ERROR!
+java.util.NoSuchElementException: No value present
+	at com.springboot.forent.PropertiesTest.testPutProperty(PropertiesTest.java:68)
+
+testPostProperty  Time elapsed: 0.032 s  <<< ERROR!
+java.util.NoSuchElementException: No value present
+	at com.springboot.forent.PropertiesTest.testPostProperty(PropertiesTest.java:51)
+
+testDeleteProperty  Time elapsed: 0.121 s  <<< ERROR!
+org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.springframework.dao.EmptyResultDataAccessException: No class com.springboot.forent.Properties entity with id 7 exists!
+	at com.springboot.forent.PropertiesTest.testDeleteProperty(PropertiesTest.java:84)
+Caused by: org.springframework.dao.EmptyResultDataAccessException: No class com.springboot.forent.Properties entity with id 7 exists!
+	at com.springboot.forent.PropertiesTest.testDeleteProperty(PropertiesTest.java:84)
+
+testGetProperty  Time elapsed: 0.016 s  <<< ERROR!
+java.util.NoSuchElementException: No value present
+	at com.springboot.forent.PropertiesTest.testGetProperty(PropertiesTest.java:62)
+

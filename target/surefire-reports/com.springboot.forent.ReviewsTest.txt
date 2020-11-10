@@ -1,0 +1,22 @@
+-------------------------------------------------------------------------------
+Test set: com.springboot.forent.ReviewsTest
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 0.064 s <<< FAILURE! - in com.springboot.forent.ReviewsTest
+testDeleteReview  Time elapsed: 0.001 s  <<< ERROR!
+org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.springframework.dao.EmptyResultDataAccessException: No class com.springboot.forent.Reviews entity with id 6 exists!
+	at com.springboot.forent.ReviewsTest.testDeleteReview(ReviewsTest.java:54)
+Caused by: org.springframework.dao.EmptyResultDataAccessException: No class com.springboot.forent.Reviews entity with id 6 exists!
+	at com.springboot.forent.ReviewsTest.testDeleteReview(ReviewsTest.java:54)
+
+testPostReview  Time elapsed: 0.002 s  <<< ERROR!
+org.springframework.orm.jpa.JpaSystemException: could not execute statement; nested exception is org.hibernate.exception.GenericJDBCException: could not execute statement
+	at com.springboot.forent.ReviewsTest.testPostReview(ReviewsTest.java:40)
+Caused by: org.hibernate.exception.GenericJDBCException: could not execute statement
+	at com.springboot.forent.ReviewsTest.testPostReview(ReviewsTest.java:40)
+Caused by: java.sql.SQLException: Field 'id_user' doesn't have a default value
+	at com.springboot.forent.ReviewsTest.testPostReview(ReviewsTest.java:40)
+
+testGetReview  Time elapsed: 0.005 s  <<< ERROR!
+java.util.NoSuchElementException: No value present
+	at com.springboot.forent.ReviewsTest.testGetReview(ReviewsTest.java:46)
+
