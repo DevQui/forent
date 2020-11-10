@@ -1,38 +1,41 @@
 package com.springboot.forent.service;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
-class UsersServiceTest {
+import com.springboot.forent.model.Users;
+import com.springboot.forent.repository.UsersRepository;
 
-	/*@Test
-	void test() {
-		fail("Not yet implemented");
-	}*/
-	
+class UsersServiceTest {	
 	@Autowired
-	EmployeeService service;
+	UsersService service;
 	@MockBean
-	EmployeeRepository repo;
+	UsersRepository repo;
+	
 	@Test
-	@DisplayName("TEST getEmployeesHasResult")
+	@DisplayName("TEST getUsersHasResult")
 	void getEmployeesHasResult() throws Exception {
 		// Mocked the employee and the repo
-		Employee emp1 = new Employee(1, "John", "Manager", 10);
-		Employee emp2 = new Employee(2, "Jane", "Director", 15);
-		Employee emp3 = new Employee(3, "James", "Supervisor", 5);
-		List<Employee> list = new ArrayList<Employee>();
-		list.add(emp1);
-		list.add(emp2);
-		list.add(emp3);
-		doReturn(list).when(repo).getEmployees();
+		Users user1 = new Users(1, "host","John", "Middle Name", "Last-Name-John", "john@gmail.com", "+6911111111111", "password123","2020-11-09 11:00:00");
+		Users user2 = new Users(2, "tenant","Jane", "Middle Name", "Last-Name-Jane", "jane@gmail.com", "+6911111111112", "password123","2020-11-09 11:00:00");
+		Users user3 = new Users(3, "tenant","James", "Middle Name", "Last-Name-James", "james@gmail.com", "+6911111111113", "password123","2020-11-09 11:00:00");
+		List<Users> list = new ArrayList<Users>();
+		list.add(user1);
+		list.add(user2);
+		list.add(user3);
+		/*doReturn(list).when(repo).getUsers();
 		// Call service
-		List<Employee> returnedList = (List<Employee>) service.getEmployees();
+		List<Users> returnedList = (List<Employee>) service.getEmployees();
 		// Validate
 		Assertions.assertFalse(returnedList.isEmpty(), "No result.");
-		Assertions.assertSame(returnedList.get(0), emp1, "Employee should be the same.");
-		Assertions.assertEquals(returnedList.get(2).getName(), "James");
+		Assertions.assertSame(returnedList.get(0), user1, "Employee should be the same.");
+		Assertions.assertEquals(returnedList.get(2).getName(), "James");*/
 	}
 
 }

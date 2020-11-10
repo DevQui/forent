@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 	
-	@ExceptionHandler({UserNotFoundException.class, NoSuchElementException.class})
+	@ExceptionHandler({NoSuchElementException.class})
 	public final ResponseEntity<Object> handleUserNotFoundException(
 			NoSuchElementException exception) {
-	    //String exceptionResponse = String.format("Dev, Invalid input parameters: %s\n", exception.getMessage());
-	    return new ResponseEntity<>("Data not found in the database", HttpStatus.NOT_FOUND);
+	    String exceptionResponse = String.format("Dev, Invalid input parameters: %s\n", exception.getMessage());
+	    return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
 	}
 	
     /** Provides handling for exceptions throughout this service. */
