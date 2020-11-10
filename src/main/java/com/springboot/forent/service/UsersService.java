@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import com.springboot.forent.config.UserNotFoundException;
 import com.springboot.forent.model.Users;
 import com.springboot.forent.repository.UsersRepository;
 
@@ -18,7 +17,7 @@ public class UsersService {
 	private UsersRepository usersRepository;
 	
 	public List<Users> listAllUsers(){
-		 return (List<Users>) usersRepository.findAll();
+		return (List<Users>) usersRepository.findAll();
 	}
 	
 	public void saveUser(Users user) {
@@ -28,7 +27,7 @@ public class UsersService {
 		if(StringUtils.isEmpty(user.getFirst_name()) || StringUtils.isEmpty(user.getLast_name()) || 
 				StringUtils.isEmpty(user.getEmail()) || StringUtils.isEmpty(user.getPhone_number()) ||
 				StringUtils.isEmpty(user.getUser_password())) {
-    		throw new UserNotFoundException();
+    		throw new NoSuchElementException();
     	}
         usersRepository.save(user);
     }

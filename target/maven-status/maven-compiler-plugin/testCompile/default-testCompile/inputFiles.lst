@@ -1,6 +1,8 @@
 /home/devorh/Documents/Proj/forent/src/test/java/com/springboot/forent/FavoritesTest.java
+/home/devorh/Documents/Proj/forent/src/test/java/com/springboot/forent/controller/UsersControllerTest.java
 /home/devorh/Documents/Proj/forent/src/test/java/com/springboot/forent/PropertiesTest.java
 /home/devorh/Documents/Proj/forent/src/test/java/com/springboot/forent/ReviewsTest.java
 /home/devorh/Documents/Proj/forent/src/test/java/com/springboot/forent/SchedulesTest.java
+/home/devorh/Documents/Proj/forent/src/test/java/com/springboot/forent/service/UsersServiceTest.java
 /home/devorh/Documents/Proj/forent/src/test/java/com/springboot/forent/UsersTest.java
 /home/devorh/Documents/Proj/forent/src/test/java/com/springboot/forent/ForentApplicationTests.java

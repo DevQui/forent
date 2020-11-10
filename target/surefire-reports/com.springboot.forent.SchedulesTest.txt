@@ -1,22 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.springboot.forent.SchedulesTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 0.252 s <<< FAILURE! - in com.springboot.forent.SchedulesTest
-testPostSchedule  Time elapsed: 0.154 s  <<< ERROR!
-org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; constraint [null]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement
-	at com.springboot.forent.SchedulesTest.testPostSchedule(SchedulesTest.java:36)
-Caused by: org.hibernate.exception.ConstraintViolationException: could not execute statement
-	at com.springboot.forent.SchedulesTest.testPostSchedule(SchedulesTest.java:36)
-Caused by: java.sql.SQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`rentals`.`schedules`, CONSTRAINT `fk_schedules_id_property` FOREIGN KEY (`id_property`) REFERENCES `properties` (`id_property`))
-	at com.springboot.forent.SchedulesTest.testPostSchedule(SchedulesTest.java:36)
-
-testDeleteSchedule  Time elapsed: 0.021 s  <<< ERROR!
-org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.springframework.dao.EmptyResultDataAccessException: No class com.springboot.forent.Schedules entity with id 4 exists!
-	at com.springboot.forent.SchedulesTest.testDeleteSchedule(SchedulesTest.java:49)
-Caused by: org.springframework.dao.EmptyResultDataAccessException: No class com.springboot.forent.Schedules entity with id 4 exists!
-	at com.springboot.forent.SchedulesTest.testDeleteSchedule(SchedulesTest.java:49)
-
-testGetSchedule  Time elapsed: 0.02 s  <<< ERROR!
-java.util.NoSuchElementException: No value present
-	at com.springboot.forent.SchedulesTest.testGetSchedule(SchedulesTest.java:42)
-
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.102 s - in com.springboot.forent.SchedulesTest
