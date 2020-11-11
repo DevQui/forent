@@ -30,6 +30,10 @@ public class FavoritesController {
         return favoritesService.listAllFavorites();
     }
 	
+	@GetMapping("/users/{id}/favorites")
+	public List<Favorites> getFavorites(@PathVariable Integer id) {
+		return favoritesService.getUsersFavorites(id);
+	}	
 	
 	/*@GetMapping("/favorites/{id}")
     public ResponseEntity<Favorites> get(@PathVariable Integer id) {

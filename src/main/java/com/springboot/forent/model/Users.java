@@ -1,11 +1,12 @@
 package com.springboot.forent.model;
 
-import javax.persistence.CascadeType;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Table(name="users")
@@ -24,6 +25,8 @@ public class Users {
 	private String created_datetime;
 	private String updated_datetime;
 	
+	@OneToMany
+	private List<Favorites> favorites;
 	/*@OneToOne(cascade=CascadeType.ALL, mappedBy="iduser")
 	private Properties properties;*/
 	
