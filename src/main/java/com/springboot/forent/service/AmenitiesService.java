@@ -10,8 +10,7 @@ import com.springboot.forent.repository.AmenitiesRepository;
 
 @Service
 public class AmenitiesService {
-	
-	
+	@Autowired
 	private AmenitiesRepository amenitiesRepository;
 	
 	public List<Amenities> listAllAmenities(){
@@ -26,8 +25,7 @@ public class AmenitiesService {
         return amenitiesRepository.findById(id).get();
     }
 
-    public String deleteAmenities(Integer id) {
+    public void deleteAmenities(Integer id) {
     	amenitiesRepository.deleteById(id);
-        return "User "+id+" has been deleted.";
     }
 }
