@@ -20,6 +20,15 @@ public class Reviews {
 	public Reviews() {
 	}
 	
+	public Reviews(int id_review, int rating, String comment, String created_datetime, int id_property) {
+		super();
+		this.id_review = id_review;
+		this.rating = rating;
+		this.comment = comment;
+		this.created_datetime = created_datetime;
+		this.id_property = id_property;
+	}
+
 	public Reviews(int rating, String comment, String created_datetime, int id_property) {
 		this.rating = rating;
 		this.comment = comment;

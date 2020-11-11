@@ -42,7 +42,6 @@ public class SchedulesController {
 	@PostMapping("/schedules")
 	public ResponseEntity<Schedules> add(@RequestBody Schedules schedule) {
 		try {
-			
 			HttpHeaders header = new HttpHeaders();
 			header.setLocation(new URI("/schedules"));
 			Schedules response = schedulesService.saveSchedule(schedule);

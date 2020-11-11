@@ -17,8 +17,8 @@ public class ReviewsService {
 		 return (List<Reviews>) reviewsRepository.findAll();
 	}
 	
-	public void saveReview(Reviews review) {
-		reviewsRepository.save(review);
+	public Reviews saveReview(Reviews review) {
+		return reviewsRepository.save(review);
    }
 
    public Reviews getReview(Integer id) {
