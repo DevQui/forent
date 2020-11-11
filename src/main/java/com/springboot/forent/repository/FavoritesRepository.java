@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.springboot.forent.model.Favorites;
 
 public interface FavoritesRepository extends CrudRepository<Favorites, Integer>{
-	public List<Favorites>findByIduser(Integer iduser);
+	//public List<Favorites>findByIduser(Integer iduser);
 
 }

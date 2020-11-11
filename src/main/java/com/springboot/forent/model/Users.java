@@ -27,8 +27,8 @@ public class Users {
 	@OneToOne(cascade=CascadeType.ALL, mappedBy="iduser")
 	private Properties properties;
 	
-	@OneToOne(cascade=CascadeType.ALL, mappedBy="iduser")
-	private Favorites favorites;
+	/*@OneToOne(cascade=CascadeType.ALL, mappedBy="iduser")
+	private Favorites favorites;*/
 	
 	public Users() {
 	}

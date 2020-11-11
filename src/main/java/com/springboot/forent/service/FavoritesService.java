@@ -17,16 +17,15 @@ public class FavoritesService {
 		 return (List<Favorites>) favoritesRepository.findAll();
 	}
 	
-	public void saveFavorite(Favorites favorites) {
-		favoritesRepository.save(favorites);
+	public Favorites saveFavorite(Favorites favorites) {
+		return favoritesRepository.save(favorites);
     }
 
     public Favorites getFavorite(Integer id) {
         return favoritesRepository.findById(id).get();
     }
 
-    public String deleteFavorite(Integer id) {
+    public void deleteFavorite(Integer id) {
     	favoritesRepository.deleteById(id);
-        return "Favorite "+id+" has been deleted.";
     }
 }

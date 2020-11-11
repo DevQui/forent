@@ -1,9 +1,11 @@
 package com.springboot.forent.controller;
 
+import java.net.URI;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -40,22 +42,30 @@ public class FavoritesController {
 	}*/
 	
 	@GetMapping("/favorites/{id}")
-	public Favorites get(@PathVariable Integer id){
+	public ResponseEntity<Favorites> get(@PathVariable Integer id){
         try {
         	RestTemplate restTemplate = new RestTemplate();        	
             Favorites favorite = favoritesService.getFavorite(id);
-            Users user = restTemplate.getForObject("http://localhost:8080/users/"+favorite.getId_user().getId_user(), Users.class);
-            return new Favorites(favorite, user);
-            //return new ResponseEntity<Properties>(property, HttpStatus.OK);
+            //Users user = restTemplate.getForObject("http://localhost:8080/users/"+favorite.getId_user(), Users.class);
+            //return new Favorites(favorite, user);
+            
+            return new ResponseEntity<Favorites>(favorite, HttpStatus.OK);
         } catch (NoSuchElementException e) {;
-            //return new ResponseEntity<Properties>(HttpStatus.NOT_FOUND);
-        	return null;	
+            return new ResponseEntity<Favorites>(HttpStatus.NOT_FOUND);
+        	
         }
 	}
 	
 	@PostMapping("/favorites")
-    public void add(@RequestBody Favorites favorites) {
-		favoritesService.saveFavorite(favorites);
+    public ResponseEntity<Favorites> add(@RequestBody Favorites favorites) {
+		try {
+			HttpHeaders header = new HttpHeaders();
+			header.setLocation(new URI("/favorites"));
+			Favorites response = favoritesService.saveFavorite(favorites);
+			return new ResponseEntity<Favorites>(response,header,HttpStatus.CREATED);
+		}catch(Exception ex) {
+			return new ResponseEntity<>(favorites,HttpStatus.PRECONDITION_REQUIRED);
+		}
     }
 	
     
