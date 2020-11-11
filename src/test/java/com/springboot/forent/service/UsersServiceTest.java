@@ -16,6 +16,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.springboot.forent.model.Reviews;
 import com.springboot.forent.model.Users;
 import com.springboot.forent.repository.UsersRepository;
 
@@ -84,4 +85,15 @@ class UsersServiceTest {
 		Assertions.assertEquals(addedUser.getPhone_number(),"+6911111111111");
 		Assertions.assertEquals(addedUser.getUser_password(),"password123");		
 	}
+	
+	@Test
+	@DisplayName("TEST deleteUser")
+	void deleteUser() throws Exception{
+		Users user = new Users(1, "host","John", "Middle Name", "Last-Name-John", "john@gmail.com", "+6911111111111", "password123","2020-11-09 11:00:00");
+				
+		repo.delete(user);
+		String response = service.deleteUser(1);
+		
+		Assertions.assertEquals(response, "User Deleted");
+	}	
 }

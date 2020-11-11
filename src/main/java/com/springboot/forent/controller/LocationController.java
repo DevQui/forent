@@ -84,9 +84,5 @@ public class LocationController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-	
-	@DeleteMapping("/location/{id}")
-	public void delete(@PathVariable Integer id) {
-		locationService.deleteLocation(id);
-	}
+
 }

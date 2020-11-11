@@ -41,7 +41,8 @@ public class UsersService {
     }
     	
 
-    public void deleteUser(Integer id) {
+    public String deleteUser(Integer id) {
         usersRepository.deleteById(id);
+        return "User Deleted";
     }
 }

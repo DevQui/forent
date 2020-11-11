@@ -82,9 +82,4 @@ public class AmenitiesController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-	
-	@DeleteMapping("/amenities/{id}")
-	public void delete(@PathVariable Integer id) {
-		amenitiesService.deleteAmenities(id);
-	}
 }

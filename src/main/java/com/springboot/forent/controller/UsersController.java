@@ -63,26 +63,16 @@ public class UsersController {
             if(existUser != null) {
             	OffsetDateTime current = OffsetDateTime.now();
         		String updated_datetime = current.toString();
-        		
-        		try{
-        			if(user.getFirst_name() != null || user.getLast_name() != null ||
-						user.getEmail() != null || user.getPhone_number() != null ||
-						user.getUser_password() != null || !user.getFirst_name().isEmpty() || 
-						!user.getLast_name().isEmpty() || !user.getEmail().isEmpty() || !
-						!user.getPhone_number().isEmpty() || !user.getUser_password().isEmpty()) {
+        	
+				existUser.setFirst_name(user.getFirst_name());
+				existUser.setMiddle_name(user.getMiddle_name());
+    			existUser.setLast_name(user.getLast_name());
+    			existUser.setEmail(user.getEmail());
+    			existUser.setPhone_number(user.getPhone_number());
+    			existUser.setUser_password(user.getUser_password());
+    	    	existUser.setUpdated_datetime(updated_datetime);
+    	    	usersService.saveUser(existUser);
         				
-        				existUser.setFirst_name(user.getFirst_name());
-        				existUser.setMiddle_name(user.getMiddle_name());
-            			existUser.setLast_name(user.getLast_name());
-            			existUser.setEmail(user.getEmail());
-            			existUser.setPhone_number(user.getPhone_number());
-            			existUser.setUser_password(user.getUser_password());
-            	    	existUser.setUpdated_datetime(updated_datetime);
-            	    	usersService.saveUser(existUser);
-        			}		
-        		}catch(NullPointerException ex) {
-        			return new ResponseEntity<>(HttpStatus.PRECONDITION_REQUIRED);
-        		}		
             }
             return new ResponseEntity<Users>(user,HttpStatus.OK);
         } catch (NoSuchElementException e) {
@@ -92,8 +82,9 @@ public class UsersController {
 	
 	
     @DeleteMapping("/users/{id}")
-    public void delete(@PathVariable Integer id) {
-        usersService.deleteUser(id);
+    public ResponseEntity<String> delete(@PathVariable Integer id) {
+		String response = usersService.deleteUser(id);
+		return new ResponseEntity<String>(response,HttpStatus.OK);
     }
     
     

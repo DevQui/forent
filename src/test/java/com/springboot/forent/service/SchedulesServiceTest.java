@@ -16,6 +16,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.springboot.forent.model.Favorites;
 import com.springboot.forent.model.Schedules;
 import com.springboot.forent.repository.SchedulesRepository;
 
@@ -79,6 +80,17 @@ class SchedulesServiceTest {
 		Assertions.assertEquals(addedSchedule.getId_user(),3);
 		Assertions.assertEquals(addedSchedule.getSchedule_date_from(),"2020-11-01");
 		Assertions.assertEquals(addedSchedule.getSchedule_date_to(), "2020-11-04");	
+	}
+	
+	@Test
+	@DisplayName("TEST deleteSchedule")
+	void deleteSchedule() throws Exception{
+		Schedules schedule = new Schedules(3, 2, 3, "2020-11-01", "2020-11-04");
+				
+		repo.delete(schedule);
+		String response = service.deleteSchedule(1);
+		
+		Assertions.assertEquals(response, "Schedule Deleted");
 	}
 
 }

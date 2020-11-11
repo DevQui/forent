@@ -1,6 +1,7 @@
 package com.springboot.forent.controller;
 
 import static org.mockito.Mockito.doReturn;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -10,6 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -23,6 +25,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.springboot.forent.model.Favorites;
+import com.springboot.forent.model.Users;
 import com.springboot.forent.service.FavoritesService;
 
 @AutoConfigureMockMvc
@@ -102,7 +105,7 @@ class FavoritesControllerTest {
 			.andExpect(jsonPath("$.id_property").value(1))
 			.andExpect(jsonPath("$.id_user").value(2));
 	}
-	
+
 	
 	@Test
 	@DisplayName("POST /favorites is SUCCESSFUL")
@@ -116,6 +119,19 @@ class FavoritesControllerTest {
 		
 			.andExpect(status().isCreated());
 			//.andExpect(header().string(HttpHeaders.LOCATION,"/favorites"));
+	}
+	
+	@Test
+	@DisplayName("DELETE /favorites/1 SUCCESS")
+	void deleteFavorite() throws Exception{
+		Favorites fave = new Favorites(1,1,1);
+		doReturn("Favorite Property Deleted").when(service).deleteFavorite(1);
+		
+		mockMvc.perform(delete("/favorites/1")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(asJsonString(fave)))
+			
+				.andExpect(status().isOk());
 	}
 	
 	public String asJsonString(final Object obj) {

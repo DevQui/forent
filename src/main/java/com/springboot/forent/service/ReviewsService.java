@@ -27,6 +27,6 @@ public class ReviewsService {
 
    public String deleteReview(Integer id) {
 	   reviewsRepository.deleteById(id);
-       return "User "+id+" has been deleted.";
+       return "Review Deleted";
    }
 }

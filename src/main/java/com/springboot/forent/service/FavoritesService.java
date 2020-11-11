@@ -25,7 +25,8 @@ public class FavoritesService {
         return favoritesRepository.findById(id).get();
     }
 
-    public void deleteFavorite(Integer id) {
+    public String deleteFavorite(Integer id) {
     	favoritesRepository.deleteById(id);
+    	return "Favorite Property Deleted";
     }
 }

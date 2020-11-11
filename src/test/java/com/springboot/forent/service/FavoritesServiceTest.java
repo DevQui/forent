@@ -17,6 +17,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.springboot.forent.model.Favorites;
+import com.springboot.forent.model.Reviews;
 import com.springboot.forent.repository.FavoritesRepository;
 
 @AutoConfigureMockMvc
@@ -74,5 +75,16 @@ class FavoritesServiceTest {
 		Assertions.assertEquals(addedFave.getId_favorite(),3);
 		Assertions.assertEquals(addedFave.getId_property(),2);
 		Assertions.assertEquals(addedFave.getId_user(),3);	
+	}
+	
+	@Test
+	@DisplayName("TEST deleteFavorite")
+	void deleteFavorite() throws Exception{
+		Favorites fave = new Favorites(3,2,3);
+				
+		repo.delete(fave);
+		String response = service.deleteFavorite(1);
+		
+		Assertions.assertEquals(response, "Favorite Property Deleted");
 	}
 }

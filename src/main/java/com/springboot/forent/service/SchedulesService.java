@@ -27,6 +27,6 @@ public class SchedulesService {
 
     public String deleteSchedule(Integer id) {
     	schedulesRespository.deleteById(id);
-        return "Schedule "+id+" has been deleted.";
+        return "Schedule Deleted";
     }
 }

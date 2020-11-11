@@ -5,6 +5,7 @@ import static org.mockito.Mockito.doReturn;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -125,7 +126,7 @@ class UsersControllerTest {
 			.andExpect(status().isCreated())
 			.andExpect(header().string(HttpHeaders.LOCATION,"/users"));
 	}
-	
+		
 	@Test
 	@DisplayName("PUT /users/1 is SUCCESSFUL")
 	void updateUserSuccess() throws Exception{
@@ -147,6 +148,19 @@ class UsersControllerTest {
 			
 	}
 	
+	@Test
+	@DisplayName("DELETE /users/1 SUCCESS")
+	void deleteUser() throws Exception{
+		Users user = new Users(1, "host","John", "Middle Name", "Last-Name-John", "john@gmail.com", "+6911111111111", "password123","2020-11-09 11:00:00");
+		doReturn("User deleted").when(service).deleteUser(1);
+		
+		mockMvc.perform(delete("/users/1")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(asJsonString(user)))
+			
+				.andExpect(status().isOk());
+	}
+		
 	public String asJsonString(final Object obj) {
         try {
             return new ObjectMapper().writeValueAsString(obj);

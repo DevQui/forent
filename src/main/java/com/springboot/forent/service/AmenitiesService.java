@@ -24,8 +24,4 @@ public class AmenitiesService {
     public Amenities getAmenities(Integer id) {
         return amenitiesRepository.findById(id).get();
     }
-
-    public void deleteAmenities(Integer id) {
-    	amenitiesRepository.deleteById(id);
-    }
 }

@@ -1,6 +1,7 @@
 package com.springboot.forent.controller;
 
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.forent.model.Reviews;
-import com.springboot.forent.model.Schedules;
 import com.springboot.forent.service.ReviewsService;
 
 @RestController
@@ -41,20 +41,18 @@ public class ReviewsController {
 	}
 	
 	@PostMapping("/reviews")
-	public ResponseEntity<Reviews> add(@RequestBody Reviews review) {
-		try {			
-			HttpHeaders header = new HttpHeaders();
-			header.setLocation(new URI("/reviews"));
+	public ResponseEntity<Reviews> add(@RequestBody Reviews review) throws URISyntaxException {
 			
-			OffsetDateTime current = OffsetDateTime.now();
-			String created_datetime = current.toString();	
-			review.setCreated_datetime(created_datetime);
-			
-			Reviews response = reviewsService.saveReview(review);
-			return new ResponseEntity<Reviews>(response,header,HttpStatus.CREATED);
-		}catch(Exception ex) {
-			return new ResponseEntity<>(review,HttpStatus.PRECONDITION_REQUIRED);
-		}
+		HttpHeaders header = new HttpHeaders();
+		header.setLocation(new URI("/reviews"));
+		
+		OffsetDateTime current = OffsetDateTime.now();
+		String created_datetime = current.toString();	
+		review.setCreated_datetime(created_datetime);
+		
+		Reviews response = reviewsService.saveReview(review);
+		return new ResponseEntity<Reviews>(response,header,HttpStatus.CREATED);
+
     }
 	
 	

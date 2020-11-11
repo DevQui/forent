@@ -1,6 +1,7 @@
 package com.springboot.forent.controller;
 
 import static org.mockito.Mockito.doReturn;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -128,6 +129,19 @@ class ReviewsControllerTest {
 		
 			.andExpect(status().isCreated())
 			.andExpect(header().string(HttpHeaders.LOCATION,"/reviews"));
+	}
+	
+	@Test
+	@DisplayName("DELETE /reviews/1 SUCCESS")
+	void deleteReviews() throws Exception{
+		Reviews review = new Reviews(1, 4, "Awesome host", "2020-11-01", 1);
+		doReturn("Review Deleted").when(service).deleteReview(1);
+		
+		mockMvc.perform(delete("/reviews/1")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(asJsonString(review)))
+			
+				.andExpect(status().isOk());
 	}
 	
 	public String asJsonString(final Object obj) {

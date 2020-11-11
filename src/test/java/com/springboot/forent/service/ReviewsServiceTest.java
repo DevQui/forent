@@ -17,7 +17,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.springboot.forent.model.Reviews;
-import com.springboot.forent.model.Schedules;
 import com.springboot.forent.repository.ReviewsRepository;
 
 @AutoConfigureMockMvc
@@ -79,5 +78,16 @@ class ReviewsServiceTest {
 		Assertions.assertEquals(addedReview.getComment(),"Good location");
 		Assertions.assertEquals(addedReview.getCreated_datetime(),"2020-11-01");
 		Assertions.assertEquals(addedReview.getId_property(), 3);	
+	}
+	
+	@Test
+	@DisplayName("TEST deleteReview")
+	void deleteReview() throws Exception{
+		Reviews review1 = new Reviews(1, 4, "Awesome host", "2020-11-01", 1);
+				
+		repo.delete(review1);
+		String response = service.deleteReview(1);
+		
+		Assertions.assertEquals(response, "Review Deleted");
 	}
 }

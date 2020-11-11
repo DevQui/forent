@@ -70,7 +70,8 @@ public class FavoritesController {
 	
     
     @DeleteMapping("/favorites/{id}")
-    public void delete(@PathVariable Integer id) {
-    	favoritesService.deleteFavorite(id);
+    public ResponseEntity<String> delete(@PathVariable Integer id) {
+    	String response = favoritesService.deleteFavorite(id);
+    	return new ResponseEntity<String>(response,HttpStatus.OK);
     }
 }

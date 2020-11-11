@@ -1,6 +1,7 @@
 package com.springboot.forent.controller;
 
 import static org.mockito.Mockito.doReturn;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -24,6 +25,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.springboot.forent.model.Favorites;
 import com.springboot.forent.model.Schedules;
 import com.springboot.forent.model.Users;
 import com.springboot.forent.service.SchedulesService;
@@ -128,6 +130,19 @@ class SchedulesControllerTest {
 		
 			.andExpect(status().isCreated())
 			.andExpect(header().string(HttpHeaders.LOCATION,"/schedules"));
+	}
+	
+	@Test
+	@DisplayName("DELETE /schedules/1 SUCCESS")
+	void deleteSchedule() throws Exception{
+		Schedules schedule = new Schedules(1, 1, 1, "2020-11-01", "2020-11-02");
+		doReturn("Schedule Deleted").when(service).deleteSchedule(1);
+		
+		mockMvc.perform(delete("/schedules/1")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(asJsonString(schedule)))
+			
+				.andExpect(status().isOk());
 	}
 	
 	public String asJsonString(final Object obj) {
