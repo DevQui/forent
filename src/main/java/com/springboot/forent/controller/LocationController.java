@@ -1,9 +1,11 @@
 package com.springboot.forent.controller;
 
+import java.net.URI;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.forent.model.Location;
+import com.springboot.forent.model.Users;
 import com.springboot.forent.service.LocationService;
 
 @RestController
@@ -39,8 +42,15 @@ public class LocationController {
 	
 	
 	@PostMapping("/location")
-	public void add(@RequestBody Location location) {
-		locationService.saveLocation(location);
+	public ResponseEntity<Location> add(@RequestBody Location location) {
+		try {
+			HttpHeaders header = new HttpHeaders();
+			header.setLocation(new URI("/location"));
+			Location response = locationService.saveLocation(location);
+			return new ResponseEntity<Location>(response,header,HttpStatus.CREATED);
+		}catch(Exception ex) {
+			return new ResponseEntity<>(location,HttpStatus.PRECONDITION_REQUIRED);
+		}
     }	
 	
 	@PatchMapping("/location/{id}")

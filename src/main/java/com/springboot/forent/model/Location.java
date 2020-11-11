@@ -26,6 +26,16 @@ public class Location {
 	public Location() {
 	}
 	
+	public Location(int id_location, int id_property, String town, String city, String region, String country) {
+		super();
+		this.id_location = id_location;
+		this.id_property = id_property;
+		this.town = town;
+		this.city = city;
+		this.region = region;
+		this.country = country;
+	}
+	
 	public Location(int id_property, String town, String city, String region, String country) {
 		this.id_property = id_property;
 		this.town = town;
