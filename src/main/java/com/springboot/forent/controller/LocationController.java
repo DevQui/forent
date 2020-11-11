@@ -65,12 +65,6 @@ public class LocationController {
         					location.getCity() != null || !location.getCity().isEmpty()) {
         				existLocation.setTown(location.getTown());
         				existLocation.setCity(location.getCity());
-        				if(location.getRegion() != null || !location.getRegion().isEmpty()) {
-        					existLocation.setRegion(existLocation.getRegion());
-        				}
-        				if(location.getCountry() != null || !location.getCountry().isEmpty()) {
-        					existLocation.setCountry(existLocation.getCountry());
-        				}
         				
         				locationService.saveLocation(location);
         			}

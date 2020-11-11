@@ -27,11 +27,6 @@ public class Users {
 	
 	@OneToMany
 	private List<Favorites> favorites;
-	/*@OneToOne(cascade=CascadeType.ALL, mappedBy="iduser")
-	private Properties properties;*/
-	
-	/*@OneToOne(cascade=CascadeType.ALL, mappedBy="iduser")
-	private Favorites favorites;*/
 	
 	public Users() {
 	}

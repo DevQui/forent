@@ -25,12 +25,6 @@ public class UsersController {
 	@Autowired
     private UsersService usersService;
 	
-	/*@Autowired
-	private PropertiesService propertiesService;
-	
-	@Autowired
-	private PropertiesRepository propertiesRepository;*/
-	
 	@GetMapping("/users")
     public List<Users> list() {
         return usersService.listAllUsers();
@@ -38,7 +32,6 @@ public class UsersController {
 	
 	@PostMapping("/users")
 	public ResponseEntity<Users> add(@RequestBody Users user) {
-        //return usersService.saveUser(user);
 		try {
 			HttpHeaders header = new HttpHeaders();
 			header.setLocation(new URI("/users"));
@@ -86,6 +79,5 @@ public class UsersController {
 		String response = usersService.deleteUser(id);
 		return new ResponseEntity<String>(response,HttpStatus.OK);
     }
-    
     
 }

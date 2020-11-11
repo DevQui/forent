@@ -52,7 +52,7 @@ public class AmenitiesController {
 			Amenities response = amenitiesService.saveAmenities(amenities);
 			return new ResponseEntity<Amenities>(response,header,HttpStatus.CREATED);
 		}catch(Exception ex) {
-			return new ResponseEntity<>(amenities,HttpStatus.PRECONDITION_REQUIRED);
+			return new ResponseEntity<>(HttpStatus.PRECONDITION_REQUIRED);
 		}
         
     }	

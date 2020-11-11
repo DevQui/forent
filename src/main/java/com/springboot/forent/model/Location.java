@@ -37,6 +37,7 @@ public class Location {
 	}
 	
 	public Location(int id_property, String town, String city, String region, String country) {
+		super();
 		this.id_property = id_property;
 		this.town = town;
 		this.city = city;

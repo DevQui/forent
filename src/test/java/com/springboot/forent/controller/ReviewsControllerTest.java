@@ -92,9 +92,9 @@ class ReviewsControllerTest {
 	@Test
 	@DisplayName("GET /reviews/3 is FOUND")
 	void getReviewsByIdFound() throws Exception {
-		Reviews review1 = new Reviews(1, 4, "Awesome host", "2020-11-01", 1);
-		Reviews review2 = new Reviews(2, 3, "So-so", "2020-11-03", 2);
-		Reviews review3 = new Reviews(3, 3, "Good location", "2020-11-01", 3);
+		Reviews review1 = new Reviews(1, 1, 4, "Awesome host", "2020-11-01", 1);
+		Reviews review2 = new Reviews(2, 2, 3, "So-so", "2020-11-03", 2);
+		Reviews review3 = new Reviews(3, 3, 3, "Good location", "2020-11-01", 3);
 		
 		List<Reviews> list = new ArrayList<Reviews>();
 		list.add(review1);
@@ -109,6 +109,7 @@ class ReviewsControllerTest {
 			.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 
 			.andExpect(jsonPath("$.id_review").value(3))
+			.andExpect(jsonPath("$.id_user").value(3))
 			.andExpect(jsonPath("$.rating").value(3))
 			.andExpect(jsonPath("$.comment").value("Good location"))
 			.andExpect(jsonPath("$.created_datetime").value("2020-11-01"))
