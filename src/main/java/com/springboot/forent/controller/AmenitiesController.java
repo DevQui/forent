@@ -1,9 +1,11 @@
 package com.springboot.forent.controller;
 
+import java.net.URI;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.forent.model.Amenities;
+import com.springboot.forent.model.Users;
 import com.springboot.forent.service.AmenitiesService;
 import com.springboot.forent.service.PropertiesService;
 
@@ -23,9 +26,6 @@ import com.springboot.forent.service.PropertiesService;
 public class AmenitiesController {
 	@Autowired
     private AmenitiesService amenitiesService;
-	
-	@Autowired
-	private PropertiesService propertiesService;
 	
 	@GetMapping("/amenities")
     public List<Amenities> list() {
@@ -45,8 +45,16 @@ public class AmenitiesController {
 	}	
 	
 	@PostMapping("/amenities")
-	public void add(@RequestBody Amenities amenities) {
-        amenitiesService.saveAmenities(amenities);
+	public ResponseEntity<Amenities>  add(@RequestBody Amenities amenities) {
+        try {
+			HttpHeaders header = new HttpHeaders();
+			header.setLocation(new URI("/amenities"));
+			Amenities response = amenitiesService.saveAmenities(amenities);
+			return new ResponseEntity<Amenities>(response,header,HttpStatus.CREATED);
+		}catch(Exception ex) {
+			return new ResponseEntity<>(amenities,HttpStatus.PRECONDITION_REQUIRED);
+		}
+        
     }	
 	
 	@PatchMapping("/amenities/{id}")

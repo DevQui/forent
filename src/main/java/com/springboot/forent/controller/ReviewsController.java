@@ -27,7 +27,6 @@ public class ReviewsController {
         return reviewsService.listAllReviews();
     }
 	
-	
 	@GetMapping("/reviews/{id}")
     public ResponseEntity<Reviews> get(@PathVariable Integer id) {
         try {

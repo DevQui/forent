@@ -18,8 +18,8 @@ public class AmenitiesService {
 		 return (List<Amenities>) amenitiesRepository.findAll();
 	}
 	
-	public void saveAmenities(Amenities amenities) {
-		amenitiesRepository.save(amenities);
+	public Amenities saveAmenities(Amenities amenities) {
+		return amenitiesRepository.save(amenities);
     }
 
     public Amenities getAmenities(Integer id) {

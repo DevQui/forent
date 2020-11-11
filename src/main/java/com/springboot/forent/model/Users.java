@@ -24,8 +24,8 @@ public class Users {
 	private String created_datetime;
 	private String updated_datetime;
 	
-	@OneToOne(cascade=CascadeType.ALL, mappedBy="iduser")
-	private Properties properties;
+	/*@OneToOne(cascade=CascadeType.ALL, mappedBy="iduser")
+	private Properties properties;*/
 	
 	/*@OneToOne(cascade=CascadeType.ALL, mappedBy="iduser")
 	private Favorites favorites;*/

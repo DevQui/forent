@@ -38,7 +38,7 @@ public class PropertiesController {
         return propertiesService.listAllProperties();
     }
 	
-	@PostMapping("/properties")
+	/*@PostMapping("/properties")
     public void add(@RequestBody Properties property, Location location, Amenities amenities) {
 		OffsetDateTime current = OffsetDateTime.now();
 		String created_datetime = current.toString();	
@@ -49,36 +49,28 @@ public class PropertiesController {
         locationService.saveLocation(location);
         amenities.setId_property(property.getId_property());
         amenitiesService.saveAmenities(amenities);
-    }
+    }*/
 	
 	@GetMapping("/properties/{id}")
-	public Properties get(@PathVariable Integer id){
-	    Properties property = propertiesService.getProperty(id);
-	    return new Properties(property);    
+	public ResponseEntity<Properties> get(@PathVariable Integer id){
+		try {
+            Properties property = propertiesService.getProperty(id);
+            return new ResponseEntity<Properties>(property, HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<Properties>(HttpStatus.NOT_FOUND);
+        }
 	}
 	
-	
-	/*public Properties get(@PathVariable Integer id){
-        try {
-        	RestTemplate restTemplate = new RestTemplate();        	
-            Properties property = propertiesService.getProperty(id);
-            Location location = restTemplate.getForObject("http://localhost:8080/location/"+property.getId_location().getId_location(), Location.class);
-            Amenities amenities = restTemplate.getForObject("http://localhost:8080/amenities/"+property.getId_amenities().getId_amenities(), Amenities.class);
-            Users user = restTemplate.getForObject("http://localhost:8080/users/"+property.getId_user().getId_user(), Users.class);
-            return new Properties(property, location, amenities, user);
-            //return new ResponseEntity<Properties>(property, HttpStatus.OK);
-        } catch (NoSuchElementException e) {;
-            //return new ResponseEntity<Properties>(HttpStatus.NOT_FOUND);
-        	return null;	
-        }
-	}*/
-	
-    @PutMapping("/properties/{id}")
+    /*@PutMapping("/properties/{id}")
     public ResponseEntity<Properties> update(@RequestBody Properties property, @PathVariable Integer id) {
         try {
         	Properties existProperty = propertiesService.getProperty(id);
-        	Location location = locationService.getLocation(existProperty.getId_location().getId_location());
-        	Amenities amenities = amenitiesService.getAmenities(existProperty.getId_amenities().getId_amenities());
+        	
+        	//Location location = locationService.getLocation(existProperty.getId_location().getId_location());
+        	//Amenities amenities = amenitiesService.getAmenities(existProperty.getId_amenities().getId_amenities());
+        	
+        	//Location location = locationService.getLocation(existProperty.getLocation().getId_location());
+        	//Amenities amenities = amenitiesService.getAmenities(existProperty.getAmenities().getId_amenity());
         	
         	if(existProperty != null) {
             	OffsetDateTime current = OffsetDateTime.now();
@@ -124,10 +116,10 @@ public class PropertiesController {
     public void delete(@PathVariable Integer id) {
     	propertiesService.deleteProperty(id);
     	Properties property = propertiesService.getProperty(id);
-    	locationService.deleteLocation(property.getId_location().getId_location());
-    }
+    	locationService.deleteLocation(property.getLocation().getId_location());
+    }*/
     
-    @GetMapping("/properties/{id}/reviews")
+    /*@GetMapping("/properties/{id}/reviews")
     public Properties getReviews(@PathVariable Integer id) {
     	 try {
          	RestTemplate restTemplate = new RestTemplate();        	
@@ -142,5 +134,5 @@ public class PropertiesController {
              //return new ResponseEntity<Properties>(HttpStatus.NOT_FOUND);
          	return null;	
          }
-    }
+    }*/
 }

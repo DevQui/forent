@@ -20,8 +20,8 @@ public class Location {
 	private String region;
 	private String country;
 	
-	@OneToOne(cascade=CascadeType.ALL, mappedBy="idlocation")
-	private Properties properties;
+	/*@OneToOne(cascade=CascadeType.ALL, mappedBy="id_location")
+	private Properties properties;*/
 	
 	public Location() {
 	}
