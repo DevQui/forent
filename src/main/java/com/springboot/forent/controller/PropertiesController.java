@@ -28,10 +28,6 @@ import com.springboot.forent.service.PropertiesService;
 public class PropertiesController {
 	@Autowired
     private PropertiesService propertiesService;
-	@Autowired
-	private LocationService locationService;
-	@Autowired
-	private AmenitiesService amenitiesService;
 	
 	@GetMapping("/properties")
     public List<Properties> list() {
