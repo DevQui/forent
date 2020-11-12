@@ -63,19 +63,15 @@ public class AmenitiesController {
         	Amenities existAmenities = amenitiesService.getAmenities(id);
         	
         	if(existAmenities != null) {
-        		try{
-        			
-        			if(amenities.getOther_amenities() != null || !amenities.getOther_amenities().isEmpty()) {
-        				existAmenities.setRooms(existAmenities.getRooms());
-        				existAmenities.setToilets(existAmenities.getToilets());
-        				existAmenities.setBeds(existAmenities.getBeds());
-        				existAmenities.setOther_amenities(existAmenities.getOther_amenities());
-            	    	amenitiesService.saveAmenities(amenities);
-        			}
         		
-        		}catch(NullPointerException ex) {
-        			return new ResponseEntity<>(HttpStatus.PRECONDITION_REQUIRED);
-        		}
+				existAmenities.setRooms(amenities.getRooms());
+				existAmenities.setToilets(amenities.getToilets());
+				existAmenities.setBeds(amenities.getBeds());    			
+    			if(amenities.getOther_amenities() != null && !amenities.getOther_amenities().isEmpty()) {
+    				existAmenities.setOther_amenities(amenities.getOther_amenities());
+    			}
+    			amenitiesService.saveAmenities(existAmenities);
+			
         	}
             return new ResponseEntity<Amenities>(amenities, HttpStatus.OK);
         } catch (NoSuchElementException e) {
