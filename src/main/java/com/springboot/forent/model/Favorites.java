@@ -15,9 +15,9 @@ public class Favorites {
 	private int id_favorite;
 	private int id_property;
 	private int idUser;
-	/*@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="id_user")
-	private Users iduser;*/
+	@ManyToOne
+	private Users user;
+
 	
 	public Favorites() {
 	}

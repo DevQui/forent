@@ -2,6 +2,7 @@ package com.springboot.forent.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,7 +26,8 @@ public class Users {
 	private String created_datetime;
 	private String updated_datetime;
 	
-	@OneToMany
+	//@OneToMany
+	@OneToMany(mappedBy="user", cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<Favorites> favorites;
 	
 	public Users() {

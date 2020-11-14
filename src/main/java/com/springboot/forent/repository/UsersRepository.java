@@ -7,4 +7,5 @@ import com.springboot.forent.model.Users;
 
 @Repository
 public interface UsersRepository extends CrudRepository<Users, Integer>{
+
 }

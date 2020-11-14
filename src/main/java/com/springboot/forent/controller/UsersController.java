@@ -44,9 +44,13 @@ public class UsersController {
     }
 	
 	@GetMapping("/users/{id}")
-	public Users get(@PathVariable Integer id) {
-		Users user = usersService.getUser(id);
-		return user;
+	public ResponseEntity<Users> get(@PathVariable Integer id) {
+		try {
+			Users user = usersService.getUser(id);
+			return new ResponseEntity<Users>(user, HttpStatus.OK);
+		}catch(Exception ex) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 	
     @PutMapping("/users/{id}")
