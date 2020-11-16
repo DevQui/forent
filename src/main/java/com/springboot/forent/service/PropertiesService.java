@@ -25,7 +25,7 @@ public class PropertiesService {
 			propertiesData.add(List<Properties> propertiesRepository.findByAmenitiesIdProperty(property.getId_property()));
 		}
 		return propertiesData;*/
-		return propertiesRepository.findAll();
+		return (List<Properties>) propertiesRepository.findAll();
 	}
 	
 	public void saveProperty(Properties property) {

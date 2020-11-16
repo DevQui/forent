@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Table(name="reviews")
@@ -17,6 +18,9 @@ public class Reviews {
 	private String comment;
 	private String created_datetime;
 	private int id_property;
+	
+	@ManyToOne
+	public Properties properties;
 	
 	public Reviews() {
 	}

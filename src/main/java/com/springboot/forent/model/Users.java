@@ -26,7 +26,6 @@ public class Users {
 	private String created_datetime;
 	private String updated_datetime;
 	
-	//@OneToMany
 	@OneToMany(mappedBy="user", cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<Favorites> favorites;
 	

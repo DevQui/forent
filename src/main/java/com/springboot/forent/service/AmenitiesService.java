@@ -7,18 +7,24 @@ import org.springframework.stereotype.Service;
 
 import com.springboot.forent.model.Amenities;
 import com.springboot.forent.repository.AmenitiesRepository;
+import com.springboot.forent.repository.PropertiesRepository;
 
 @Service
 public class AmenitiesService {
 	@Autowired
 	private AmenitiesRepository amenitiesRepository;
 	
+	@Autowired
+	public PropertiesRepository propertiesRepository;
+	
 	public List<Amenities> listAllAmenities(){
 		 return (List<Amenities>) amenitiesRepository.findAll();
 	}
 	
 	public Amenities saveAmenities(Amenities amenities) {
-		return amenitiesRepository.save(amenities);
+		Amenities amenity = amenitiesRepository.save(amenities); 
+		propertiesRepository.setAmenitiesId(amenity.getId_amenity(), amenity.getId_property());
+		return amenity;
     }
 
     public Amenities getAmenities(Integer id) {

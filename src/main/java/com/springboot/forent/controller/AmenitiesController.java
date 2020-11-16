@@ -33,8 +33,8 @@ public class AmenitiesController {
     }
 	
 	//@GetMapping("properties/{id}/amenities")
-	@GetMapping("amenities/{id}")
-    public ResponseEntity<Amenities> get(@PathVariable Integer id) {
+	@GetMapping("/properties/{id_property}/amenities/{id}")
+    public ResponseEntity<Amenities> get(@PathVariable Integer id_property, @PathVariable Integer id) {
         try {
         	
             Amenities amenisties = amenitiesService.getAmenities(id);
@@ -44,11 +44,12 @@ public class AmenitiesController {
         }
 	}	
 	
-	@PostMapping("/amenities")
-	public ResponseEntity<Amenities>  add(@RequestBody Amenities amenities) {
+	@PostMapping("/properties/{id_property}/amenities")
+	public ResponseEntity<Amenities>  add(@RequestBody Amenities amenities, @PathVariable Integer id_property) {
         try {
 			HttpHeaders header = new HttpHeaders();
 			header.setLocation(new URI("/amenities"));
+			amenities.setId_property(id_property);
 			Amenities response = amenitiesService.saveAmenities(amenities);
 			return new ResponseEntity<Amenities>(response,header,HttpStatus.CREATED);
 		}catch(Exception ex) {
@@ -57,8 +58,8 @@ public class AmenitiesController {
         
     }	
 	
-	@PatchMapping("/amenities/{id}")
-	public ResponseEntity<Amenities> update(@RequestBody Amenities amenities, @PathVariable Integer id) {
+	@PatchMapping("/properties/{id_property}/amenities/{id}")
+	public ResponseEntity<Amenities> update(@RequestBody Amenities amenities, @PathVariable Integer id_property, @PathVariable Integer id) {
         try {
         	Amenities existAmenities = amenitiesService.getAmenities(id);
         	

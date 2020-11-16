@@ -7,18 +7,24 @@ import org.springframework.stereotype.Service;
 
 import com.springboot.forent.model.Location;
 import com.springboot.forent.repository.LocationRepository;
+import com.springboot.forent.repository.PropertiesRepository;
 
 @Service
 public class LocationService {
 	@Autowired
 	private LocationRepository locationRepository;
 	
+	@Autowired
+	public PropertiesRepository propertiesRepository;
+	
 	public List<Location> listAllLocation(){
 		 return (List<Location>) locationRepository.findAll();
 	}
 	
 	public Location saveLocation(Location location) {
-		return locationRepository.save(location);
+		Location loc = locationRepository.save(location);
+		propertiesRepository.setLocationId(loc.getId_location(), loc.getId_property());
+		return loc;
     }
 
     public Location getLocation(Integer id) {

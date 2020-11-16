@@ -34,18 +34,18 @@ public class PropertiesController {
         return propertiesService.listAllProperties();
     }
 	
-	/*@PostMapping("/properties")
+	@PostMapping("/properties")
     public void add(@RequestBody Properties property, Location location, Amenities amenities) {
 		OffsetDateTime current = OffsetDateTime.now();
 		String created_datetime = current.toString();	
 		property.setCreated_datetime(created_datetime);
         propertiesService.saveProperty(property);
         
-        location.setId_property(property.getId_property());
+        /*location.setId_property(property.getId_property());
         locationService.saveLocation(location);
         amenities.setId_property(property.getId_property());
-        amenitiesService.saveAmenities(amenities);
-    }*/
+        amenitiesService.saveAmenities(amenities);*/
+    }
 	
 	@GetMapping("/properties/{id}")
 	public ResponseEntity<Properties> get(@PathVariable Integer id){

@@ -7,5 +7,4 @@ import com.springboot.forent.model.Location;
 
 @Repository
 public interface LocationRepository extends CrudRepository<Location, Integer>{
-
 }
