@@ -14,14 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 import com.springboot.forent.model.Amenities;
 import com.springboot.forent.model.Location;
 import com.springboot.forent.model.Properties;
-import com.springboot.forent.model.Users;
-import com.springboot.forent.service.AmenitiesService;
-import com.springboot.forent.service.LocationService;
 import com.springboot.forent.service.PropertiesService;
 
 @RestController
@@ -40,11 +36,6 @@ public class PropertiesController {
 		String created_datetime = current.toString();	
 		property.setCreated_datetime(created_datetime);
         propertiesService.saveProperty(property);
-        
-        /*location.setId_property(property.getId_property());
-        locationService.saveLocation(location);
-        amenities.setId_property(property.getId_property());
-        amenitiesService.saveAmenities(amenities);*/
     }
 	
 	@GetMapping("/properties/{id}")
@@ -57,52 +48,36 @@ public class PropertiesController {
         }
 	}
 	
-    /*@PutMapping("/properties/{id}")
+    @PutMapping("/properties/{id}")
     public ResponseEntity<Properties> update(@RequestBody Properties property, @PathVariable Integer id) {
         try {
         	Properties existProperty = propertiesService.getProperty(id);
-        	
-        	//Location location = locationService.getLocation(existProperty.getId_location().getId_location());
-        	//Amenities amenities = amenitiesService.getAmenities(existProperty.getId_amenities().getId_amenities());
-        	
-        	//Location location = locationService.getLocation(existProperty.getLocation().getId_location());
-        	//Amenities amenities = amenitiesService.getAmenities(existProperty.getAmenities().getId_amenity());
         	
         	if(existProperty != null) {
             	OffsetDateTime current = OffsetDateTime.now();
         		String updated_datetime = current.toString();
         		
         		try{
-        			if(property.getType() != null || property.getName() != null ||
-        					property.getPrice() != null || property.getDescription() != null ||
-    						!property.getType().isEmpty() || !property.getName().isEmpty() ||
-    						!property.getDescription().isEmpty()) {
-        				
-        				existProperty.setType(existProperty.getType());
-        				existProperty.setName(existProperty.getName());
-        				existProperty.setPrice(existProperty.getPrice());
-        				existProperty.setDescription(existProperty.getDescription());
-        				existProperty.setUpdated_datetime(updated_datetime);
-            	    	propertiesService.saveProperty(existProperty);
-            	    	
-            	    	location.setTown(location.getTown());
-            	    	location.setCity(location.getTown());
-            	    	location.setRegion(location.getRegion());
-            	    	location.setCountry(location.getCountry());
-            	    	locationService.saveLocation(location);
-            	    	
-            	    	amenities.setRooms(amenities.getRooms());
-            	    	amenities.setToilets(amenities.getToilets());
-            	    	amenities.setBeds(amenities.getBeds());
-            	    	amenities.setOther_amenities(amenities.getOther_amenities());
-            	    	amenitiesService.saveAmenities(amenities);
+        			if(property.getType() != null && !property.getType().isBlank()) { 
+    					existProperty.setType(property.getType());	
         			}
+        			if(property.getName() != null) {
+    					existProperty.setName(property.getName());	
+        			}
+        			if(property.getPrice() != null) {
+        				existProperty.setPrice(property.getPrice());
+        			}
+        			if(property.getDescription() != null && !property.getDescription().isEmpty()) {
+        				existProperty.setDescription(property.getDescription());
+        			}
+    				existProperty.setUpdated_datetime(updated_datetime);
+        	    	propertiesService.saveProperty(existProperty);
         		
         		}catch(NullPointerException ex) {
         			return new ResponseEntity<>(HttpStatus.PRECONDITION_REQUIRED);
         		}
         	}
-            return new ResponseEntity<Properties>(property, HttpStatus.OK);
+            return new ResponseEntity<Properties>(existProperty, HttpStatus.OK);
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -111,9 +86,9 @@ public class PropertiesController {
     @DeleteMapping("/properties/{id}")
     public void delete(@PathVariable Integer id) {
     	propertiesService.deleteProperty(id);
-    	Properties property = propertiesService.getProperty(id);
-    	locationService.deleteLocation(property.getLocation().getId_location());
-    }*/
+    	//Properties property = propertiesService.getProperty(id);
+    	//locationService.deleteLocation(property.getLocation().getId_location());
+    }
     
     /*@GetMapping("/properties/{id}/reviews")
     public Properties getReviews(@PathVariable Integer id) {

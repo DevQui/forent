@@ -1,13 +1,11 @@
 package com.springboot.forent.model;
 
 
-import java.util.List;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -24,17 +22,17 @@ public class Properties {
 	private String created_datetime;
 	private String updated_datetime;
 
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	private Users user;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	private Location location;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	private Amenities amenities;
 	
-	@OneToMany
-	private List<Reviews> reviews;
+	/*@OneToMany
+	private List<Reviews> reviews;*/
 	
 	
 	public Properties() {
