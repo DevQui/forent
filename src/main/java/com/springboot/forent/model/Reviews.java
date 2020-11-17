@@ -4,8 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.Table;	
 
 @Table(name="reviews")
 @Entity
@@ -13,43 +12,49 @@ public class Reviews {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //to generation strategies for the values of primary keys.
 	private int id_review;
+	private int id_property;
 	private int id_user;
 	private int rating;
 	private String comment;
 	private String created_datetime;
-	private int id_property;
-	
-	@ManyToOne
-	public Properties properties;
 	
 	public Reviews() {
 	}
-	
-	public Reviews(int id_review, int id_user, int rating, String comment, String created_datetime, int id_property) {
+
+	public Reviews(int idReview, int idProperty, int id_user, int rating, String comment, String created_datetime) {
 		super();
-		this.id_review = id_review;
+		this.id_review = idReview;
+		this.id_property = idProperty;
 		this.id_user = id_user;
 		this.rating = rating;
 		this.comment = comment;
 		this.created_datetime = created_datetime;
-		this.id_property = id_property;
 	}
 
-	public Reviews(int id_review, int rating, String comment, String created_datetime, int id_property) {
-		this.id_review = id_review;
+	public Reviews(int idProperty, int id_user, int rating, String comment, String created_datetime) {
+		super();
+		this.id_property = idProperty;
+		this.id_user = id_user;
 		this.rating = rating;
 		this.comment = comment;
 		this.created_datetime = created_datetime;
-		this.id_property = id_property;
 	}
 	
 
-	public int getId_review() {
+	public int getIdReview() {
 		return id_review;
 	}
 
-	public void setId_review(int id_review) {
-		this.id_review = id_review;
+	public void setIdReview(int idReview) {
+		this.id_review = idReview;
+	}
+
+	public int getIdProperty() {
+		return id_property;
+	}
+
+	public void setIdProperty(int idProperty) {
+		this.id_property = idProperty;
 	}
 
 	public int getId_user() {
@@ -82,13 +87,5 @@ public class Reviews {
 
 	public void setCreated_datetime(String created_datetime) {
 		this.created_datetime = created_datetime;
-	}
-
-	public int getId_property() {
-		return id_property;
-	}
-
-	public void setId_property(int id_property) {
-		this.id_property = id_property;
 	}
 }

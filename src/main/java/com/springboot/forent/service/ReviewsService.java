@@ -1,6 +1,7 @@
 package com.springboot.forent.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,20 +14,22 @@ public class ReviewsService {
 	@Autowired
 	ReviewsRepository reviewsRepository;
 	
-	public List<Reviews> listAllReviews(){
-		 return (List<Reviews>) reviewsRepository.findAll();
+	public Optional<Reviews> listAllReviews(Integer idProperty){
+		return reviewsRepository.findByIdProperty(idProperty);
 	}
 	
 	public Reviews saveReview(Reviews review) {
-		return reviewsRepository.save(review);
-   }
+		Reviews reviews = reviewsRepository.save(review); 
+		return reviews;
+   	}
 
-   public Reviews getReview(Integer id) {
-       return reviewsRepository.findById(id).get();
-   }
+	public Optional<Reviews> getReview(Integer id_property, Integer id) {
+       return reviewsRepository.findByIdReviewIdProprerty(id_property, id);
+   	}
+   
 
-   public String deleteReview(Integer id) {
-	   reviewsRepository.deleteById(id);
+	public String deleteReview(Integer id_property, Integer id) {
+	   reviewsRepository.deleteReviewFromProperty(id_property, id);
        return "Review Deleted";
-   }
+	}
 }

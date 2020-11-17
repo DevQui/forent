@@ -1,11 +1,15 @@
 package com.springboot.forent.model;
 
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -31,20 +35,23 @@ public class Properties {
 	@OneToOne(cascade=CascadeType.ALL)
 	private Amenities amenities;
 	
-	/*@OneToMany
-	private List<Reviews> reviews;*/
+	@OneToMany(targetEntity = Reviews.class, cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_property")
+	private List<Reviews> reviews;
 	
 	
 	public Properties() {
 	}
 
-	public Properties(int id_property, Users id_user, Location location, Amenities amenities, String type, String name,
-			String description, Float price, String created_datetime, String updated_datetime) {
+	public Properties(int id_property, Users id_user, Location location, Amenities amenities, 
+			List<Reviews> reviews, String type, String name, String description, Float price, 
+			String created_datetime, String updated_datetime) {
 		super();
 		this.id_property = id_property;
 		this.user = id_user;
 		this.location = location;
 		this.amenities = amenities;
+		this.reviews = reviews;
 		this.type = type;
 		this.name = name;
 		this.description = description;
@@ -114,6 +121,14 @@ public class Properties {
 		this.amenities = amenities;
 	}
 
+	public List<Reviews> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(List<Reviews> reviews) {
+		this.reviews = reviews;
+	}
+	
 	public String getType() {
 		return type;
 	}

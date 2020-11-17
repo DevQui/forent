@@ -1,6 +1,5 @@
 package com.springboot.forent.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -16,15 +15,6 @@ public class PropertiesService {
 	private PropertiesRepository propertiesRepository;
 	
 	public List<Properties> listAllProperties(){
-		/*List<Properties> propertiesAll;
-		List<Properties> propertiesData = new ArrayList<>();
-		
-		propertiesAll = propertiesRepository.findAll();
-		
-		for(Properties property : propertiesAll) {
-			propertiesData.add(List<Properties> propertiesRepository.findByAmenitiesIdProperty(property.getId_property()));
-		}
-		return propertiesData;*/
 		return (List<Properties>) propertiesRepository.findAll();
 	}
 	

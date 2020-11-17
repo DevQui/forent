@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.springboot.forent.model.Favorites;
-import com.springboot.forent.model.Users;
 import com.springboot.forent.repository.FavoritesRepository;
 
 @Service
