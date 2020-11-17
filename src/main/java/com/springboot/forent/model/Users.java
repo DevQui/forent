@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -26,7 +27,8 @@ public class Users {
 	private String created_datetime;
 	private String updated_datetime;
 	
-	@OneToMany(mappedBy="user", cascade=CascadeType.ALL, orphanRemoval=true)
+	@OneToMany(targetEntity = Favorites.class, cascade=CascadeType.ALL)
+	@JoinColumn(name = "id_user")
 	private List<Favorites> favorites;
 	
 	public Users() {
@@ -150,5 +152,13 @@ public class Users {
 
 	public void setUpdated_datetime(String updated_datetime) {
 		this.updated_datetime = updated_datetime;
+	}
+
+	public List<Favorites> getFavorites() {
+		return favorites;
+	}
+
+	public void setFavorites(List<Favorites> favorites) {
+		this.favorites = favorites;
 	}
 }

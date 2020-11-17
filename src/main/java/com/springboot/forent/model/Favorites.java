@@ -14,45 +14,36 @@ public class Favorites {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_favorite;
 	private int id_property;
-	private int idUser;
-	@ManyToOne
-	private Users user;
+	private int id_user;
 
 	
 	public Favorites() {
 	}
 	
-	/*public Favorites(int id_property, Users id_user) {
-		this.id_property = id_property;
-		this.iduser = id_user;
-	}*/
-	
-
 	public Favorites(int id_favorite, int id_property, int id_user) {
 		this.id_favorite = id_favorite;
 		this.id_property = id_property;
-		this.idUser = id_user;
+		this.id_user = id_user;
 	}
 
 	public int getId_user() {
-		return idUser;
+		return id_user;
 	}
 
 	public void setId_user(int id_user) {
-		this.idUser = id_user;
+		this.id_user = id_user;
 	}
 
 	public Favorites(int id_property, int id_user) {
 		super();
 		this.id_property = id_property;
-		this.idUser = id_user;
+		this.id_user = id_user;
 	}
 
 	public Favorites(Favorites favorite, Users user) {
-		// TODO Auto-generated constructor stub
 		this.id_favorite = favorite.getId_favorite();
 		this.id_property = favorite.getId_property();
-		//this.iduser = user;
+	
 	}
 
 	public int getId_favorite() {
@@ -70,12 +61,4 @@ public class Favorites {
 	public void setId_property(int id_property) {
 		this.id_property = id_property;
 	}
-
-	/*public Users getId_user() {
-		return iduser;
-	}
-
-	public void setId_user(Users id_user) {
-		this.iduser = id_user;
-	}*/
 }

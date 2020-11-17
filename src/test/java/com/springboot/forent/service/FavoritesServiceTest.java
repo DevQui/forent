@@ -34,7 +34,7 @@ class FavoritesServiceTest {
 	@DisplayName("TEST getFavoritesHasResult")
 	void getFavoritesHasResult() throws Exception {
 		Favorites fave1 = new Favorites(1,1,1);
-		Favorites fave2 = new Favorites(2,1,2);
+		Favorites fave2 = new Favorites(2,2,1);
 		Favorites fave3 = new Favorites(3,2,3);
 
 		List<Favorites> list = new ArrayList<Favorites>();
@@ -42,9 +42,9 @@ class FavoritesServiceTest {
 		list.add(fave2);
 		list.add(fave3);
 		
-		doReturn(list).when(repo).findAll();
+		doReturn(list).when(repo).findAllFavorites(1);
 		
-		List<Favorites> returnedList = (List<Favorites>) service.listAllFavorites();
+		List<Favorites> returnedList = (List<Favorites>) service.listAllFavorites(1);
 		// Validate
 		Assertions.assertFalse(returnedList.isEmpty(), "No result.");
 		Assertions.assertSame(returnedList.get(0), fave1, "User should be the same.");
@@ -55,9 +55,9 @@ class FavoritesServiceTest {
 	@DisplayName("TEST getFavoriteByID")
 	void getFavoriteByID() throws Exception{
 		Favorites fave1 = new Favorites(3,2,3);
-		doReturn(Optional.of(fave1)).when(repo).findById(3);
+		doReturn(fave1).when(repo).findUserFavoriteProperty(3,2);
 		
-		Favorites fave = service.getFavorite(3);
+		Favorites fave = service.getFavorite(3,2);
 		
 		Assertions.assertEquals(fave.getId_favorite(),3);
 		Assertions.assertEquals(fave.getId_property(), 2);
@@ -82,8 +82,8 @@ class FavoritesServiceTest {
 	void deleteFavorite() throws Exception{
 		Favorites fave = new Favorites(3,2,3);
 				
-		repo.delete(fave);
-		String response = service.deleteFavorite(1);
+		repo.deleteFavoriteProperty(3, 2);
+		String response = service.deleteFavorite(3,2);
 		
 		Assertions.assertEquals(response, "Favorite Property Deleted");
 	}

@@ -13,24 +13,21 @@ public class FavoritesService {
 	@Autowired
 	private FavoritesRepository favoritesRepository;
 	
-	public List<Favorites> listAllFavorites(){
-		 return (List<Favorites>) favoritesRepository.findAll();
+	public List<Favorites> listAllFavorites(Integer id_user){
+		 //return (List<Favorites>) favoritesRepository.findAll();
+		return (List<Favorites>) favoritesRepository.findAllFavorites(id_user);
 	}
-	
-	public List<Favorites> getUsersFavorites(Integer id){ 
-		return favoritesRepository.findByFavoritesIdUser(id);
-	}
-	
+		
 	public Favorites saveFavorite(Favorites favorites) {
 		return favoritesRepository.save(favorites);
     }
 
-    public Favorites getFavorite(Integer id) {
-        return favoritesRepository.findById(id).get();
+    public Favorites getFavorite(Integer id_user, Integer id) {
+        return favoritesRepository.findUserFavoriteProperty(id_user, id);
     }
 
-    public String deleteFavorite(Integer id) {
-    	favoritesRepository.deleteById(id);
+    public String deleteFavorite(Integer id_user, Integer id) {
+    	favoritesRepository.deleteFavoriteProperty(id_user, id);
     	return "Favorite Property Deleted";
     }
 }

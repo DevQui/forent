@@ -39,10 +39,10 @@ class FavoritesControllerTest {
 	private FavoritesService service;
 	
 	@Test
-	@DisplayName("GET /favorites WITH RESULT")
+	@DisplayName("GET /users/{id_user}/favorites WITH RESULT")
 	void getFavoritesListHasResult() throws Exception {
 		Favorites fave1 = new Favorites(1,1,1);
-		Favorites fave2 = new Favorites(2,1,2);
+		Favorites fave2 = new Favorites(2,2,1);
 		Favorites fave3 = new Favorites(3,2,3);
 
 		List<Favorites> list = new ArrayList<Favorites>();
@@ -50,9 +50,9 @@ class FavoritesControllerTest {
 		list.add(fave2);
 		list.add(fave3);
 		
-		doReturn(list).when(service).listAllFavorites();
+		doReturn(list).when(service).listAllFavorites(1);
 
-		mockMvc.perform(get("/favorites"))
+		mockMvc.perform(get("/users/{id_user}/favorites",1))
 
 			.andExpect(status().isOk())
 			.andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -61,20 +61,17 @@ class FavoritesControllerTest {
 			.andExpect(jsonPath("$.[0].id_property").value(1))
 			.andExpect(jsonPath("$.[0].id_user").value(1))
 			.andExpect(jsonPath("$.[1].id_favorite").value(2))
-			.andExpect(jsonPath("$.[1].id_property").value(1))
-			.andExpect(jsonPath("$.[1].id_user").value(2))
-			.andExpect(jsonPath("$.[2].id_favorite").value(3))
-			.andExpect(jsonPath("$.[2].id_property").value(2))
-			.andExpect(jsonPath("$.[2].id_user").value(3));
+			.andExpect(jsonPath("$.[1].id_property").value(2))
+			.andExpect(jsonPath("$.[1].id_user").value(1));
 	}
 	
 	
 	@Test
 	@DisplayName("GET /favorites WITH NO RESULT")
 	void getFavoritesListNoResult() throws Exception {
-		doReturn(new ArrayList<Favorites>()).when(service).listAllFavorites();
+		doReturn(new ArrayList<Favorites>()).when(service).listAllFavorites(1);
 
-		mockMvc.perform(get("/favorites"))
+		mockMvc.perform(get("/users/{id_user}/favorites",1))
 
 			.andExpect(status().isOk())
 			.andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -83,10 +80,10 @@ class FavoritesControllerTest {
 	}
 	
 	@Test
-	@DisplayName("GET /favorites/3 is FOUND")
+	@DisplayName("GET /users/{id_user}/favorites/{id} is FOUND")
 	void getFavoriteByIdFound() throws Exception {
 		Favorites fave1 = new Favorites(1,1,1);
-		Favorites fave2 = new Favorites(2,1,2);
+		Favorites fave2 = new Favorites(2,2,1);
 		Favorites fave3 = new Favorites(3,2,3);
 
 		List<Favorites> list = new ArrayList<Favorites>();
@@ -94,16 +91,16 @@ class FavoritesControllerTest {
 		list.add(fave2);
 		list.add(fave3);
 	
-		doReturn(fave2).when(service).getFavorite(2);
+		doReturn(fave2).when(service).getFavorite(1,2);
 
-		mockMvc.perform(get("/favorites/{id}",2))
+		mockMvc.perform(get("/users/{id_user}/favorites/{id}",1,2))
 
 			.andExpect(status().isOk())
 			.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 
 			.andExpect(jsonPath("$.id_favorite").value(2))
-			.andExpect(jsonPath("$.id_property").value(1))
-			.andExpect(jsonPath("$.id_user").value(2));
+			.andExpect(jsonPath("$.id_property").value(2))
+			.andExpect(jsonPath("$.id_user").value(1));
 	}
 
 	
@@ -113,7 +110,7 @@ class FavoritesControllerTest {
 		Favorites fave = new Favorites(1,1,1);
 		doReturn(fave).when(service).saveFavorite(fave);	
 		
-		mockMvc.perform(post("/favorites")
+		mockMvc.perform(post("/users/{id_user}/favorites",1)
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(asJsonString(fave)))
 		
@@ -125,9 +122,9 @@ class FavoritesControllerTest {
 	@DisplayName("DELETE /favorites/1 SUCCESS")
 	void deleteFavorite() throws Exception{
 		Favorites fave = new Favorites(1,1,1);
-		doReturn("Favorite Property Deleted").when(service).deleteFavorite(1);
+		doReturn("Favorite Property Deleted").when(service).deleteFavorite(1,1);
 		
-		mockMvc.perform(delete("/favorites/1")
+		mockMvc.perform(delete("/users/{id_user}/favorites/{id}",1,1)
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(asJsonString(fave)))
 			
