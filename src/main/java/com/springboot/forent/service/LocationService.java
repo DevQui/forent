@@ -27,8 +27,8 @@ public class LocationService {
 		return loc;
     }
 
-    public Location getLocation(Integer id) {
-        return locationRepository.findById(id).get();
+    public Location getLocation(Integer id_property, Integer id) {
+        return locationRepository.findIdLocationFromProperty(id_property, id);
     }
 
 }

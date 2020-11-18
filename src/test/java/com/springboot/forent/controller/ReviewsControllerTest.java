@@ -51,7 +51,7 @@ class ReviewsControllerTest {
 		list.add(review2);
 		list.add(review3);
 		
-		doReturn(Optional.of(list)).when(service).listAllReviews(1);
+		doReturn(list).when(service).listAllReviews(1);
 
 		mockMvc.perform(get("/properties/{id_property}/reviews", 1))
 
@@ -82,7 +82,7 @@ class ReviewsControllerTest {
 	@Test
 	@DisplayName("GET /properties/{id_proeprty}/reviews WITH NO RESULT")
 	void getReviewsListNoResult() throws Exception {
-		doReturn(Optional.of(new ArrayList<Reviews>())).when(service).listAllReviews(1);
+		doReturn(new ArrayList<Reviews>()).when(service).listAllReviews(1);
 
 		mockMvc.perform(get("/properties/{id_property}/reviews",1))
 

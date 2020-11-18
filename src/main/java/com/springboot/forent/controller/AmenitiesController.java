@@ -27,12 +27,11 @@ public class AmenitiesController {
 	@Autowired
     private AmenitiesService amenitiesService;
 	
-	@GetMapping("/amenities")
-    public List<Amenities> list() {
-        return amenitiesService.listAllAmenities();
+	@GetMapping("properties/{id_property}/amenities")
+    public List<Amenities> list(@PathVariable Integer id_property) {
+        return amenitiesService.listPropertyAmenities(id_property);
     }
 	
-	//@GetMapping("properties/{id}/amenities")
 	@GetMapping("/properties/{id_property}/amenities/{id}")
     public ResponseEntity<Amenities> get(@PathVariable Integer id_property, @PathVariable Integer id) {
         try {

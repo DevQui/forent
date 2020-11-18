@@ -30,7 +30,7 @@ public class LocationController {
 	@GetMapping("properties/{id_property}/location/{id}")
     public ResponseEntity<Location> get(@PathVariable Integer id_property, @PathVariable Integer id) {
         try {
-        	Location location = locationService.getLocation(id);
+        	Location location = locationService.getLocation(id_property, id);
             return new ResponseEntity<Location>(location, HttpStatus.OK);
         } catch (NoSuchElementException e) {
             return new ResponseEntity<Location>(HttpStatus.NOT_FOUND);
@@ -52,7 +52,7 @@ public class LocationController {
 	@PatchMapping("/properties/{id_property}/location/{id}")
 	public ResponseEntity<Location> update(@RequestBody Location location, @PathVariable Integer id, @PathVariable Integer id_property) {
         try {
-        	Location existLocation= locationService.getLocation(id);
+        	Location existLocation= locationService.getLocation(id_property, id);
         	
         	if(existLocation != null) {
         		try{

@@ -39,10 +39,10 @@ class AmenitiesControllerTest {
 	private AmenitiesService service;
 	
 	@Test
-	@DisplayName("GET /amenities WITH RESULT")
+	@DisplayName("GET /properties/{id_property}/amenities WITH RESULT")
 	void getAmenitiesListHasResult() throws Exception {
 		Amenities amenity1 = new Amenities(1, 1, 2, 1, 2, "Wifi, Cable");
-		Amenities amenity2 = new Amenities(2, 2, 2, 2, 1, "Gym, Pool");
+		Amenities amenity2 = new Amenities(2, 1, 2, 2, 1, "Gym, Pool");
 		Amenities amenity3 = new Amenities(3, 3, 1, 1, 1, "Microwave, Ref");
 
 		List<Amenities> list = new ArrayList<Amenities>();
@@ -50,9 +50,9 @@ class AmenitiesControllerTest {
 		list.add(amenity2);
 		list.add(amenity3);
 		
-		doReturn(list).when(service).listAllAmenities();
+		doReturn(list).when(service).listPropertyAmenities(1);
 
-		mockMvc.perform(get("/amenities"))
+		mockMvc.perform(get("/properties/{id_property}/amenities",1))
 
 			.andExpect(status().isOk())
 			.andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -64,27 +64,21 @@ class AmenitiesControllerTest {
 			.andExpect(jsonPath("$.[0].beds").value(2))
 			.andExpect(jsonPath("$.[0].other_amenities").value("Wifi, Cable"))
 			.andExpect(jsonPath("$.[1].id_amenity").value(2))
-			.andExpect(jsonPath("$.[1].id_property").value(2))
+			.andExpect(jsonPath("$.[1].id_property").value(1))
 			.andExpect(jsonPath("$.[1].rooms").value(2))
 			.andExpect(jsonPath("$.[1].toilets").value(2))
 			.andExpect(jsonPath("$.[1].beds").value(1))
-			.andExpect(jsonPath("$.[1].other_amenities").value("Gym, Pool"))
-			.andExpect(jsonPath("$.[2].id_amenity").value(3))
-			.andExpect(jsonPath("$.[2].id_property").value(3))
-			.andExpect(jsonPath("$.[2].rooms").value(1))
-			.andExpect(jsonPath("$.[2].toilets").value(1))
-			.andExpect(jsonPath("$.[2].beds").value(1))
-			.andExpect(jsonPath("$.[2].other_amenities").value("Microwave, Ref"));
+			.andExpect(jsonPath("$.[1].other_amenities").value("Gym, Pool"));
 	}
 	
 	
 	@Test
-	@DisplayName("GET /amenities WITH NO RESULT")
+	@DisplayName("GET /properties/{id_property}/amenities WITH NO RESULT")
 	void getAmenitiesListNoResult() throws Exception {
 		// Mocked the users and the service
-		doReturn(new ArrayList<Users>()).when(service).listAllAmenities();
+		doReturn(new ArrayList<Users>()).when(service).listPropertyAmenities(1);
 
-		mockMvc.perform(get("/amenities"))
+		mockMvc.perform(get("/properties/{id_property}/amenities",1))
 
 			.andExpect(status().isOk())
 			.andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -93,11 +87,11 @@ class AmenitiesControllerTest {
 	}
 	
 	@Test
-	@DisplayName("GET /amenities/3 is FOUND")
+	@DisplayName("GET /properties/{id_property}/amenities/{id_amenities} is FOUND")
 	void getUserByIdFound() throws Exception {
 		Amenities amenity1 = new Amenities(1, 1, 2, 1, 2, "Wifi, Cable");
-		Amenities amenity2 = new Amenities(2, 2, 2, 2, 1, "Gym, Pool");
-		Amenities amenity3 = new Amenities(3, 3, 1, 1, 1, "Microwave, Ref");
+		Amenities amenity2 = new Amenities(2, 1, 2, 2, 1, "Gym, Pool");
+		Amenities amenity3 = new Amenities(3, 2, 1, 1, 1, "Microwave, Ref");
 
 		List<Amenities> list = new ArrayList<Amenities>();
 		list.add(amenity1);
@@ -106,13 +100,13 @@ class AmenitiesControllerTest {
 	
 		doReturn(amenity3).when(service).getAmenities(3);
 
-		mockMvc.perform(get("/amenities/{id}",3))
+		mockMvc.perform(get("/properties/{id_property}/amenities/{id}",2,3))
 
 			.andExpect(status().isOk())
 			.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 
 			.andExpect(jsonPath("$.id_amenity").value(3))
-			.andExpect(jsonPath("$.id_property").value(3))
+			.andExpect(jsonPath("$.id_property").value(2))
 			.andExpect(jsonPath("$.rooms").value(1))
 			.andExpect(jsonPath("$.toilets").value(1))
 			.andExpect(jsonPath("$.beds").value(1))
@@ -121,13 +115,13 @@ class AmenitiesControllerTest {
 	
 	
 	@Test
-	@DisplayName("POST /amenities is SUCCESSFUL")
+	@DisplayName("POST /properties/{id_property}/amenities is SUCCESSFUL")
 	void addAmenitiesSuccess() throws Exception {
 		// Mocked the users and the service
 		Amenities amenity = new Amenities(1, 1, 2, 1, 2, "Wifi, Cable");
 		doReturn(amenity).when(service).saveAmenities(amenity);	
 		
-		mockMvc.perform(post("/amenities")
+		mockMvc.perform(post("/properties/{id_property}/amenities",1)
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(asJsonString(amenity)))
 		
@@ -136,14 +130,14 @@ class AmenitiesControllerTest {
 	}
 	
 	@Test
-	@DisplayName("PATCH /amenities/1 is SUCCESSFUL")
+	@DisplayName("PATCH /properties/{id_property}/amenities/{id_amenities} is SUCCESSFUL")
 	void updateAmenitiesSuccess() throws Exception{
 		Amenities amenityFind = new Amenities(1, 1, 2, 1, 2, "Wifi, Cable");
 		Amenities amenityPut = new Amenities(1, 1, 3, 2, 1, "Wifi, Cable");
 		doReturn(amenityFind).when(service).getAmenities(1);
 		doReturn(amenityPut).when(service).saveAmenities(amenityPut);
 		
-		mockMvc.perform(patch("/amenities/1")
+		mockMvc.perform(patch("/properties/{id_property}/amenities/{id}",1,1)
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(asJsonString(amenityPut)))
 			

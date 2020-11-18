@@ -17,8 +17,8 @@ public class AmenitiesService {
 	@Autowired
 	public PropertiesRepository propertiesRepository;
 	
-	public List<Amenities> listAllAmenities(){
-		 return (List<Amenities>) amenitiesRepository.findAll();
+	public List<Amenities> listPropertyAmenities(Integer id_property){
+		 return (List<Amenities>) amenitiesRepository.findPropretyAmenities(id_property);
 	}
 	
 	public Amenities saveAmenities(Amenities amenities) {

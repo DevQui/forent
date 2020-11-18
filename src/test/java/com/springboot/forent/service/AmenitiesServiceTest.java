@@ -18,6 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.springboot.forent.model.Amenities;
 import com.springboot.forent.repository.AmenitiesRepository;
+import com.springboot.forent.repository.PropertiesRepository;
 
 @AutoConfigureMockMvc
 @RunWith(SpringRunner.class)
@@ -27,23 +28,26 @@ class AmenitiesServiceTest {
 	AmenitiesService service;
 	
 	@MockBean
+	PropertiesRepository propertiesReposirtory;
+	
+	@MockBean
 	AmenitiesRepository repo;
 	
 	@Test
 	@DisplayName("TEST getAmenitiesHasResult")
 	void getAmenitiesHasResult() throws Exception {
 		Amenities amenity1 = new Amenities(1, 1, 2, 1, 2, "Wifi, Cable");
-		Amenities amenity2 = new Amenities(2, 2, 2, 2, 1, "Gym, Pool");
-		Amenities amenity3 = new Amenities(3, 3, 1, 1, 1, "Microwave, Ref");
+		Amenities amenity2 = new Amenities(2, 1, 2, 2, 1, "Gym, Pool");
+		Amenities amenity3 = new Amenities(3, 2, 1, 1, 1, "Microwave, Ref");
 
 		List<Amenities> list = new ArrayList<Amenities>();
 		list.add(amenity1);
 		list.add(amenity2);
 		list.add(amenity3);
 		
-		doReturn(list).when(repo).findAll();
+		doReturn(list).when(repo).findPropretyAmenities(1);
 
-		List<Amenities> returnedList = (List<Amenities>) service.listAllAmenities();
+		List<Amenities> returnedList = (List<Amenities>) service.listPropertyAmenities(1);
 
 		Assertions.assertFalse(returnedList.isEmpty(), "No result.");
 		Assertions.assertSame(returnedList.get(0), amenity1, "Amenity should be the same.");

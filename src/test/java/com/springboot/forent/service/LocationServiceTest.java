@@ -18,6 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.springboot.forent.model.Location;
 import com.springboot.forent.repository.LocationRepository;
+import com.springboot.forent.repository.PropertiesRepository;
 
 @AutoConfigureMockMvc
 @RunWith(SpringRunner.class)
@@ -25,6 +26,9 @@ import com.springboot.forent.repository.LocationRepository;
 class LocationServiceTest {
 	@Autowired
 	LocationService service;
+	
+	@MockBean
+	PropertiesRepository propertiesRepository;
 	
 	@MockBean
 	LocationRepository repo;
@@ -54,9 +58,9 @@ class LocationServiceTest {
 	@DisplayName("TEST getUserByID")
 	void getUserByID() throws Exception{
 		Location loc1 = new Location(1,1,"Town1","City1","Region1","Country1");
-		doReturn(Optional.of(loc1)).when(repo).findById(1);
+		doReturn(loc1).when(repo).findIdLocationFromProperty(1,1);
 		
-		Location loc = service.getLocation(1);
+		Location loc = service.getLocation(1,1);
 		
 		Assertions.assertEquals(loc.getId_location(),1);
 		Assertions.assertEquals(loc.getId_property(),1);
