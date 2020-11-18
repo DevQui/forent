@@ -27,10 +27,6 @@ public class Properties {
 	private String created_datetime;
 	private String updated_datetime;
 
-	private int users_id;
-	private int location_id;
-	private int amenties_id;
-
 	@ManyToOne(cascade=CascadeType.ALL)
 	private Users users;
 	
@@ -65,16 +61,6 @@ public class Properties {
 		this.updated_datetime = updated_datetime;
 	}
 
-	public Properties(String type, String name, String description, Float price,
-			String created_datetime) {
-		super();
-		this.type = type;
-		this.name = name;
-		this.description = description;
-		this.price = price;
-		this.created_datetime = created_datetime;
-	}
-
 	public Properties(int id_property, String type, String name, String description, Float price,
 			String updated_datetime) {
 		super();
@@ -85,24 +71,6 @@ public class Properties {
 		this.price = price;
 		this.updated_datetime = updated_datetime;
 	}
-	
-	public Properties(int id_property, int users_id, int location_id, int amenties_id, 
-			String type, String name, String description, Float price,
-			String created_datetime, String updated_datetime) {
-		super();
-		this.id_property = id_property;
-		this.users_id = users_id;
-		this.location_id = location_id;
-		this.amenties_id = amenties_id;
-		this.type = type;
-		this.name = name;
-		this.description = description;
-		this.price = price;
-		this.created_datetime = created_datetime;
-		this.updated_datetime = updated_datetime;
-	}
-	
-	
 
 	public int getId_property() {
 		return id_property;

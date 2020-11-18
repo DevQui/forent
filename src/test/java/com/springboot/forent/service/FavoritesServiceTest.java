@@ -4,7 +4,6 @@ import static org.mockito.Mockito.doReturn;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -17,7 +16,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.springboot.forent.model.Favorites;
-import com.springboot.forent.model.Reviews;
 import com.springboot.forent.repository.FavoritesRepository;
 
 @AutoConfigureMockMvc
@@ -80,8 +78,6 @@ class FavoritesServiceTest {
 	@Test
 	@DisplayName("TEST deleteFavorite")
 	void deleteFavorite() throws Exception{
-		Favorites fave = new Favorites(3,2,3);
-				
 		repo.deleteFavoriteProperty(3, 2);
 		String response = service.deleteFavorite(3,2);
 		

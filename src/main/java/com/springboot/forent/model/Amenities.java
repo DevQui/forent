@@ -31,23 +31,6 @@ public class Amenities {
 		this.other_amenities = other_amenities;
 	}
 
-	public Amenities(int id_property, int rooms, int toilets, int beds, String other_amenities) {
-		super();
-		this.idProperty = id_property;
-		this.rooms = rooms;
-		this.toilets = toilets;
-		this.beds = beds;
-		this.other_amenities = other_amenities;
-	}
-
-	public Amenities(int rooms, int toilets, int beds, String other_amenities) {
-		super();
-		this.rooms = rooms;
-		this.toilets = toilets;
-		this.beds = beds;
-		this.other_amenities = other_amenities;
-	}
-
 	public int getId_amenity() {
 		return id_amenity;
 	}

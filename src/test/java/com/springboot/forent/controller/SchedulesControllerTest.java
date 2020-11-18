@@ -25,7 +25,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.springboot.forent.model.Favorites;
 import com.springboot.forent.model.Schedules;
 import com.springboot.forent.model.Users;
 import com.springboot.forent.service.SchedulesService;

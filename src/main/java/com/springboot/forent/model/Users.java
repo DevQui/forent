@@ -37,32 +37,6 @@ public class Users {
 	
 	public Users() {
 	}
-	
-	
-	public Users(String type, String first_name, String middle_name, String last_name, String email,
-			String phone_number, String user_password, String created_datetime) {
-		super();
-		this.type = type;
-		this.first_name = first_name;
-		this.middle_name = middle_name;
-		this.last_name = last_name;
-		this.email = email;
-		this.phone_number = phone_number;
-		this.user_password = user_password;
-		this.created_datetime = created_datetime;
-	}
-
-	public Users(String first_name, String middle_name, String last_name, String email, String phone_number,
-			String user_password, String updated_datetime) {
-		super();
-		this.first_name = first_name;
-		this.middle_name = middle_name;
-		this.last_name = last_name;
-		this.email = email;
-		this.phone_number = phone_number;
-		this.user_password = user_password;
-		this.updated_datetime = updated_datetime;
-	}
 
 	public Users(int id_user, String type, String first_name, String middle_name, String last_name, String email, String phone_number,
 			String user_password, String created_datetime) {

@@ -16,7 +16,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.springboot.forent.model.Favorites;
 import com.springboot.forent.model.Schedules;
 import com.springboot.forent.repository.SchedulesRepository;
 

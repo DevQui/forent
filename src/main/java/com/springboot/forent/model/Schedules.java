@@ -29,13 +29,6 @@ public class Schedules {
 		this.schedule_date_to = schedule_date_to;
 	}
 
-	public Schedules(int id_property, int id_user, String schedule_date_from, String schedule_date_to) {
-		this.id_property = id_property;
-		this.id_user = id_user;
-		this.schedule_date_from = schedule_date_from;
-		this.schedule_date_to = schedule_date_to;
-	}
-
 	public int getId_schedule() {
 		return id_schedule;
 	}

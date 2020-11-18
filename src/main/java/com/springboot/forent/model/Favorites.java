@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Table(name="favorites")
@@ -32,18 +31,6 @@ public class Favorites {
 
 	public void setId_user(int id_user) {
 		this.id_user = id_user;
-	}
-
-	public Favorites(int id_property, int id_user) {
-		super();
-		this.id_property = id_property;
-		this.id_user = id_user;
-	}
-
-	public Favorites(Favorites favorite, Users user) {
-		this.id_favorite = favorite.getId_favorite();
-		this.id_property = favorite.getId_property();
-	
 	}
 
 	public int getId_favorite() {
