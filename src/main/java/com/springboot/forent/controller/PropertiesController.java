@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.springboot.forent.model.Amenities;
 import com.springboot.forent.model.Location;
 import com.springboot.forent.model.Properties;
+import com.springboot.forent.model.Users;
 import com.springboot.forent.service.PropertiesService;
 
 @RestController
@@ -46,6 +47,11 @@ public class PropertiesController {
         } catch (NoSuchElementException e) {
             return new ResponseEntity<Properties>(HttpStatus.NOT_FOUND);
         }
+	}
+	
+	@GetMapping("/users/{id_user}/properties")
+	public List<Properties> getListOfProperties(@PathVariable Integer id_user) {
+		return propertiesService.getUserProperties(id_user);
 	}
 	
     @PutMapping("/properties/{id}")

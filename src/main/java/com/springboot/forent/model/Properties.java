@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -26,8 +27,8 @@ public class Properties {
 	private String created_datetime;
 	private String updated_datetime;
 
-	@OneToOne(cascade=CascadeType.ALL)
-	private Users user;
+	@ManyToOne(cascade=CascadeType.ALL)
+	private Users users;
 	
 	@OneToOne(cascade=CascadeType.ALL)
 	private Location location;
@@ -43,12 +44,12 @@ public class Properties {
 	public Properties() {
 	}
 
-	public Properties(int id_property, Users id_user, Location location, Amenities amenities, 
+	public Properties(int id_property, Users users, Location location, Amenities amenities, 
 			List<Reviews> reviews, String type, String name, String description, Float price, 
 			String created_datetime, String updated_datetime) {
 		super();
 		this.id_property = id_property;
-		this.user = id_user;
+		this.users = users;
 		this.location = location;
 		this.amenities = amenities;
 		this.reviews = reviews;
@@ -89,46 +90,6 @@ public class Properties {
 		this.id_property = id_property;
 	}
 
-	public Users getId_user() {
-		return user;
-	}
-
-	public void setId_user(Users id_user) {
-		this.user = id_user;
-	}
-	
-	public Users getUser() {
-		return user;
-	}
-
-	public void setUser(Users user) {
-		this.user = user;
-	}
-
-	public Location getLocation() {
-		return location;
-	}	
-
-	public void setLocation(Location location) {
-		this.location = location;
-	}
-
-	public Amenities getAmenities() {
-		return amenities;
-	}
-
-	public void setAmenities(Amenities amenities) {
-		this.amenities = amenities;
-	}
-
-	public List<Reviews> getReviews() {
-		return reviews;
-	}
-
-	public void setReviews(List<Reviews> reviews) {
-		this.reviews = reviews;
-	}
-	
 	public String getType() {
 		return type;
 	}
@@ -175,5 +136,37 @@ public class Properties {
 
 	public void setUpdated_datetime(String updated_datetime) {
 		this.updated_datetime = updated_datetime;
-	}	
+	}
+
+	public Users getUsers() {
+		return users;
+	}
+
+	public void setUsers(Users users) {
+		this.users = users;
+	}
+
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
+	public Amenities getAmenities() {
+		return amenities;
+	}
+
+	public void setAmenities(Amenities amenities) {
+		this.amenities = amenities;
+	}
+
+	public List<Reviews> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(List<Reviews> reviews) {
+		this.reviews = reviews;
+	}
 }

@@ -31,10 +31,14 @@ public class Users {
 	@JoinColumn(name = "id_user")
 	private List<Favorites> favorites;
 	
+	@OneToMany(targetEntity = Properties.class, cascade=CascadeType.ALL)
+	@JoinColumn(name = "users")
+	private List<Properties> properties;
+	
 	public Users() {
 	}
 	
-	//POST Method
+	
 	public Users(String type, String first_name, String middle_name, String last_name, String email,
 			String phone_number, String user_password, String created_datetime) {
 		super();
@@ -47,7 +51,7 @@ public class Users {
 		this.user_password = user_password;
 		this.created_datetime = created_datetime;
 	}
-	//PUT Method
+
 	public Users(String first_name, String middle_name, String last_name, String email, String phone_number,
 			String user_password, String updated_datetime) {
 		super();

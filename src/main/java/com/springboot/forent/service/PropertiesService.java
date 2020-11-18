@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.springboot.forent.model.Properties;
+import com.springboot.forent.model.Users;
 import com.springboot.forent.repository.PropertiesRepository;
 
 @Service
@@ -32,5 +33,9 @@ public class PropertiesService {
     public void deleteProperty(Integer id) {
     	propertiesRepository.deleteById(id);
     }
+
+	public List<Properties> getUserProperties(Integer id_user) {
+		return propertiesRepository.getUserListOfProperties(id_user);
+	}
     
 }
