@@ -32,7 +32,7 @@ public class Users {
 	private List<Favorites> favorites;
 	
 	@OneToMany(targetEntity = Properties.class, cascade=CascadeType.ALL)
-	@JoinColumn(name = "users")
+	@JoinColumn(name = "users_id_user")
 	private List<Properties> properties;
 	
 	public Users() {
@@ -138,5 +138,13 @@ public class Users {
 
 	public void setFavorites(List<Favorites> favorites) {
 		this.favorites = favorites;
+	}
+
+	public List<Properties> getProperties() {
+		return properties;
+	}
+
+	public void setProperties(List<Properties> properties) {
+		this.properties = properties;
 	}
 }
