@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.springboot.forent.model.Amenities;
 import com.springboot.forent.model.Location;
 import com.springboot.forent.model.Properties;
-import com.springboot.forent.model.Users;
 import com.springboot.forent.service.PropertiesService;
 
 @RestController
@@ -32,11 +31,16 @@ public class PropertiesController {
     }
 	
 	@PostMapping("/properties")
-    public void add(@RequestBody Properties property, Location location, Amenities amenities) {
-		OffsetDateTime current = OffsetDateTime.now();
-		String created_datetime = current.toString();	
-		property.setCreated_datetime(created_datetime);
-        propertiesService.saveProperty(property);
+    public ResponseEntity<Properties> add(@RequestBody Properties property, Location location, Amenities amenities) {
+		try {
+			OffsetDateTime current = OffsetDateTime.now();
+			String created_datetime = current.toString();	
+			property.setCreated_datetime(created_datetime);
+			Properties propertySaved =  propertiesService.saveProperty(property);
+			return new ResponseEntity<Properties>(propertySaved, HttpStatus.CREATED);
+		}catch( Exception ex) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
     }
 	
 	@GetMapping("/properties/{id}")
@@ -92,24 +96,6 @@ public class PropertiesController {
     @DeleteMapping("/properties/{id}")
     public void delete(@PathVariable Integer id) {
     	propertiesService.deleteProperty(id);
-    	//Properties property = propertiesService.getProperty(id);
-    	//locationService.deleteLocation(property.getLocation().getId_location());
+    	
     }
-    
-    /*@GetMapping("/properties/{id}/reviews")
-    public Properties getReviews(@PathVariable Integer id) {
-    	 try {
-         	RestTemplate restTemplate = new RestTemplate();        	
-             Properties property = propertiesService.getProperty(id);
-             Location location = restTemplate.getForObject("http://localhost:8080/location/"+property.getId_location().getId_location(), Location.class);
-             Amenities amenities = restTemplate.getForObject("http://localhost:8080/amenities/"+property.getId_amenities().getId_amenities(), Amenities.class);
-             Users user = restTemplate.getForObject("http://localhost:8080/users/"+property.getId_user().getId_user(), Users.class);
-             //Reviews review = restTemplate.getForObject("http://localhost:8080/reviews/"+property.getId_review(), Reviews.class);
-             return new Properties(property, location, amenities, user);
-             //return new ResponseEntity<Properties>(property, HttpStatus.OK);
-         } catch (NoSuchElementException e) {;
-             //return new ResponseEntity<Properties>(HttpStatus.NOT_FOUND);
-         	return null;	
-         }
-    }*/
 }

@@ -19,8 +19,8 @@ public class PropertiesService {
 		return (List<Properties>) propertiesRepository.findAll();
 	}
 	
-	public void saveProperty(Properties property) {
-		propertiesRepository.save(property);
+	public Properties saveProperty(Properties property) {
+		return propertiesRepository.save(property);
     }
 
     public Properties getProperty(Integer id) {    	
@@ -30,8 +30,9 @@ public class PropertiesService {
         return propertiesRepository.findById(id).get();
     }
 
-    public void deleteProperty(Integer id) {
+    public String deleteProperty(Integer id) {
     	propertiesRepository.deleteById(id);
+    	return "Property Deleted";
     }
 
 	public List<Properties> getUserProperties(Integer id_user) {
