@@ -1,5 +1,6 @@
 package com.springboot.forent.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Modifying;
@@ -14,7 +15,7 @@ import com.springboot.forent.model.Reviews;
 @Repository
 public interface ReviewsRepository extends CrudRepository<Reviews, Integer>{
 	@Query("SELECT r FROM Reviews r WHERE r.id_property = ?1")
-	Optional<Reviews> findByIdProperty(Integer idProperty);
+	List<Reviews> findByIdProperty(Integer idProperty);
 	
 	@Query("SELECT r FROM Reviews r WHERE r.id_property = ?1 AND r.id_review = ?2")
 	Optional<Reviews> findByIdReviewIdProprerty(Integer id_property, Integer id);

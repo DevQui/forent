@@ -41,9 +41,9 @@ class ReviewsServiceTest {
 		list.add(review2);
 		list.add(review3);
 		
-		doReturn(Optional.of(list)).when(repo).findByIdProperty(3);
+		doReturn(list).when(repo).findByIdProperty(3);
 
-		List<Reviews> returnedList = (List<Reviews>) service.listAllReviews(3).get();
+		List<Reviews> returnedList = (List<Reviews>) service.listAllReviews(3);
 
 		Assertions.assertFalse(returnedList.isEmpty(), "No result.");
 		Assertions.assertSame(returnedList.get(0), review1, "User should be the same.");

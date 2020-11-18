@@ -14,7 +14,7 @@ public class ReviewsService {
 	@Autowired
 	ReviewsRepository reviewsRepository;
 	
-	public Optional<Reviews> listAllReviews(Integer idProperty){
+	public List<Reviews> listAllReviews(Integer idProperty){
 		return reviewsRepository.findByIdProperty(idProperty);
 	}
 	

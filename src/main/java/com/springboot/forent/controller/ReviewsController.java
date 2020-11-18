@@ -27,7 +27,7 @@ public class ReviewsController {
 		
 	@GetMapping("/properties/{id_property}/reviews")
     public List<Reviews> list(@PathVariable Integer id_property) {
-        return (List<Reviews>) reviewsService.listAllReviews(id_property).get();
+        return (List<Reviews>) reviewsService.listAllReviews(id_property);
     }
 		
 	@GetMapping("/properties/{id_property}/reviews/{id}")
