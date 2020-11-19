@@ -42,7 +42,7 @@ class PropertiesServiceTest {
 		list.add(property2);
 		list.add(property3);
 				
-		doReturn(list).when(repo).findAll();
+		doReturn(list).when(repo).findAllWithUserInfo();
 
 		List<Properties> returnedList = (List<Properties>) service.listAllProperties();
 

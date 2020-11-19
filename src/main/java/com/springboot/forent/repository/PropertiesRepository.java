@@ -30,4 +30,13 @@ public interface PropertiesRepository extends JpaRepository<Properties, Integer>
 
 	@Query("SELECT p FROM Properties p WHERE p.users.id_user = ?1")
 	List<Properties> getUserListOfProperties(Integer id_user);
+	
+	@Query("SELECT p,u FROM Properties p LEFT JOIN Users u ON p.users_id_user = u.id_user")
+	List<Properties> findAllWithUserInfo();
+
+	@Transactional
+	@Modifying(clearAutomatically = true)
+	@Query("DELETE Properties " + 
+			"WHERE users_id_user = ?1 AND id_property = ?2")
+	Integer deletePropertyOfUser(Integer id_user, Integer id_property);
 }

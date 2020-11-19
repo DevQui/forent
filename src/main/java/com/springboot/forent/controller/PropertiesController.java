@@ -30,19 +30,6 @@ public class PropertiesController {
         return propertiesService.listAllProperties();
     }
 	
-	@PostMapping("/properties")
-    public ResponseEntity<Properties> add(@RequestBody Properties property, Location location, Amenities amenities) {
-		try {
-			OffsetDateTime current = OffsetDateTime.now();
-			String created_datetime = current.toString();	
-			property.setCreated_datetime(created_datetime);
-			Properties propertySaved =  propertiesService.saveProperty(property);
-			return new ResponseEntity<Properties>(propertySaved, HttpStatus.CREATED);
-		}catch( Exception ex) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
-    }
-	
 	@GetMapping("/properties/{id}")
 	public ResponseEntity<Properties> get(@PathVariable Integer id){
 		try {
@@ -53,15 +40,29 @@ public class PropertiesController {
         }
 	}
 	
+	@PostMapping("/users/{id_user}/properties")
+    public ResponseEntity<Properties> add(@PathVariable Integer id_user, @RequestBody Properties property, Location location, Amenities amenities) {
+		try {
+			OffsetDateTime current = OffsetDateTime.now();
+			String created_datetime = current.toString();	
+			property.setCreated_datetime(created_datetime);
+			property.setUsers_id_user(id_user);
+			Properties propertySaved =  propertiesService.saveProperty(property);
+			return new ResponseEntity<Properties>(propertySaved, HttpStatus.CREATED);
+		}catch( Exception ex) {
+			return new ResponseEntity<Properties>(HttpStatus.BAD_REQUEST);
+		}
+    }
+	
 	@GetMapping("/users/{id_user}/properties")
 	public List<Properties> getListOfProperties(@PathVariable Integer id_user) {
 		return propertiesService.getUserProperties(id_user);
 	}
 	
-    @PutMapping("/properties/{id}")
-    public ResponseEntity<Properties> update(@RequestBody Properties property, @PathVariable Integer id) {
+    @PutMapping("/users/{id_user}/properties/{id_property}")
+    public ResponseEntity<Properties> update(@RequestBody Properties property, @PathVariable Integer id_user, @PathVariable Integer id_property) {
         try {
-        	Properties existProperty = propertiesService.getProperty(id);
+        	Properties existProperty = propertiesService.getProperty(id_property);
         	
         	if(existProperty != null) {
             	OffsetDateTime current = OffsetDateTime.now();
@@ -93,9 +94,8 @@ public class PropertiesController {
         }
     }
     
-    @DeleteMapping("/properties/{id}")
-    public void delete(@PathVariable Integer id) {
-    	propertiesService.deleteProperty(id);
-    	
+    @DeleteMapping("/users/{id_user}/properties/{id_property}")
+    public ResponseEntity<String> delete(@PathVariable Integer id_user, @PathVariable Integer id_property) {
+    	return propertiesService.deleteProperty(id_user, id_property);
     }
 }

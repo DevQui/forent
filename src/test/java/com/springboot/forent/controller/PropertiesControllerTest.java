@@ -19,7 +19,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -28,7 +30,7 @@ import com.springboot.forent.model.Amenities;
 import com.springboot.forent.model.Location;
 import com.springboot.forent.model.Properties;
 import com.springboot.forent.model.Reviews;
-import com.springboot.forent.model.Users;
+import com.springboot.forent.model.UserProperties;
 import com.springboot.forent.service.PropertiesService;
 
 
@@ -133,7 +135,7 @@ class PropertiesControllerTest {
 		Properties property = new Properties(1, "bungalow", "Bungalow Property", "A Bungalow Property", (float)3999.00, "2020-11-01 11:00:00");
 		doReturn(property).when(service).saveProperty(property);	
 		
-		mockMvc.perform(post("/properties")
+		mockMvc.perform(post("/users/{id_user}/properties",1)
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(asJsonString(property)))
 		
@@ -143,8 +145,8 @@ class PropertiesControllerTest {
 	@Test
 	@DisplayName("GET /users/{id_users}/proerties is FOUND")
 	void getPropertiesOfUser() throws Exception {
-		Users user1 = new Users(1, "host","John", "Middle Name", "Last-Name-John", "john@gmail.com", "+6911111111111", "password123","2020-11-09 11:00:00");
-		Users user2 = new Users(2, "tenant","Jane", "Middle Name", "Last-Name-Jane", "jane@gmail.com", "+6911111111112", "password123","2020-11-09 11:00:00");
+		UserProperties user1 = new UserProperties(1, "host","John", "Middle Name", "Last-Name-John", "john@gmail.com", "+6911111111111");
+		UserProperties user2 = new UserProperties(2, "tenant","Jane", "Middle Name", "Last-Name-Jane", "jane@gmail.com", "+6911111111112");
 		
 		Location location = new Location(1,1,"Town1","City1","Region1","Country1");
 		Location location2 = new Location(2,2,"Town2","City2","Region2","Country2");
@@ -206,7 +208,7 @@ class PropertiesControllerTest {
 		doReturn(propertyFind).when(service).getProperty(1);
 		doReturn(propertyPut).when(service).saveProperty(propertyPut);
 		
-		mockMvc.perform(put("/properties/{id_property}",1)
+		mockMvc.perform(put("/users/{id_user}/properties/{id_property}",1,1)
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(asJsonString(propertyPut)))
 			
@@ -222,12 +224,14 @@ class PropertiesControllerTest {
 	}
 	
 	@Test
-	@DisplayName("DELETE /properties/{id_property} SUCCESS")
+	@DisplayName("DELETE /users/{id_user}/properties/{id_property} SUCCESS")
 	void deleteProperty() throws Exception{
 		Properties property = new Properties(1, "bungalow", "Bungalow Property", "A Bungalow Property", (float)3999.00, "2020-11-01 11:00:00");
-		doReturn("Property Deleted").when(service).deleteProperty(1);
+		ResponseEntity<String> response = new ResponseEntity<String>("Property Deleted",HttpStatus.OK);
 		
-		mockMvc.perform(delete("/properties/{id_property}",1)
+		doReturn(response).when(service).deleteProperty(1,1);
+		
+		mockMvc.perform(delete("/users/{id_user}/properties/{id_property}",1,1)
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(asJsonString(property)))
 			

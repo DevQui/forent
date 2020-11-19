@@ -26,10 +26,20 @@ public class Properties {
 	private Float price;
 	private String created_datetime;
 	private String updated_datetime;
-
-	@ManyToOne(cascade=CascadeType.ALL)
-	private Users users;
+	private int users_id_user;
 	
+	@ManyToOne(targetEntity = UserProperties.class, cascade=CascadeType.ALL)
+	@JoinColumn(name = "users_id_user",  insertable = false, updatable = false)
+	private UserProperties users;
+	
+	public int getUsers_id_user() {
+		return users_id_user;
+	}
+
+	public void setUsers_id_user(int users_id_user) {
+		this.users_id_user = users_id_user;
+	}
+
 	@OneToOne(cascade=CascadeType.ALL)
 	private Location location;
 	
@@ -44,7 +54,7 @@ public class Properties {
 	public Properties() {
 	}
 
-	public Properties(int id_property, Users users, Location location, Amenities amenities, 
+	public Properties(int id_property, UserProperties users, Location location, Amenities amenities, 
 			List<Reviews> reviews, String type, String name, String description, Float price, 
 			String created_datetime, String updated_datetime) {
 		super();
@@ -128,11 +138,11 @@ public class Properties {
 		this.updated_datetime = updated_datetime;
 	}
 
-	public Users getUsers() {
+	public UserProperties getUsers() {
 		return users;
 	}
 
-	public void setUsers(Users users) {
+	public void setUsers(UserProperties users) {
 		this.users = users;
 	}
 
