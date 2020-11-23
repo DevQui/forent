@@ -2,16 +2,16 @@ package com.springboot.forent.repository;
 
 import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.springboot.forent.model.Properties;
 
 @Repository
-public interface PropertiesRepository extends JpaRepository<Properties, Integer>{
+public interface PropertiesRepository extends CrudRepository<Properties, Integer>{
 	@Transactional
 	@Modifying(clearAutomatically = true)
 	@Query("UPDATE Properties " + 
@@ -39,4 +39,7 @@ public interface PropertiesRepository extends JpaRepository<Properties, Integer>
 	@Query("DELETE Properties " + 
 			"WHERE users_id_user = ?1 AND id_property = ?2")
 	Integer deletePropertyOfUser(Integer id_user, Integer id_property);
+
+	@Query("SELECT p FROM Properties p WHERE p.users.id_user = ?1 AND p.id_property = ?2")
+	Properties findPropertyOfUser(Integer id_user, Integer id_property);
 }

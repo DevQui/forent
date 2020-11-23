@@ -22,13 +22,13 @@ import com.springboot.forent.service.SchedulesService;
 public class SchedulesController {
 	@Autowired
     private SchedulesService schedulesService;
-	
+	//"/properties/{id_property}/schedules" (list of schedules with the user)
+	//"/users/{id_user}/schedules" (list of schedules with the properties)
 	@GetMapping("/schedules")
     public List<Schedules> list() {
         return schedulesService.listAllSchedules();
     }
-	
-	
+	//"/users/{id_user}/schedules/{id_schedule}"(get: property id,)
 	@GetMapping("/schedules/{id}")
     public ResponseEntity<Schedules> get(@PathVariable Integer id) {
         try {
@@ -39,8 +39,8 @@ public class SchedulesController {
         }
 	}
 	
-	@PostMapping("/schedules")
-	public ResponseEntity<Schedules> add(@RequestBody Schedules schedule) {
+	@PostMapping("users/{id_users}/properties/{id_property}/schedules")
+	public ResponseEntity<Schedules> add(@PathVariable Integer id_users, @PathVariable Integer id_property, @RequestBody Schedules schedule) {
 		try {
 			HttpHeaders header = new HttpHeaders();
 			header.setLocation(new URI("/schedules"));
@@ -52,9 +52,9 @@ public class SchedulesController {
         
     }	
 	
-    @DeleteMapping("/schedules/{id}")
-    public ResponseEntity<String> delete(@PathVariable Integer id) {
-        String response = schedulesService.deleteSchedule(id);
+    @DeleteMapping("users/{id_user}/properties/{id_property}/schedules/{id_schedule}")
+    public ResponseEntity<String> delete(@PathVariable Integer id_users, @PathVariable Integer id_property, @PathVariable Integer id_schedule) {
+        String response = schedulesService.deleteSchedule(id_schedule);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

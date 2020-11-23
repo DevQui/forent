@@ -14,14 +14,21 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotBlank;
+
+
+
 @Table(name="properties")
 @Entity
 public class Properties {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_property;
+	@NotBlank(message = "Type should not be null or blank")
 	private String type;
+	@NotBlank(message = "Name should not be null or blank")
 	private String name;
+	@NotBlank(message = "Description should not be null or blank")
 	private String description;
 	private Float price;
 	private String created_datetime;
@@ -80,6 +87,20 @@ public class Properties {
 		this.description = description;
 		this.price = price;
 		this.updated_datetime = updated_datetime;
+	}
+
+	public Properties(int id_property, int users_id_user, String type, String name, String description, Float price,
+			String created_datetime, String updated_datetime) {
+		super();
+		this.id_property = id_property;
+		this.users_id_user = users_id_user;
+		this.type = type;
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.created_datetime = created_datetime;
+		this.updated_datetime = updated_datetime;
+		
 	}
 
 	public int getId_property() {

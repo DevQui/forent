@@ -112,8 +112,10 @@ class PropertiesControllerTest {
 		list.add(property1);
 		list.add(property2);
 		list.add(property3);
+		
+		ResponseEntity<Properties> response = new ResponseEntity<Properties>(property3, HttpStatus.OK);
 	
-		doReturn(property3).when(service).getProperty(3);
+		doReturn(response).when(service).getProperty(3);
 
 		mockMvc.perform(get("/properties/{id}",3))
 
@@ -129,17 +131,19 @@ class PropertiesControllerTest {
 	}
 	
 	@Test
-	@DisplayName("POST /properties SUCCESS")
+	@DisplayName("POST /users/{id_user}/properties SUCCESS")
 	void addPropertySuccess() throws Exception {
-
 		Properties property = new Properties(1, "bungalow", "Bungalow Property", "A Bungalow Property", (float)3999.00, "2020-11-01 11:00:00");
-		doReturn(property).when(service).saveProperty(property);	
+		
+		ResponseEntity<Properties> response = new ResponseEntity<Properties>(property,HttpStatus.CREATED);
+		
+		doReturn(response).when(service).addProperty(1, property);
 		
 		mockMvc.perform(post("/users/{id_user}/properties",1)
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(asJsonString(property)))
 		
-			.andExpect(status().isCreated());
+			.andExpect(status().isOk());
 	}
 	
 	@Test
@@ -203,24 +207,21 @@ class PropertiesControllerTest {
 	@Test
 	@DisplayName("PUT /properties/{id_property} SUCCESS")
 	void updatePropertySuccess() throws Exception{
-		Properties propertyFind = new Properties(1, "bungalow", "Bungalow Property", "A Bungalow Property", (float)3999.00, "2020-11-01 11:00:00");
-		Properties propertyPut = new Properties(1, "bungalow", "Bungalow Property", "This is a Bungalow Property", (float)3999.00, "2020-11-01 11:00:00");
-		doReturn(propertyFind).when(service).getProperty(1);
-		doReturn(propertyPut).when(service).saveProperty(propertyPut);
 		
-		mockMvc.perform(put("/users/{id_user}/properties/{id_property}",1,1)
+		Properties propertyFind = new Properties(1, 2, "bungalow", "Bungalow Property", "A Bungalow Property", (float)3999.00, "2020-11-01 11:00:00", "2020-11-01 11:00:00");
+		Properties propertyPut = new Properties(1, 2, "bungalow", "Bungalow Property2", "A Bungalow Property2", (float)3999.00, "2020-11-01 11:00:00", "2020-11-01 11:10:00");
+		
+		ResponseEntity<Properties> responseFind = new ResponseEntity<Properties>(propertyFind, HttpStatus.OK);
+		ResponseEntity<Properties> response = new ResponseEntity<Properties>(propertyPut, HttpStatus.OK);
+		
+		doReturn(responseFind).when(service).getProperty(1);
+		doReturn(response).when(service).updateProperty(2, 1, propertyPut);
+		
+		mockMvc.perform(put("/users/{id_user}/properties/{id_property}",2,1)
 				.contentType(MediaType.APPLICATION_JSON)
-				.content(asJsonString(propertyPut)))
-			
-				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-		
-				.andExpect(jsonPath("$.id_property").value(1))
-				.andExpect(jsonPath("$.type").value("bungalow"))
-				.andExpect(jsonPath("$.name").value("Bungalow Property"))
-				.andExpect(jsonPath("$.description").value("This is a Bungalow Property"))
-				.andExpect(jsonPath("$.price").value(3999.00));
-			
+				.content(asJsonString(propertyFind)))
+				
+				.andExpect(status().isOk());
 	}
 	
 	@Test
@@ -235,7 +236,8 @@ class PropertiesControllerTest {
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(asJsonString(property)))
 			
-				.andExpect(status().isOk());
+				.andExpect(status().isOk())
+				.equals(response.getStatusCodeValue() == 201);
 	}
 	
 	
