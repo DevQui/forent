@@ -1,15 +1,12 @@
 package com.springboot.forent.controller;
 
-import java.net.URI;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,39 +19,45 @@ import com.springboot.forent.service.SchedulesService;
 public class SchedulesController {
 	@Autowired
     private SchedulesService schedulesService;
-	//"/properties/{id_property}/schedules" (list of schedules with the user)
-	//"/users/{id_user}/schedules" (list of schedules with the properties)
+
 	@GetMapping("/schedules")
     public List<Schedules> list() {
         return schedulesService.listAllSchedules();
-    }
-	//"/users/{id_user}/schedules/{id_schedule}"(get: property id,)
-	@GetMapping("/schedules/{id}")
-    public ResponseEntity<Schedules> get(@PathVariable Integer id) {
-        try {
-            Schedules schedule = schedulesService.getSchedule(id);
-            return new ResponseEntity<Schedules>(schedule, HttpStatus.OK);
-        } catch (NoSuchElementException e) {
-            return new ResponseEntity<Schedules>(HttpStatus.NOT_FOUND);
-        }
 	}
 	
-	@PostMapping("users/{id_users}/properties/{id_property}/schedules")
-	public ResponseEntity<Schedules> add(@PathVariable Integer id_users, @PathVariable Integer id_property, @RequestBody Schedules schedule) {
-		try {
-			HttpHeaders header = new HttpHeaders();
-			header.setLocation(new URI("/schedules"));
-			Schedules response = schedulesService.saveSchedule(schedule);
-			return new ResponseEntity<Schedules>(response,header,HttpStatus.CREATED);
-		}catch(Exception ex) {
-			return new ResponseEntity<>(schedule,HttpStatus.PRECONDITION_REQUIRED);
-		}
-        
-    }	
+	//as a host user, I want to know the schedules of my property/properties
+	//(list of schedules with the user)
+	@GetMapping("/properties/{id_property}/schedules")
+    public List<Schedules> listPropertySchedules(@PathVariable Integer id_property) {
+        return schedulesService.listAllPropertySchedules(id_property);
+    }
 	
-    @DeleteMapping("users/{id_user}/properties/{id_property}/schedules/{id_schedule}")
-    public ResponseEntity<String> delete(@PathVariable Integer id_users, @PathVariable Integer id_property, @PathVariable Integer id_schedule) {
-        String response = schedulesService.deleteSchedule(id_schedule);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+	//as a tenant user, I want to know my schedules
+	//(list of schedules with the properties)
+	@GetMapping("/users/{id_user}/schedules")
+    public List<Schedules> listUserSchuedles(@PathVariable Integer id_user) {
+        return schedulesService.listAllUserSchedules(id_user);
+    }
+	
+	//as a tenant user, I want to get the details of my schedule
+	//(get: property id,)
+	@GetMapping("/users/{id_user}/schedules/{id_schedule}")
+    public ResponseEntity<Schedules> get(@PathVariable Integer id_user, @PathVariable Integer id_schedule) {
+          return schedulesService.getUserScheduleDetails(id_user, id_schedule);
+	}
+	
+	@PostMapping("/users/{id_user}/properties/{id_property}/schedules")
+	public ResponseEntity<String> add(@PathVariable Integer id_user, @PathVariable Integer id_property, @RequestBody Schedules schedules) {
+		return schedulesService.saveSchedule(id_user, id_property, schedules);
+    }
+	
+	@PatchMapping("/users/{id_user}/properties/{id_property}/schedules/{id_schedule}")
+    public ResponseEntity<String> update(@PathVariable Integer id_user, @PathVariable Integer id_property, @PathVariable Integer id_schedule) { 
+    	return schedulesService.updateSchedule(id_user, id_property, id_schedule);
+    }
+	 
+    @DeleteMapping("/users/{id_user}/properties/{id_property}/schedules/{id_schedule}")
+    public ResponseEntity<String> delete(@PathVariable Integer id_user, @PathVariable Integer id_property, @PathVariable Integer id_schedule) {
+        return schedulesService.deleteSchedule(id_user, id_property, id_schedule);
     }
 }
