@@ -42,7 +42,7 @@ public class SchedulesController {
 	//as a tenant user, I want to get the details of my schedule
 	//(get: property id,)
 	@GetMapping("/users/{id_user}/schedules/{id_schedule}")
-    public ResponseEntity<Schedules> get(@PathVariable Integer id_user, @PathVariable Integer id_schedule) {
+    public ResponseEntity<Schedules> getUserScheduleDetails(@PathVariable Integer id_user, @PathVariable Integer id_schedule) {
           return schedulesService.getUserScheduleDetails(id_user, id_schedule);
 	}
 	
@@ -52,7 +52,7 @@ public class SchedulesController {
     }
 	
 	@PatchMapping("/users/{id_user}/properties/{id_property}/schedules/{id_schedule}")
-    public ResponseEntity<String> update(@PathVariable Integer id_user, @PathVariable Integer id_property, @PathVariable Integer id_schedule) { 
+    public ResponseEntity<String> updateSchedule(@PathVariable Integer id_user, @PathVariable Integer id_property, @PathVariable Integer id_schedule) { 
     	return schedulesService.updateSchedule(id_user, id_property, id_schedule);
     }
 	 
