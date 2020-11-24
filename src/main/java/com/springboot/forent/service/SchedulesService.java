@@ -67,8 +67,7 @@ public class SchedulesService {
     }
     
     public ResponseEntity<String> updateSchedule(Integer id_user, Integer id_property, Integer id_schedule) {
-    	Integer acceptStatus = 1; 
-		Integer updated = schedulesRepository.acceptSchedule(id_user, id_property, id_schedule, acceptStatus);
+		Integer updated = schedulesRepository.acceptSchedule(id_property, id_user, id_schedule, 1);
 		if(updated > 0) {
 			return new ResponseEntity<String>("Booking Schedule Request Accepted", HttpStatus.OK);
 		}else {
@@ -83,5 +82,23 @@ public class SchedulesService {
     	}else{
     		throw new DataNotFoundException(id_schedule);
     	}
-    }  
+    }
+
+	public Schedules getScheduleById(Integer id_schedule) {
+		Schedules schedule = schedulesRepository.getScheduleById(id_schedule);
+		if(schedule != null) {
+			return schedule;
+		}else {
+			throw new DataNotFoundException(id_schedule);
+		}
+	}
+
+	public Schedules getPropertySchedule(Integer id_property, Integer id_schedule) {
+		Schedules schedules = schedulesRepository.getPropertySchedule(id_property, id_schedule);
+		if(schedules != null) {
+			return schedules;
+		}else {
+			throw new DataNotFoundException(id_schedule);
+		}
+	}  
 }

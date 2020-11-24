@@ -5,7 +5,6 @@ import static org.mockito.Mockito.doReturn;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Ignore;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -52,6 +51,29 @@ class SchedulesServiceTest {
 		Assertions.assertFalse(returnedList.isEmpty(), "No result.");
 		Assertions.assertSame(returnedList.get(0), schedule1, "User should be the same.");
 		Assertions.assertEquals(returnedList.get(2).getId_schedule(), 3);
+	}
+	
+	@Test
+	@DisplayName("TEST getScheduleById")
+	void getScheduleById() throws Exception{
+		Schedules schedule1 = new Schedules(1, 1, 1, 0, "2020-11-01", "2020-11-02");
+		Schedules schedule2 = new Schedules(2, 1, 3, 0, "2020-11-03", "2020-11-04");
+		Schedules schedule3 = new Schedules(3, 2, 3, 0, "2020-11-01", "2020-11-04");
+		
+		List<Schedules> list = new ArrayList<Schedules>();
+		list.add(schedule1);
+		list.add(schedule2);
+		list.add(schedule3);
+		
+		doReturn(schedule1).when(repo).getScheduleById(1);
+		
+		Schedules schedule = service.getScheduleById(1);
+		
+		Assertions.assertEquals(schedule.getId_schedule(),schedule1.getId_schedule());
+		Assertions.assertEquals(schedule.getId_property(),schedule1.getId_property());
+		Assertions.assertEquals(schedule.getId_user(),schedule1.getId_user());
+		Assertions.assertEquals(schedule.getSchedule_date_from(), schedule1.getSchedule_date_from());
+		Assertions.assertEquals(schedule.getSchedule_date_to(), schedule1.getSchedule_date_to());
 	}
 	
 	@Test
@@ -126,7 +148,6 @@ class SchedulesServiceTest {
 	
 	@Test
 	@DisplayName("TEST saveSchedule")
-	@Ignore
 	void saveSchedule() throws Exception{
 		Schedules schedule = new Schedules(3, 2, 3, 0, "2020-11-01", "2020-11-04");
 		Integer savedStatus = 1;
@@ -139,9 +160,8 @@ class SchedulesServiceTest {
 	
 	@Test
 	@DisplayName("TEST updateSchedule")
-	@Ignore
 	void updateSchedule() throws Exception{
-		Schedules schedule = new Schedules(3, 2, 3, 0, "2020-11-01", "2020-11-04");
+		Schedules schedule = new Schedules(1, 1, 1, 0, "2020-11-01", "2020-11-04");
 		Integer updatedStatus = 1;
 		doReturn(updatedStatus).when(repo).acceptSchedule(schedule.getId_user(), schedule.getId_property(),schedule.getId_schedule(), updatedStatus);
 		
@@ -151,8 +171,30 @@ class SchedulesServiceTest {
 	}
 	
 	@Test
+	@DisplayName("TEST getPropertySchedule")
+	void getPropertySchedule() throws Exception{
+		Schedules schedule1 = new Schedules(1, 1, 1, 0, "2020-11-01", "2020-11-02");
+		Schedules schedule2 = new Schedules(2, 1, 3, 0, "2020-11-03", "2020-11-04");
+		Schedules schedule3 = new Schedules(3, 2, 3, 0, "2020-11-01", "2020-11-04");
+		
+		List<Schedules> list = new ArrayList<Schedules>();
+		list.add(schedule1);
+		list.add(schedule2);
+		list.add(schedule3);
+		
+		doReturn(schedule1).when(repo).getPropertySchedule(schedule1.getId_property(), schedule1.getId_schedule());
+		
+		Schedules schedule = service.getPropertySchedule(schedule1.getId_property(), schedule1.getId_schedule());
+		
+		Assertions.assertEquals(schedule.getId_schedule(),schedule1.getId_schedule());
+		Assertions.assertEquals(schedule.getId_property(),schedule1.getId_property());
+		Assertions.assertEquals(schedule.getId_user(),schedule1.getId_user());
+		Assertions.assertEquals(schedule.getSchedule_date_from(), schedule1.getSchedule_date_from());
+		Assertions.assertEquals(schedule.getSchedule_date_to(), schedule1.getSchedule_date_to());
+	}
+	
+	@Test
 	@DisplayName("TEST deleteSchedule")
-	@Ignore
 	void deleteSchedule() throws Exception{
 		Schedules schedule = new Schedules(3, 2, 3, 0, "2020-11-01", "2020-11-04");
 		Integer deletedStatus = 1;
@@ -216,6 +258,22 @@ class SchedulesServiceTest {
 	void deleteScheduleNOTFOUND() throws DataNotFoundException {
 		Assertions.assertThrows(DataNotFoundException.class, () -> {
 			service.deleteSchedule(1,1,1);
+		  });
+	}
+	
+	@Test
+	@DisplayName("TEST getScheduleByIdNOTFOUND")
+	void getScheduleByIdNOTFOUND() throws DataNotFoundException {
+		Assertions.assertThrows(DataNotFoundException.class, () -> {
+			service.getScheduleById(1);
+		  });
+	}
+	
+	@Test
+	@DisplayName("TEST getPropertyScheduleNOTFOUND")
+	void getPropertyScheduleNOTFOUND() throws DataNotFoundException {
+		Assertions.assertThrows(DataNotFoundException.class, () -> {
+			service.getPropertySchedule(1,1);
 		  });
 	}
 }

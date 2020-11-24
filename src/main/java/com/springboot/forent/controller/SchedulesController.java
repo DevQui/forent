@@ -25,11 +25,21 @@ public class SchedulesController {
         return schedulesService.listAllSchedules();
 	}
 	
+	@GetMapping("/schedules/{id_schedule}")
+    public Schedules getScheduleById(@PathVariable Integer id_schedule) {
+        return schedulesService.getScheduleById(id_schedule);
+	}
+	
 	//as a host user, I want to know the schedules of my property/properties
 	//(list of schedules with the user)
 	@GetMapping("/properties/{id_property}/schedules")
     public List<Schedules> listPropertySchedules(@PathVariable Integer id_property) {
         return schedulesService.listAllPropertySchedules(id_property);
+    }
+	
+	@GetMapping("/properties/{id_property}/schedules/{id_schedule}")
+    public Schedules getPropertySchedule(@PathVariable Integer id_property, @PathVariable Integer id_schedule) {
+        return schedulesService.getPropertySchedule(id_property, id_schedule);
     }
 	
 	//as a tenant user, I want to know my schedules

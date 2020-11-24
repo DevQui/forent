@@ -24,19 +24,27 @@ public interface SchedulesRepository extends CrudRepository<Schedules, Integer>{
 
 	@Transactional
 	@Modifying(clearAutomatically = true)
-	@Query("INSERT INTO Schedules(" +
+	@Query(nativeQuery = true, value ="INSERT INTO schedules(" +
 			"id_property, id_user, status, schedule_date_from, schedule_date_to) " + 
-		"SELECT  p.id_property, p.users_id_user, 0, ?3, ?4 FROM Properties p " + 
-		"WHERE p.users_id_user = ?1 AND p.id_property = ?2 ")
-	Integer saveSchedule(Integer id_user, Integer id_property, String date_from, String date_to);
+		"SELECT  ?1, ?2, 0, ?3, ?4 FROM properties " + 
+		"WHERE EXISTS (SELECT id_property FROM properties WHERE id_property = ?1) AND " +
+		"EXISTS (SELECT id_user FROM users WHERE id_user = ?2) " +
+		"LIMIT 1")
+	Integer saveSchedule(Integer id_property, Integer id_user, String date_from, String date_to);
 		
 	@Transactional
 	@Modifying(clearAutomatically = true)
-	@Query("UPDATE Schedules SET status = 1 WHERE id_user =?1 AND id_property = ?2 AND id_schedule = ?3")
+	@Query("UPDATE Schedules SET status = ?4 WHERE id_user =?1 AND id_property = ?2 AND id_schedule = ?3")
 	Integer acceptSchedule(Integer id_user, Integer id_property, Integer id_schedule, Integer status);
 
 	@Transactional
 	@Modifying(clearAutomatically = true)
 	@Query("DELETE Schedules WHERE id_user = ?1 AND id_property = ?2 AND id_schedule = ?3")
 	Integer deleteSchedule(Integer id_user, Integer id_property, Integer id_schedule);
+
+	@Query("SELECT sched FROM Schedules sched WHERE sched.id_schedule = ?1")
+	Schedules getScheduleById(Integer id_schedule);
+	
+	@Query("SELECT sched FROM Schedules sched WHERE sched.id_property = ?1 AND sched.id_schedule = ?2")
+	Schedules getPropertySchedule(Integer id_property, Integer id_schedule);
 }

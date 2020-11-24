@@ -78,6 +78,33 @@ class SchedulesControllerTest {
 	}
 	
 	@Test
+	@DisplayName("GET /schedules/{id_schedules} is FOUND")
+	void getScheduleById() throws Exception {
+		Schedules schedule1 = new Schedules(1, 1, 1, 0, "2020-11-01", "2020-11-02");
+		Schedules schedule2 = new Schedules(2, 1, 2, 0, "2020-11-03", "2020-11-04");
+		Schedules schedule3 = new Schedules(3, 2, 3, 0, "2020-11-01", "2020-11-04");
+		
+		List<Schedules> list = new ArrayList<Schedules>();
+		list.add(schedule1);
+		list.add(schedule2);
+		list.add(schedule3);
+	
+		doReturn(schedule1).when(service).getScheduleById(1);
+
+		mockMvc.perform(get("/schedules/{id_schedule}",1))
+
+			.andExpect(status().isOk())
+			.andExpect(content().contentType(MediaType.APPLICATION_JSON))
+
+			.andExpect(jsonPath("$.id_schedule").value(1))
+			.andExpect(jsonPath("$.id_property").value(1))
+			.andExpect(jsonPath("$.id_user").value(1))
+			.andExpect(jsonPath("$.status").value(0))
+			.andExpect(jsonPath("$.schedule_date_from").value("2020-11-01"))
+			.andExpect(jsonPath("$.schedule_date_to").value("2020-11-02"));
+	}
+	
+	@Test
 	@DisplayName("GET /properties/{id_property}/schedules is FOUND")
 	void listPropertySchedules() throws Exception {
 		Schedules schedule1 = new Schedules(1, 1, 1, 0, "2020-11-01", "2020-11-02");
@@ -102,6 +129,33 @@ class SchedulesControllerTest {
 			.andExpect(jsonPath("$.[0].status").value(0))
 			.andExpect(jsonPath("$.[0].schedule_date_from").value("2020-11-01"))
 			.andExpect(jsonPath("$.[0].schedule_date_to").value("2020-11-02"));
+	}
+	
+	@Test
+	@DisplayName("GET /properties/{id_property}/schedules/{id_schedule} is FOUND")
+	void getPropertySchedule() throws Exception {
+		Schedules schedule1 = new Schedules(1, 1, 1, 0, "2020-11-01", "2020-11-02");
+		Schedules schedule2 = new Schedules(2, 1, 2, 0, "2020-11-03", "2020-11-04");
+		Schedules schedule3 = new Schedules(3, 2, 3, 0, "2020-11-01", "2020-11-04");
+		
+		List<Schedules> list = new ArrayList<Schedules>();
+		list.add(schedule1);
+		list.add(schedule2);
+		list.add(schedule3);
+			
+		doReturn(schedule3).when(service).getPropertySchedule(2,3);
+
+		mockMvc.perform(get("/properties/{id_property}/schedules/{id_schedule}",2,3))
+
+			.andExpect(status().isOk())
+			.andExpect(content().contentType(MediaType.APPLICATION_JSON))
+
+			.andExpect(jsonPath("$.id_schedule").value(3))
+			.andExpect(jsonPath("$.id_property").value(2))
+			.andExpect(jsonPath("$.id_user").value(3))
+			.andExpect(jsonPath("$.status").value(0))
+			.andExpect(jsonPath("$.schedule_date_from").value("2020-11-01"))
+			.andExpect(jsonPath("$..schedule_date_to").value("2020-11-04"));
 	}
 	
 	@Test
