@@ -42,4 +42,12 @@ public interface PropertiesRepository extends CrudRepository<Properties, Integer
 
 	@Query("SELECT p FROM Properties p WHERE p.users.id_user = ?1 AND p.id_property = ?2")
 	Properties findPropertyOfUser(Integer id_user, Integer id_property);
+
+	@Transactional
+	@Modifying(clearAutomatically = true)
+	@Query(nativeQuery = true, value ="UPDATE properties " + 
+		"SET type = ?3, name = ?4, description = ?5, price = ?6 "+
+		"WHERE users_id_user = ?1 AND id_property = ?2")
+	Integer updateProperty(Integer id_user, Integer id_property, String type, String name, String description,
+			Float price, String updated_datetime);
 }

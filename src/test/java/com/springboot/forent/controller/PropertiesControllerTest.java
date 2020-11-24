@@ -48,7 +48,6 @@ class PropertiesControllerTest {
 	@Test
 	@DisplayName("GET /properties WITH RESULT")
 	void getPropertiesListHasResult() throws Exception {
-		// Mocked the users and the service
 		Properties property1 = new Properties(1, "bungalow", "Bungalow Property", "A Bungalow Property", (float)3999.00, "2020-11-01 11:00:00");
 		Properties property2 = new Properties(2, "apartment", "Apartment Property", "An Apartment Property", (float)1999.00, "2020-11-01 11:00:00");
 		Properties property3 = new Properties(3, "condominium", "Condominium Property", "A Condominium Property", (float)2999.00, "2020-11-01 11:00:00");
@@ -89,7 +88,6 @@ class PropertiesControllerTest {
 	@Test
 	@DisplayName("GET /properties WITH NO RESULT")
 	void getPropertiesListNoResult() throws Exception {
-		// Mocked the users and the service
 		doReturn(new ArrayList<Properties>()).when(service).listAllProperties();
 
 		mockMvc.perform(get("/properties"))
@@ -140,6 +138,22 @@ class PropertiesControllerTest {
 		doReturn(response).when(service).addProperty(1, property);
 		
 		mockMvc.perform(post("/users/{id_user}/properties",1)
+			.contentType(MediaType.APPLICATION_JSON)
+			.content(asJsonString(property)))
+		
+			.andExpect(status().isOk());
+	}
+	
+	@Test
+	@DisplayName("GET /users/{id_user}/properties/{id_property} SUCCESS")
+	void getPropertyOfUser() throws Exception {
+		Properties property = new Properties(1, 1, "bungalow", "Bungalow Property", "A Bungalow Property", (float)3999.00, "2020-11-01 11:00:00", "2020-11-01 11:00:00");
+		
+		ResponseEntity<Properties> response = new ResponseEntity<Properties>(property,HttpStatus.OK);
+		
+		doReturn(response).when(service).getPropertyOfUser(1, 1);
+		
+		mockMvc.perform(get("/users/{id_user}/properties/{id_property}",1,1)
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(asJsonString(property)))
 		
@@ -207,19 +221,14 @@ class PropertiesControllerTest {
 	@Test
 	@DisplayName("PUT /properties/{id_property} SUCCESS")
 	void updatePropertySuccess() throws Exception{
+		Properties property = new Properties(1, 2, "bungalow", "Bungalow Property2", "A Bungalow Property2", (float)3999.00, "2020-11-01 11:00:00", "2020-11-01 11:10:00");
 		
-		Properties propertyFind = new Properties(1, 2, "bungalow", "Bungalow Property", "A Bungalow Property", (float)3999.00, "2020-11-01 11:00:00", "2020-11-01 11:00:00");
-		Properties propertyPut = new Properties(1, 2, "bungalow", "Bungalow Property2", "A Bungalow Property2", (float)3999.00, "2020-11-01 11:00:00", "2020-11-01 11:10:00");
+		ResponseEntity<String> response = new ResponseEntity<String>("Property Successfully Updated", HttpStatus.OK);
 		
-		ResponseEntity<Properties> responseFind = new ResponseEntity<Properties>(propertyFind, HttpStatus.OK);
-		ResponseEntity<Properties> response = new ResponseEntity<Properties>(propertyPut, HttpStatus.OK);
-		
-		doReturn(responseFind).when(service).getProperty(1);
-		doReturn(response).when(service).updateProperty(2, 1, propertyPut);
-		
+		doReturn(response).when(service).updateProperty(1,2, property);
 		mockMvc.perform(put("/users/{id_user}/properties/{id_property}",2,1)
 				.contentType(MediaType.APPLICATION_JSON)
-				.content(asJsonString(propertyFind)))
+				.content(asJsonString(property)))
 				
 				.andExpect(status().isOk());
 	}

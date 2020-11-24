@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -140,26 +141,22 @@ class PropertiesServiceTest{
 		Assertions.assertEquals(property.getBody().getUpdated_datetime(),"2020-11-01 11:00:00");
 	}
 	
-	/*@Test
+	@Test
 	@DisplayName("TEST updateProperty")
 	void updateProperty() throws Exception{
+		Properties updateProperty = new Properties(1, 1, "bungalow", "Bungalow Property2", "A Bungalow Property2", (float)3999.00, "2020-11-01 11:00:00", "2020-11-01 11:00:00");
+		Properties originalProperty = new Properties(1, "bungalow", "Bungalow Property2", "A Bungalow Property2", (float)3999.00, "2020-11-01 11:00:00");
+		Integer updatePropertyStatus = 1;
 		
-		//Properties originalProperty = new Properties(1, 2, "bungalow", "Bungalow Property", "A Bungalow Property", (float)3999.00, "2020-11-01 11:00:00", "2020-11-01 11:00:00");
-		Properties updateProperty = new Properties(2, 1, "bungalow", "Bungalow Property2", "A Bungalow Property2", (float)3999.00, "2020-11-01 11:00:00", "2020-11-01 11:00:00");
+		Mockito.when(repo.updateProperty(Mockito.anyInt(), Mockito.anyInt(), Mockito.anyString(),
+				Mockito.anyString(), Mockito.anyString(), Mockito.anyFloat(), 
+				Mockito.anyString())).thenReturn(updatePropertyStatus);
 		
-		doReturn(updateProperty).when(repo).save(updateProperty);
-		
-		ResponseEntity<Properties> property = service.updateProperty(1,2, updateProperty);
+		ResponseEntity<String> property = service.updateProperty(updateProperty.getUsers_id_user(),
+				updateProperty.getId_property(), originalProperty);
 		
 		Assertions.assertEquals(property.getStatusCode().value(), 200);
-		Assertions.assertEquals(property.getBody().getId_property(),2);
-		Assertions.assertEquals(property.getBody().getUsers_id_user(),1);
-		Assertions.assertEquals(property.getBody().getType(),"bungalow");
-		Assertions.assertEquals(property.getBody().getName(),"Bungalow Property2");
-		Assertions.assertEquals(property.getBody().getDescription(),"A Bungalow Property2");
-		Assertions.assertEquals(property.getBody().getPrice(), (float)3999.00);
-		Assertions.assertEquals(property.getBody().getUpdated_datetime(),"2020-11-01 11:00:00");
-	}*/
+	}
 	
 	
 	@Test

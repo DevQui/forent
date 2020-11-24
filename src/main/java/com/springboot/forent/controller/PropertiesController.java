@@ -50,7 +50,7 @@ public class PropertiesController {
     }
 	
     @PutMapping("/users/{id_user}/properties/{id_property}")
-    public ResponseEntity<Properties> update(@RequestBody Properties property, @PathVariable Integer id_user, @PathVariable Integer id_property) { 
+    public ResponseEntity<String> update(@RequestBody Properties property, @PathVariable Integer id_user, @PathVariable Integer id_property) { 
     	return propertiesService.updateProperty(id_user, id_property, property);
     }
     
