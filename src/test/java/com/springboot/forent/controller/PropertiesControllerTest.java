@@ -133,7 +133,7 @@ class PropertiesControllerTest {
 	void addPropertySuccess() throws Exception {
 		Properties property = new Properties(1, "bungalow", "Bungalow Property", "A Bungalow Property", (float)3999.00, "2020-11-01 11:00:00");
 		
-		ResponseEntity<Properties> response = new ResponseEntity<Properties>(property,HttpStatus.CREATED);
+		ResponseEntity<String> response = new ResponseEntity<String>("Property Successfully Added",HttpStatus.CREATED);
 		
 		doReturn(response).when(service).addProperty(1, property);
 		

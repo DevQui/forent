@@ -45,7 +45,7 @@ public class PropertiesController {
 	}
 	
 	@PostMapping("/users/{id_user}/properties")
-    public ResponseEntity<Properties> add(@PathVariable Integer id_user, @RequestBody @Valid Properties property, Location location, Amenities amenities){
+    public ResponseEntity<String> add(@PathVariable Integer id_user, @RequestBody @Valid Properties property, Location location, Amenities amenities){
 		return propertiesService.addProperty(id_user, property);
     }
 	

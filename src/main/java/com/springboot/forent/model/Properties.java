@@ -102,7 +102,7 @@ public class Properties {
 		this.updated_datetime = updated_datetime;
 		
 	}
-
+	
 	public int getId_property() {
 		return id_property;
 	}

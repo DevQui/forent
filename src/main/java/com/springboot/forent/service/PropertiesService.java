@@ -56,29 +56,29 @@ public class PropertiesService {
     }
 	
 	
-	public ResponseEntity<Properties> addProperty(Integer id_user, Properties property){
-			OffsetDateTime current = OffsetDateTime.now();
-			String created_datetime = current.toString();	
-			property.setCreated_datetime(created_datetime);
-			property.setUsers_id_user(id_user);
-			Properties propertySaved = propertiesRepository.save(property);
-			return new ResponseEntity<Properties>(propertySaved, HttpStatus.CREATED);
+	public ResponseEntity<String> addProperty(Integer id_user, Properties property){
+		OffsetDateTime current = OffsetDateTime.now();
+		String created_datetime = current.toString();	
+		property.setCreated_datetime(created_datetime);
+		property.setUsers_id_user(id_user);
+		Integer propertySavedStatus = propertiesRepository.saveProperty(id_user, property.getType(),
+				property.getName(), property.getDescription(), property.getPrice(), created_datetime);
+		if(propertySavedStatus > 0) {
+			return new ResponseEntity<String>("Property Successfully Added", HttpStatus.CREATED);
+		}else {
+			throw new DataNotFoundException(id_user);
+		}
+		
 		
     }
 	
 	public ResponseEntity<String> updateProperty(Integer id_user, Integer id_property, Properties property) {
 		OffsetDateTime current = OffsetDateTime.now();
 		String updated_datetime = current.toString();
-		System.out.println(id_user);
-		System.out.println(id_property);
-		System.out.println(property.getType());
-		System.out.println(property.getName());
-		System.out.println(property.getDescription());
-		System.out.println(property.getPrice());
-		System.out.println(updated_datetime);
+		
 		Integer updatePropertyStatus = propertiesRepository.updateProperty(id_user, id_property,
 				property.getType(), property.getName(), property.getDescription(), property.getPrice(), updated_datetime);
-		System.out.println(updatePropertyStatus);
+		
 		if(updatePropertyStatus > 0) {
 			return new ResponseEntity<String>("Property Successfully Updated", HttpStatus.OK);
 		}else {

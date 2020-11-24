@@ -50,4 +50,14 @@ public interface PropertiesRepository extends CrudRepository<Properties, Integer
 		"WHERE users_id_user = ?1 AND id_property = ?2")
 	Integer updateProperty(Integer id_user, Integer id_property, String type, String name, String description,
 			Float price, String updated_datetime);
+
+	@Transactional
+	@Modifying(clearAutomatically = true)
+	@Query(nativeQuery = true, value ="INSERT INTO properties(" +
+			" users_id_user, type, name, description, price, created_datetime) " + 
+		"SELECT  ?1, ?2, ?3, ?4, ?5, ?6 FROM properties " + 
+		"WHERE EXISTS (SELECT id_user FROM users WHERE id_user = ?1) " +
+		"LIMIT 1")
+	Integer saveProperty(Integer id_user, String type, String name, String description, Float price,
+			String created_datetime);
 }
