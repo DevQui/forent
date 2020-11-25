@@ -39,8 +39,8 @@ class LocationControllerTest {
 	private LocationService service;
 	
 	@Test
-	@DisplayName("GET /properites/{id_property}/location WITH RESULT")
-	void getLocationListHasResult() throws Exception {
+	@DisplayName("GET /location WITH RESULT")
+	void listAllLocation() throws Exception {
 		Location loc1 = new Location(1,1,"Town1","City1","Region1","Country1");
 		Location loc2 = new Location(2,2,"Town2","City2","Region2","Country2");
 		Location loc3 = new Location(3,3,"Town3","City3","Region3","Country3");
@@ -104,6 +104,32 @@ class LocationControllerTest {
 			.andExpect(jsonPath("$.country").value("Country3"));
 	}
 	
+	@Test
+	@DisplayName("GET /properites/{id_property}/location is FOUND")
+	void getLocationByPropertyID() throws Exception {
+		Location loc1 = new Location(1,1,"Town1","City1","Region1","Country1");
+		Location loc2 = new Location(2,2,"Town2","City2","Region2","Country2");
+		Location loc3 = new Location(3,3,"Town3","City3","Region3","Country3");
+
+		List<Location> list = new ArrayList<Location>();
+		list.add(loc1);
+		list.add(loc2);
+		list.add(loc3);
+	
+		doReturn(loc3).when(service).getLocationByPropertyID(3);
+
+		mockMvc.perform(get("/properties/{id_property}/location",3))
+
+			.andExpect(status().isOk())
+			.andExpect(content().contentType(MediaType.APPLICATION_JSON))
+
+			.andExpect(jsonPath("$.id_location").value(3))
+			.andExpect(jsonPath("$.id_property").value(3))
+			.andExpect(jsonPath("$.town").value("Town3"))
+			.andExpect(jsonPath("$.city").value("City3"))
+			.andExpect(jsonPath("$.region").value("Region3"))
+			.andExpect(jsonPath("$.country").value("Country3"));
+	}
 	
 	@Test
 	@DisplayName("GET /properites/{id_property}/location/{id_location} is FOUND")
