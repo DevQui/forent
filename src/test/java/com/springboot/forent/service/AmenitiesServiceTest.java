@@ -16,6 +16,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.springboot.forent.exception.DataNotFoundException;
 import com.springboot.forent.model.Amenities;
 import com.springboot.forent.repository.AmenitiesRepository;
 import com.springboot.forent.repository.PropertiesRepository;
@@ -101,5 +102,35 @@ class AmenitiesServiceTest {
 		Assertions.assertEquals(addedAmenity.getStatusCodeValue(), 200);
 	}
 	
+	@Test
+	@DisplayName("TEST listPropertyAmenitiesNORESULT")
+	void listPropertyAmenitiesNORESULT() throws DataNotFoundException {
+		Assertions.assertThrows(DataNotFoundException.class, () -> {
+			service.listPropertyAmenities(1);
+		  });
+	}
 	
+	@Test
+	@DisplayName("TEST getPropertyAmenitiesnNORESULT")
+	void getPropertyAmenitiesNORESULT() throws DataNotFoundException {
+		Assertions.assertThrows(DataNotFoundException.class, () -> {
+			service.getPropertyAmenities(1,1);
+		  });
+	}
+	
+	@Test
+	@DisplayName("TEST saveAmenityNORESULT")
+	void saveAmenityNORESULT() throws DataNotFoundException {
+		Assertions.assertThrows(DataNotFoundException.class, () -> {
+			service.saveAmenities(1, new Amenities());
+		  });
+	}
+	
+	@Test
+	@DisplayName("TEST gupdateAmenitiesNORESULT")
+	void gupdateAmenitiesNORESULT() throws DataNotFoundException {
+		Assertions.assertThrows(DataNotFoundException.class, () -> {
+			service.updateAmenities(1,1, new Amenities());
+		  });
+	}	
 }

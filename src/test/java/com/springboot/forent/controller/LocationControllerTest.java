@@ -18,7 +18,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -101,7 +103,7 @@ class LocationControllerTest {
 		list.add(loc2);
 		list.add(loc3);
 	
-		doReturn(loc3).when(service).getLocation(3,3);
+		doReturn(loc3).when(service).getPropertyLocation(3,3);
 
 		mockMvc.perform(get("/properties/{id_property}/location/{id_location}",3,3))
 
@@ -121,38 +123,32 @@ class LocationControllerTest {
 	@DisplayName("POST /properties/{id_property}/location is SUCCESSFUL")
 	void addUserSuccess() throws Exception {
 		Location loc = new Location(1,1,"Town1","City1","Region1","Country1");
-		doReturn(loc).when(service).saveLocation(loc);	
+		
+		ResponseEntity<String> response = new ResponseEntity<String>("Successfully Added Property Location", HttpStatus.CREATED);
+		doReturn(response).when(service).savePropertyLocation(1,loc);	
 		
 		mockMvc.perform(post("/properties/{id_property}/location",1)
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(asJsonString(loc)))
 		
-			.andExpect(status().isCreated());
-			//.andExpect(header().string(HttpHeaders.LOCATION,"/location"));
+			.andExpect(status().isOk());
 	}
 	
 	@Test
 	@DisplayName("PATCH /location/1 is SUCCESSFUL")
 	void updateUserSuccess() throws Exception{
-		Location locFind = new Location(1,1,"Town1","City1","Region1","Country1");
+		
 		Location locPut = new Location(1,1,"Town22","City1","Region1","Country1");
-		doReturn(locFind).when(service).getLocation(1,1);
-		doReturn(locPut).when(service).saveLocation(locPut);
+		
+		ResponseEntity<String> response = new ResponseEntity<String>("Successfully Updated Property Location", HttpStatus.CREATED);
+		
+		doReturn(response).when(service).savePropertyLocation(1, locPut);
 		
 		mockMvc.perform(patch("/properties/{id_property}/location/{id_location}",1,1)
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(asJsonString(locPut)))
 			
-				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-		
-				.andExpect(jsonPath("$.id_location").value(1))
-				.andExpect(jsonPath("$.id_property").value(1))
-				.andExpect(jsonPath("$.town").value("Town22"))
-				.andExpect(jsonPath("$.city").value("City1"))
-				.andExpect(jsonPath("$.region").value("Region1"))
-				.andExpect(jsonPath("$.country").value("Country1"));
-			
+				.andExpect(status().isOk());
 	}
 	
 	public String asJsonString(final Object obj) {
