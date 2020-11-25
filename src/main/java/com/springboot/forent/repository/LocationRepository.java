@@ -13,7 +13,10 @@ public interface LocationRepository extends CrudRepository<Location, Integer>{
 	
 	@Query("SELECT loc FROM Location loc WHERE loc.id_property = ?1 AND loc.id_location = ?2")
 	Location findIdLocationFromProperty(Integer id_property, Integer id);
-
+	
+	@Query("SELECT loc FROM Location loc WHERE loc.id_location = ?1")
+	Location getLocation(Integer id_location);
+	
 	@Transactional
 	@Modifying(clearAutomatically = true)
 	@Query(nativeQuery = true, value ="INSERT INTO location(" +

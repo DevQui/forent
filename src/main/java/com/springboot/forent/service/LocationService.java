@@ -30,6 +30,15 @@ public class LocationService {
 		 }
 	}
 	
+	public Location getLocation(Integer id_location) {
+		Location location =  locationRepository.getLocation(id_location);
+        if(location != null) {
+        	return location;
+        }else {
+        	throw new DataNotFoundException(id_location);
+        }
+	}
+	
 	public ResponseEntity<String> savePropertyLocation(Integer id_property, Location location) {
 		Integer saveLocationStatus = locationRepository.savePropertyLocation(id_property, location.getTown(), 
 				location.getCity(), location.getRegion(), location.getCountry());
@@ -60,8 +69,5 @@ public class LocationService {
     		throw new DataNotFoundException(id_location);
     	}
 		
-	}
-
-    
-    
+	}    
 }

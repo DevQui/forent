@@ -26,6 +26,11 @@ public class LocationController {
         return locationService.listAllLocation();
     }
 	
+	@GetMapping("/location/{id_location}")
+	public Location getLocation(@PathVariable Integer id_location) {
+        return locationService.getLocation(id_location);
+	}
+	
 	@GetMapping("properties/{id_property}/location/{id_location}")
     public Location getPropertyLocation(@PathVariable Integer id_property, @PathVariable Integer id_location) {
         return locationService.getPropertyLocation(id_property, id_location);

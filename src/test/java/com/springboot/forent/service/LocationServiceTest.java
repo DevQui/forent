@@ -57,7 +57,23 @@ class LocationServiceTest {
 	}
 	
 	@Test
-	@DisplayName("TEST getUserByID")
+	@DisplayName("TEST getLocation")
+	void getLocation() throws Exception{
+		Location loc1 = new Location(1,1,"Town1","City1","Region1","Country1");
+		doReturn(loc1).when(repo).getLocation(1);
+		
+		Location loc = service.getLocation(1);
+		
+		Assertions.assertEquals(loc.getId_location(),1);
+		Assertions.assertEquals(loc.getId_property(),1);
+		Assertions.assertEquals(loc.getTown(),"Town1");
+		Assertions.assertEquals(loc.getCity(),"City1");
+		Assertions.assertEquals(loc.getRegion(),"Region1");
+		Assertions.assertEquals(loc.getCountry(),"Country1");
+	}
+	
+	@Test
+	@DisplayName("TEST getPropertyLocation")
 	void getPropertyLocation() throws Exception{
 		Location loc1 = new Location(1,1,"Town1","City1","Region1","Country1");
 		doReturn(loc1).when(repo).findIdLocationFromProperty(1,1);
@@ -103,6 +119,14 @@ class LocationServiceTest {
 	void listAllLocationNORESULT() throws NoDataFoundException {
 		Assertions.assertThrows(NoDataFoundException.class, () -> {
 			service.listAllLocation();
+		  });
+	}
+	
+	@Test
+	@DisplayName("TEST getLocationNORESULT")
+	void getLocationNORESULT() throws DataNotFoundException {
+		Assertions.assertThrows(DataNotFoundException.class, () -> {
+			service.getLocation(1);
 		  });
 	}
 	

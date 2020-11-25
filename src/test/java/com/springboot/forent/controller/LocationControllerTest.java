@@ -77,23 +77,37 @@ class LocationControllerTest {
 			.andExpect(jsonPath("$.[2].country").value("Country3"));
 	}
 	
-	
 	@Test
-	@DisplayName("GET /properites/{id_property}/location WITH NO RESULT")
-	void getLocationListNoResult() throws Exception {
-		doReturn(new ArrayList<Location>()).when(service).listAllLocation();
+	@DisplayName("GET /location/{id_location} is FOUND")
+	void getLocation() throws Exception {
+		Location loc1 = new Location(1,1,"Town1","City1","Region1","Country1");
+		Location loc2 = new Location(2,2,"Town2","City2","Region2","Country2");
+		Location loc3 = new Location(3,3,"Town3","City3","Region3","Country3");
 
-		mockMvc.perform(get("/location"))
+		List<Location> list = new ArrayList<Location>();
+		list.add(loc1);
+		list.add(loc2);
+		list.add(loc3);
+	
+		doReturn(loc3).when(service).getLocation(3);
+
+		mockMvc.perform(get("/location/{id_location}",3))
 
 			.andExpect(status().isOk())
 			.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 
-			.andExpect(content().string("[]"));
+			.andExpect(jsonPath("$.id_location").value(3))
+			.andExpect(jsonPath("$.id_property").value(3))
+			.andExpect(jsonPath("$.town").value("Town3"))
+			.andExpect(jsonPath("$.city").value("City3"))
+			.andExpect(jsonPath("$.region").value("Region3"))
+			.andExpect(jsonPath("$.country").value("Country3"));
 	}
+	
 	
 	@Test
 	@DisplayName("GET /properites/{id_property}/location/{id_location} is FOUND")
-	void getLocationByIdFound() throws Exception {
+	void getPropertyLocation() throws Exception {
 		Location loc1 = new Location(1,1,"Town1","City1","Region1","Country1");
 		Location loc2 = new Location(2,2,"Town2","City2","Region2","Country2");
 		Location loc3 = new Location(3,3,"Town3","City3","Region3","Country3");
@@ -121,7 +135,7 @@ class LocationControllerTest {
 	
 	@Test
 	@DisplayName("POST /properties/{id_property}/location is SUCCESSFUL")
-	void addUserSuccess() throws Exception {
+	void savePropertyLocation() throws Exception {
 		Location loc = new Location(1,1,"Town1","City1","Region1","Country1");
 		
 		ResponseEntity<String> response = new ResponseEntity<String>("Successfully Added Property Location", HttpStatus.CREATED);
@@ -142,7 +156,7 @@ class LocationControllerTest {
 		
 		ResponseEntity<String> response = new ResponseEntity<String>("Successfully Updated Property Location", HttpStatus.CREATED);
 		
-		doReturn(response).when(service).savePropertyLocation(1, locPut);
+		doReturn(response).when(service).updatePropertyLocation(locPut, 1, 1);
 		
 		mockMvc.perform(patch("/properties/{id_property}/location/{id_location}",1,1)
 				.contentType(MediaType.APPLICATION_JSON)
