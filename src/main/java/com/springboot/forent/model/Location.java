@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Table(name="location")
 @Entity
 public class Location {
@@ -13,7 +15,9 @@ public class Location {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_location;
 	private int id_property;
+	@NotBlank(message = "Town should not be null or blank")
 	private String town;
+	@NotBlank(message = "City should not be null or blank")
 	private String city;
 	private String region;
 	private String country;

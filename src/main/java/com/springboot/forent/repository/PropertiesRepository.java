@@ -15,16 +15,16 @@ public interface PropertiesRepository extends CrudRepository<Properties, Integer
 	@Transactional
 	@Modifying(clearAutomatically = true)
 	@Query("UPDATE Properties " + 
-			"SET location_id_location = ?1 " + 
-			"WHERE id_property = ?2")
-	void setLocationId(Integer id_location, Integer id_property);
+			"SET location_id_location = (SELECT id_location FROM Location where id_property = ?1)  " + 
+			"WHERE id_property = ?1")
+	void setLocationId(Integer id_property);
 
 
 	@Transactional
 	@Modifying(clearAutomatically = true)
 	@Query("UPDATE Properties " + 
-			"SET amenities_id_amenity = ?1 " + 
-			"WHERE id_property = ?2")
+			"SET amenities_id_amenity = (SELECT id_amenity FROM Amenities where id_property = ?1) " + 
+			"WHERE id_property = ?1")
 	void setAmenitiesId(int id_property);
 
 
@@ -53,9 +53,9 @@ public interface PropertiesRepository extends CrudRepository<Properties, Integer
 
 	@Transactional
 	@Modifying(clearAutomatically = true)
-	@Query(nativeQuery = true, value ="INSERT INTO properties(" +
-			" users_id_user, type, name, description, price, created_datetime) " + 
-		"SELECT  ?1, ?2, ?3, ?4, ?5, ?6 FROM properties " + 
+	@Query(nativeQuery = true, value ="INSERT INTO properties( " +
+			"users_id_user, type, name, description, price, created_datetime) " + 
+		"SELECT  ?1, ?2, ?3, ?4, ?5, ?6 FROM users " + 
 		"WHERE EXISTS (SELECT id_user FROM users WHERE id_user = ?1) " +
 		"LIMIT 1")
 	Integer saveProperty(Integer id_user, String type, String name, String description, Float price,
