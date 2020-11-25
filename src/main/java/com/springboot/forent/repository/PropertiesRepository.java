@@ -25,7 +25,7 @@ public interface PropertiesRepository extends CrudRepository<Properties, Integer
 	@Query("UPDATE Properties " + 
 			"SET amenities_id_amenity = ?1 " + 
 			"WHERE id_property = ?2")
-	void setAmenitiesId(int id_amenity, int id_property);
+	void setAmenitiesId(int id_property);
 
 
 	@Query("SELECT p FROM Properties p WHERE p.users.id_user = ?1")
