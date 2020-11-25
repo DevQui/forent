@@ -18,7 +18,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -38,7 +40,7 @@ class FavoritesControllerTest {
 	
 	@Test
 	@DisplayName("GET /users/{id_user}/favorites WITH RESULT")
-	void getFavoritesListHasResult() throws Exception {
+	void listAllUserFavorites() throws Exception {
 		Favorites fave1 = new Favorites(1,1,1);
 		Favorites fave2 = new Favorites(2,2,1);
 		Favorites fave3 = new Favorites(3,2,3);
@@ -48,7 +50,7 @@ class FavoritesControllerTest {
 		list.add(fave2);
 		list.add(fave3);
 		
-		doReturn(list).when(service).listAllFavorites(1);
+		doReturn(list).when(service).listAllUserFavorites(1);
 
 		mockMvc.perform(get("/users/{id_user}/favorites",1))
 
@@ -62,24 +64,10 @@ class FavoritesControllerTest {
 			.andExpect(jsonPath("$.[1].id_property").value(2))
 			.andExpect(jsonPath("$.[1].id_user").value(1));
 	}
-	
-	
-	@Test
-	@DisplayName("GET /favorites WITH NO RESULT")
-	void getFavoritesListNoResult() throws Exception {
-		doReturn(new ArrayList<Favorites>()).when(service).listAllFavorites(1);
-
-		mockMvc.perform(get("/users/{id_user}/favorites",1))
-
-			.andExpect(status().isOk())
-			.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-
-			.andExpect(content().string("[]"));
-	}
-	
+		
 	@Test
 	@DisplayName("GET /users/{id_user}/favorites/{id} is FOUND")
-	void getFavoriteByIdFound() throws Exception {
+	void getUserFavoriteProperty() throws Exception {
 		Favorites fave1 = new Favorites(1,1,1);
 		Favorites fave2 = new Favorites(2,2,1);
 		Favorites fave3 = new Favorites(3,2,3);
@@ -89,7 +77,7 @@ class FavoritesControllerTest {
 		list.add(fave2);
 		list.add(fave3);
 	
-		doReturn(fave2).when(service).getFavorite(1,2);
+		doReturn(fave2).when(service).getUserFavoriteProperty(1,2);
 
 		mockMvc.perform(get("/users/{id_user}/favorites/{id}",1,2))
 
@@ -104,23 +92,28 @@ class FavoritesControllerTest {
 	
 	@Test
 	@DisplayName("POST /favorites is SUCCESSFUL")
-	void addFavoriteSuccess() throws Exception {
+	void savePropertyToFavorites() throws Exception {
 		Favorites fave = new Favorites(1,1,1);
-		doReturn(fave).when(service).saveFavorite(fave);	
 		
-		mockMvc.perform(post("/users/{id_user}/favorites",1)
+		ResponseEntity<String> response = new ResponseEntity<String>("Successfully Added Property to Favorites", HttpStatus.CREATED);
+		
+		doReturn(response).when(service).savePropertyToFavorites(1,1);	
+		
+		mockMvc.perform(post("/users/{id_user}/properties/{id_property}/favorites",1,1)
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(asJsonString(fave)))
 		
 			.andExpect(status().isCreated());
-			//.andExpect(header().string(HttpHeaders.LOCATION,"/favorites"));
 	}
 	
 	@Test
 	@DisplayName("DELETE /favorites/1 SUCCESS")
-	void deleteFavorite() throws Exception{
+	void deleteFavoriteProperty() throws Exception{
 		Favorites fave = new Favorites(1,1,1);
-		doReturn("Favorite Property Deleted").when(service).deleteFavorite(1,1);
+		
+		ResponseEntity<String> response = new ResponseEntity<String>("Successfully Deleted Property to Favorites", HttpStatus.OK);
+		
+		doReturn(response).when(service).deleteFavoriteProperty(1,1);
 		
 		mockMvc.perform(delete("/users/{id_user}/favorites/{id}",1,1)
 				.contentType(MediaType.APPLICATION_JSON)

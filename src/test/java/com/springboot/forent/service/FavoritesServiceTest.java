@@ -13,8 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.springboot.forent.exception.DataNotFoundException;
+import com.springboot.forent.exception.NoDataFoundException;
 import com.springboot.forent.model.Favorites;
 import com.springboot.forent.repository.FavoritesRepository;
 
@@ -29,8 +32,8 @@ class FavoritesServiceTest {
 	FavoritesRepository repo;
 	
 	@Test
-	@DisplayName("TEST getFavoritesHasResult")
-	void getFavoritesHasResult() throws Exception {
+	@DisplayName("TEST listAllUserFavorites")
+	void listAllUserFavorites() throws Exception {
 		Favorites fave1 = new Favorites(1,1,1);
 		Favorites fave2 = new Favorites(2,2,1);
 		Favorites fave3 = new Favorites(3,2,3);
@@ -40,22 +43,23 @@ class FavoritesServiceTest {
 		list.add(fave2);
 		list.add(fave3);
 		
-		doReturn(list).when(repo).findAllFavorites(1);
+		doReturn(list).when(repo).listAllUserFavorites(1);
 		
-		List<Favorites> returnedList = (List<Favorites>) service.listAllFavorites(1);
-		// Validate
+		List<Favorites> returnedList = (List<Favorites>) service.listAllUserFavorites(1);
+
 		Assertions.assertFalse(returnedList.isEmpty(), "No result.");
 		Assertions.assertSame(returnedList.get(0), fave1, "User should be the same.");
 		Assertions.assertEquals(returnedList.get(2).getId_property(), 2);
 	}
 	
 	@Test
-	@DisplayName("TEST getFavoriteByID")
-	void getFavoriteByID() throws Exception{
+	@DisplayName("TEST getUserFavoriteProperty")
+	void getUserFavoriteProperty() throws Exception{
 		Favorites fave1 = new Favorites(3,2,3);
+		
 		doReturn(fave1).when(repo).findUserFavoriteProperty(3,2);
 		
-		Favorites fave = service.getFavorite(3,2);
+		Favorites fave = service.getUserFavoriteProperty(3,2);
 		
 		Assertions.assertEquals(fave.getId_favorite(),3);
 		Assertions.assertEquals(fave.getId_property(), 2);
@@ -63,24 +67,61 @@ class FavoritesServiceTest {
 	}
 	
 	@Test
-	@DisplayName("TEST saveFavorite")
-	void saveFavorite() throws Exception{
+	@DisplayName("TEST savePropertyToFavorites")
+	void savePropertyToFavorites() throws Exception{
 		Favorites fave1 = new Favorites(3,2,3);
-		doReturn(fave1).when(repo).save(fave1);
 		
-		Favorites addedFave = service.saveFavorite(fave1);
+		Integer savePropertyToFavoritesStatus = 1;
 		
-		Assertions.assertEquals(addedFave.getId_favorite(),3);
-		Assertions.assertEquals(addedFave.getId_property(),2);
-		Assertions.assertEquals(addedFave.getId_user(),3);	
+		doReturn(savePropertyToFavoritesStatus).when(repo).savePropertyToFavorites(fave1.getId_user(), 
+				fave1.getId_property());	
+		
+		ResponseEntity<String> response = service.savePropertyToFavorites(fave1.getId_user(), fave1.getId_property());
+		
+		Assertions.assertEquals(response.getStatusCodeValue(), 201);
 	}
 	
 	@Test
-	@DisplayName("TEST deleteFavorite")
-	void deleteFavorite() throws Exception{
-		repo.deleteFavoriteProperty(3, 2);
-		String response = service.deleteFavorite(3,2);
+	@DisplayName("TEST deleteFavoriteProperty")
+	void deleteFavoriteProperty() throws Exception{
+		Integer updatePropertyToFavoritesStatus = 1;
 		
-		Assertions.assertEquals(response, "Favorite Property Deleted");
+		doReturn(updatePropertyToFavoritesStatus).when(repo).deleteFavoriteProperty(3, 2);
+		
+		ResponseEntity<String> response = service.deleteFavoriteProperty(3,2);
+		
+		Assertions.assertEquals(response.getStatusCodeValue(), 200);
+	}
+	
+	@Test
+	@DisplayName("TEST listAllUserFavoritesNORESULT")
+	void listAllUserFavoritesNORESULT() throws NoDataFoundException {
+		Assertions.assertThrows(NoDataFoundException.class, () -> {
+			service.listAllUserFavorites(1);
+		  });
+	}
+	
+	@Test
+	@DisplayName("TEST getUserFavoritePropertyNOTFOUND")
+	void getUserFavoritePropertyNOTFOUND() throws DataNotFoundException {
+		Assertions.assertThrows(DataNotFoundException.class, () -> {
+			service.getUserFavoriteProperty(1,1);
+		  });
+	}
+	
+	@Test
+	@DisplayName("TEST gsavePropertyToFavoritesNOTFOUND")
+	void savePropertyToFavoritesNOTFOUND() throws DataNotFoundException {
+		Assertions.assertThrows(DataNotFoundException.class, () -> {
+			service.savePropertyToFavorites(1,1);
+		  });
+	}
+	
+	@Test
+	@DisplayName("TEST deleteFavoritePropertyNOTFOUND")
+	void deleteFavoritePropertyNOTFOUND() throws DataNotFoundException {
+		Assertions.assertThrows(DataNotFoundException.class, () -> {
+			service.deleteFavoriteProperty(1,1);
+		  });
 	}
 }
