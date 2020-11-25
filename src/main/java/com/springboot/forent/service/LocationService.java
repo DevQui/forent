@@ -49,6 +49,15 @@ public class LocationService {
 			throw new DataNotFoundException(id_property);
 		}
     }
+	
+	public Location getLocationByPropertyID(Integer id_property) {
+		Location location =  locationRepository.getLocationByPropertyID(id_property);
+        if(location != null) {
+        	return location;
+        }else {
+        	throw new DataNotFoundException(id_property);
+        }
+	}
 
     public Location getPropertyLocation(Integer id_property, Integer id_location) {
         Location location =  locationRepository.findIdLocationFromProperty(id_property, id_location);
