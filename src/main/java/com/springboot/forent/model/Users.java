@@ -11,19 +11,29 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+
 @Table(name="users")
 @Entity
 public class Users {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //to generation strategies for the values of primary keys.
 	private int id_user;
+	@NotBlank(message = "User Type should not be blank or null")
 	private String type;
+	@NotBlank(message = "User First Name should not be blank or null")
 	private String first_name;
 	private String middle_name;
+	@NotBlank(message = "User Last Name should not be blank or null")
 	private String last_name;
+	@Email(message = "Please enter valid email")
 	private String email;
+	@NotBlank(message = "User Phone Number should not be blank or null")
 	private String phone_number;
+	@NotBlank(message = "User Password should not be blank or null")
 	private String user_password;
+	@NotBlank(message = "User Created Datetime should not be blank or null")
 	private String created_datetime;
 	private String updated_datetime;
 	

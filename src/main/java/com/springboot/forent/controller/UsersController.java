@@ -5,6 +5,8 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -30,17 +32,9 @@ public class UsersController {
         return usersService.listAllUsers();
     }
 	
-	@PostMapping("/users")
-	public ResponseEntity<Users> add(@RequestBody Users user) {
-		try {
-			HttpHeaders header = new HttpHeaders();
-			header.setLocation(new URI("/users"));
-			Users response = usersService.saveUser(user);
-			return new ResponseEntity<Users>(response,header,HttpStatus.CREATED);
-		}catch(Exception ex) {
-			return new ResponseEntity<>(user,HttpStatus.PRECONDITION_REQUIRED);
-		}
-        
+	@PostMapping("/registration")
+	public ResponseEntity<String> add(@RequestBody @Valid Users user) {
+		return usersService.saveUser(user);       
     }
 	
 	@GetMapping("/users/{id}")
@@ -54,7 +48,7 @@ public class UsersController {
 	}
 	
     @PutMapping("/users/{id}")
-    public ResponseEntity<Users> update(@RequestBody Users user, @PathVariable Integer id) {
+    public ResponseEntity<Users> update(@RequestBody @Valid Users user, @PathVariable Integer id) {
         try {
             Users existUser = usersService.getUser(id);
             if(existUser != null) {

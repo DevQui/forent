@@ -113,18 +113,18 @@ class UsersControllerTest {
 	
 	
 	@Test
-	@DisplayName("POST /users is SUCCESSFUL")
+	@DisplayName("POST /registration is SUCCESSFUL")
 	void addUserSuccess() throws Exception {
 		// Mocked the users and the service
 		Users user = new Users(1, "host","John", "Middle Name", "Last-Name-John", "john@gmail.com", "+6911111111111", "password123","2020-11-09 11:00:00");
 		doReturn(user).when(service).saveUser(user);	
 		
-		mockMvc.perform(post("/users")
+		mockMvc.perform(post("/registration")
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(asJsonString(user)))
 		
 			.andExpect(status().isCreated())
-			.andExpect(header().string(HttpHeaders.LOCATION,"/users"));
+			.andExpect(header().string(HttpHeaders.LOCATION,"/registration"));
 	}
 		
 	@Test

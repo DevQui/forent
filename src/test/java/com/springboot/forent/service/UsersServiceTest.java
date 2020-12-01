@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.springboot.forent.model.Users;
@@ -71,18 +72,13 @@ class UsersServiceTest {
 	@DisplayName("TEST saveUser")
 	void saveUser() throws Exception{
 		Users user = new Users(1, "host","John", "Middle Name", "Last-Name-John", "john@gmail.com", "+6911111111111", "password123","2020-11-09 11:00:00");
-		doReturn(user).when(repo).save(user);
+		doReturn(user).when(repo).saveUser(user.getType(), user.getFirst_name(), user.getMiddle_name(),
+				user.getLast_name(), user.getEmail(), user.getPhone_number(), user.getUser_password(),
+				user.getCreated_datetime());
 		
-		Users addedUser = service.saveUser(user);
+		ResponseEntity<String> response = service.saveUser(user);
 		
-		Assertions.assertEquals(addedUser.getId_user(),1);
-		Assertions.assertEquals(addedUser.getType(),"host");
-		Assertions.assertEquals(addedUser.getFirst_name(),"John");
-		Assertions.assertEquals(addedUser.getMiddle_name(),"Middle Name");
-		Assertions.assertEquals(addedUser.getLast_name(),"Last-Name-John");
-		Assertions.assertEquals(addedUser.getEmail(),"john@gmail.com");
-		Assertions.assertEquals(addedUser.getPhone_number(),"+6911111111111");
-		Assertions.assertEquals(addedUser.getUser_password(),"password123");		
+		Assertions.assertEquals(response.getStatusCodeValue(), 201);		
 	}
 	
 	@Test
