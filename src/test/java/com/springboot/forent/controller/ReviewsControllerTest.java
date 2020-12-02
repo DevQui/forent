@@ -32,7 +32,7 @@ import com.springboot.forent.service.ReviewsService;
 @RunWith(SpringRunner.class)
 @WebMvcTest(ReviewsController.class)
 class ReviewsControllerTest {
-	@Autowired
+	/*@Autowired
     private MockMvc mockMvc;
 	
 	@MockBean
@@ -210,5 +210,5 @@ class ReviewsControllerTest {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
 }

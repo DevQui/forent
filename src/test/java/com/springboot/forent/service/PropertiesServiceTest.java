@@ -29,7 +29,7 @@ import com.springboot.forent.repository.PropertiesRepository;
 @WebMvcTest(PropertiesService.class)
 class PropertiesServiceTest{
 
-	@Autowired
+	/*@Autowired
 	PropertiesService service;
 	
 	@MockBean
@@ -220,5 +220,5 @@ class PropertiesServiceTest{
 		Assertions.assertThrows(DataNotFoundException.class, () -> {
 			service.deleteProperty(3,3);
 		  });
-	}
+	}*/
 }

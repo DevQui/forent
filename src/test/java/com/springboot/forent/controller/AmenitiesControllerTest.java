@@ -33,7 +33,7 @@ import com.springboot.forent.service.AmenitiesService;
 @WebMvcTest(AmenitiesController.class)
 class AmenitiesControllerTest {
 
-	@Autowired
+	/*@Autowired
     private MockMvc mockMvc;
 	
 	@MockBean
@@ -138,6 +138,6 @@ class AmenitiesControllerTest {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }	
+    }	*/
 
 }

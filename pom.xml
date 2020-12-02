@@ -16,7 +16,7 @@
 	<description>Project for renting properties</description>
 
 	<properties>
-		<java.version>11</java.version>
+		<java.version>1.8</java.version>
 	</properties>
 
 	<dependencies>
@@ -27,7 +27,7 @@
 		<!--<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-oauth2-client</artifactId>
-		</dependency>-->
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
@@ -36,6 +36,13 @@
 		    <groupId>org.keycloak</groupId>
 		    <artifactId>keycloak-spring-boot-starter</artifactId>
 		</dependency>
+		<dependency>
+		    <groupId>com.c4-soft.springaddons</groupId>
+		    <artifactId>spring-security-oauth2-test-webmvc-addons</artifactId>
+		    <version>2.3.4</version>
+		    <scope>test</scope>
+		</dependency>-->
+				
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -92,7 +99,7 @@
 		</dependency>
 	</dependencies>
  
- 	<dependencyManagement>
+ 	<!--<dependencyManagement>
 	    <dependencies>
 	        <dependency>
 	            <groupId>org.keycloak.bom</groupId>
@@ -102,7 +109,7 @@
 	            <scope>import</scope>
 	        </dependency>
 	    </dependencies>
-	</dependencyManagement>
+	</dependencyManagement>-->
 	
 	<build>
 		<plugins>

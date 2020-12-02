@@ -1,0 +1,35 @@
+version: '3.3'
+
+services:
+ #Spring Boot API
+ forent:
+  container_name: forent-app
+  build:
+   context: ""
+   dockerfile: Dockerfile
+  image: forent-app:v1
+  networks:
+   - forentnet
+  ports:
+   - "8090:8090"
+  #environment:
+   #- authUrl=http://localhost:8080/auth
+  #depends_on:
+   #- keycloak	
+ #Keycloak
+ #keycloak:
+  #networks:
+   #- forentnet
+  #ports:
+   #- '8080:8080'
+  #restart: always
+ 
+ #Mysql
+ mysql:
+  image: mysql:latest
+  networks:
+   - forentnet
+ 
+networks:
+ forentnet:
+  driver: bridge

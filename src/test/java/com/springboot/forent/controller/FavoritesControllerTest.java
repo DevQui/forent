@@ -32,7 +32,7 @@ import com.springboot.forent.service.FavoritesService;
 @RunWith(SpringRunner.class)
 @WebMvcTest(FavoritesController.class)
 class FavoritesControllerTest {
-	@Autowired
+	/*@Autowired
     private MockMvc mockMvc;
 	
 	@MockBean
@@ -128,5 +128,5 @@ class FavoritesControllerTest {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
 }

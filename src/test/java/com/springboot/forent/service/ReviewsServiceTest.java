@@ -27,7 +27,7 @@ import com.springboot.forent.repository.ReviewsRepository;
 @RunWith(SpringRunner.class)
 @WebMvcTest(ReviewsService.class)
 class ReviewsServiceTest {
-	@Autowired
+	/*@Autowired
 	ReviewsService service;
 	
 	@MockBean
@@ -187,5 +187,5 @@ class ReviewsServiceTest {
 		Assertions.assertThrows(DataNotFoundException.class, () -> {
 			service.deleteReview(1,1);
 		  });
-	}
+	}*/
 }

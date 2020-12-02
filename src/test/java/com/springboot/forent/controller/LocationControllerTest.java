@@ -32,7 +32,7 @@ import com.springboot.forent.service.LocationService;
 @RunWith(SpringRunner.class)
 @WebMvcTest(LocationController.class)
 class LocationControllerTest {
-	@Autowired
+	/*@Autowired
     private MockMvc mockMvc;
 	
 	@MockBean
@@ -197,5 +197,5 @@ class LocationControllerTest {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
 }

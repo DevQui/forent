@@ -34,7 +34,7 @@ import com.springboot.forent.service.UsersService;
 @RunWith(SpringRunner.class)
 @WebMvcTest(UsersController.class)
 class UsersControllerTest {
-	@Autowired
+	/*@Autowired
     private MockMvc mockMvc;
 	
 	@MockBean
@@ -167,5 +167,5 @@ class UsersControllerTest {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }	
+    }	*/
 }

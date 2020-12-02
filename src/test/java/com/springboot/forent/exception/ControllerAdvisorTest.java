@@ -22,7 +22,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 @WebMvcTest(ControllerAdvisor.class)
 class ControllerAdvisorTest {
 
-	@Autowired
+	/*@Autowired
 	ControllerAdvisor advisor;
 	
 	@Test
@@ -41,7 +41,7 @@ class ControllerAdvisorTest {
 		
         Assertions.assertEquals(handled.getStatusCode().value(), 404);
 		 
-    }
+    }*/
 
 	
 	/*@Test

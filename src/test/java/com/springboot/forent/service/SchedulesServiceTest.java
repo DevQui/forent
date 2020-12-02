@@ -26,7 +26,7 @@ import com.springboot.forent.repository.SchedulesRepository;
 @WebMvcTest(SchedulesService.class)
 class SchedulesServiceTest {
 	
-	@Autowired
+	/*@Autowired
 	SchedulesService service;
 	
 	@MockBean
@@ -275,5 +275,5 @@ class SchedulesServiceTest {
 		Assertions.assertThrows(DataNotFoundException.class, () -> {
 			service.getPropertySchedule(1,1);
 		  });
-	}
+	}*/
 }

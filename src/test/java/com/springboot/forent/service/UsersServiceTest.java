@@ -24,7 +24,7 @@ import com.springboot.forent.repository.UsersRepository;
 @RunWith(SpringRunner.class)
 @WebMvcTest(UsersService.class)
 class UsersServiceTest {	
-	@Autowired
+	/*@Autowired
 	UsersService service;
 	
 	@MockBean
@@ -90,5 +90,5 @@ class UsersServiceTest {
 		String response = service.deleteUser(1);
 		
 		Assertions.assertEquals(response, "User Deleted");
-	}	
+	}*/	
 }

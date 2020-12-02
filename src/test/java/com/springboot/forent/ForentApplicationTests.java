@@ -7,9 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class ForentApplicationTests {
 
-	@Test
-	@Ignore
+	/*@Test
 	void contextLoads() {
-	}
+	}*/
 
 }
