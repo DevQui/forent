@@ -5,17 +5,33 @@ services:
  forent:
   container_name: forent-app
   build:
-   context: ""
+   context: .
    dockerfile: Dockerfile
   image: forent-app:v1
   networks:
    - forentnet
   ports:
    - "8090:8090"
-  #environment:
+  environment:
+   SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/rentals
+   SPRING_DATASOURCE_PASSWORD: password
+   SPRING_DATASOURCE_USERNAME: root
    #- authUrl=http://localhost:8080/auth
-  #depends_on:
-   #- keycloak	
+  depends_on:
+   - mysql
+   
+ #Mysql
+ mysql:
+  container_name: forent_mysql
+  build:
+   context: .
+   dockerfile: mysql/Dockerfile
+  networks:
+   - forentnet
+  ports:
+   - "6033:3306"
+
+
  #Keycloak
  #keycloak:
   #networks:
@@ -23,12 +39,6 @@ services:
   #ports:
    #- '8080:8080'
   #restart: always
- 
- #Mysql
- mysql:
-  image: mysql:latest
-  networks:
-   - forentnet
  
 networks:
  forentnet:
