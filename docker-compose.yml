@@ -1,6 +1,16 @@
 version: '3.3'
 
 services:
+ #Mysql
+ mysql:
+  container_name: forent-mysql
+  build:
+   context: .
+   dockerfile: mysql/Dockerfile
+  networks:
+   - forentnet
+  ports:
+   - "6033:3306"
  #Spring Boot API
  forent:
   container_name: forent-app
@@ -19,19 +29,8 @@ services:
    #- authUrl=http://localhost:8080/auth
   depends_on:
    - mysql
-   
- #Mysql
- mysql:
-  container_name: forent_mysql
-  build:
-   context: .
-   dockerfile: mysql/Dockerfile
-  networks:
-   - forentnet
-  ports:
-   - "6033:3306"
-
-
+  restart: on-failure
+ 
  #Keycloak
  #keycloak:
   #networks:
