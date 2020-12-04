@@ -5,6 +5,6 @@
 FROM jboss/keycloak
 EXPOSE 8080
 
-ENV KEYCLOAK_USER=adminforent
+ENV KEYCLOAK_USER=admin
 ENV KEYCLOAK_PASSWORD=admin
 
