@@ -1,6 +1,11 @@
+#FROM openjdk:8
+#COPY target/*.jar app.jar
+#ENTRYPOINT ["java", "-jar", "/app.jar"]
+
 FROM openjdk:8
-#WORKDIR /src/main/java/com/springboot/forent
-#COPY /src/main/java/com/springboot/forent/ForentApplication.java .
-#ENV CLASSPATH=/src/main/java/com/springboot/forent
+LABEL maintainer="dquisido@ms3-inc.com"
+#VOLUME /tmp
+EXPOSE 8090
+#ADD /target/forent-0.0.1-SNAPSHOT.jar forent-0.0.1-SNAPSHOT.jar
 COPY target/*.jar app.jar
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]

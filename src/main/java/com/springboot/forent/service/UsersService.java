@@ -28,8 +28,8 @@ public class UsersService {
 	}
 		
 	public ResponseEntity<String> saveUser(Users user) {
-		OffsetDateTime current = OffsetDateTime.now();
-		String created_datetime = current.toString();
+		OffsetDateTime created_datetime = OffsetDateTime.now();
+		//String created_datetime = current.toString();
 		
 		Integer saveUserStatus = usersRepository.saveUser(user.getType(), user.getFirst_name(),
 				user.getMiddle_name(), user.getLast_name(), user.getEmail(), user.getPhone_number(),

@@ -1,5 +1,7 @@
 package com.springboot.forent.repository;
 
+import java.time.OffsetDateTime;
+
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -17,7 +19,7 @@ public interface UsersRepository extends CrudRepository<Users, Integer>{
 			"type, first_name, middle_name, last_name, email, phone_number, user_password, created_datetime) " + 
 			"VALUES(?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8)")
 	Integer saveUser(String type, String first_name, String middle_name, String last_name, String email,
-			String phone_number, String user_password, String created_datetime);
+			String phone_number, String user_password, OffsetDateTime created_datetime);
 
 	/*@Query(nativeQuery = true, value ="INSERT INTO users(" +
 	"type, first_name, middle_name, last_name, email, phone_number, user_password, created_datetime) " + 

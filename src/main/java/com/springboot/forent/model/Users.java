@@ -1,5 +1,6 @@
 package com.springboot.forent.model;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -33,8 +34,8 @@ public class Users {
 	private String phone_number;
 	@NotBlank(message = "User Password should not be blank or null")
 	private String user_password;
-	@NotBlank(message = "User Created Datetime should not be blank or null")
-	private String created_datetime;
+
+	private OffsetDateTime created_datetime;
 	private String updated_datetime;
 	
 	@OneToMany(targetEntity = Favorites.class, cascade=CascadeType.ALL)
@@ -49,7 +50,7 @@ public class Users {
 	}
 
 	public Users(int id_user, String type, String first_name, String middle_name, String last_name, String email, String phone_number,
-			String user_password, String created_datetime) {
+			String user_password, OffsetDateTime created_datetime) {
 		this.id_user = id_user;
 		this.type = type;
 		this.first_name = first_name;
@@ -126,11 +127,11 @@ public class Users {
 		this.user_password = user_password;
 	}
 
-	public String getCreated_datetime() {
+	public OffsetDateTime getCreated_datetime() {
 		return created_datetime;
 	}
 
-	public void setCreated_datetime(String created_datetime) {
+	public void setCreated_datetime(OffsetDateTime created_datetime) {
 		this.created_datetime = created_datetime;
 	}
 
