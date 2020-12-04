@@ -1,6 +1,6 @@
 package com.springboot.forent.config;
 
-/*import org.keycloak.adapters.springboot.KeycloakSpringBootConfigResolver;
+import org.keycloak.adapters.springboot.KeycloakSpringBootConfigResolver;
 import org.keycloak.adapters.springsecurity.KeycloakConfiguration;
 import org.keycloak.adapters.springsecurity.authentication.KeycloakAuthenticationProvider;
 import org.keycloak.adapters.springsecurity.config.KeycloakWebSecurityConfigurerAdapter;
@@ -11,9 +11,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper;
 import org.springframework.security.web.authentication.session.NullAuthenticatedSessionStrategy;
-*/
-public class KeycloakAdapterConfig {}
-/*@KeycloakConfiguration
+
+@KeycloakConfiguration
 @Import({KeycloakSpringBootConfigResolver.class})
 public class KeycloakAdapterConfig extends KeycloakWebSecurityConfigurerAdapter {
 	
@@ -46,11 +45,11 @@ public class KeycloakAdapterConfig extends KeycloakWebSecurityConfigurerAdapter 
         super.configure(http);
         http
                 .authorizeRequests()
-                .antMatchers("/properties*").hasRole("tenant")
-                .antMatchers("/properties*").hasRole("host")
-                .antMatchers("/users").hasRole("admin")
+                .antMatchers("/users/*").hasRole("tenant")
+                .antMatchers("/users/*").hasRole("host")
+                .antMatchers("/users*").hasRole("admin")
                 .anyRequest().authenticated();
     }
 	
-}*/
+}
 
