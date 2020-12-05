@@ -1,8 +1,4 @@
-#FROM openjdk:8
-#COPY target/*.jar app.jar
-#ENTRYPOINT ["java", "-jar", "/app.jar"]
-
-FROM openjdk:8
+FROM openjdk:8-jdk-alpine
 LABEL maintainer="dquisido@ms3-inc.com"
 #VOLUME /tmp
 EXPOSE 8090
