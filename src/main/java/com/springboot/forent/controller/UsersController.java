@@ -1,6 +1,5 @@
 package com.springboot.forent.controller;
 
-import java.net.URI;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -8,7 +7,6 @@ import java.util.NoSuchElementException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,7 +24,7 @@ import com.springboot.forent.service.UsersService;
 public class UsersController {
 	@Autowired
     private UsersService usersService;
-	
+
 	@GetMapping("/users")
     public List<Users> list() {
         return usersService.listAllUsers();
@@ -36,7 +34,7 @@ public class UsersController {
 	public ResponseEntity<String> add(@RequestBody @Valid Users user) {
 		return usersService.saveUser(user);       
     }
-	
+
 	@GetMapping("/users/{id}")
 	public ResponseEntity<Users> get(@PathVariable Integer id) {
 		try {
