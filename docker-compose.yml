@@ -41,8 +41,6 @@ services:
    - "6033:3306"
   volumes:
    - my-db:/var/lib/mysql
-  #depends_on:
-   #- keycloak
  
  #Keycloak
  keycloak:
@@ -62,24 +60,10 @@ services:
    DB_DATABASE: rentals
    DB_USER: forent_user
    DB_PASSWORD: password
-  # KEYCLOAK_USER: admin
-  # KEYCLOAK_PASSWORD: admin
-   #- KEYCLOAK_USER=admin
-   #- KEYCLOAK_PASSWORD=admin
-   #- DB_DATABASE=rentals
-   #- DB_USER=forent_user
-   #- DB_PASSWORD=password
-  #depends_on:
-   #- mysql
-  #links:
-   #- mysql:3306
-  #volumes:
-  # - keycloak:/tmp
    
    
 networks:
  forentnet:
-  #driver: bridge
 
 volumes:
  my-db:
