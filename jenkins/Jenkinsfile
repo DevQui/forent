@@ -11,9 +11,39 @@ pipeline{
 		stage("Compile Stage") {
 			steps{
 				withMaven(maven: 'maven_3_6_3'){
-					sh 'mvn clean compile -DskipTests=true'
+					/*sh 'mvn clean compile -DskipTests=true'*/
+				    sh 'mvn package'
 				}
 			}
 		}
+		
+		stage("Unit Testing"){
+            steps{
+                withMaven(maven : 'maven_3_6_3'){
+                    sh 'mvn clean test jacoco:report'
+                    sleep time: 1, unit: 'MINUTES'
+                }
+            }
+            post{
+                success{
+                   publishHTML(target: [
+                       allowMissing:false,
+                       alwaysLinkToLastBuild: false,
+                       keepAll: true,
+                       reportDir: 'target/site/jacoco',
+                       reportFiles: 'index.html',
+                       reportName: 'Jacoco Report'
+                    ])
+                }
+            }
+        }
+        
+        stage("Build and start test image") {
+            steps {
+                sh "docker-compose up --build"
+                sleep time: 1, unit: 'MINUTES'
+            }
+        }
+
 	}
 }
