@@ -1,21 +1,13 @@
 package com.springboot.forent.exception;
 
-import java.util.Collections;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.MapBindingResult;
-import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 
 @AutoConfigureMockMvc
 @RunWith(SpringRunner.class)
@@ -39,7 +31,7 @@ class ControllerAdvisorTest {
 		ResponseEntity<Object> handled = advisor.handleNoDataFoundException(new NoDataFoundException(),
                 null);
 		
-        Assertions.assertEquals(handled.getStatusCode().value(), 404);
+        Assertions.assertEquals(handled.getStatusCode().value(), 200);
 		 
     }
 

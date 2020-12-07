@@ -58,7 +58,7 @@ public class SchedulesService {
 
     
     public ResponseEntity<String> saveSchedule(Integer id_user, Integer id_property, Schedules schedule) {
-		Integer saved = schedulesRepository.saveSchedule(id_user, id_property, schedule.getSchedule_date_from(), schedule.getSchedule_date_to());
+		Integer saved = schedulesRepository.saveSchedule(id_property, id_user, schedule.getSchedule_date_from(), schedule.getSchedule_date_to());
 		if(saved > 0) {
 			return new ResponseEntity<String>("Successfully Added Schedule", HttpStatus.CREATED);
 		}else {
@@ -67,7 +67,7 @@ public class SchedulesService {
     }
     
     public ResponseEntity<String> updateSchedule(Integer id_user, Integer id_property, Integer id_schedule) {
-		Integer updated = schedulesRepository.acceptSchedule(id_property, id_user, id_schedule, 1);
+		Integer updated = schedulesRepository.acceptSchedule(id_property, id_schedule, 1);
 		if(updated > 0) {
 			return new ResponseEntity<String>("Booking Schedule Request Accepted", HttpStatus.OK);
 		}else {

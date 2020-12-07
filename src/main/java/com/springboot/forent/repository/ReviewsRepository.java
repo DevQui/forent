@@ -1,5 +1,6 @@
 package com.springboot.forent.repository;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Modifying;
@@ -28,9 +29,9 @@ public interface ReviewsRepository extends CrudRepository<Reviews, Integer>{
 	@Modifying(clearAutomatically = true)
 	@Query(nativeQuery = true, value ="INSERT INTO reviews(" +
 			"id_property, id_user, rating, comment, created_datetime) " + 
-		"SELECT  ?1, ?2, ?3, ?4, ?5 FROM reviews " + 
+		"SELECT  ?1, ?2, ?3, ?4, ?5 FROM properties " + 
 		"WHERE EXISTS (SELECT id_property FROM properties WHERE id_property = ?1) AND " +
 		"EXISTS (SELECT id_user FROM users WHERE id_user = ?2)" +
 		"LIMIT 1")
-	Integer saveReview(Integer id_property, int id_user, int rating, String comment, String created_datetime);
+	Integer saveReview(Integer id_property, int id_user, int rating, String comment, OffsetDateTime created_datetime);
 }

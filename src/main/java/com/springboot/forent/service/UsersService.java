@@ -41,6 +41,21 @@ public class UsersService {
 			throw new NoDataFoundException();
 		}
     }
+	
+	public ResponseEntity<String> updateUser(Users user) {
+		OffsetDateTime updated_datetime = OffsetDateTime.now();
+		//String created_datetime = current.toString();
+		
+		Integer saveUserStatus = usersRepository.updateUser(user.getId_user(), user.getType(), user.getFirst_name(),
+				user.getMiddle_name(), user.getLast_name(), user.getEmail(), user.getPhone_number(),
+				user.getUser_password(), updated_datetime);
+		
+		if(saveUserStatus > 0) {
+			return new ResponseEntity<String>("Successfully Added User", HttpStatus.OK);
+		}else {
+			throw new NoDataFoundException();
+		}
+    }
 
     public Users getUser(Integer id) {
     	if(usersRepository.findById(id).get() == null) {

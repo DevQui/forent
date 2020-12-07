@@ -40,9 +40,9 @@ public class ReviewsController {
         return reviewsService.getPropertyReview(id_property, id);    
 	}
 	
-	@PostMapping("/properties/{id_property}/reviews")
-	public ResponseEntity<String> add(@PathVariable Integer id_property, @RequestBody Reviews review) throws URISyntaxException {		
-		return reviewsService.saveReview(id_property,review);
+	@PostMapping("/users/{id_user}/properties/{id_property}/reviews")
+	public ResponseEntity<String> add(@PathVariable Integer id_user, @PathVariable Integer id_property, @RequestBody Reviews review) throws URISyntaxException {		
+		return reviewsService.saveReview(id_user, id_property,review);
     }
 	
     @DeleteMapping("/properties/{id_property}/reviews/{id_review}")

@@ -36,7 +36,7 @@ public class Users {
 	private String user_password;
 
 	private OffsetDateTime created_datetime;
-	private String updated_datetime;
+	private OffsetDateTime updated_datetime;
 	
 	@OneToMany(targetEntity = Favorites.class, cascade=CascadeType.ALL)
 	@JoinColumn(name = "id_user")
@@ -135,11 +135,11 @@ public class Users {
 		this.created_datetime = created_datetime;
 	}
 
-	public String getUpdated_datetime() {
+	public OffsetDateTime getUpdated_datetime() {
 		return updated_datetime;
 	}
 
-	public void setUpdated_datetime(String updated_datetime) {
+	public void setUpdated_datetime(OffsetDateTime updated_datetime) {
 		this.updated_datetime = updated_datetime;
 	}
 

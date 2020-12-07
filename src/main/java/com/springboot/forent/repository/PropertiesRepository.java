@@ -1,5 +1,6 @@
 package com.springboot.forent.repository;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Modifying;
@@ -59,5 +60,5 @@ public interface PropertiesRepository extends CrudRepository<Properties, Integer
 		"WHERE EXISTS (SELECT id_user FROM users WHERE id_user = ?1) " +
 		"LIMIT 1")
 	Integer saveProperty(Integer id_user, String type, String name, String description, Float price,
-			String created_datetime);
+			OffsetDateTime created_datetime);
 }

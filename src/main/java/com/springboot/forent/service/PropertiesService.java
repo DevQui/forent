@@ -57,8 +57,7 @@ public class PropertiesService {
 	
 	
 	public ResponseEntity<String> addProperty(Integer id_user, Properties property){
-		OffsetDateTime current = OffsetDateTime.now();
-		String created_datetime = current.toString();	
+		OffsetDateTime created_datetime = OffsetDateTime.now();
 		property.setCreated_datetime(created_datetime);
 		property.setUsers_id_user(id_user);
 		Integer propertySavedStatus = propertiesRepository.saveProperty(id_user, property.getType(),

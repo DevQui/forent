@@ -36,11 +36,10 @@ public class ReviewsService {
        }
    	}
 	
-	public ResponseEntity<String> saveReview(Integer id_property,Reviews review) {
-		OffsetDateTime current = OffsetDateTime.now();
-		String created_datetime = current.toString();
+	public ResponseEntity<String> saveReview(Integer id_user, Integer id_property,Reviews review) {
+		OffsetDateTime created_datetime = OffsetDateTime.now();
 		
-		Integer saveReviewStatus = reviewsRepository.saveReview(id_property, review.getId_user(),
+		Integer saveReviewStatus = reviewsRepository.saveReview(id_property, id_user,
 				review.getRating(), review.getComment(), created_datetime);
 		if(saveReviewStatus > 0) {
 			return new ResponseEntity<String>("Successfully Added Review", HttpStatus.CREATED);

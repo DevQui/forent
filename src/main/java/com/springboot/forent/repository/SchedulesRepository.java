@@ -34,8 +34,8 @@ public interface SchedulesRepository extends CrudRepository<Schedules, Integer>{
 		
 	@Transactional
 	@Modifying(clearAutomatically = true)
-	@Query("UPDATE Schedules SET status = ?4 WHERE id_user =?1 AND id_property = ?2 AND id_schedule = ?3")
-	Integer acceptSchedule(Integer id_user, Integer id_property, Integer id_schedule, Integer status);
+	@Query("UPDATE Schedules SET status = ?3 WHERE id_property =?1 AND id_schedule = ?2")
+	Integer acceptSchedule(Integer id_property, Integer id_schedule, Integer status);
 
 	@Transactional
 	@Modifying(clearAutomatically = true)

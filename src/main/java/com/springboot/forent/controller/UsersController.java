@@ -50,9 +50,10 @@ public class UsersController {
         try {
             Users existUser = usersService.getUser(id);
             if(existUser != null) {
-            	OffsetDateTime current = OffsetDateTime.now();
-        		String updated_datetime = current.toString();
+            	OffsetDateTime updated_datetime = OffsetDateTime.now();
         	
+            	existUser.setId_user(id);
+        		existUser.setType(user.getType());
 				existUser.setFirst_name(user.getFirst_name());
 				existUser.setMiddle_name(user.getMiddle_name());
     			existUser.setLast_name(user.getLast_name());
@@ -60,9 +61,9 @@ public class UsersController {
     			existUser.setPhone_number(user.getPhone_number());
     			existUser.setUser_password(user.getUser_password());
     	    	existUser.setUpdated_datetime(updated_datetime);
-    	    	usersService.saveUser(existUser);
+    	    	usersService.updateUser(existUser);
         				
-            }
+            }	
             return new ResponseEntity<Users>(user,HttpStatus.OK);
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -1,5 +1,7 @@
 package com.springboot.forent.model;
 
+import java.time.OffsetDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,12 +18,12 @@ public class Reviews {
 	private int id_user;
 	private int rating;
 	private String comment;
-	private String created_datetime;
+	private OffsetDateTime created_datetime;
 	
 	public Reviews() {
 	}
 
-	public Reviews(int idReview, int idProperty, int id_user, int rating, String comment, String created_datetime) {
+	public Reviews(int idReview, int idProperty, int id_user, int rating, String comment, OffsetDateTime created_datetime) {
 		super();
 		this.id_review = idReview;
 		this.id_property = idProperty;
@@ -31,7 +33,7 @@ public class Reviews {
 		this.created_datetime = created_datetime;
 	}
 
-	public Reviews(int idProperty, int id_user, int rating, String comment, String created_datetime) {
+	public Reviews(int idProperty, int id_user, int rating, String comment, OffsetDateTime created_datetime) {
 		super();
 		this.id_property = idProperty;
 		this.id_user = id_user;
@@ -81,11 +83,11 @@ public class Reviews {
 		this.comment = comment;
 	}
 
-	public String getCreated_datetime() {
+	public OffsetDateTime getCreated_datetime() {
 		return created_datetime;
 	}
 
-	public void setCreated_datetime(String created_datetime) {
+	public void setCreated_datetime(OffsetDateTime created_datetime) {
 		this.created_datetime = created_datetime;
 	}
 }

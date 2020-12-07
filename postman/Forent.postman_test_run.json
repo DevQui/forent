@@ -1,0 +1,1568 @@
+{
+	"id": "6a982fd3-2c91-4e2d-aaf5-b743b08f0e32",
+	"name": "Forent",
+	"timestamp": "2020-12-07T03:21:09.068Z",
+	"collection_id": "4e0235ef-3b56-42a8-a2e1-3271a94142ba",
+	"folder_id": 0,
+	"environment_id": "c59a2040-abd9-451c-8b60-e213758b143b",
+	"totalPass": 60,
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "e7a54710-eb5b-4a61-9168-731bc962eb8b",
+			"name": "Get host login",
+			"url": "http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token",
+			"time": 178,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				178
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "d7e79989-c779-4ca1-83e0-e82610d9a332",
+			"name": "Add host",
+			"url": "http://localhost:8090/registration",
+			"time": 962,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Successful POST request": true
+			},
+			"testPassFailCounts": {
+				"Successful POST request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				962
+			],
+			"allTests": [
+				{
+					"Successful POST request": true
+				}
+			]
+		},
+		{
+			"id": "ad1e2dc5-bd49-46f8-b22e-f5d9263d4340",
+			"name": "Get specific user",
+			"url": "http://localhost:8090/users/1",
+			"time": 999,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				999
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "f7f185a6-9353-4f79-8ccf-2f890034a316",
+			"name": "Update user",
+			"url": "http://localhost:8090/users/1",
+			"time": 122,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				122
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "8d312d13-440e-4823-9233-51bbd278c39d",
+			"name": "Add Property",
+			"url": "http://localhost:8090/users/1/properties",
+			"time": 98,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Successful POST request": true
+			},
+			"testPassFailCounts": {
+				"Successful POST request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				98
+			],
+			"allTests": [
+				{
+					"Successful POST request": true
+				}
+			]
+		},
+		{
+			"id": "33d97b7a-bc63-4fb6-b0a4-a8a7a295d7a6",
+			"name": "Get host's list of properties",
+			"url": "http://localhost:8090/users/1/properties",
+			"time": 65,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				65
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "2d7aad86-e550-4623-ae20-4f854c67c4e7",
+			"name": "Get user's specific owned property",
+			"url": "http://localhost:8090/users/1/properties/1",
+			"time": 48,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				48
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "38b10832-db48-455c-b2d9-ffb62c67e3ba",
+			"name": "Update Property",
+			"url": "http://localhost:8090/users/1/properties/1",
+			"time": 40,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				40
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "78072d72-e7f0-454c-a601-285f1197c9d9",
+			"name": "Add Amenity",
+			"url": "http://localhost:8090/properties/1/amenities",
+			"time": 60,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Successful POST request": true
+			},
+			"testPassFailCounts": {
+				"Successful POST request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				60
+			],
+			"allTests": [
+				{
+					"Successful POST request": true
+				}
+			]
+		},
+		{
+			"id": "1af73c2e-e27e-44cb-a14d-dc5940028a1b",
+			"name": "Update Amenity",
+			"url": "http://localhost:8090/properties/1/amenities/1",
+			"time": 22,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				22
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "d9ca746f-2526-4e52-bea2-30eda84f6e0e",
+			"name": "Add Location",
+			"url": "http://localhost:8090/properties/1/location",
+			"time": 61,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Successful POST request": true
+			},
+			"testPassFailCounts": {
+				"Successful POST request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				61
+			],
+			"allTests": [
+				{
+					"Successful POST request": true
+				}
+			]
+		},
+		{
+			"id": "4cb7a97f-d779-4345-89be-6ca1be9900ed",
+			"name": "Update Location",
+			"url": "http://localhost:8090/properties/1/location/1",
+			"time": 30,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				30
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "0cbb2c6a-2c3f-4c13-bdef-245662648c60",
+			"name": "Get tenant login",
+			"url": "http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token",
+			"time": 183,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				183
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "b3194bbb-2cf8-470c-a0c3-d1b0dd3fa85b",
+			"name": "Add tenant",
+			"url": "http://localhost:8090/registration",
+			"time": 23,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Successful POST request": true
+			},
+			"testPassFailCounts": {
+				"Successful POST request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				23
+			],
+			"allTests": [
+				{
+					"Successful POST request": true
+				}
+			]
+		},
+		{
+			"id": "316995c2-71ee-41a9-ad1c-99b8af294315",
+			"name": "Get tenant info",
+			"url": "http://localhost:8090/users/2",
+			"time": 36,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				36
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "01ca7a61-d694-44e5-a6c8-88fd28a4921a",
+			"name": "Update tenant",
+			"url": "http://localhost:8090/users/2",
+			"time": 62,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				62
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "d45dd29e-27a1-4530-a0c0-46b47eff88a6",
+			"name": "Add Favorite Property",
+			"url": "http://localhost:8090/users/2/properties/1/favorites",
+			"time": 33,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Successful POST request": true
+			},
+			"testPassFailCounts": {
+				"Successful POST request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				33
+			],
+			"allTests": [
+				{
+					"Successful POST request": true
+				}
+			]
+		},
+		{
+			"id": "095b7e18-2790-4191-a845-e04ca8e4cb58",
+			"name": "Get list of favorite properties",
+			"url": "http://localhost:8090/users/2",
+			"time": 44,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				44
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "802620b6-706c-432a-9499-fac7f488fd4c",
+			"name": "Get specific favorite",
+			"url": "http://localhost:8090/users/2/favorites/1",
+			"time": 27,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				27
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "dd1c5c69-1760-4632-8d52-3121a33b1f9c",
+			"name": "Delete Favorite Property",
+			"url": "http://localhost:8090/users/2/favorites/1",
+			"time": 26,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				26
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "6a285377-e2d9-49b1-9ff8-ec89b01c7402",
+			"name": "Add Schedule",
+			"url": "http://localhost:8090/users/2/properties/1/schedules",
+			"time": 34,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Successful POST request": true
+			},
+			"testPassFailCounts": {
+				"Successful POST request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				34
+			],
+			"allTests": [
+				{
+					"Successful POST request": true
+				}
+			]
+		},
+		{
+			"id": "20a66488-2c09-4fdf-ac82-2bdd132caec1",
+			"name": "Get specific tenant's list schedules",
+			"url": "http://localhost:8090/users/2/schedules",
+			"time": 30,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				30
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "563195ce-fffc-48e5-a0a5-b11c737cf50f",
+			"name": "Get specific tenant's specific schedule",
+			"url": "http://localhost:8090/users/2/schedules/1",
+			"time": 21,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				21
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "5ee152da-89b4-49df-b2a5-fe7943993b30",
+			"name": "Add Review",
+			"url": "http://localhost:8090/users/2/properties/1/reviews",
+			"time": 33,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Successful POST request": true
+			},
+			"testPassFailCounts": {
+				"Successful POST request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				33
+			],
+			"allTests": [
+				{
+					"Successful POST request": true
+				}
+			]
+		},
+		{
+			"id": "0679ba83-7f8b-4318-a6c3-6c848107dc90",
+			"name": "Update Schedule Status",
+			"url": "http://localhost:8090/users/1/properties/1/schedules/1",
+			"time": 25,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				25
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "4c5252ac-77b4-4837-897e-e3f7035e27f8",
+			"name": "Get admin login",
+			"url": "http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token",
+			"time": 174,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				174
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "cb69b2c6-a273-464b-9a11-c31e8c0374f3",
+			"name": "Get list of users",
+			"url": "http://localhost:8090/users",
+			"time": 120,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				120
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "54433caa-7288-4211-8599-616e7925219d",
+			"name": "Get specific user",
+			"url": "http://localhost:8090/users/1",
+			"time": 78,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				78
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "5c527c4d-9c4c-4bfb-9edb-9bcc9e3e5944",
+			"name": "Get a list of schedules",
+			"url": "http://localhost:8090/schedules",
+			"time": 18,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				18
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "7bdf535f-78a2-4d66-ae79-5c7b191af832",
+			"name": "Get a specific Schedule",
+			"url": "http://localhost:8090/schedules/1",
+			"time": 15,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				15
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "68e7d437-4a91-42c4-b978-d0a3f92f509a",
+			"name": "Get specific tenant's specific schedule",
+			"url": "http://localhost:8090/users/2/schedules/1",
+			"time": 17,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				17
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "e3c39a26-90f4-466e-87f4-c38598111128",
+			"name": "Get a list of amenities",
+			"url": "http://localhost:8090/properties/1/amenities",
+			"time": 14,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				14
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "48837748-11ff-4e31-90a7-8e309b9ed629",
+			"name": "Get a specific amenitites",
+			"url": "http://localhost:8090/properties/1/amenities/1",
+			"time": 22,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				22
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "9f3a036b-598e-4cd7-a9f3-4d553381fc3a",
+			"name": "Get list of all reviews",
+			"url": "http://localhost:8090/reviews",
+			"time": 16,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				16
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "e2170c73-22d5-4a9f-9710-1d48c782cf64",
+			"name": "Get specific review",
+			"url": "http://localhost:8090/reviews/1",
+			"time": 22,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				22
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "ddbaa538-696c-40d7-a4fa-5eefbee7b3aa",
+			"name": "Get list of properties",
+			"url": "http://localhost:8090/properties",
+			"time": 52,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				52
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "7d56160d-3fa9-4db1-9992-18d28a5986dc",
+			"name": "Get specific property",
+			"url": "http://localhost:8090/properties/1",
+			"time": 21,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				21
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "86ce67b4-30a8-4d2b-9002-3aa702917076",
+			"name": "Get specific location",
+			"url": "http://localhost:8090/location/1",
+			"time": 11,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				11
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "c2dfe4c1-3e7f-45fc-85fa-d361c6aba8ee",
+			"name": "Get specific property's location",
+			"url": "http://localhost:8090/properties/1/location/1",
+			"time": 15,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				15
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "272b118f-b1dd-419d-a252-034f6334e3a2",
+			"name": "Get specific property's location without specifiying id_location",
+			"url": "http://localhost:8090/properties/1/location",
+			"time": 16,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				16
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "3c5d730d-8ccc-4a7d-adf0-313c62047d8c",
+			"name": "Get a list of locations",
+			"url": "http://localhost:8090/location",
+			"time": 19,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				19
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "a057f87c-d8ca-4b1b-834b-bf7f1eeea5ea",
+			"name": "Get a list of specific property reviews",
+			"url": "http://localhost:8090/properties/1/reviews",
+			"time": 20,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				20
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "3987af1c-d87c-4654-ac18-d60f84bb1d27",
+			"name": "Get a specific review of the property",
+			"url": "http://localhost:8090/properties/1/reviews/1",
+			"time": 12,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				12
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "8c18a7ad-5e92-499b-b9da-4eefc69f2f27",
+			"name": "Get specific property's list of schedules",
+			"url": "http://localhost:8090/properties/1/schedules",
+			"time": 19,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				19
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "4bc3b2a9-bbbe-4d5a-84ef-2581f4636ea4",
+			"name": "Get specific property's specific schedule",
+			"url": "http://localhost:8090/properties/1/schedules/1",
+			"time": 30,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				30
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "5aabe892-2b9e-447f-9906-8ff2c085ed41",
+			"name": "Delete Review",
+			"url": "http://localhost:8090/properties/1/reviews/1",
+			"time": 21,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				21
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "8ecc025c-fe66-43e8-a1a4-cce5bb05bf77",
+			"name": "Delete schedule",
+			"url": "http://localhost:8090/users/2/properties/1/schedules/1",
+			"time": 46,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				46
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "5b9a0221-2fd4-4f71-af28-36dc7afdec8e",
+			"name": "Delete tenant",
+			"url": "http://localhost:8090/users/2",
+			"time": 71,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				71
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "07f8acc6-b13a-4489-bc45-88b79cefdcdd",
+			"name": "Delete Property",
+			"url": "http://localhost:8090/users/1/properties/1",
+			"time": 35,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				35
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "9c8f45fb-f5b3-4c60-89c0-15f5867be435",
+			"name": "Delete Host",
+			"url": "http://localhost:8090/users/1",
+			"time": 54,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				54
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 4200,
+	"collection": {
+		"requests": [
+			{
+				"id": "e7a54710-eb5b-4a61-9168-731bc962eb8b",
+				"method": "POST"
+			},
+			{
+				"id": "d7e79989-c779-4ca1-83e0-e82610d9a332",
+				"method": "POST"
+			},
+			{
+				"id": "ad1e2dc5-bd49-46f8-b22e-f5d9263d4340",
+				"method": "GET"
+			},
+			{
+				"id": "f7f185a6-9353-4f79-8ccf-2f890034a316",
+				"method": "PUT"
+			},
+			{
+				"id": "8d312d13-440e-4823-9233-51bbd278c39d",
+				"method": "POST"
+			},
+			{
+				"id": "33d97b7a-bc63-4fb6-b0a4-a8a7a295d7a6",
+				"method": "GET"
+			},
+			{
+				"id": "2d7aad86-e550-4623-ae20-4f854c67c4e7",
+				"method": "GET"
+			},
+			{
+				"id": "38b10832-db48-455c-b2d9-ffb62c67e3ba",
+				"method": "PUT"
+			},
+			{
+				"id": "78072d72-e7f0-454c-a601-285f1197c9d9",
+				"method": "POST"
+			},
+			{
+				"id": "1af73c2e-e27e-44cb-a14d-dc5940028a1b",
+				"method": "PATCH"
+			},
+			{
+				"id": "d9ca746f-2526-4e52-bea2-30eda84f6e0e",
+				"method": "POST"
+			},
+			{
+				"id": "4cb7a97f-d779-4345-89be-6ca1be9900ed",
+				"method": "PATCH"
+			},
+			{
+				"id": "0cbb2c6a-2c3f-4c13-bdef-245662648c60",
+				"method": "POST"
+			},
+			{
+				"id": "b3194bbb-2cf8-470c-a0c3-d1b0dd3fa85b",
+				"method": "POST"
+			},
+			{
+				"id": "316995c2-71ee-41a9-ad1c-99b8af294315",
+				"method": "GET"
+			},
+			{
+				"id": "01ca7a61-d694-44e5-a6c8-88fd28a4921a",
+				"method": "PUT"
+			},
+			{
+				"id": "d45dd29e-27a1-4530-a0c0-46b47eff88a6",
+				"method": "POST"
+			},
+			{
+				"id": "095b7e18-2790-4191-a845-e04ca8e4cb58",
+				"method": "GET"
+			},
+			{
+				"id": "802620b6-706c-432a-9499-fac7f488fd4c",
+				"method": "GET"
+			},
+			{
+				"id": "dd1c5c69-1760-4632-8d52-3121a33b1f9c",
+				"method": "DELETE"
+			},
+			{
+				"id": "6a285377-e2d9-49b1-9ff8-ec89b01c7402",
+				"method": "POST"
+			},
+			{
+				"id": "20a66488-2c09-4fdf-ac82-2bdd132caec1",
+				"method": "GET"
+			},
+			{
+				"id": "563195ce-fffc-48e5-a0a5-b11c737cf50f",
+				"method": "GET"
+			},
+			{
+				"id": "5ee152da-89b4-49df-b2a5-fe7943993b30",
+				"method": "POST"
+			},
+			{
+				"id": "0679ba83-7f8b-4318-a6c3-6c848107dc90",
+				"method": "PATCH"
+			},
+			{
+				"id": "4c5252ac-77b4-4837-897e-e3f7035e27f8",
+				"method": "POST"
+			},
+			{
+				"id": "cb69b2c6-a273-464b-9a11-c31e8c0374f3",
+				"method": "GET"
+			},
+			{
+				"id": "54433caa-7288-4211-8599-616e7925219d",
+				"method": "GET"
+			},
+			{
+				"id": "5c527c4d-9c4c-4bfb-9edb-9bcc9e3e5944",
+				"method": "GET"
+			},
+			{
+				"id": "7bdf535f-78a2-4d66-ae79-5c7b191af832",
+				"method": "GET"
+			},
+			{
+				"id": "68e7d437-4a91-42c4-b978-d0a3f92f509a",
+				"method": "GET"
+			},
+			{
+				"id": "e3c39a26-90f4-466e-87f4-c38598111128",
+				"method": "GET"
+			},
+			{
+				"id": "48837748-11ff-4e31-90a7-8e309b9ed629",
+				"method": "GET"
+			},
+			{
+				"id": "9f3a036b-598e-4cd7-a9f3-4d553381fc3a",
+				"method": "GET"
+			},
+			{
+				"id": "e2170c73-22d5-4a9f-9710-1d48c782cf64",
+				"method": "GET"
+			},
+			{
+				"id": "ddbaa538-696c-40d7-a4fa-5eefbee7b3aa",
+				"method": "GET"
+			},
+			{
+				"id": "7d56160d-3fa9-4db1-9992-18d28a5986dc",
+				"method": "GET"
+			},
+			{
+				"id": "86ce67b4-30a8-4d2b-9002-3aa702917076",
+				"method": "GET"
+			},
+			{
+				"id": "c2dfe4c1-3e7f-45fc-85fa-d361c6aba8ee",
+				"method": "GET"
+			},
+			{
+				"id": "272b118f-b1dd-419d-a252-034f6334e3a2",
+				"method": "GET"
+			},
+			{
+				"id": "3c5d730d-8ccc-4a7d-adf0-313c62047d8c",
+				"method": "GET"
+			},
+			{
+				"id": "a057f87c-d8ca-4b1b-834b-bf7f1eeea5ea",
+				"method": "GET"
+			},
+			{
+				"id": "3987af1c-d87c-4654-ac18-d60f84bb1d27",
+				"method": "GET"
+			},
+			{
+				"id": "8c18a7ad-5e92-499b-b9da-4eefc69f2f27",
+				"method": "GET"
+			},
+			{
+				"id": "4bc3b2a9-bbbe-4d5a-84ef-2581f4636ea4",
+				"method": "GET"
+			},
+			{
+				"id": "5aabe892-2b9e-447f-9906-8ff2c085ed41",
+				"method": "DELETE"
+			},
+			{
+				"id": "8ecc025c-fe66-43e8-a1a4-cce5bb05bf77",
+				"method": "DELETE"
+			},
+			{
+				"id": "5b9a0221-2fd4-4f71-af28-36dc7afdec8e",
+				"method": "DELETE"
+			},
+			{
+				"id": "07f8acc6-b13a-4489-bc45-88b79cefdcdd",
+				"method": "DELETE"
+			},
+			{
+				"id": "9c8f45fb-f5b3-4c60-89c0-15f5867be435",
+				"method": "DELETE"
+			}
+		]
+	}
+}
