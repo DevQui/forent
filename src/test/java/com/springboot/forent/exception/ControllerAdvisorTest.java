@@ -31,7 +31,7 @@ class ControllerAdvisorTest {
 		ResponseEntity<Object> handled = advisor.handleNoDataFoundException(new NoDataFoundException(),
                 null);
 		
-        Assertions.assertEquals(handled.getStatusCode().value(), 200);
+        Assertions.assertEquals(handled.getStatusCode().value(), 404);
 		 
     }
 
