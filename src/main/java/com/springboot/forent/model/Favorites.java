@@ -15,10 +15,6 @@ public class Favorites {
 	private int id_property;
 	private int id_user;
 
-	
-	public Favorites() {
-	}
-	
 	public Favorites(int id_favorite, int id_property, int id_user) {
 		this.id_favorite = id_favorite;
 		this.id_property = id_property;

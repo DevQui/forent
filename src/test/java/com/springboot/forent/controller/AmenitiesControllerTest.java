@@ -7,6 +7,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -31,16 +33,17 @@ import com.springboot.forent.service.AmenitiesService;
 @AutoConfigureMockMvc
 @RunWith(SpringRunner.class)
 @WebMvcTest(AmenitiesController.class)
-class AmenitiesControllerTest {
+class AmenitiesControllerTest{
 
-	/*@Autowired
+	@Autowired
     private MockMvc mockMvc;
 	
 	@MockBean
 	private AmenitiesService service;
-	
+    
 	@Test
 	@DisplayName("GET /properties/{id_property}/amenities WITH RESULT")
+	@WithMockUser(roles = "host")
 	void listPropertyAmenities() throws Exception {
 		Amenities amenity1 = new Amenities(1, 1, 2, 1, 2, "Wifi, Cable");
 		Amenities amenity2 = new Amenities(2, 1, 2, 2, 1, "Gym, Pool");
@@ -74,6 +77,7 @@ class AmenitiesControllerTest {
 	
 	@Test
 	@DisplayName("GET /properties/{id_property}/amenities/{id_amenities} is FOUND")
+	@WithMockUser(roles = "tenant")
 	void getPropertyAmenities() throws Exception {
 		Amenities amenity1 = new Amenities(1, 1, 2, 1, 2, "Wifi, Cable");
 		Amenities amenity2 = new Amenities(2, 1, 2, 2, 1, "Gym, Pool");
@@ -102,6 +106,7 @@ class AmenitiesControllerTest {
 	
 	@Test
 	@DisplayName("POST /properties/{id_property}/amenities is SUCCESSFUL")
+	@WithMockUser(roles = "host")
 	void saveAmenities() throws Exception {
 		Amenities amenity = new Amenities(1, 1, 2, 1, 2, "Wifi, Cable");
 		ResponseEntity<String> response = new ResponseEntity<String>("Successfully Added Amenity", HttpStatus.CREATED);
@@ -109,6 +114,7 @@ class AmenitiesControllerTest {
 		doReturn(response).when(service).saveAmenities(1,amenity);	
 		
 		mockMvc.perform(post("/properties/{id_property}/amenities",1)
+			.with(csrf())
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(asJsonString(amenity)))
 		
@@ -117,6 +123,7 @@ class AmenitiesControllerTest {
 	
 	@Test
 	@DisplayName("PATCH /properties/{id_property}/amenities/{id_amenities} is SUCCESSFUL")
+	@WithMockUser(roles = "host")
 	void updateAmenitiesSuccess() throws Exception{
 		
 		Amenities amenityPut = new Amenities(1, 1, 3, 2, 1, "Wifi, Cable");
@@ -126,6 +133,7 @@ class AmenitiesControllerTest {
 		doReturn(response).when(service).saveAmenities(1, amenityPut);
 		
 		mockMvc.perform(patch("/properties/{id_property}/amenities/{id}",1,1)
+				.with(csrf())
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(asJsonString(amenityPut)))
 			
@@ -138,6 +146,6 @@ class AmenitiesControllerTest {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }	*/
+    }
 
 }

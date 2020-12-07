@@ -1,6 +1,7 @@
 package com.springboot.forent.controller;
 
 import static org.mockito.Mockito.doReturn;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -21,6 +22,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -32,7 +34,7 @@ import com.springboot.forent.service.LocationService;
 @RunWith(SpringRunner.class)
 @WebMvcTest(LocationController.class)
 class LocationControllerTest {
-	/*@Autowired
+	@Autowired
     private MockMvc mockMvc;
 	
 	@MockBean
@@ -40,6 +42,7 @@ class LocationControllerTest {
 	
 	@Test
 	@DisplayName("GET /location WITH RESULT")
+	@WithMockUser(roles = "admin")
 	void listAllLocation() throws Exception {
 		Location loc1 = new Location(1,1,"Town1","City1","Region1","Country1");
 		Location loc2 = new Location(2,2,"Town2","City2","Region2","Country2");
@@ -79,6 +82,7 @@ class LocationControllerTest {
 	
 	@Test
 	@DisplayName("GET /location/{id_location} is FOUND")
+	@WithMockUser(roles = "admin")
 	void getLocation() throws Exception {
 		Location loc1 = new Location(1,1,"Town1","City1","Region1","Country1");
 		Location loc2 = new Location(2,2,"Town2","City2","Region2","Country2");
@@ -106,6 +110,7 @@ class LocationControllerTest {
 	
 	@Test
 	@DisplayName("GET /properites/{id_property}/location is FOUND")
+	@WithMockUser(roles = "admin")
 	void getLocationByPropertyID() throws Exception {
 		Location loc1 = new Location(1,1,"Town1","City1","Region1","Country1");
 		Location loc2 = new Location(2,2,"Town2","City2","Region2","Country2");
@@ -133,6 +138,7 @@ class LocationControllerTest {
 	
 	@Test
 	@DisplayName("GET /properites/{id_property}/location/{id_location} is FOUND")
+	@WithMockUser(roles = "admin")
 	void getPropertyLocation() throws Exception {
 		Location loc1 = new Location(1,1,"Town1","City1","Region1","Country1");
 		Location loc2 = new Location(2,2,"Town2","City2","Region2","Country2");
@@ -161,6 +167,7 @@ class LocationControllerTest {
 	
 	@Test
 	@DisplayName("POST /properties/{id_property}/location is SUCCESSFUL")
+	@WithMockUser(roles = "host")
 	void savePropertyLocation() throws Exception {
 		Location loc = new Location(1,1,"Town1","City1","Region1","Country1");
 		
@@ -168,6 +175,7 @@ class LocationControllerTest {
 		doReturn(response).when(service).savePropertyLocation(1,loc);	
 		
 		mockMvc.perform(post("/properties/{id_property}/location",1)
+			.with(csrf())
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(asJsonString(loc)))
 		
@@ -176,6 +184,7 @@ class LocationControllerTest {
 	
 	@Test
 	@DisplayName("PATCH /location/1 is SUCCESSFUL")
+	@WithMockUser(roles = "host")
 	void updateUserSuccess() throws Exception{
 		
 		Location locPut = new Location(1,1,"Town22","City1","Region1","Country1");
@@ -185,6 +194,7 @@ class LocationControllerTest {
 		doReturn(response).when(service).updatePropertyLocation(locPut, 1, 1);
 		
 		mockMvc.perform(patch("/properties/{id_property}/location/{id_location}",1,1)
+				.with(csrf())
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(asJsonString(locPut)))
 			
@@ -197,5 +207,5 @@ class LocationControllerTest {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }*/
+    }
 }

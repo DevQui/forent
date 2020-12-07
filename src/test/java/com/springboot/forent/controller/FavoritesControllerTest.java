@@ -1,6 +1,7 @@
 package com.springboot.forent.controller;
 
 import static org.mockito.Mockito.doReturn;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -21,6 +22,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -32,7 +34,7 @@ import com.springboot.forent.service.FavoritesService;
 @RunWith(SpringRunner.class)
 @WebMvcTest(FavoritesController.class)
 class FavoritesControllerTest {
-	/*@Autowired
+	@Autowired
     private MockMvc mockMvc;
 	
 	@MockBean
@@ -40,6 +42,7 @@ class FavoritesControllerTest {
 	
 	@Test
 	@DisplayName("GET /users/{id_user}/favorites WITH RESULT")
+	@WithMockUser(roles = "tenant")
 	void listAllUserFavorites() throws Exception {
 		Favorites fave1 = new Favorites(1,1,1);
 		Favorites fave2 = new Favorites(2,2,1);
@@ -67,6 +70,7 @@ class FavoritesControllerTest {
 		
 	@Test
 	@DisplayName("GET /users/{id_user}/favorites/{id} is FOUND")
+	@WithMockUser(roles = "tenant")
 	void getUserFavoriteProperty() throws Exception {
 		Favorites fave1 = new Favorites(1,1,1);
 		Favorites fave2 = new Favorites(2,2,1);
@@ -92,6 +96,7 @@ class FavoritesControllerTest {
 	
 	@Test
 	@DisplayName("POST /favorites is SUCCESSFUL")
+	@WithMockUser(roles = "tenant")
 	void savePropertyToFavorites() throws Exception {
 		Favorites fave = new Favorites(1,1,1);
 		
@@ -100,6 +105,7 @@ class FavoritesControllerTest {
 		doReturn(response).when(service).savePropertyToFavorites(1,1);	
 		
 		mockMvc.perform(post("/users/{id_user}/properties/{id_property}/favorites",1,1)
+			.with(csrf())
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(asJsonString(fave)))
 		
@@ -108,6 +114,7 @@ class FavoritesControllerTest {
 	
 	@Test
 	@DisplayName("DELETE /favorites/1 SUCCESS")
+	@WithMockUser(roles = "tenant")
 	void deleteFavoriteProperty() throws Exception{
 		Favorites fave = new Favorites(1,1,1);
 		
@@ -116,6 +123,7 @@ class FavoritesControllerTest {
 		doReturn(response).when(service).deleteFavoriteProperty(1,1);
 		
 		mockMvc.perform(delete("/users/{id_user}/favorites/{id}",1,1)
+				.with(csrf())
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(asJsonString(fave)))
 			
@@ -128,5 +136,5 @@ class FavoritesControllerTest {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }*/
+    }
 }

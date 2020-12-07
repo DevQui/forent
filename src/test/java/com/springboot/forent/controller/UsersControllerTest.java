@@ -2,15 +2,16 @@ package com.springboot.forent.controller;
 
 
 import static org.mockito.Mockito.doReturn;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,8 +22,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -34,19 +37,23 @@ import com.springboot.forent.service.UsersService;
 @RunWith(SpringRunner.class)
 @WebMvcTest(UsersController.class)
 class UsersControllerTest {
-	/*@Autowired
+	@Autowired
     private MockMvc mockMvc;
 	
 	@MockBean
 	private UsersService service;
 	
+	OffsetDateTime created_datetime = OffsetDateTime.now();
+	OffsetDateTime updated_datetime = OffsetDateTime.now();
+		
 	@Test
 	@DisplayName("GET /users WITH RESULT")
+	@WithMockUser(roles = "host")
 	void getUsersListHasResult() throws Exception {
 		// Mocked the users and the service
-		Users user1 = new Users(1, "host","John", "Middle Name", "Last-Name-John", "john@gmail.com", "+6911111111111", "password123","2020-11-09 11:00:00");
-		Users user2 = new Users(2, "tenant","Jane", "Middle Name", "Last-Name-Jane", "jane@gmail.com", "+6911111111112", "password123","2020-11-09 11:00:00");
-		Users user3 = new Users(3, "tenant","James", "Middle Name", "Last-Name-James", "james@gmail.com", "+6911111111113", "password123","2020-11-09 11:00:00");
+		Users user1 = new Users(1, "host","John", "Middle Name", "Last-Name-John", "john@gmail.com", "+6911111111111", "password123",created_datetime);
+		Users user2 = new Users(2, "tenant","Jane", "Middle Name", "Last-Name-Jane", "jane@gmail.com", "+6911111111112", "password123",created_datetime);
+		Users user3 = new Users(3, "tenant","James", "Middle Name", "Last-Name-James", "james@gmail.com", "+6911111111113", "password123",created_datetime);
 
 		List<Users> list = new ArrayList<Users>();
 		list.add(user1);
@@ -70,29 +77,15 @@ class UsersControllerTest {
 			.andExpect(jsonPath("$.[2].type").value("tenant"))
 			.andExpect(jsonPath("$.[2].first_name").value("James"));
 	}
-	
-	
-	@Test
-	@DisplayName("GET /users WITH NO RESULT")
-	void getUsersListNoResult() throws Exception {
-		// Mocked the users and the service
-		doReturn(new ArrayList<Users>()).when(service).listAllUsers();
-
-		mockMvc.perform(get("/users"))
-
-			.andExpect(status().isOk())
-			.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-
-			.andExpect(content().string("[]"));
-	}
-	
+		
 	@Test
 	@DisplayName("GET /users/3 is FOUND")
+	@WithMockUser(roles = "host")
 	void getUserByIdFound() throws Exception {
 		// Mocked the users and the service
-		Users user1 = new Users(1, "host","John", "Middle Name", "Last-Name-John", "john@gmail.com", "+6911111111111", "password123","2020-11-09 11:00:00");
-		Users user2 = new Users(2, "tenant","Jane", "Middle Name", "Last-Name-Jane", "jane@gmail.com", "+6911111111112", "password123","2020-11-09 11:00:00");
-		Users user3 = new Users(3, "tenant","James", "Middle Name", "Last-Name-James", "james@gmail.com", "+6911111111113", "password123","2020-11-09 11:00:00");
+		Users user1 = new Users(1, "host","John", "Middle Name", "Last-Name-John", "john@gmail.com", "+6911111111111", "password123", created_datetime);
+		Users user2 = new Users(2, "tenant","Jane", "Middle Name", "Last-Name-Jane", "jane@gmail.com", "+6911111111112", "password123", created_datetime);
+		Users user3 = new Users(3, "tenant","James", "Middle Name", "Last-Name-James", "james@gmail.com", "+6911111111113", "password123", created_datetime);
 
 		List<Users> list = new ArrayList<Users>();
 		list.add(user1);
@@ -111,50 +104,51 @@ class UsersControllerTest {
 			.andExpect(jsonPath("$.first_name").value("James"));
 	}
 	
-	
 	@Test
 	@DisplayName("POST /registration is SUCCESSFUL")
+	@WithMockUser(roles = "host")
 	void addUserSuccess() throws Exception {
 		// Mocked the users and the service
-		Users user = new Users(1, "host","John", "Middle Name", "Last-Name-John", "john@gmail.com", "+6911111111111", "password123","2020-11-09 11:00:00");
-		doReturn(user).when(service).saveUser(user);	
+		Users user = new Users("host","John", "Middle Name", "Last-Name-John", "john@gmail.com", "+6911111111111", "password123");
+		ResponseEntity<String>response = new ResponseEntity<String>("Successfully Added User", HttpStatus.CREATED);
+		
+		doReturn(response).when(service).saveUser(user);	
 		
 		mockMvc.perform(post("/registration")
+			.with(csrf())
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(asJsonString(user)))
 		
-			.andExpect(status().isCreated())
-			.andExpect(header().string(HttpHeaders.LOCATION,"/registration"));
+			.andExpect(status().isOk());
 	}
 		
 	@Test
 	@DisplayName("PUT /users/1 is SUCCESSFUL")
+	@WithMockUser(roles = "host")
 	void updateUserSuccess() throws Exception{
-		Users userFind = new Users(1, "host","John", "Middle Name", "Last-Name-John", "john@gmail.com", "+6911111111111", "password123","2020-11-09 11:00:00");
-		Users userPut = new Users(1,"host","John22", "Middle Name", "Last-Name-John", "john@gmail.com", "+6911111111111", "password123","2020-11-09 11:00:00");
-		doReturn(userFind).when(service).getUser(1);
-		doReturn(userPut).when(service).saveUser(userPut);
+		Users userPut = new Users("host","John22", "Middle Name", "Last-Name-John", "john@gmail.com", "+6911111111111", "password123");
 		
-		mockMvc.perform(put("/users/1")
+		ResponseEntity<String>response = new ResponseEntity<String>("Successfully Updated User", HttpStatus.OK);
+		
+		doReturn(response).when(service).updateUser(userPut);	
+		
+		mockMvc.perform(put("/users/{id_user}",1)
+				.with(csrf())
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(asJsonString(userPut)))
 			
-				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-		
-				.andExpect(jsonPath("$.id_user").value(1))
-				.andExpect(jsonPath("$.type").value("host"))
-				.andExpect(jsonPath("$.first_name").value("John22"));
-			
+				.andExpect(status().isOk());	
 	}
 	
 	@Test
 	@DisplayName("DELETE /users/1 SUCCESS")
+	@WithMockUser(roles = "host")
 	void deleteUser() throws Exception{
-		Users user = new Users(1, "host","John", "Middle Name", "Last-Name-John", "john@gmail.com", "+6911111111111", "password123","2020-11-09 11:00:00");
+		Users user = new Users(1, "host","John", "Middle Name", "Last-Name-John", "john@gmail.com", "+6911111111111", "password123",created_datetime);
 		doReturn("User deleted").when(service).deleteUser(1);
 		
 		mockMvc.perform(delete("/users/1")
+				.with(csrf())
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(asJsonString(user)))
 			
@@ -167,5 +161,5 @@ class UsersControllerTest {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }	*/
+	}
 }

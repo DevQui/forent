@@ -47,47 +47,23 @@ public class Reviews {
 		return id_review;
 	}
 
-	public void setIdReview(int idReview) {
-		this.id_review = idReview;
-	}
-
 	public int getIdProperty() {
 		return id_property;
-	}
-
-	public void setIdProperty(int idProperty) {
-		this.id_property = idProperty;
 	}
 
 	public int getId_user() {
 		return id_user;
 	}
 
-	public void setId_user(int id_user) {
-		this.id_user = id_user;
-	}
-
 	public int getRating() {
 		return rating;
-	}
-
-	public void setRating(int rating) {
-		this.rating = rating;
 	}
 
 	public String getComment() {
 		return comment;
 	}
 
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
-
 	public OffsetDateTime getCreated_datetime() {
 		return created_datetime;
-	}
-
-	public void setCreated_datetime(OffsetDateTime created_datetime) {
-		this.created_datetime = created_datetime;
 	}
 }

@@ -14,6 +14,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.springboot.forent.exception.DataNotFoundException;
@@ -25,7 +26,7 @@ import com.springboot.forent.repository.PropertiesRepository;
 @RunWith(SpringRunner.class)
 @WebMvcTest(AmenitiesService.class)
 class AmenitiesServiceTest {
-	/*@Autowired
+	@Autowired
 	AmenitiesService service;
 	
 	@MockBean
@@ -34,8 +35,10 @@ class AmenitiesServiceTest {
 	@MockBean
 	AmenitiesRepository repo;
 	
+	
 	@Test
 	@DisplayName("TEST getAmenitiesHasResult")
+	@WithMockUser(roles = "host")
 	void listPropertyAmenities() throws Exception {
 		Amenities amenity1 = new Amenities(1, 1, 2, 1, 2, "Wifi, Cable");
 		Amenities amenity2 = new Amenities(2, 1, 2, 2, 1, "Gym, Pool");
@@ -57,6 +60,7 @@ class AmenitiesServiceTest {
 	
 	@Test
 	@DisplayName("TEST getAmenityByID")
+	@WithMockUser(roles = "host")
 	void getPropertyAmenities() throws Exception{
 		Amenities amenity1 = new Amenities(1, 1, 2, 1, 2, "Wifi, Cable");
 		
@@ -132,5 +136,5 @@ class AmenitiesServiceTest {
 		Assertions.assertThrows(DataNotFoundException.class, () -> {
 			service.updateAmenities(1,1, new Amenities());
 		  });
-	}*/	
+	}
 }

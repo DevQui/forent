@@ -26,7 +26,7 @@ import com.springboot.forent.repository.SchedulesRepository;
 @WebMvcTest(SchedulesService.class)
 class SchedulesServiceTest {
 	
-	/*@Autowired
+	@Autowired
 	SchedulesService service;
 	
 	@MockBean
@@ -151,9 +151,9 @@ class SchedulesServiceTest {
 	void saveSchedule() throws Exception{
 		Schedules schedule = new Schedules(3, 2, 3, 0, "2020-11-01", "2020-11-04");
 		Integer savedStatus = 1;
-		doReturn(savedStatus).when(repo).saveSchedule(schedule.getId_user(), schedule.getId_property(),schedule.getSchedule_date_from(), schedule.getSchedule_date_to());
+		doReturn(savedStatus).when(repo).saveSchedule(schedule.getId_property(), schedule.getId_schedule(), schedule.getSchedule_date_from(), schedule.getSchedule_date_to());
 		
-		ResponseEntity<String> addedSchedule = service.saveSchedule(schedule.getId_user(), schedule.getId_property(),schedule);
+		ResponseEntity<String> addedSchedule = service.saveSchedule(3,2,schedule);
 		
 		Assertions.assertEquals(addedSchedule.getStatusCodeValue(), 201);	
 	}
@@ -163,7 +163,7 @@ class SchedulesServiceTest {
 	void updateSchedule() throws Exception{
 		Schedules schedule = new Schedules(1, 1, 1, 0, "2020-11-01", "2020-11-04");
 		Integer updatedStatus = 1;
-		doReturn(updatedStatus).when(repo).acceptSchedule(schedule.getId_user(), schedule.getId_property(),schedule.getId_schedule(), updatedStatus);
+		doReturn(updatedStatus).when(repo).acceptSchedule(schedule.getId_property(),schedule.getId_schedule(), updatedStatus);
 		
 		ResponseEntity<String> updatedSchedule = service.updateSchedule(schedule.getId_user(), schedule.getId_property(),schedule.getId_schedule());
 		
@@ -275,5 +275,5 @@ class SchedulesServiceTest {
 		Assertions.assertThrows(DataNotFoundException.class, () -> {
 			service.getPropertySchedule(1,1);
 		  });
-	}*/
+	}
 }

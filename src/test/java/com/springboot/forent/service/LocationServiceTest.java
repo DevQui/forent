@@ -26,7 +26,7 @@ import com.springboot.forent.repository.PropertiesRepository;
 @RunWith(SpringRunner.class)
 @WebMvcTest(LocationService.class)
 class LocationServiceTest {
-	/*@Autowired
+	@Autowired
 	LocationService service;
 	
 	@MockBean
@@ -176,5 +176,5 @@ class LocationServiceTest {
 		Assertions.assertThrows(DataNotFoundException.class, () -> {
 			service.updatePropertyLocation(new Location(),1,1);
 		  });
-	}*/
+	}
 }

@@ -1,6 +1,7 @@
 package com.springboot.forent.controller;
 
 import static org.mockito.Mockito.doReturn;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
@@ -23,6 +24,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -36,22 +38,15 @@ import com.springboot.forent.service.SchedulesService;
 //@ComponentScan(basePackageClasses = { KeycloakSecurityComponents.class, KeycloakSpringBootConfigResolver.class })
 class SchedulesControllerTest {
 	
-	/*@Autowired
+	@Autowired
     private MockMvc mockMvc;
 	
 	@MockBean
 	private SchedulesService service;
-	
-	
-	//@Test
-    //@WithMockKeycloackAuth("host")
-    //public void whenUserIsNotGrantedWithAuthorizedPersonelThenSecretRouteIsNotAccessible() throws Exception {
-	//	mockMvc.perform(get("/properties")).andExpect(status().isForbidden());
-    //}
-	 
-	
+		
 	@Test
 	@DisplayName("GET /schedules WITH RESULT")
+	@WithMockUser(roles = "tenant")
 	void listAllSchedules() throws Exception{
 		Schedules schedule1 = new Schedules(1, 1, 1, 0, "2020-11-01", "2020-11-02");
 		Schedules schedule2 = new Schedules(2, 1, 2, 0, "2020-11-03", "2020-11-04");
@@ -88,6 +83,7 @@ class SchedulesControllerTest {
 	
 	@Test
 	@DisplayName("GET /schedules/{id_schedules} is FOUND")
+	@WithMockUser(roles = "tenant")
 	void getScheduleById() throws Exception {
 		Schedules schedule1 = new Schedules(1, 1, 1, 0, "2020-11-01", "2020-11-02");
 		Schedules schedule2 = new Schedules(2, 1, 2, 0, "2020-11-03", "2020-11-04");
@@ -115,6 +111,7 @@ class SchedulesControllerTest {
 	
 	@Test
 	@DisplayName("GET /properties/{id_property}/schedules is FOUND")
+	@WithMockUser(roles = "tenant")
 	void listPropertySchedules() throws Exception {
 		Schedules schedule1 = new Schedules(1, 1, 1, 0, "2020-11-01", "2020-11-02");
 		Schedules schedule2 = new Schedules(2, 1, 2, 0, "2020-11-03", "2020-11-04");
@@ -142,6 +139,7 @@ class SchedulesControllerTest {
 	
 	@Test
 	@DisplayName("GET /properties/{id_property}/schedules/{id_schedule} is FOUND")
+	@WithMockUser(roles = "tenant")
 	void getPropertySchedule() throws Exception {
 		Schedules schedule1 = new Schedules(1, 1, 1, 0, "2020-11-01", "2020-11-02");
 		Schedules schedule2 = new Schedules(2, 1, 2, 0, "2020-11-03", "2020-11-04");
@@ -169,6 +167,7 @@ class SchedulesControllerTest {
 	
 	@Test
 	@DisplayName("GET /users/{id_user}/schedules is FOUND")
+	@WithMockUser(roles = "tenant")
 	void listUserSchuedles() throws Exception {
 		Schedules schedule1 = new Schedules(1, 1, 1, 0, "2020-11-01", "2020-11-02");
 		Schedules schedule2 = new Schedules(2, 1, 3, 0, "2020-11-03", "2020-11-04");
@@ -197,6 +196,7 @@ class SchedulesControllerTest {
 	
 	@Test
 	@DisplayName("GET /users/{id_user}/schedules/{id_schedule} is FOUND")
+	@WithMockUser(roles = "tenant")
 	void getUserScheduleDetails() throws Exception {
 		Schedules schedule1 = new Schedules(1, 1, 1, 0, "2020-11-01", "2020-11-02");
 		Schedules schedule2 = new Schedules(2, 1, 2, 0, "2020-11-03", "2020-11-04");
@@ -226,12 +226,14 @@ class SchedulesControllerTest {
 		
 	@Test
 	@DisplayName("POST /users/{id_user}/properties/{id_property}/schedules is SUCCESSFUL")
+	@WithMockUser(roles = "tenant")
 	void addScheduleSuccess() throws Exception {
 		Schedules schedule1 = new Schedules(1, 1, 1, 0, "2020-11-01", "2020-11-02");
 		ResponseEntity<String> response = new ResponseEntity<String>("Successfully Added Schedule", HttpStatus.CREATED);
 		doReturn(response).when(service).saveSchedule(1, 1, schedule1);	
 		
 		mockMvc.perform(post("/users/{id_user}/properties/{id_property}/schedules",1,1)
+			.with(csrf())
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(asJsonString(schedule1)))
 		
@@ -240,15 +242,17 @@ class SchedulesControllerTest {
 	
 	@Test
 	@DisplayName("PATCH /users/{id_user}/properties/{id_property}/schedules/{id_schedule} is SUCCESSFUL")
+	@WithMockUser(roles = "host")
 	void updateSchedule() throws Exception {
 		ResponseEntity<String> response = new ResponseEntity<String>("Booking Schedule Request Accepted", HttpStatus.OK);
 		
 		Mockito.when(service.updateSchedule(1,1,1)).thenReturn(response);
-		mockMvc.perform(patch("/users/{id_user}/properties/{id_property}/schedules/{id_schedule}",1,1,1));
+		mockMvc.perform(patch("/users/{id_user}/properties/{id_property}/schedules/{id_schedule}",1,1,1).with(csrf()));
 	}
 	
 	@Test
 	@DisplayName("DELETE /users/{id_user}/properties/{id_property}/schedules/{id_schedule} SUCCESS")
+	@WithMockUser(roles = "tenant")
 	void deleteSchedule() throws Exception{
 		Schedules schedule = new Schedules(1, 1, 1, 0, "2020-11-01", "2020-11-02");
 		ResponseEntity<String> response = new ResponseEntity<String>("Schedule Deleted", HttpStatus.OK);
@@ -256,6 +260,7 @@ class SchedulesControllerTest {
 		doReturn(response).when(service).deleteSchedule(1, 1, 1);
 		
 		mockMvc.perform(delete("/users/{id_user}/properties/{id_property}/schedules/{id_schedule}",1,1,1)
+				.with(csrf())
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(asJsonString(schedule)))
 			
@@ -268,5 +273,5 @@ class SchedulesControllerTest {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }*/
+    }
 }

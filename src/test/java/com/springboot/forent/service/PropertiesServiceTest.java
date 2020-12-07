@@ -3,6 +3,7 @@ package com.springboot.forent.service;
 
 import static org.mockito.Mockito.doReturn;
 
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -29,13 +30,15 @@ import com.springboot.forent.repository.PropertiesRepository;
 @WebMvcTest(PropertiesService.class)
 class PropertiesServiceTest{
 
-	/*@Autowired
+	@Autowired
 	PropertiesService service;
 	
 	@MockBean
 	PropertiesRepository repo;
 	
-	
+	OffsetDateTime created_datetime = OffsetDateTime.now();
+	OffsetDateTime updated_datetime = OffsetDateTime.now();
+		
 	@Test
 	@DisplayName("TEST getUsersHasResult")
 	void getUsersHasResult() throws Exception {
@@ -76,7 +79,7 @@ class PropertiesServiceTest{
 	@Test
 	@DisplayName("TEST getPropertyOfUserFOUND")
 	void getPropertyOfUserFOUND() throws Exception{
-		Properties property1 = new Properties(1, 1, "bungalow", "Bungalow Property", "A Bungalow Property", (float)3999.00, "2020-11-01 11:00:00", "2020-11-01 11:00:00");
+		Properties property1 = new Properties(1, 1, "bungalow", "Bungalow Property", "A Bungalow Property", (float)3999.00, created_datetime, updated_datetime.toString());
 		
 		doReturn(property1).when(repo).findPropertyOfUser(1,1);
 		
@@ -87,15 +90,14 @@ class PropertiesServiceTest{
 		Assertions.assertEquals(property.getBody().getName(),"Bungalow Property");
 		Assertions.assertEquals(property.getBody().getDescription(),"A Bungalow Property");
 		Assertions.assertEquals(property.getBody().getPrice(), (float)3999.00);
-		Assertions.assertEquals(property.getBody().getUpdated_datetime(),"2020-11-01 11:00:00");
 	}
 	
 	@Test
 	@DisplayName("TEST getUserPropertiesFOUND")
 	void getUserPropertiesFOUND() throws Exception{
 		
-		Properties property1 = new Properties(1, 1, "bungalow", "Bungalow Property", "A Bungalow Property", (float)3999.00, "2020-11-01 11:00:00", "2020-11-01 11:00:00");
-		Properties property2 = new Properties(2, 1, "bungalow", "Bungalow Property2", "A Bungalow Property2", (float)3999.00, "2020-11-01 11:00:00", "2020-11-01 11:00:00");
+		Properties property1 = new Properties(1, 1, "bungalow", "Bungalow Property", "A Bungalow Property", (float)3999.00, created_datetime, updated_datetime.toString());
+		Properties property2 = new Properties(2, 1, "bungalow", "Bungalow Property2", "A Bungalow Property2", (float)3999.00, created_datetime, updated_datetime.toString());
 		
 		List<Properties> list = new ArrayList<>();
 		list.add(property1);
@@ -110,26 +112,24 @@ class PropertiesServiceTest{
 		Assertions.assertEquals(property.get(0).getName(),"Bungalow Property");
 		Assertions.assertEquals(property.get(0).getDescription(),"A Bungalow Property");
 		Assertions.assertEquals(property.get(0).getPrice(), (float)3999.00);
-		Assertions.assertEquals(property.get(0).getUpdated_datetime(),"2020-11-01 11:00:00");
 
 		Assertions.assertEquals(property.get(1).getId_property(),2);
 		Assertions.assertEquals(property.get(1).getType(),"bungalow");
 		Assertions.assertEquals(property.get(1).getName(),"Bungalow Property2");
 		Assertions.assertEquals(property.get(1).getDescription(),"A Bungalow Property2");
 		Assertions.assertEquals(property.get(1).getPrice(), (float)3999.00);
-		Assertions.assertEquals(property.get(1).getUpdated_datetime(),"2020-11-01 11:00:00");
 
 	}	
 	
 	@Test
 	@DisplayName("TEST addPropertySUCCESS")
 	void addPropertySUCCESS() throws Exception{
-		Properties addedProperty = new Properties(1, 1, "bungalow", "Bungalow Property", "A Bungalow Property", (float)3999.00, "2020-11-01 11:00:00", "2020-11-01 11:00:00");
+		Properties addedProperty = new Properties(1, 1, "bungalow", "Bungalow Property", "A Bungalow Property", (float)3999.00, created_datetime, updated_datetime.toString());
 		Integer user_id = 1;
 		Integer addedPropertyStatus = 1;
 		
 		doReturn(addedPropertyStatus).when(repo).saveProperty(Mockito.anyInt(), Mockito.anyString(),
-				Mockito.anyString(), Mockito.anyString(), Mockito.anyFloat(), Mockito.anyString());
+				Mockito.anyString(), Mockito.anyString(), Mockito.anyFloat(), Mockito.any());
 		
 		ResponseEntity<String> property = service.addProperty(user_id, addedProperty);
 
@@ -139,8 +139,8 @@ class PropertiesServiceTest{
 	@Test
 	@DisplayName("TEST updateProperty")
 	void updateProperty() throws Exception{
-		Properties updateProperty = new Properties(1, 1, "bungalow", "Bungalow Property2", "A Bungalow Property2", (float)3999.00, "2020-11-01 11:00:00", "2020-11-01 11:00:00");
-		Properties originalProperty = new Properties(1, "bungalow", "Bungalow Property2", "A Bungalow Property2", (float)3999.00, "2020-11-01 11:00:00");
+		Properties updateProperty = new Properties(1, 1, "bungalow", "Bungalow Property2", "A Bungalow Property2", (float)3999.00, created_datetime, updated_datetime.toString());
+		Properties originalProperty = new Properties(1, 1, "bungalow", "Bungalow Property2", "A Bungalow Property2", (float)3999.00, created_datetime, updated_datetime.toString());
 		Integer updatePropertyStatus = 1;
 		
 		Mockito.when(repo.updateProperty(Mockito.anyInt(), Mockito.anyInt(), Mockito.anyString(),
@@ -199,7 +199,7 @@ class PropertiesServiceTest{
 	@Test
 	@DisplayName("TEST updatePropertyNOTFOUND")
 	void addPropertyNOTFOUND() throws DataNotFoundException {
-		Properties addedProperty = new Properties(1, 1, "bungalow", "Bungalow Property", "A Bungalow Property", (float)3999.00, "2020-11-01 11:00:00", "2020-11-01 11:00:00");
+		Properties addedProperty = new Properties(1, 1, "bungalow", "Bungalow Property", "A Bungalow Property", (float)3999.00, created_datetime, updated_datetime.toString());
 		Assertions.assertThrows(DataNotFoundException.class, () -> {
 			service.addProperty(3,addedProperty);
 		  });
@@ -208,7 +208,7 @@ class PropertiesServiceTest{
 	@Test
 	@DisplayName("TEST updatePropertyNOTFOUND")
 	void updatePropertyNOTFOUND() throws DataNotFoundException {
-		Properties addedProperty = new Properties(1, 1, "bungalow", "Bungalow Property", "A Bungalow Property", (float)3999.00, "2020-11-01 11:00:00", "2020-11-01 11:00:00");
+		Properties addedProperty = new Properties(1, 1, "bungalow", "Bungalow Property", "A Bungalow Property", (float)3999.00, created_datetime, updated_datetime.toString());
 		Assertions.assertThrows(DataNotFoundException.class, () -> {
 			service.updateProperty(3,3,addedProperty);
 		  });
@@ -220,5 +220,5 @@ class PropertiesServiceTest{
 		Assertions.assertThrows(DataNotFoundException.class, () -> {
 			service.deleteProperty(3,3);
 		  });
-	}*/
+	}
 }

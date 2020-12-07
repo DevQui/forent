@@ -46,9 +46,9 @@ public class Users {
 	@JoinColumn(name = "users_id_user")
 	private List<Properties> properties;
 	
-	public Users() {
+	public Users(){
 	}
-
+	
 	public Users(int id_user, String type, String first_name, String middle_name, String last_name, String email, String phone_number,
 			String user_password, OffsetDateTime created_datetime) {
 		this.id_user = id_user;
@@ -62,6 +62,18 @@ public class Users {
 		this.created_datetime = created_datetime;
 	}
 
+	public Users(String type, String first_name, String middle_name, String last_name, String email, String phone_number,
+			String user_password) {
+		this.type = type;
+		this.first_name = first_name;
+		this.middle_name = middle_name;
+		this.last_name = last_name;
+		this.email = email;
+		this.phone_number = phone_number;
+		this.user_password = user_password;
+	}
+
+	
 	//setters and getters
 	public int getId_user() {
 		return id_user;
