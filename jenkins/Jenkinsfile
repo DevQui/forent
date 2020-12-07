@@ -11,8 +11,7 @@ pipeline{
 		stage("Compile Stage") {
 			steps{
 				withMaven(maven: 'maven_3_6_3'){
-					/*sh 'mvn clean compile -DskipTests=true'*/
-				    sh 'mvn package'
+					sh 'mvn clean compile -DskipTests=true'
 				}
 			}
 		}
@@ -21,7 +20,7 @@ pipeline{
             steps{
                 withMaven(maven : 'maven_3_6_3'){
                     sh 'mvn clean test jacoco:report'
-                    sleep time: 1, unit: 'MINUTES'
+                    //sleep time: 1, unit: 'MINUTES'
                 }
             }
             post{
@@ -38,10 +37,22 @@ pipeline{
             }
         }
         
-        stage("Build and start test image") {
+        stage("Build .jar file Stage") {
+			steps{
+				withMaven(maven: 'maven_3_6_3'){
+				    sh 'mvn package'
+				    stash includes: 'target/*.jar', name: 'targetfiles'
+				}
+			}
+		}
+        
+        stage("Build and start docker-compose") {
             steps {
-                sh "docker-compose up --build"
-                sleep time: 1, unit: 'MINUTES'
+                script{
+                    unstash 'targetfiles'
+                    sh "docker-compose up --build"
+                }
+                //sleep time: 1, unit: 'MINUTES'
             }
         }
 
