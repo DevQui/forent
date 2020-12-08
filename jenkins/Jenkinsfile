@@ -45,8 +45,39 @@ pipeline{
 				}
 			}
 		}
+		
+		stage("Postman/Newman Testing Stage"){
+		    parallel{
+                stage("Run API"){
+                    steps{
+                        sh 'mvn spring-boot:run &'
+                    }
+                }
+                stage('Postman Test'){
+                    steps{
+                        dir('postman'){
+                            sleep time: 2, unit: 'MINUTES'
+                            sh "newman run 'Forent.postman_collection_1.json' "
+                            sh "newman run 'Forent.postman_collection_1.json' -r htmlextra --reporter-htmlextra-export 'HTMLReport/report.html' "
+                        }
+                    }
+                    post{
+                        success{
+                            publishHTML( target: [
+                                allowMissing:false,
+                                alwaysLinkToLastBuild: false,
+                                keepAll: true,
+                                reportDir: 'postman/HTMLReport',
+                                reportFiles: 'forent_newman_report.html',
+                                reportName: 'Postman Report'
+                            ])
+                        }
+                    }
+                }
+            }
+		}
         
-        stage("Build and start docker-compose") {
+        /*stage("Build and start docker-compose") {
             steps {
                 script{
                     unstash 'targetfiles'
@@ -54,7 +85,7 @@ pipeline{
                 }
                 //sleep time: 1, unit: 'MINUTES'
             }
-        }
+        }*/
 
 	}
 }
