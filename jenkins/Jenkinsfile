@@ -56,8 +56,8 @@ pipeline{
                 stage('Postman Test'){
                     steps{
                         dir('postman'){
-                            sleep time: 2, unit: 'MINUTES'
-                            sh "newman run 'Forent.postman_collection_1.json' "
+                            //sleep time: 2, unit: 'MINUTES'
+                            //sh "newman run 'Forent.postman_collection_1.json' "
                             sh "newman run 'Forent.postman_collection_1.json' -r htmlextra --reporter-htmlextra-export 'HTMLReport/report.html' "
                         }
                     }

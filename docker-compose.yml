@@ -60,9 +60,7 @@ services:
    DB_DATABASE: rentals
    DB_USER: forent_user
    DB_PASSWORD: password
-   #KEYCLOAK_IMPORT: "/tmp/realm.json -Dkeycloak.profile.feature.upload_scripts=enabled"
-  #volume:
-   #- keycloak: /tmp
+   KEYCLOAK_IMPORT: "/forent_realm.json -Dkeycloak.profile.feature.upload_scripts=enabled"
  
    
 networks:
