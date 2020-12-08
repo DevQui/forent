@@ -154,9 +154,13 @@
 									"script": {
 										"id": "78ac2a0e-1a8c-4167-9ebb-c457b2d5516a",
 										"exec": [
-											"pm.test(\"Status code is 200\", function () {",
+											"/*pm.test(\"Status code is 200\", function () {",
 											"    pm.response.to.have.status(200);",
-											"});"
+											"});*/",
+											"",
+											"pm.test(\"Status 200 OK\", function() {",
+											"    pm.response.to.have.status(200);",
+											"})"
 										],
 										"type": "text/javascript"
 									}
@@ -2278,12 +2282,12 @@
 	],
 	"variable": [
 		{
-			"id": "92cc1155-06fc-4db1-8214-0fc4ee0137b9",
+			"id": "5fddfca9-5d8b-4406-a93c-ffd44160b38b",
 			"key": "baseUrl",
 			"value": "http://localhost:8090"
 		},
 		{
-			"id": "12121411-dd87-464e-899d-0088be7e6b05",
+			"id": "53f196be-eef8-4acf-b4b7-085878865600",
 			"key": "keycloak",
 			"value": "http://localhost:8080/auth"
 		}
