@@ -4,8 +4,8 @@ services:
  #Spring Boot API
  forent:
   container_name: forent-app
-  #image: forent-app:v1
-  image: dquisido/forent:latest
+  image: forent-app:v1
+  #image: dquisido/forent:latest
   build:
    context: .
    dockerfile: Dockerfile
