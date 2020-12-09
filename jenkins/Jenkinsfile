@@ -50,22 +50,24 @@ pipeline{
 		    parallel{
                 stage("Run API"){
                     steps{
-                        sh 'mvn spring-boot:run &'
+                        withMaven(maven: 'maven_3_6_3'){
+                            sh 'mvn spring-boot:run &'
+                        }
                     }
                 }
                 stage('Postman Test'){
                     steps{
                         dir('postman'){
                             //sleep time: 2, unit: 'MINUTES'
-                            //sh "newman run 'Forent.postman_collection_1.json' "
-                            sh "newman run 'Forent.postman_collection_1.json' -r htmlextra --reporter-htmlextra-export 'HTMLReport/report.html' "
+                            sh "newman run Forent.postman_collection_3.json"
+                            sh "newman run Forent.postman_collection_3.json -r htmlextra --reporter-htmlextra-export HTMLReport/forent_newman_report.html"
                         }
                     }
                     post{
                         success{
                             publishHTML( target: [
                                 allowMissing:false,
-                                alwaysLinkToLastBuild: false,
+                                alwaysLinkToLastBuild: true,
                                 keepAll: true,
                                 reportDir: 'postman/HTMLReport',
                                 reportFiles: 'forent_newman_report.html',
@@ -76,16 +78,23 @@ pipeline{
                 }
             }
 		}
-        
-        /*stage("Build and start docker-compose") {
-            steps {
-                script{
-                    unstash 'targetfiles'
-                    sh "docker-compose up --build"
-                }
-                //sleep time: 1, unit: 'MINUTES'
+		
+		stage("Build Docker Images Stage"){
+            steps{
+                sh 'docker build -t forent-api:latest .'
+                sh 'docker tag forent-api dquisido/forent:latest'
+                sh 'docker tag forent-api dquisido/forent:$BUILD_NUMBER'
             }
-        }*/
+        }
+   
+        
+        stage("Push to Dockerhub"){
+            steps{
+                
+                withDockerRegistry([credentialsId: "18cdac66-f749-45ea-8f9c-b02489a2218d", url: '']) {
+                    sh 'docker push dquisido/forent:latest'
+                }   
+        }
 
 	}
 }

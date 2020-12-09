@@ -5,6 +5,7 @@ services:
  forent:
   container_name: forent-app
   image: forent-app:v1
+  #image: dquisido/forent:latest
   build:
    context: .
    dockerfile: Dockerfile
