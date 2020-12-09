@@ -59,8 +59,8 @@ pipeline{
                     steps{
                         dir('postman'){
                             //sleep time: 2, unit: 'MINUTES'
-                            sh "newman run Forent.postman_collection_3.json"
-                            sh "newman run Forent.postman_collection_3.json -r htmlextra --reporter-htmlextra-export HTMLReport/forent_newman_report.html"
+                            sh "newman run Forent.postman_collection_4.json"
+                            sh "newman run Forent.postman_collection_4.json -r htmlextra --reporter-htmlextra-export HTMLReport/forent_newman_report.html"
                         }
                     }
                     post{
@@ -94,6 +94,7 @@ pipeline{
                 withDockerRegistry([credentialsId: "18cdac66-f749-45ea-8f9c-b02489a2218d", url: '']) {
                     sh 'docker push dquisido/forent:latest'
                 }   
+            }
         }
 
 	}
