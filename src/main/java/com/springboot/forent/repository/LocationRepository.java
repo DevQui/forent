@@ -26,8 +26,9 @@ public interface LocationRepository extends CrudRepository<Location, Integer>{
 			"id_property, town, city, region, country) " + 
 		"SELECT  ?1, ?2, ?3, ?4, ?5 FROM properties " + 
 		"WHERE EXISTS (SELECT id_property FROM properties WHERE id_property = ?1) " +
-		"LIMIT 1")
-	Integer savePropertyLocation(Integer id_property, String town, String city, String region, String country);
+		"AND NOT EXISTS( SELECT id_property FROM location WHERE id_property = ?1)" +
+ 		"LIMIT 1")
+	void savePropertyLocation(Integer id_property, String town, String city, String region, String country);
 
 	@Transactional
 	@Modifying(clearAutomatically = true)

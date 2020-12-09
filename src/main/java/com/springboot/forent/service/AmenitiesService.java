@@ -40,16 +40,12 @@ public class AmenitiesService {
     }
 	
 	public ResponseEntity<String> saveAmenities(Integer id_property, Amenities amenities) {
-		Integer saveAmenityStatus = amenitiesRepository.saveAmenity(id_property, amenities.getRooms(),
-				amenities.getToilets(), amenities.getBeds(), amenities.getOther_amenities());
-		if(saveAmenityStatus > 0) {
-			propertiesRepository.setAmenitiesId(id_property);
-			return new ResponseEntity<String>("Successfully Added Amenity", HttpStatus.CREATED);
-		}else {
-			throw new DataNotFoundException(id_property);
-		}
+		amenitiesRepository.saveAmenity(id_property, amenities.getRooms(),
+		amenities.getToilets(), amenities.getBeds(), amenities.getOther_amenities());
 		
-		
+		propertiesRepository.setAmenitiesId(id_property);
+		return new ResponseEntity<String>("Successfully Added Amenity", HttpStatus.CREATED);
+	
     }
 
 	public ResponseEntity<String> updateAmenities(Integer id_property, Integer id_amenity, Amenities amenities) {

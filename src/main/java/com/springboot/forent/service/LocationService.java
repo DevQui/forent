@@ -40,14 +40,12 @@ public class LocationService {
 	}
 	
 	public ResponseEntity<String> savePropertyLocation(Integer id_property, Location location) {
-		Integer saveLocationStatus = locationRepository.savePropertyLocation(id_property, location.getTown(), 
-				location.getCity(), location.getRegion(), location.getCountry());
-		if(saveLocationStatus > 0) {
-			propertiesRepository.setLocationId(id_property);
-			return new ResponseEntity<String>("Successfully Added Location", HttpStatus.CREATED);
-		}else {
-			throw new DataNotFoundException(id_property);
-		}
+		locationRepository.savePropertyLocation(id_property, location.getTown(), 
+		location.getCity(), location.getRegion(), location.getCountry());
+	
+		propertiesRepository.setLocationId(id_property);
+		return new ResponseEntity<String>("Successfully Added Location", HttpStatus.CREATED);
+		
     }
 	
 	public Location getLocationByPropertyID(Integer id_property) {
