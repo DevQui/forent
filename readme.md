@@ -11,15 +11,12 @@ Forent is a Spring Boot API that is for renting real estates and lets the users 
 - Amenities
 - Favorites
 
+## Schema/ERD
+![Forent_ERD](https://github.com/DevQui/forent/blob/feature1/forent_database_erd.png?raw=true)
+
+
 ## About the API
 This Spring Boot API is using Keycloak for restring specific users to access what resources, how they can access it, and what they can store in the MySQL Database.
-
-### Http Requests Involved
-- GET
-- POST
-- PATCH
-- PUT
-- DELETE
 
 When running the Jenkins Pipeline which is used to build images to be pushed to the Docker Hub for you to pull to your machine on, Spring Boot, Keycloak and MySQL are all running in the background to create .jar file, execute the tests and be able to successfully build and push the image to Docker Hub.
 
@@ -41,8 +38,30 @@ When running the Jenkins Pipeline which is used to build images to be pushed to 
 
 
 
+## Requirements
+- JDK/JRE
+- [Ubuntu Docker](https://docs.docker.com/engine/install/ubuntu/) or [Windows Docker](https://docs.docker.com/docker-for-windows/install/)
+- [Keycloak](https://www.keycloak.org/downloads.html)
+- MySQL
+- Jenkins
+- NodeJs with NPM
+
 ## Installation
-- Install the IDE of your choice
-- Install JDK with JRE
-- Install MySql
-- Install Keycloak
+**Install Newman**  to run the Postman collection by copying the following command to your terminal
+
+```bash
+ npm install -g newman
+```
+
+**Install newman-reporter-htmlextra** to view the result of the postman collection in an HTML Report
+```bash
+ npm install -g newman-reporter-extra
+```
+
+**Install Keycloak** using the Standalone server distribution
+- If using **zip** extract the file and navigate to where you extracted Keycloak and run in the terminal
+```bash
+ex: cd /Downloads/keycloak-11.0.3/bin
+    ./standalone.sh
+```
+- If using **tar.gz**, follow this [link](https://medium.com/@hasnat.saeed/setup-keycloak-server-on-ubuntu-18-04-ed8c7c79a2d9)
