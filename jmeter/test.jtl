@@ -1,0 +1,421 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1607604330063,215,Host Login,200,OK,Thread Group 1-2,text,true,,2654,324,2,2,http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token,215,0,6
+1607604329924,269,Host Login,200,OK,Thread Group 1-1,text,true,,2654,324,2,2,http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token,264,0,58
+1607604330337,89,Add Host,201,,Thread Group 1-2,text,true,,185,2854,3,3,http://localhost:8090/registration,89,0,4
+1607604330338,89,Add Host,201,,Thread Group 1-1,text,true,,185,2854,3,3,http://localhost:8090/registration,89,0,5
+1607604330432,55,Add Property,201,,Thread Group 1-1,text,true,,189,2785,3,3,http://localhost:8090/users/1/properties,55,0,0
+1607604330436,56,Add Property,201,,Thread Group 1-2,text,true,,189,2785,3,3,http://localhost:8090/users/1/properties,56,0,0
+1607604330491,34,Add Amenity,201,,Thread Group 1-1,text,true,,188,2791,3,3,http://localhost:8090/properties/1/amenities,34,0,0
+1607604330499,38,Add Amenity,201,,Thread Group 1-2,text,true,,188,2791,3,3,http://localhost:8090/properties/1/amenities,38,0,0
+1607604330528,21,Add Location,201,,Thread Group 1-1,text,true,,189,2719,3,3,http://localhost:8090/properties/1/location,21,0,0
+1607604330549,35,Add Location,201,,Thread Group 1-2,text,true,,189,2719,3,3,http://localhost:8090/properties/1/location,35,0,0
+1607604330396,223,Host Login,200,OK,Thread Group 1-3,text,true,,2654,324,3,3,http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token,222,0,2
+1607604330626,51,Add Host,201,,Thread Group 1-3,text,true,,185,2854,4,4,http://localhost:8090/registration,51,0,3
+1607604330685,45,Add Property,201,,Thread Group 1-3,text,true,,189,2785,4,4,http://localhost:8090/users/1/properties,45,0,0
+1607604330738,30,Add Amenity,201,,Thread Group 1-3,text,true,,188,2791,4,4,http://localhost:8090/properties/1/amenities,30,0,0
+1607604330781,22,Add Location,201,,Thread Group 1-3,text,true,,189,2719,4,4,http://localhost:8090/properties/1/location,22,0,0
+1607604330628,215,Host Login,200,OK,Thread Group 1-4,text,true,,2654,324,4,4,http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token,215,0,2
+1607604330867,76,Add Host,201,,Thread Group 1-4,text,true,,185,2854,5,5,http://localhost:8090/registration,76,0,1
+1607604330588,501,Get specific user,200,,Thread Group 1-2,text,true,,38764,2600,6,6,http://localhost:8090/users/1,234,0,0
+1607604330949,148,Add Property,201,,Thread Group 1-4,text,true,,189,2785,6,6,http://localhost:8090/users/1/properties,147,0,0
+1607604330855,237,Host Login,200,OK,Thread Group 1-5,text,true,,2654,324,6,6,http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token,237,0,19
+1607604331099,41,Add Amenity,201,,Thread Group 1-4,text,true,,188,2791,6,6,http://localhost:8090/properties/1/amenities,41,0,0
+1607604331104,121,Add Host,201,,Thread Group 1-5,text,true,,185,2854,6,6,http://localhost:8090/registration,120,0,2
+1607604331142,133,Add Location,201,,Thread Group 1-4,text,true,,189,2719,6,6,http://localhost:8090/properties/1/location,133,0,0
+1607604331082,197,Host Login,200,OK,Thread Group 1-6,text,true,,2654,324,6,6,http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token,197,0,5
+1607604331226,115,Add Property,201,,Thread Group 1-5,text,true,,189,2785,7,7,http://localhost:8090/users/1/properties,114,0,0
+1607604331284,75,Add Host,201,,Thread Group 1-6,text,true,,185,2854,7,7,http://localhost:8090/registration,74,0,1
+1607604331343,43,Add Amenity,201,,Thread Group 1-5,text,true,,188,2791,7,7,http://localhost:8090/properties/1/amenities,43,0,0
+1607604330554,847,Get specific user,200,,Thread Group 1-1,text,true,,38764,2600,7,7,http://localhost:8090/users/1,342,0,0
+1607604331401,32,Add Location,201,,Thread Group 1-5,text,true,,189,2719,7,7,http://localhost:8090/properties/1/location,32,0,0
+1607604331398,85,Add Property,201,,Thread Group 1-6,text,true,,189,2785,7,7,http://localhost:8090/users/1/properties,85,0,0
+1607604331335,217,Host Login,200,OK,Thread Group 1-7,text,true,,2654,324,7,7,http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token,217,0,11
+1607604331494,70,Add Amenity,201,,Thread Group 1-6,text,true,,188,2791,7,7,http://localhost:8090/properties/1/amenities,70,0,0
+1607604331569,48,Add Location,201,,Thread Group 1-6,text,true,,189,2719,7,7,http://localhost:8090/properties/1/location,48,0,0
+1607604331570,52,Add Host,201,,Thread Group 1-7,text,true,,185,2854,7,7,http://localhost:8090/registration,52,0,1
+1607604330805,818,Get specific user,200,,Thread Group 1-3,text,true,,39185,2600,7,7,http://localhost:8090/users/1,371,0,0
+1607604331628,69,Add Property,201,,Thread Group 1-7,text,true,,189,2785,7,7,http://localhost:8090/users/1/properties,68,0,0
+1607604331698,46,Add Amenity,201,,Thread Group 1-7,text,true,,188,2791,8,8,http://localhost:8090/properties/1/amenities,46,0,0
+1607604331746,53,Add Location,201,,Thread Group 1-7,text,true,,189,2719,8,8,http://localhost:8090/properties/1/location,53,0,0
+1607604331279,587,Get specific user,200,,Thread Group 1-4,text,true,,40027,2600,8,8,http://localhost:8090/users/1,278,0,0
+1607604331716,199,Host Login,200,OK,Thread Group 1-8,text,true,,2654,324,8,8,http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token,199,0,5
+1607604331095,860,Get list of properties,200,,Thread Group 1-2,text,true,,38925,2611,8,8,http://localhost:8090/users/1/properties,525,0,0
+1607604331919,37,Add Host,201,,Thread Group 1-8,text,true,,185,2854,8,8,http://localhost:8090/registration,37,0,1
+1607604331960,64,Add Property,201,,Thread Group 1-8,text,true,,189,2785,8,8,http://localhost:8090/users/1/properties,64,0,0
+1607604331965,67,Get owned property,200,,Thread Group 1-2,text,true,,9015,2613,8,8,http://localhost:8090/users/1/properties/1,66,0,0
+1607604332028,29,Add Amenity,201,,Thread Group 1-8,text,true,,188,2791,8,8,http://localhost:8090/properties/1/amenities,28,0,0
+1607604332059,34,Add Location,201,,Thread Group 1-8,text,true,,189,2719,8,8,http://localhost:8090/properties/1/location,34,0,0
+1607604332034,172,Update user,200,,Thread Group 1-2,text,true,,516,2855,8,8,http://localhost:8090/users/1,172,0,0
+1607604331403,977,Get list of properties,200,,Thread Group 1-1,text,true,,39346,2611,9,9,http://localhost:8090/users/1/properties,331,0,0
+1607604332209,200,Update property,200,,Thread Group 1-2,text,true,,255,2767,9,9,http://localhost:8090/users/1/properties/1,200,0,0
+1607604332234,246,Host Login,200,OK,Thread Group 1-9,text,true,,2654,324,9,9,http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token,246,0,2
+1607604332411,134,Update amenity,200,,Thread Group 1-2,text,true,,192,2694,10,10,http://localhost:8090/properties/1/amenities/1,132,0,0
+1607604332486,129,Add Host,201,,Thread Group 1-9,text,true,,185,2854,10,10,http://localhost:8090/registration,129,0,2
+1607604332547,123,Update location,200,,Thread Group 1-2,text,true,,200,2737,10,10,http://localhost:8090/properties/1/location/1,123,0,0
+1607604332383,374,Get owned property,200,,Thread Group 1-1,text,true,,9015,2613,10,10,http://localhost:8090/users/1/properties/1,374,0,0
+1607604331440,1327,Get specific user,200,,Thread Group 1-5,text,true,,40448,2600,10,10,http://localhost:8090/users/1,382,0,0
+1607604332616,638,Add Property,201,,Thread Group 1-9,text,true,,189,2785,10,10,http://localhost:8090/users/1/properties,638,0,0
+1607604332761,546,Update user,200,,Thread Group 1-1,text,true,,516,2855,10,10,http://localhost:8090/users/1,546,0,0
+1607604333256,53,Add Amenity,201,,Thread Group 1-9,text,true,,188,2791,10,10,http://localhost:8090/properties/1/amenities,53,0,0
+1607604332522,804,Host Login,200,OK,Thread Group 1-10,text,true,,2654,324,10,10,http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token,804,0,2
+1607604333309,34,Update property,200,,Thread Group 1-1,text,true,,255,2767,10,10,http://localhost:8090/users/1/properties/1,34,0,0
+1607604331621,1734,Get specific user,200,,Thread Group 1-6,text,true,,40869,2600,10,10,http://localhost:8090/users/1,403,0,0
+1607604333312,46,Add Location,201,,Thread Group 1-9,text,true,,189,2719,10,10,http://localhost:8090/properties/1/location,46,0,0
+1607604333344,28,Update amenity,200,,Thread Group 1-1,text,true,,192,2694,10,10,http://localhost:8090/properties/1/amenities/1,27,0,0
+1607604333328,61,Add Host,201,,Thread Group 1-10,text,true,,185,2854,10,10,http://localhost:8090/registration,61,0,1
+1607604333373,58,Update location,200,,Thread Group 1-1,text,true,,200,2737,10,10,http://localhost:8090/properties/1/location/1,58,0,0
+1607604331626,1832,Get list of properties,200,,Thread Group 1-3,text,true,,39767,2611,10,10,http://localhost:8090/users/1/properties,402,0,0
+1607604333392,76,Add Property,201,,Thread Group 1-10,text,true,,189,2785,10,10,http://localhost:8090/users/1/properties,76,0,0
+1607604332673,810,Tenant Login,200,OK,Thread Group 1-2,text,true,,2660,328,10,10,http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token,810,0,0
+1607604333470,35,Add Amenity,201,,Thread Group 1-10,text,true,,188,2791,10,10,http://localhost:8090/properties/1/amenities,35,0,0
+1607604333460,70,Get owned property,200,,Thread Group 1-3,text,true,,9015,2613,10,10,http://localhost:8090/users/1/properties/1,66,0,0
+1607604333485,69,Add Tenant,201,,Thread Group 1-2,text,true,,185,2870,10,10,http://localhost:8090/registration,69,0,0
+1607604333507,70,Add Location,201,,Thread Group 1-10,text,true,,189,2719,10,10,http://localhost:8090/properties/1/location,69,0,0
+1607604333432,196,Tenant Login,200,OK,Thread Group 1-1,text,true,,2660,328,10,10,http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token,196,0,0
+1607604333555,85,Add Favorite Property,201,,Thread Group 1-2,text,true,,202,2691,10,10,http://localhost:8090/users/2/properties/1/favorites,84,0,0
+1607604331802,1876,Get specific user,200,,Thread Group 1-7,text,true,,40869,2600,10,10,http://localhost:8090/users/1,1475,0,0
+1607604331868,1824,Get list of properties,200,,Thread Group 1-4,text,true,,40188,2611,10,10,http://localhost:8090/users/1/properties,826,0,0
+1607604333631,81,Add Tenant,201,,Thread Group 1-1,text,true,,185,2870,10,10,http://localhost:8090/registration,81,0,0
+1607604333531,185,Update user,200,,Thread Group 1-3,text,true,,516,2855,10,10,http://localhost:8090/users/1,185,0,0
+1607604333643,97,Add Schedule,201,,Thread Group 1-2,text,true,,189,2775,10,10,http://localhost:8090/users/2/properties/1/schedules,97,0,0
+1607604333725,18,Update property,200,,Thread Group 1-3,text,true,,255,2767,10,10,http://localhost:8090/users/1/properties/1,18,0,0
+1607604333745,35,Update amenity,200,,Thread Group 1-3,text,true,,192,2694,10,10,http://localhost:8090/properties/1/amenities/1,35,0,0
+1607604333727,55,Add Favorite Property,201,,Thread Group 1-1,text,true,,202,2691,10,10,http://localhost:8090/users/2/properties/1/favorites,55,0,0
+1607604333694,114,Get owned property,200,,Thread Group 1-4,text,true,,9015,2613,10,10,http://localhost:8090/users/1/properties/1,113,0,0
+1607604333742,82,Add Review,201,,Thread Group 1-2,text,true,,187,2742,10,10,http://localhost:8090/users/2/properties/1/reviews,82,0,0
+1607604333782,49,Update location,200,,Thread Group 1-3,text,true,,200,2737,10,10,http://localhost:8090/properties/1/location/1,49,0,0
+1607604333784,54,Add Schedule,201,,Thread Group 1-1,text,true,,189,2775,10,10,http://localhost:8090/users/2/properties/1/schedules,54,0,0
+1607604333840,38,Add Review,201,,Thread Group 1-1,text,true,,187,2742,10,10,http://localhost:8090/users/2/properties/1/reviews,38,0,0
+1607604333826,63,Get specific user,200,,Thread Group 1-2,text,true,,3459,2612,10,10,http://localhost:8090/users/2,62,0,0
+1607604333810,91,Update user,200,,Thread Group 1-4,text,true,,516,2855,10,10,http://localhost:8090/users/1,90,0,0
+1607604333903,16,Update property,200,,Thread Group 1-4,text,true,,255,2767,10,10,http://localhost:8090/users/1/properties/1,16,0,0
+1607604333890,34,Get list of favorite properties,200,,Thread Group 1-2,text,true,,3146,2622,10,10,http://localhost:8090/users/2/favorites,34,0,0
+1607604333926,24,Get favorite property,404,,Thread Group 1-2,text,false,,324,2624,10,10,http://localhost:8090/users/2/favorites/1,24,0,0
+1607604333924,33,Update amenity,200,,Thread Group 1-4,text,true,,192,2694,10,10,http://localhost:8090/properties/1/amenities/1,33,0,0
+1607604332769,1188,Get list of properties,200,,Thread Group 1-5,text,true,,41030,2611,10,10,http://localhost:8090/users/1/properties,856,0,0
+1607604333880,83,Get specific user,200,,Thread Group 1-1,text,true,,3459,2612,10,10,http://localhost:8090/users/2,82,0,0
+1607604332095,1879,Get specific user,200,,Thread Group 1-8,text,true,,41296,2600,10,10,http://localhost:8090/users/1,1405,0,0
+1607604333959,43,Update location,200,,Thread Group 1-4,text,true,,200,2737,10,10,http://localhost:8090/properties/1/location/1,43,0,0
+1607604333965,43,Get list of favorite properties,200,,Thread Group 1-1,text,true,,3146,2622,10,10,http://localhost:8090/users/2/favorites,39,0,0
+1607604334012,27,Get favorite property,404,,Thread Group 1-1,text,false,,324,2624,10,10,http://localhost:8090/users/2/favorites/1,27,0,0
+1607604333832,219,Tenant Login,200,OK,Thread Group 1-3,text,true,,2660,328,10,10,http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token,219,0,0
+1607604333952,114,Get list of schedules,200,,Thread Group 1-2,text,true,,7921,2622,10,10,http://localhost:8090/users/2/schedules,114,0,0
+1607604333959,111,Get owned property,200,,Thread Group 1-5,text,true,,9255,2613,10,10,http://localhost:8090/users/1/properties/1,109,0,0
+1607604334068,23,Get user schedule,404,,Thread Group 1-2,text,false,,323,2624,10,10,http://localhost:8090/users/2/schedules/1,23,0,0
+1607604334054,39,Add Tenant,201,,Thread Group 1-3,text,true,,185,2870,10,10,http://localhost:8090/registration,39,0,0
+1607604334045,54,Get list of schedules,200,,Thread Group 1-1,text,true,,7921,2622,10,10,http://localhost:8090/users/2/schedules,54,0,0
+1607604333356,755,Get list of properties,200,,Thread Group 1-6,text,true,,41030,2611,10,10,http://localhost:8090/users/1/properties,407,0,0
+1607604333360,780,Get specific user,200,,Thread Group 1-9,text,true,,41718,2600,10,10,http://localhost:8090/users/1,359,0,0
+1607604334073,72,Update user,200,,Thread Group 1-5,text,true,,516,2855,10,10,http://localhost:8090/users/1,72,0,0
+1607604334094,58,Add Favorite Property,201,,Thread Group 1-3,text,true,,202,2691,10,10,http://localhost:8090/users/2/properties/1/favorites,57,0,0
+1607604334109,88,Get user schedule,404,,Thread Group 1-1,text,false,,324,2624,10,10,http://localhost:8090/users/2/schedules/1,82,0,0
+1607604334093,106,Update user,200,,Thread Group 1-2,text,true,,521,2872,10,10,http://localhost:8090/users/2,103,0,0
+1607604334153,53,Add Schedule,201,,Thread Group 1-3,text,true,,189,2775,10,10,http://localhost:8090/users/2/properties/1/schedules,53,0,0
+1607604334147,72,Update property,200,,Thread Group 1-5,text,true,,255,2767,10,10,http://localhost:8090/users/1/properties/1,72,0,0
+1607604334222,29,Update amenity,200,,Thread Group 1-5,text,true,,192,2694,10,10,http://localhost:8090/properties/1/amenities/1,29,0,0
+1607604334118,143,Get owned property,200,,Thread Group 1-6,text,true,,9255,2613,10,10,http://localhost:8090/users/1/properties/1,136,0,0
+1607604334208,65,Add Review,201,,Thread Group 1-3,text,true,,187,2742,10,10,http://localhost:8090/users/2/properties/1/reviews,65,0,0
+1607604334252,34,Update location,200,,Thread Group 1-5,text,true,,200,2737,10,10,http://localhost:8090/properties/1/location/1,34,0,0
+1607604334201,99,Update user,200,,Thread Group 1-1,text,true,,521,2872,10,10,http://localhost:8090/users/2,99,0,0
+1607604334275,66,Get specific user,200,,Thread Group 1-3,text,true,,3506,2612,10,10,http://localhost:8090/users/2,66,0,0
+1607604334263,83,Update user,200,,Thread Group 1-6,text,true,,516,2855,10,10,http://localhost:8090/users/1,82,0,0
+1607604333679,673,Get list of properties,200,,Thread Group 1-7,text,true,,41578,2611,10,10,http://localhost:8090/users/1/properties,309,0,0
+1607604334343,13,Get list of favorite properties,200,,Thread Group 1-3,text,true,,3193,2622,10,10,http://localhost:8090/users/2/favorites,13,0,0
+1607604334348,21,Update property,200,,Thread Group 1-6,text,true,,255,2767,10,10,http://localhost:8090/users/1/properties/1,21,0,0
+1607604334358,26,Get favorite property,404,,Thread Group 1-3,text,false,,324,2624,10,10,http://localhost:8090/users/2/favorites/1,26,0,0
+1607604334355,49,Get owned property,200,,Thread Group 1-7,text,true,,9375,2613,10,10,http://localhost:8090/users/1/properties/1,49,0,0
+1607604334002,414,Tenant Login,200,OK,Thread Group 1-4,text,true,,2660,328,10,10,http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token,414,0,0
+1607604333579,851,Get specific user,200,,Thread Group 1-10,text,true,,42139,2600,10,10,http://localhost:8090/users/1,421,0,0
+1607604334371,62,Update amenity,200,,Thread Group 1-6,text,true,,192,2694,10,10,http://localhost:8090/properties/1/amenities/1,62,0,0
+1607604334418,29,Add Tenant,201,,Thread Group 1-4,text,true,,185,2870,10,10,http://localhost:8090/registration,29,0,0
+1607604334435,20,Update location,200,,Thread Group 1-6,text,true,,200,2737,10,10,http://localhost:8090/properties/1/location/1,20,0,0
+1607604334449,32,Add Favorite Property,201,,Thread Group 1-4,text,true,,202,2691,10,10,http://localhost:8090/users/2/properties/1/favorites,32,0,0
+1607604334406,98,Update user,200,,Thread Group 1-7,text,true,,516,2855,10,10,http://localhost:8090/users/1,97,0,0
+1607604334385,143,Get list of schedules,200,,Thread Group 1-3,text,true,,8045,2622,10,10,http://localhost:8090/users/2/schedules,142,0,0
+1607604334485,50,Add Schedule,201,,Thread Group 1-4,text,true,,189,2775,10,10,http://localhost:8090/users/2/properties/1/schedules,50,0,0
+1607604334505,33,Update property,200,,Thread Group 1-7,text,true,,255,2767,10,10,http://localhost:8090/users/1/properties/1,33,0,0
+1607604334539,13,Update amenity,200,,Thread Group 1-7,text,true,,192,2694,10,10,http://localhost:8090/properties/1/amenities/1,13,0,0
+1607604334529,33,Get user schedule,404,,Thread Group 1-3,text,false,,324,2624,10,10,http://localhost:8090/users/2/schedules/1,19,0,0
+1607604334553,27,Update location,200,,Thread Group 1-7,text,true,,200,2737,10,10,http://localhost:8090/properties/1/location/1,27,0,0
+1607604334540,52,Add Review,201,,Thread Group 1-4,text,true,,187,2742,10,10,http://localhost:8090/users/2/properties/1/reviews,52,0,0
+1607604334596,59,Get specific user,200,,Thread Group 1-4,text,true,,3553,2612,10,10,http://localhost:8090/users/2,59,0,0
+1607604334564,108,Update user,200,,Thread Group 1-3,text,true,,521,2872,10,10,http://localhost:8090/users/2,108,0,0
+1607604334657,55,Get list of favorite properties,200,,Thread Group 1-4,text,true,,3240,2622,10,10,http://localhost:8090/users/2/favorites,55,0,0
+1607604333976,741,Get list of properties,200,,Thread Group 1-8,text,true,,41698,2611,10,10,http://localhost:8090/users/1/properties,279,0,0
+1607604334714,26,Get favorite property,404,,Thread Group 1-4,text,false,,324,2624,10,10,http://localhost:8090/users/2/favorites/1,26,0,0
+1607604334718,63,Get owned property,200,,Thread Group 1-8,text,true,,9495,2613,10,10,http://localhost:8090/users/1/properties/1,63,0,0
+1607604334742,47,Get list of schedules,200,,Thread Group 1-4,text,true,,8169,2622,10,10,http://localhost:8090/users/2/schedules,41,0,0
+1607604334791,23,Get user schedule,404,,Thread Group 1-4,text,false,,324,2624,10,10,http://localhost:8090/users/2/schedules/1,19,0,0
+1607604334783,92,Update user,200,,Thread Group 1-8,text,true,,516,2855,10,10,http://localhost:8090/users/1,91,0,0
+1607604334878,26,Update property,200,,Thread Group 1-8,text,true,,255,2767,10,10,http://localhost:8090/users/1/properties/1,26,0,0
+1607604334142,772,Get list of properties,200,,Thread Group 1-9,text,true,,41818,2611,10,10,http://localhost:8090/users/1/properties,381,0,0
+1607604334816,101,Update user,200,,Thread Group 1-4,text,true,,521,2872,10,10,http://localhost:8090/users/2,101,0,0
+1607604334906,17,Update amenity,200,,Thread Group 1-8,text,true,,192,2694,10,10,http://localhost:8090/properties/1/amenities/1,17,0,0
+1607604334924,31,Update location,200,,Thread Group 1-8,text,true,,200,2737,10,10,http://localhost:8090/properties/1/location/1,31,0,0
+1607604334916,57,Get owned property,200,,Thread Group 1-9,text,true,,9495,2613,10,10,http://localhost:8090/users/1/properties/1,51,0,0
+1607604334976,52,Update user,200,,Thread Group 1-9,text,true,,516,2855,10,10,http://localhost:8090/users/1,52,0,0
+1607604335030,25,Update property,200,,Thread Group 1-9,text,true,,255,2767,10,10,http://localhost:8090/users/1/properties/1,25,0,0
+1607604334199,864,Host Login,200,OK,Thread Group 1-2,text,true,,2654,324,10,10,http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token,863,0,0
+1607604335056,18,Update amenity,200,,Thread Group 1-9,text,true,,192,2694,10,10,http://localhost:8090/properties/1/amenities/1,18,0,0
+1607604335064,21,Update schedule,200,,Thread Group 1-2,text,true,,259,2646,10,10,http://localhost:8090/users/1/properties/1/schedules/1,21,0,0
+1607604335075,18,Update location,200,,Thread Group 1-9,text,true,,200,2737,10,10,http://localhost:8090/properties/1/location/1,18,0,0
+1607604334432,677,Get list of properties,200,,Thread Group 1-10,text,true,,41938,2611,10,10,http://localhost:8090/users/1/properties,417,0,0
+1607604335110,43,Get owned property,200,,Thread Group 1-10,text,true,,9495,2613,10,10,http://localhost:8090/users/1/properties/1,43,0,0
+1607604335155,16,Update user,200,,Thread Group 1-10,text,true,,516,2855,10,10,http://localhost:8090/users/1,15,0,0
+1607604335176,12,Update property,200,,Thread Group 1-10,text,true,,255,2767,10,10,http://localhost:8090/users/1/properties/1,11,0,0
+1607604335197,13,Update amenity,200,,Thread Group 1-10,text,true,,192,2694,10,10,http://localhost:8090/properties/1/amenities/1,13,0,0
+1607604334455,764,Tenant Login,200,OK,Thread Group 1-6,text,true,,2660,328,10,10,http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token,764,0,0
+1607604335214,14,Update location,200,,Thread Group 1-10,text,true,,200,2737,10,10,http://localhost:8090/properties/1/location/1,14,0,0
+1607604335220,22,Add Tenant,201,,Thread Group 1-6,text,true,,185,2870,10,10,http://localhost:8090/registration,22,0,0
+1607604334287,962,Tenant Login,200,OK,Thread Group 1-5,text,true,,2660,328,10,10,http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token,962,0,0
+1607604335243,26,Add Favorite Property,201,,Thread Group 1-6,text,true,,202,2691,10,10,http://localhost:8090/users/2/properties/1/favorites,26,0,0
+1607604335251,32,Add Tenant,201,,Thread Group 1-5,text,true,,185,2870,10,10,http://localhost:8090/registration,32,0,0
+1607604335270,35,Add Schedule,201,,Thread Group 1-6,text,true,,189,2775,10,10,http://localhost:8090/users/2/properties/1/schedules,35,0,0
+1607604335289,36,Add Favorite Property,201,,Thread Group 1-5,text,true,,202,2691,10,10,http://localhost:8090/users/2/properties/1/favorites,36,0,0
+1607604335307,36,Add Review,201,,Thread Group 1-6,text,true,,187,2742,10,10,http://localhost:8090/users/2/properties/1/reviews,36,0,0
+1607604335326,23,Add Schedule,201,,Thread Group 1-5,text,true,,189,2775,10,10,http://localhost:8090/users/2/properties/1/schedules,23,0,0
+1607604335344,33,Get specific user,200,,Thread Group 1-6,text,true,,3647,2612,10,10,http://localhost:8090/users/2,33,0,0
+1607604335350,39,Add Review,201,,Thread Group 1-5,text,true,,187,2742,10,10,http://localhost:8090/users/2/properties/1/reviews,39,0,0
+1607604335378,21,Get list of favorite properties,200,,Thread Group 1-6,text,true,,3334,2622,10,10,http://localhost:8090/users/2/favorites,21,0,0
+1607604335401,35,Get favorite property,404,,Thread Group 1-6,text,false,,324,2624,10,10,http://localhost:8090/users/2/favorites/1,35,0,0
+1607604335390,53,Get specific user,200,,Thread Group 1-5,text,true,,3647,2612,10,10,http://localhost:8090/users/2,53,0,0
+1607604335438,26,Get list of schedules,200,,Thread Group 1-6,text,true,,8417,2622,10,10,http://localhost:8090/users/2/schedules,26,0,0
+1607604335444,22,Get list of favorite properties,200,,Thread Group 1-5,text,true,,3334,2622,10,10,http://localhost:8090/users/2/favorites,22,0,0
+1607604335468,12,Get favorite property,404,,Thread Group 1-5,text,false,,324,2624,10,10,http://localhost:8090/users/2/favorites/1,12,0,0
+1607604335466,42,Get user schedule,404,,Thread Group 1-6,text,false,,324,2624,10,10,http://localhost:8090/users/2/schedules/1,41,0,0
+1607604335482,62,Get list of schedules,200,,Thread Group 1-5,text,true,,8417,2622,10,10,http://localhost:8090/users/2/schedules,61,0,0
+1607604334301,1262,Host Login,200,OK,Thread Group 1-1,text,true,,2654,324,10,10,http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token,1262,0,0
+1607604335510,75,Update user,200,,Thread Group 1-6,text,true,,521,2872,10,10,http://localhost:8090/users/2,75,0,0
+1607604335565,25,Update schedule,200,,Thread Group 1-1,text,true,,259,2646,10,10,http://localhost:8090/users/1/properties/1/schedules/1,25,0,0
+1607604335545,53,Get user schedule,404,,Thread Group 1-5,text,false,,324,2624,10,10,http://localhost:8090/users/2/schedules/1,53,0,0
+1607604335605,34,Update user,200,,Thread Group 1-5,text,true,,521,2872,10,10,http://localhost:8090/users/2,34,0,0
+1607604334672,1015,Host Login,200,OK,Thread Group 1-3,text,true,,2654,324,10,10,http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token,1015,0,0
+1607604335688,10,Update schedule,200,,Thread Group 1-3,text,true,,259,2646,10,10,http://localhost:8090/users/1/properties/1/schedules/1,10,0,0
+1607604334580,1121,Tenant Login,200,OK,Thread Group 1-7,text,true,,2660,328,10,10,http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token,1121,0,0
+1607604335703,19,Add Tenant,201,,Thread Group 1-7,text,true,,185,2870,10,10,http://localhost:8090/registration,19,0,0
+1607604335723,23,Add Favorite Property,201,,Thread Group 1-7,text,true,,202,2691,10,10,http://localhost:8090/users/2/properties/1/favorites,22,0,0
+1607604335747,25,Add Schedule,201,,Thread Group 1-7,text,true,,189,2775,10,10,http://localhost:8090/users/2/properties/1/schedules,25,0,0
+1607604335773,16,Add Review,201,,Thread Group 1-7,text,true,,187,2742,10,10,http://localhost:8090/users/2/properties/1/reviews,16,0,0
+1607604335791,20,Get specific user,200,,Thread Group 1-7,text,true,,3694,2612,10,10,http://localhost:8090/users/2,20,0,0
+1607604335812,10,Get list of favorite properties,200,,Thread Group 1-7,text,true,,3381,2622,10,10,http://localhost:8090/users/2/favorites,10,0,0
+1607604335823,11,Get favorite property,404,,Thread Group 1-7,text,false,,324,2624,10,10,http://localhost:8090/users/2/favorites/1,10,0,0
+1607604335086,750,Admin Login,200,OK,Thread Group 1-2,text,true,,2657,326,10,10,http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token,750,0,0
+1607604335835,32,Get list of schedules,200,,Thread Group 1-7,text,true,,8547,2622,10,10,http://localhost:8090/users/2/schedules,31,0,0
+1607604335230,649,Tenant Login,200,OK,Thread Group 1-10,text,true,,2660,328,10,10,http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token,649,0,0
+1607604335880,25,Add Tenant,201,,Thread Group 1-10,text,true,,185,2870,10,10,http://localhost:8090/registration,25,0,0
+1607604335889,22,Get user schedule,404,,Thread Group 1-7,text,false,,324,2624,10,10,http://localhost:8090/users/2/schedules/1,22,0,0
+1607604335907,22,Add Favorite Property,201,,Thread Group 1-10,text,true,,202,2691,10,10,http://localhost:8090/users/2/properties/1/favorites,22,0,0
+1607604334956,1008,Tenant Login,200,OK,Thread Group 1-8,text,true,,2660,328,10,10,http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token,1008,0,0
+1607604335932,36,Add Schedule,201,,Thread Group 1-10,text,true,,189,2775,10,10,http://localhost:8090/users/2/properties/1/schedules,36,0,0
+1607604335912,58,Update user,200,,Thread Group 1-7,text,true,,521,2872,10,10,http://localhost:8090/users/2,58,0,0
+1607604335966,34,Add Tenant,201,,Thread Group 1-8,text,true,,185,2870,10,10,http://localhost:8090/registration,34,0,0
+1607604335969,47,Add Review,201,,Thread Group 1-10,text,true,,187,2742,10,10,http://localhost:8090/users/2/properties/1/reviews,47,0,0
+1607604336003,23,Add Favorite Property,201,,Thread Group 1-8,text,true,,202,2691,10,10,http://localhost:8090/users/2/properties/1/favorites,23,0,0
+1607604334918,1123,Host Login,200,OK,Thread Group 1-4,text,true,,2654,324,10,10,http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token,1123,0,0
+1607604336027,32,Add Schedule,201,,Thread Group 1-8,text,true,,189,2775,10,10,http://localhost:8090/users/2/properties/1/schedules,32,0,0
+1607604336042,25,Update schedule,200,,Thread Group 1-4,text,true,,259,2646,10,10,http://localhost:8090/users/1/properties/1/schedules/1,25,0,0
+1607604336017,69,Get specific user,200,,Thread Group 1-10,text,true,,3788,2612,10,10,http://localhost:8090/users/2,69,0,0
+1607604336061,47,Add Review,201,,Thread Group 1-8,text,true,,187,2742,10,10,http://localhost:8090/users/2/properties/1/reviews,47,0,0
+1607604336087,33,Get list of favorite properties,200,,Thread Group 1-10,text,true,,3475,2622,10,10,http://localhost:8090/users/2/favorites,33,0,0
+1607604336122,16,Get favorite property,404,,Thread Group 1-10,text,false,,324,2624,10,10,http://localhost:8090/users/2/favorites/1,16,0,0
+1607604336109,59,Get specific user,200,,Thread Group 1-8,text,true,,3788,2612,10,10,http://localhost:8090/users/2,59,0,0
+1607604336141,33,Get list of schedules,200,,Thread Group 1-10,text,true,,8796,2622,10,10,http://localhost:8090/users/2/schedules,33,0,0
+1607604336170,41,Get list of favorite properties,200,,Thread Group 1-8,text,true,,3475,2622,10,10,http://localhost:8090/users/2/favorites,41,0,0
+1607604336194,24,Get user schedule,404,,Thread Group 1-10,text,false,,323,2624,10,10,http://localhost:8090/users/2/schedules/1,24,0,0
+1607604336212,17,Get favorite property,404,,Thread Group 1-8,text,false,,324,2624,10,10,http://localhost:8090/users/2/favorites/1,17,0,0
+1607604335093,1142,Tenant Login,200,OK,Thread Group 1-9,text,true,,2660,328,10,10,http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token,1142,0,0
+1607604336219,43,Update user,200,,Thread Group 1-10,text,true,,521,2872,10,10,http://localhost:8090/users/2,43,0,0
+1607604336239,31,Add Tenant,201,,Thread Group 1-9,text,true,,185,2870,10,10,http://localhost:8090/registration,31,0,0
+1607604336234,59,Get list of schedules,200,,Thread Group 1-8,text,true,,8796,2622,10,10,http://localhost:8090/users/2/schedules,59,0,0
+1607604336271,31,Add Favorite Property,201,,Thread Group 1-9,text,true,,202,2691,10,10,http://localhost:8090/users/2/properties/1/favorites,31,0,0
+1607604336295,15,Get user schedule,404,,Thread Group 1-8,text,false,,324,2624,10,10,http://localhost:8090/users/2/schedules/1,15,0,0
+1607604336303,23,Add Schedule,201,,Thread Group 1-9,text,true,,189,2775,10,10,http://localhost:8090/users/2/properties/1/schedules,23,0,0
+1607604336327,25,Add Review,201,,Thread Group 1-9,text,true,,187,2742,10,10,http://localhost:8090/users/2/properties/1/reviews,24,0,0
+1607604336312,69,Update user,200,,Thread Group 1-8,text,true,,521,2872,10,10,http://localhost:8090/users/2,69,0,0
+1607604335698,708,Admin Login,200,OK,Thread Group 1-3,text,true,,2657,326,10,10,http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token,708,0,0
+1607604336353,57,Get specific user,200,,Thread Group 1-9,text,true,,3835,2612,10,10,http://localhost:8090/users/2,57,0,0
+1607604335587,846,Host Login,200,OK,Thread Group 1-6,text,true,,2654,324,10,10,http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token,846,0,0
+1607604336411,26,Get list of favorite properties,200,,Thread Group 1-9,text,true,,3522,2622,10,10,http://localhost:8090/users/2/favorites,26,0,0
+1607604336435,12,Update schedule,200,,Thread Group 1-6,text,true,,259,2646,10,10,http://localhost:8090/users/1/properties/1/schedules/1,12,0,0
+1607604336438,13,Get favorite property,404,,Thread Group 1-9,text,false,,324,2624,10,10,http://localhost:8090/users/2/favorites/1,13,0,0
+1607604336452,44,Get list of schedules,200,,Thread Group 1-9,text,true,,8920,2622,10,10,http://localhost:8090/users/2/schedules,44,0,0
+1607604336498,15,Get user schedule,404,,Thread Group 1-9,text,false,,324,2624,10,10,http://localhost:8090/users/2/schedules/1,15,0,0
+1607604335590,954,Admin Login,200,OK,Thread Group 1-1,text,true,,2657,326,10,10,http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token,954,0,0
+1607604336514,58,Update user,200,,Thread Group 1-9,text,true,,521,2872,10,10,http://localhost:8090/users/2,58,0,0
+1607604335640,960,Host Login,200,OK,Thread Group 1-5,text,true,,2654,324,10,10,http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token,960,0,0
+1607604335971,658,Host Login,200,OK,Thread Group 1-7,text,true,,2654,324,10,10,http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token,658,0,0
+1607604336602,42,Update schedule,200,,Thread Group 1-5,text,true,,259,2646,10,10,http://localhost:8090/users/1/properties/1/schedules/1,42,0,0
+1607604336631,27,Update schedule,200,,Thread Group 1-7,text,true,,259,2646,10,10,http://localhost:8090/users/1/properties/1/schedules/1,27,0,0
+1607604336068,634,Admin Login,200,OK,Thread Group 1-4,text,true,,2657,326,10,10,http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token,634,0,0
+1607604336382,613,Host Login,200,OK,Thread Group 1-8,text,true,,2654,324,10,10,http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token,613,0,0
+1607604336997,28,Update schedule,200,,Thread Group 1-8,text,true,,259,2646,10,10,http://localhost:8090/users/1/properties/1/schedules/1,28,0,0
+1607604336447,633,Admin Login,200,OK,Thread Group 1-6,text,true,,2657,326,10,10,http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token,632,0,0
+1607604336262,869,Host Login,200,OK,Thread Group 1-10,text,true,,2654,324,10,10,http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token,868,0,0
+1607604337132,33,Update schedule,200,,Thread Group 1-10,text,true,,259,2646,10,10,http://localhost:8090/users/1/properties/1/schedules/1,33,0,0
+1607604336572,606,Host Login,200,OK,Thread Group 1-9,text,true,,2654,324,10,10,http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token,606,0,0
+1607604337180,30,Update schedule,200,,Thread Group 1-9,text,true,,259,2646,10,10,http://localhost:8090/users/1/properties/1/schedules/1,30,0,0
+1607604336659,805,Admin Login,200,OK,Thread Group 1-7,text,true,,2657,326,10,10,http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token,805,0,0
+1607604337026,452,Admin Login,200,OK,Thread Group 1-8,text,true,,2657,326,10,10,http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token,452,0,0
+1607604337211,430,Admin Login,200,OK,Thread Group 1-9,text,true,,2657,326,10,10,http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token,430,0,0
+1607604336644,1156,Admin Login,200,OK,Thread Group 1-5,text,true,,2657,326,10,10,http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token,1156,0,0
+1607604337165,684,Admin Login,200,OK,Thread Group 1-10,text,true,,2657,326,10,10,http://localhost:8080/auth/realms/forentkeycloak/protocol/openid-connect/token,684,0,0
+1607604335838,2320,Get list of users,200,,Thread Group 1-2,text,true,,92119,2604,10,10,http://localhost:8090/users,291,0,0
+1607604338160,40,Get specific user,200,,Thread Group 1-2,text,true,,3835,2642,10,10,http://localhost:8090/users/2,40,0,0
+1607604338201,35,Get list of schedules,200,,Thread Group 1-2,text,true,,9846,2644,10,10,http://localhost:8090/schedules,34,0,0
+1607604338237,6,Get specific schedule,200,,Thread Group 1-2,text,true,,295,2646,10,10,http://localhost:8090/schedules/1,6,0,0
+1607604338244,20,Get property amenity,200,,Thread Group 1-2,text,true,,259,2623,10,10,http://localhost:8090/properties/1/amenities/1,20,0,0
+1607604338267,49,Get list of reviews,200,,Thread Group 1-2,text,true,,9534,2606,10,10,http://localhost:8090/reviews,48,0,0
+1607604338323,28,Get specific review,200,,Thread Group 1-2,text,true,,291,2608,10,10,http://localhost:8090/reviews/1,28,0,0
+1607604338357,463,Get list of properties,200,,Thread Group 1-2,text,true,,42594,198,10,10,http://localhost:8090/properties,156,0,0
+1607604338821,35,Get specific property,200,,Thread Group 1-2,text,true,,10151,236,10,10,http://localhost:8090/properties/1,35,0,0
+1607604338856,6,Get specific location,200,,Thread Group 1-2,text,true,,274,234,10,10,http://localhost:8090/location/1,4,0,0
+1607604338863,8,Get property's location,200,,Thread Group 1-2,text,true,,274,245,10,10,http://localhost:8090/properties/1/location,8,0,0
+1607604338872,12,Get list of locations,200,,Thread Group 1-2,text,true,,276,196,10,10,http://localhost:8090/location,11,0,0
+1607604338884,19,Get property reviews,200,,Thread Group 1-2,text,true,,9534,208,10,10,http://localhost:8090/properties/1/reviews,19,0,0
+1607604338904,11,Get reviews of property,200,,Thread Group 1-2,text,true,,291,210,10,10,http://localhost:8090/properties/1/reviews/1,11,0,0
+1607604336408,2507,Get list of users,200,,Thread Group 1-3,text,true,,93391,2604,10,10,http://localhost:8090/users,277,0,0
+1607604338916,26,Get property list of schedules,200,,Thread Group 1-2,text,true,,9846,210,10,10,http://localhost:8090/properties/1/schedules,24,0,0
+1607604338944,6,Get property  schedule,200,,Thread Group 1-2,text,true,,295,212,10,10,http://localhost:8090/properties/1/schedules/1,5,0,0
+1607604338917,44,Get specific user,200,,Thread Group 1-3,text,true,,3835,2642,9,9,http://localhost:8090/users/2,44,0,0
+1607604338963,13,Get list of schedules,200,,Thread Group 1-3,text,true,,9846,2644,9,9,http://localhost:8090/schedules,12,0,0
+1607604338978,6,Get specific schedule,200,,Thread Group 1-3,text,true,,295,2646,9,9,http://localhost:8090/schedules/1,6,0,0
+1607604338987,7,Get property amenity,200,,Thread Group 1-3,text,true,,259,2623,9,9,http://localhost:8090/properties/1/amenities/1,7,0,0
+1607604338996,24,Get list of reviews,200,,Thread Group 1-3,text,true,,9534,2606,9,9,http://localhost:8090/reviews,23,0,0
+1607604339021,15,Get specific review,200,,Thread Group 1-3,text,true,,291,2608,9,9,http://localhost:8090/reviews/1,15,0,0
+1607604336546,2510,Get list of users,200,,Thread Group 1-1,text,true,,93391,2604,9,9,http://localhost:8090/users,271,0,0
+1607604339057,35,Get specific user,200,,Thread Group 1-1,text,true,,3835,2642,9,9,http://localhost:8090/users/2,35,0,0
+1607604339093,15,Get list of schedules,200,,Thread Group 1-1,text,true,,9846,2644,9,9,http://localhost:8090/schedules,14,0,0
+1607604339110,13,Get specific schedule,200,,Thread Group 1-1,text,true,,295,2646,9,9,http://localhost:8090/schedules/1,13,0,0
+1607604339125,8,Get property amenity,200,,Thread Group 1-1,text,true,,259,2623,9,9,http://localhost:8090/properties/1/amenities/1,8,0,0
+1607604339135,14,Get list of reviews,200,,Thread Group 1-1,text,true,,9534,2606,9,9,http://localhost:8090/reviews,14,0,0
+1607604339151,6,Get specific review,200,,Thread Group 1-1,text,true,,291,2608,9,9,http://localhost:8090/reviews/1,6,0,0
+1607604336704,2536,Get list of users,200,,Thread Group 1-4,text,true,,93391,2604,9,9,http://localhost:8090/users,195,0,0
+1607604339241,12,Get specific user,200,,Thread Group 1-4,text,true,,3835,2642,9,9,http://localhost:8090/users/2,12,0,0
+1607604339255,16,Get list of schedules,200,,Thread Group 1-4,text,true,,9846,2644,9,9,http://localhost:8090/schedules,16,0,0
+1607604339037,248,Get list of properties,200,,Thread Group 1-3,text,true,,42594,198,9,9,http://localhost:8090/properties,77,0,0
+1607604339281,8,Get specific schedule,200,,Thread Group 1-4,text,true,,295,2646,9,9,http://localhost:8090/schedules/1,8,0,0
+1607604339291,5,Get property amenity,200,,Thread Group 1-4,text,true,,259,2623,9,9,http://localhost:8090/properties/1/amenities/1,5,0,0
+1607604339298,11,Get list of reviews,200,,Thread Group 1-4,text,true,,9534,2606,9,9,http://localhost:8090/reviews,11,0,0
+1607604339312,9,Get specific review,200,,Thread Group 1-4,text,true,,291,2608,9,9,http://localhost:8090/reviews/1,9,0,0
+1607604339285,37,Get specific property,200,,Thread Group 1-3,text,true,,10151,236,9,9,http://localhost:8090/properties/1,37,0,0
+1607604339323,7,Get specific location,200,,Thread Group 1-3,text,true,,274,234,9,9,http://localhost:8090/location/1,7,0,0
+1607604339331,8,Get property's location,200,,Thread Group 1-3,text,true,,274,245,9,9,http://localhost:8090/properties/1/location,6,0,0
+1607604339340,19,Get list of locations,200,,Thread Group 1-3,text,true,,276,196,9,9,http://localhost:8090/location,19,0,0
+1607604339360,9,Get property reviews,200,,Thread Group 1-3,text,true,,9534,208,9,9,http://localhost:8090/properties/1/reviews,9,0,0
+1607604339370,23,Get reviews of property,200,,Thread Group 1-3,text,true,,291,210,9,9,http://localhost:8090/properties/1/reviews/1,22,0,0
+1607604339393,8,Get property list of schedules,200,,Thread Group 1-3,text,true,,9846,210,9,9,http://localhost:8090/properties/1/schedules,8,0,0
+1607604339402,4,Get property  schedule,200,,Thread Group 1-3,text,true,,295,212,9,9,http://localhost:8090/properties/1/schedules/1,4,0,0
+1607604339158,255,Get list of properties,200,,Thread Group 1-1,text,true,,42594,198,8,8,http://localhost:8090/properties,43,0,0
+1607604339414,22,Get specific property,200,,Thread Group 1-1,text,true,,10151,236,8,8,http://localhost:8090/properties/1,21,0,0
+1607604339437,8,Get specific location,200,,Thread Group 1-1,text,true,,274,234,8,8,http://localhost:8090/location/1,8,0,0
+1607604339446,12,Get property's location,200,,Thread Group 1-1,text,true,,274,245,8,8,http://localhost:8090/properties/1/location,12,0,0
+1607604339459,10,Get list of locations,200,,Thread Group 1-1,text,true,,276,196,8,8,http://localhost:8090/location,9,0,0
+1607604337081,2404,Get list of users,200,,Thread Group 1-6,text,true,,93391,2604,8,8,http://localhost:8090/users,182,0,0
+1607604339469,22,Get property reviews,200,,Thread Group 1-1,text,true,,9534,208,8,8,http://localhost:8090/properties/1/reviews,22,0,0
+1607604339492,25,Get reviews of property,200,,Thread Group 1-1,text,true,,291,210,8,8,http://localhost:8090/properties/1/reviews/1,14,0,0
+1607604339518,13,Get property list of schedules,200,,Thread Group 1-1,text,true,,9846,210,8,8,http://localhost:8090/properties/1/schedules,12,0,0
+1607604339532,4,Get property  schedule,200,,Thread Group 1-1,text,true,,295,212,8,8,http://localhost:8090/properties/1/schedules/1,4,0,0
+1607604339487,58,Get specific user,200,,Thread Group 1-6,text,true,,3835,2642,7,7,http://localhost:8090/users/2,57,0,0
+1607604339322,261,Get list of properties,200,,Thread Group 1-4,text,true,,42594,198,7,7,http://localhost:8090/properties,56,0,0
+1607604339547,45,Get list of schedules,200,,Thread Group 1-6,text,true,,9846,2644,7,7,http://localhost:8090/schedules,44,0,0
+1607604339594,8,Get specific schedule,200,,Thread Group 1-6,text,true,,295,2646,7,7,http://localhost:8090/schedules/1,8,0,0
+1607604339583,33,Get specific property,200,,Thread Group 1-4,text,true,,10151,236,7,7,http://localhost:8090/properties/1,33,0,0
+1607604339603,17,Get property amenity,200,,Thread Group 1-6,text,true,,259,2623,7,7,http://localhost:8090/properties/1/amenities/1,17,0,0
+1607604339616,8,Get specific location,200,,Thread Group 1-4,text,true,,274,234,7,7,http://localhost:8090/location/1,8,0,0
+1607604339625,11,Get property's location,200,,Thread Group 1-4,text,true,,274,245,7,7,http://localhost:8090/properties/1/location,11,0,0
+1607604339636,11,Get list of locations,200,,Thread Group 1-4,text,true,,276,196,7,7,http://localhost:8090/location,10,0,0
+1607604339647,5,Get property reviews,200,,Thread Group 1-4,text,true,,9534,208,7,7,http://localhost:8090/properties/1/reviews,5,0,0
+1607604339622,39,Get list of reviews,200,,Thread Group 1-6,text,true,,9534,2606,7,7,http://localhost:8090/reviews,39,0,0
+1607604339653,14,Get reviews of property,200,,Thread Group 1-4,text,true,,291,210,7,7,http://localhost:8090/properties/1/reviews/1,13,0,0
+1607604339663,16,Get specific review,200,,Thread Group 1-6,text,true,,291,2608,7,7,http://localhost:8090/reviews/1,16,0,0
+1607604339668,13,Get property list of schedules,200,,Thread Group 1-4,text,true,,9846,210,7,7,http://localhost:8090/properties/1/schedules,12,0,0
+1607604339682,7,Get property  schedule,200,,Thread Group 1-4,text,true,,295,212,7,7,http://localhost:8090/properties/1/schedules/1,7,0,0
+1607604337480,2281,Get list of users,200,,Thread Group 1-8,text,true,,93391,2604,6,6,http://localhost:8090/users,391,0,0
+1607604339763,24,Get specific user,200,,Thread Group 1-8,text,true,,3835,2642,6,6,http://localhost:8090/users/2,24,0,0
+1607604339789,11,Get list of schedules,200,,Thread Group 1-8,text,true,,9846,2644,6,6,http://localhost:8090/schedules,10,0,0
+1607604339801,14,Get specific schedule,200,,Thread Group 1-8,text,true,,295,2646,6,6,http://localhost:8090/schedules/1,14,0,0
+1607604339817,8,Get property amenity,200,,Thread Group 1-8,text,true,,259,2623,6,6,http://localhost:8090/properties/1/amenities/1,8,0,0
+1607604337466,2363,Get list of users,200,,Thread Group 1-7,text,true,,93391,2604,6,6,http://localhost:8090/users,445,0,0
+1607604339680,165,Get list of properties,200,,Thread Group 1-6,text,true,,42594,198,6,6,http://localhost:8090/properties,55,0,0
+1607604339830,23,Get specific user,200,,Thread Group 1-7,text,true,,3835,2642,6,6,http://localhost:8090/users/2,23,0,0
+1607604339827,36,Get list of reviews,200,,Thread Group 1-8,text,true,,9534,2606,6,6,http://localhost:8090/reviews,28,0,0
+1607604339846,19,Get specific property,200,,Thread Group 1-6,text,true,,10151,236,6,6,http://localhost:8090/properties/1,19,0,0
+1607604339854,23,Get list of schedules,200,,Thread Group 1-7,text,true,,9846,2644,6,6,http://localhost:8090/schedules,23,0,0
+1607604339865,21,Get specific location,200,,Thread Group 1-6,text,true,,274,234,6,6,http://localhost:8090/location/1,16,0,0
+1607604339879,7,Get specific schedule,200,,Thread Group 1-7,text,true,,295,2646,6,6,http://localhost:8090/schedules/1,7,0,0
+1607604339865,26,Get specific review,200,,Thread Group 1-8,text,true,,291,2608,6,6,http://localhost:8090/reviews/1,22,0,0
+1607604339888,13,Get property amenity,200,,Thread Group 1-7,text,true,,259,2623,6,6,http://localhost:8090/properties/1/amenities/1,13,0,0
+1607604339887,19,Get property's location,200,,Thread Group 1-6,text,true,,274,245,6,6,http://localhost:8090/properties/1/location,19,0,0
+1607604337648,2267,Get list of users,200,,Thread Group 1-9,text,true,,93391,2604,6,6,http://localhost:8090/users,333,0,0
+1607604339902,25,Get list of reviews,200,,Thread Group 1-7,text,true,,9534,2606,6,6,http://localhost:8090/reviews,24,0,0
+1607604339929,9,Get specific review,200,,Thread Group 1-7,text,true,,291,2608,6,6,http://localhost:8090/reviews/1,9,0,0
+1607604339907,31,Get list of locations,200,,Thread Group 1-6,text,true,,276,196,6,6,http://localhost:8090/location,22,0,0
+1607604339916,37,Get specific user,200,,Thread Group 1-9,text,true,,3835,2642,6,6,http://localhost:8090/users/2,37,0,0
+1607604339938,15,Get property reviews,200,,Thread Group 1-6,text,true,,9534,208,6,6,http://localhost:8090/properties/1/reviews,12,0,0
+1607604337851,2109,Get list of users,200,,Thread Group 1-10,text,true,,93391,2604,6,6,http://localhost:8090/users,349,0,0
+1607604339954,15,Get reviews of property,200,,Thread Group 1-6,text,true,,291,210,6,6,http://localhost:8090/properties/1/reviews/1,15,0,0
+1607604339954,20,Get list of schedules,200,,Thread Group 1-9,text,true,,9846,2644,6,6,http://localhost:8090/schedules,17,0,0
+1607604339963,17,Get specific user,200,,Thread Group 1-10,text,true,,3835,2642,6,6,http://localhost:8090/users/2,17,0,0
+1607604339976,5,Get specific schedule,200,,Thread Group 1-9,text,true,,295,2646,6,6,http://localhost:8090/schedules/1,5,0,0
+1607604339969,13,Get property list of schedules,200,,Thread Group 1-6,text,true,,9846,210,6,6,http://localhost:8090/properties/1/schedules,13,0,0
+1607604339983,8,Get property amenity,200,,Thread Group 1-9,text,true,,259,2623,6,6,http://localhost:8090/properties/1/amenities/1,6,0,0
+1607604339990,13,Get list of schedules,200,,Thread Group 1-10,text,true,,9846,2644,6,6,http://localhost:8090/schedules,13,0,0
+1607604339983,25,Get property  schedule,200,,Thread Group 1-6,text,true,,295,212,6,6,http://localhost:8090/properties/1/schedules/1,22,0,0
+1607604339994,19,Get list of reviews,200,,Thread Group 1-9,text,true,,9534,2606,5,5,http://localhost:8090/reviews,19,0,0
+1607604340009,9,Get specific schedule,200,,Thread Group 1-10,text,true,,295,2646,5,5,http://localhost:8090/schedules/1,9,0,0
+1607604340015,8,Get specific review,200,,Thread Group 1-9,text,true,,291,2608,5,5,http://localhost:8090/reviews/1,7,0,0
+1607604340023,11,Get property amenity,200,,Thread Group 1-10,text,true,,259,2623,5,5,http://localhost:8090/properties/1/amenities/1,11,0,0
+1607604340036,8,Get list of reviews,200,,Thread Group 1-10,text,true,,9534,2606,5,5,http://localhost:8090/reviews,6,0,0
+1607604340046,13,Get specific review,200,,Thread Group 1-10,text,true,,291,2608,5,5,http://localhost:8090/reviews/1,13,0,0
+1607604337802,2295,Get list of users,200,,Thread Group 1-5,text,true,,93391,2604,5,5,http://localhost:8090/users,333,0,0
+1607604340099,10,Get specific user,200,,Thread Group 1-5,text,true,,3835,2642,5,5,http://localhost:8090/users/2,10,0,0
+1607604340113,28,Get list of schedules,200,,Thread Group 1-5,text,true,,9846,2644,5,5,http://localhost:8090/schedules,28,0,0
+1607604340144,7,Get specific schedule,200,,Thread Group 1-5,text,true,,295,2646,5,5,http://localhost:8090/schedules/1,6,0,0
+1607604340153,4,Get property amenity,200,,Thread Group 1-5,text,true,,259,2623,5,5,http://localhost:8090/properties/1/amenities/1,4,0,0
+1607604340158,10,Get list of reviews,200,,Thread Group 1-5,text,true,,9534,2606,5,5,http://localhost:8090/reviews,9,0,0
+1607604340169,21,Get specific review,200,,Thread Group 1-5,text,true,,291,2608,5,5,http://localhost:8090/reviews/1,13,0,0
+1607604339938,272,Get list of properties,200,,Thread Group 1-7,text,true,,42594,198,5,5,http://localhost:8090/properties,85,0,0
+1607604340211,28,Get specific property,200,,Thread Group 1-7,text,true,,10151,236,5,5,http://localhost:8090/properties/1,28,0,0
+1607604340240,7,Get specific location,200,,Thread Group 1-7,text,true,,274,234,5,5,http://localhost:8090/location/1,7,0,0
+1607604340060,190,Get list of properties,200,,Thread Group 1-10,text,true,,42594,198,5,5,http://localhost:8090/properties,64,0,0
+1607604339892,358,Get list of properties,200,,Thread Group 1-8,text,true,,42594,198,5,5,http://localhost:8090/properties,96,0,0
+1607604340250,7,Get property's location,200,,Thread Group 1-7,text,true,,274,245,5,5,http://localhost:8090/properties/1/location,7,0,0
+1607604340258,6,Get list of locations,200,,Thread Group 1-7,text,true,,276,196,5,5,http://localhost:8090/location,6,0,0
+1607604340251,16,Get specific property,200,,Thread Group 1-10,text,true,,10151,236,5,5,http://localhost:8090/properties/1,16,0,0
+1607604340268,9,Get specific location,200,,Thread Group 1-10,text,true,,274,234,5,5,http://localhost:8090/location/1,8,0,0
+1607604340265,15,Get property reviews,200,,Thread Group 1-7,text,true,,9534,208,5,5,http://localhost:8090/properties/1/reviews,15,0,0
+1607604340024,257,Get list of properties,200,,Thread Group 1-9,text,true,,42594,198,5,5,http://localhost:8090/properties,51,0,0
+1607604340278,6,Get property's location,200,,Thread Group 1-10,text,true,,274,245,5,5,http://localhost:8090/properties/1/location,6,0,0
+1607604340251,35,Get specific property,200,,Thread Group 1-8,text,true,,10151,236,5,5,http://localhost:8090/properties/1,34,0,0
+1607604340281,8,Get reviews of property,200,,Thread Group 1-7,text,true,,291,210,5,5,http://localhost:8090/properties/1/reviews/1,8,0,0
+1607604340281,13,Get specific property,200,,Thread Group 1-9,text,true,,10151,236,5,5,http://localhost:8090/properties/1,12,0,0
+1607604340285,11,Get list of locations,200,,Thread Group 1-10,text,true,,276,196,5,5,http://localhost:8090/location,11,0,0
+1607604340286,11,Get specific location,200,,Thread Group 1-8,text,true,,274,234,5,5,http://localhost:8090/location/1,8,0,0
+1607604340289,20,Get property list of schedules,200,,Thread Group 1-7,text,true,,9846,210,5,5,http://localhost:8090/properties/1/schedules,20,0,0
+1607604340295,19,Get specific location,200,,Thread Group 1-9,text,true,,274,234,5,5,http://localhost:8090/location/1,19,0,0
+1607604340297,18,Get property's location,200,,Thread Group 1-8,text,true,,274,245,5,5,http://localhost:8090/properties/1/location,18,0,0
+1607604340310,5,Get property  schedule,200,,Thread Group 1-7,text,true,,295,212,5,5,http://localhost:8090/properties/1/schedules/1,5,0,0
+1607604340314,5,Get property's location,200,,Thread Group 1-9,text,true,,274,245,4,4,http://localhost:8090/properties/1/location,5,0,0
+1607604340297,22,Get property reviews,200,,Thread Group 1-10,text,true,,9534,208,4,4,http://localhost:8090/properties/1/reviews,22,0,0
+1607604340316,6,Get list of locations,200,,Thread Group 1-8,text,true,,276,196,4,4,http://localhost:8090/location,6,0,0
+1607604340323,4,Get property reviews,200,,Thread Group 1-8,text,true,,9534,208,4,4,http://localhost:8090/properties/1/reviews,4,0,0
+1607604340320,10,Get reviews of property,200,,Thread Group 1-10,text,true,,291,210,4,4,http://localhost:8090/properties/1/reviews/1,8,0,0
+1607604340328,5,Get reviews of property,200,,Thread Group 1-8,text,true,,291,210,4,4,http://localhost:8090/properties/1/reviews/1,5,0,0
+1607604340319,19,Get list of locations,200,,Thread Group 1-9,text,true,,276,196,4,4,http://localhost:8090/location,19,0,0
+1607604340331,13,Get property list of schedules,200,,Thread Group 1-10,text,true,,9846,210,4,4,http://localhost:8090/properties/1/schedules,13,0,0
+1607604340345,6,Get property  schedule,200,,Thread Group 1-10,text,true,,295,212,4,4,http://localhost:8090/properties/1/schedules/1,6,0,0
+1607604340338,14,Get property reviews,200,,Thread Group 1-9,text,true,,9534,208,4,4,http://localhost:8090/properties/1/reviews,14,0,0
+1607604340353,4,Get reviews of property,200,,Thread Group 1-9,text,true,,291,210,3,3,http://localhost:8090/properties/1/reviews/1,4,0,0
+1607604340334,24,Get property list of schedules,200,,Thread Group 1-8,text,true,,9846,210,3,3,http://localhost:8090/properties/1/schedules,23,0,0
+1607604340357,11,Get property list of schedules,200,,Thread Group 1-9,text,true,,9846,210,3,3,http://localhost:8090/properties/1/schedules,10,0,0
+1607604340358,10,Get property  schedule,200,,Thread Group 1-8,text,true,,295,212,3,3,http://localhost:8090/properties/1/schedules/1,9,0,0
+1607604340370,46,Get property  schedule,200,,Thread Group 1-9,text,true,,295,212,2,2,http://localhost:8090/properties/1/schedules/1,46,0,0
+1607604340191,229,Get list of properties,200,,Thread Group 1-5,text,true,,42594,198,2,2,http://localhost:8090/properties,90,0,0
+1607604340421,8,Get specific property,200,,Thread Group 1-5,text,true,,10151,236,1,1,http://localhost:8090/properties/1,8,0,0
+1607604340430,13,Get specific location,200,,Thread Group 1-5,text,true,,274,234,1,1,http://localhost:8090/location/1,13,0,0
+1607604340443,5,Get property's location,200,,Thread Group 1-5,text,true,,274,245,1,1,http://localhost:8090/properties/1/location,5,0,0
+1607604340448,5,Get list of locations,200,,Thread Group 1-5,text,true,,276,196,1,1,http://localhost:8090/location,4,0,0
+1607604340453,5,Get property reviews,200,,Thread Group 1-5,text,true,,9534,208,1,1,http://localhost:8090/properties/1/reviews,4,0,0
+1607604340458,4,Get reviews of property,200,,Thread Group 1-5,text,true,,291,210,1,1,http://localhost:8090/properties/1/reviews/1,4,0,0
+1607604340463,4,Get property list of schedules,200,,Thread Group 1-5,text,true,,9846,210,1,1,http://localhost:8090/properties/1/schedules,4,0,0
+1607604340468,6,Get property  schedule,200,,Thread Group 1-5,text,true,,295,212,1,1,http://localhost:8090/properties/1/schedules/1,6,0,0

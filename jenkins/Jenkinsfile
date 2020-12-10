@@ -79,11 +79,45 @@ pipeline{
             }
 		}
 		
+		stage("JMeter Testing"){
+            parallel{
+                stage("Run API"){
+                    steps{
+                        sleep time: 10, unit: 'SECONDS'
+                        withMaven(maven: 'maven_3_6_3'){
+                            sh 'mvn spring-boot:run &'
+                        }
+                    }
+                }
+                stage("Jmeter Testing"){
+                    steps{
+                        dir('jmeter'){
+                                sleep time: 10, unit: 'SECONDS'
+                                 //sh 'jmeter -n -f -t Forent-Jmeter.jmx -l results.jtl -e -o HTMLReport'
+                                sh '/home/devorh/Documents/softwares/apache-jmeter-5.3/bin/jmeter.sh  -n -t /home/devorh/Documents/Proj/forent/jmeter/forent_jmeter.jmx -l test.jtl'
+                        }
+                    }
+                    post{
+                        success{
+                            publishHTML( target: [
+                                allowMissing:false,
+                                alwaysLinkToLastBuild: false,
+                                keepAll: true,
+                                reportDir: 'jmeter/HTMLReport',
+                                reportFiles: 'index.html',
+                                reportName: 'JMeter Report'
+                            ])
+                        }
+                    }
+                }
+            }
+        }
+		
 		stage("Build Docker Images Stage"){
             steps{
                 sh 'docker build -t forent-api:latest .'
                 sh 'docker tag forent-api dquisido/forent:latest'
-                sh 'docker tag forent-api dquisido/forent:$BUILD_NUMBER'
+                //sh 'docker tag forent-api dquisido/forent:$BUILD_NUMBER'
             }
         }
    

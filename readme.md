@@ -65,3 +65,15 @@ ex: cd /Downloads/keycloak-11.0.3/bin
     ./standalone.sh
 ```
 - If using **tar.gz**, follow this [link](https://medium.com/@hasnat.saeed/setup-keycloak-server-on-ubuntu-18-04-ed8c7c79a2d9)
+
+After installation, you can copy this to your web browser to access Keycloak
+```bash
+localhost: 8080
+```
+
+**Keycloak Configuration** 
+```bash
+1. Add Keycloak admin username and password
+2. Add new Realm "forentkeycloak"
+3. Add client "forent"
+```
