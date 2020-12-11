@@ -48,7 +48,7 @@
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
         <stringProp name="ThreadGroup.duration"></stringProp>
         <stringProp name="ThreadGroup.delay"></stringProp>
-        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">false</boolProp>
       </ThreadGroup>
       <hashTree>
         <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="Counter" enabled="true">
@@ -1204,7 +1204,7 @@ sampler.getHeaderManager().add(new Header(&quot;Authorization&quot;, &quot;Beare
             <stringProp name="HTTPSampler.port">8090</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
             <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-            <stringProp name="HTTPSampler.path">/users/${userId}/favorites/${favoriteId}</stringProp>
+            <stringProp name="HTTPSampler.path">/users/${userId}/favorites/${id}</stringProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -1302,7 +1302,7 @@ sampler.getHeaderManager().add(new Header(&quot;Authorization&quot;, &quot;Beare
             <stringProp name="HTTPSampler.port">8090</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
             <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-            <stringProp name="HTTPSampler.path">/users/${userId}/schedules/${schedulesId}</stringProp>
+            <stringProp name="HTTPSampler.path">/users/${userId}/schedules/${id}</stringProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
