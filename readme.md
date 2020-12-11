@@ -77,3 +77,9 @@ localhost: 8080
 2. Add new Realm "forentkeycloak"
 3. Add client "forent"
 ```
+
+## Docker Hub
+[Docker Hub Repository](https://hub.docker.com/repository/docker/dquisido/forent)
+
+## Swagger Hub
+[Swagger Hub Documentation](https://app.swaggerhub.com/apis/DevQui/ForRentAPI/1.0.0)
