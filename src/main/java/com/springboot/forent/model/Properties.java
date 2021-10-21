@@ -1,6 +1,7 @@
 package com.springboot.forent.model;
 
 
+import java.time.OffsetDateTime;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,17 +15,24 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import javax.validation.constraints.NotBlank;
+
+
+
 @Table(name="properties")
 @Entity
 public class Properties {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_property;
+	@NotBlank(message = "Type should not be null or blank")
 	private String type;
+	@NotBlank(message = "Name should not be null or blank")
 	private String name;
+	@NotBlank(message = "Description should not be null or blank")
 	private String description;
 	private Float price;
-	private String created_datetime;
+	private OffsetDateTime created_datetime;
 	private String updated_datetime;
 	private int users_id_user;
 	
@@ -56,7 +64,7 @@ public class Properties {
 
 	public Properties(int id_property, UserProperties users, Location location, Amenities amenities, 
 			List<Reviews> reviews, String type, String name, String description, Float price, 
-			String created_datetime, String updated_datetime) {
+			OffsetDateTime created_datetime, String updated_datetime) {
 		super();
 		this.id_property = id_property;
 		this.users = users;
@@ -82,6 +90,20 @@ public class Properties {
 		this.updated_datetime = updated_datetime;
 	}
 
+	public Properties(int id_property, int users_id_user, String type, String name, String description, Float price,
+			OffsetDateTime created_datetime, String updated_datetime) {
+		super();
+		this.id_property = id_property;
+		this.users_id_user = users_id_user;
+		this.type = type;
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.created_datetime = created_datetime;
+		this.updated_datetime = updated_datetime;
+		
+	}
+	
 	public int getId_property() {
 		return id_property;
 	}
@@ -122,11 +144,11 @@ public class Properties {
 		this.price = price;
 	}
 
-	public String getCreated_datetime() {
+	public OffsetDateTime getCreated_datetime() {
 		return created_datetime;
 	}
 
-	public void setCreated_datetime(String created_datetime) {
+	public void setCreated_datetime(OffsetDateTime created_datetime) {
 		this.created_datetime = created_datetime;
 	}
 

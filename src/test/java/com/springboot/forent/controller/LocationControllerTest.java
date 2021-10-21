@@ -1,6 +1,7 @@
 package com.springboot.forent.controller;
 
 import static org.mockito.Mockito.doReturn;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -18,7 +19,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -37,8 +41,9 @@ class LocationControllerTest {
 	private LocationService service;
 	
 	@Test
-	@DisplayName("GET /properites/{id_property}/location WITH RESULT")
-	void getLocationListHasResult() throws Exception {
+	@DisplayName("GET /location WITH RESULT")
+	@WithMockUser(roles = "admin")
+	void listAllLocation() throws Exception {
 		Location loc1 = new Location(1,1,"Town1","City1","Region1","Country1");
 		Location loc2 = new Location(2,2,"Town2","City2","Region2","Country2");
 		Location loc3 = new Location(3,3,"Town3","City3","Region3","Country3");
@@ -75,23 +80,10 @@ class LocationControllerTest {
 			.andExpect(jsonPath("$.[2].country").value("Country3"));
 	}
 	
-	
 	@Test
-	@DisplayName("GET /properites/{id_property}/location WITH NO RESULT")
-	void getLocationListNoResult() throws Exception {
-		doReturn(new ArrayList<Location>()).when(service).listAllLocation();
-
-		mockMvc.perform(get("/location"))
-
-			.andExpect(status().isOk())
-			.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-
-			.andExpect(content().string("[]"));
-	}
-	
-	@Test
-	@DisplayName("GET /properites/{id_property}/location/{id_location} is FOUND")
-	void getLocationByIdFound() throws Exception {
+	@DisplayName("GET /location/{id_location} is FOUND")
+	@WithMockUser(roles = "admin")
+	void getLocation() throws Exception {
 		Location loc1 = new Location(1,1,"Town1","City1","Region1","Country1");
 		Location loc2 = new Location(2,2,"Town2","City2","Region2","Country2");
 		Location loc3 = new Location(3,3,"Town3","City3","Region3","Country3");
@@ -101,7 +93,63 @@ class LocationControllerTest {
 		list.add(loc2);
 		list.add(loc3);
 	
-		doReturn(loc3).when(service).getLocation(3,3);
+		doReturn(loc3).when(service).getLocation(3);
+
+		mockMvc.perform(get("/location/{id_location}",3))
+
+			.andExpect(status().isOk())
+			.andExpect(content().contentType(MediaType.APPLICATION_JSON))
+
+			.andExpect(jsonPath("$.id_location").value(3))
+			.andExpect(jsonPath("$.id_property").value(3))
+			.andExpect(jsonPath("$.town").value("Town3"))
+			.andExpect(jsonPath("$.city").value("City3"))
+			.andExpect(jsonPath("$.region").value("Region3"))
+			.andExpect(jsonPath("$.country").value("Country3"));
+	}
+	
+	@Test
+	@DisplayName("GET /properites/{id_property}/location is FOUND")
+	@WithMockUser(roles = "admin")
+	void getLocationByPropertyID() throws Exception {
+		Location loc1 = new Location(1,1,"Town1","City1","Region1","Country1");
+		Location loc2 = new Location(2,2,"Town2","City2","Region2","Country2");
+		Location loc3 = new Location(3,3,"Town3","City3","Region3","Country3");
+
+		List<Location> list = new ArrayList<Location>();
+		list.add(loc1);
+		list.add(loc2);
+		list.add(loc3);
+	
+		doReturn(loc3).when(service).getLocationByPropertyID(3);
+
+		mockMvc.perform(get("/properties/{id_property}/location",3))
+
+			.andExpect(status().isOk())
+			.andExpect(content().contentType(MediaType.APPLICATION_JSON))
+
+			.andExpect(jsonPath("$.id_location").value(3))
+			.andExpect(jsonPath("$.id_property").value(3))
+			.andExpect(jsonPath("$.town").value("Town3"))
+			.andExpect(jsonPath("$.city").value("City3"))
+			.andExpect(jsonPath("$.region").value("Region3"))
+			.andExpect(jsonPath("$.country").value("Country3"));
+	}
+	
+	@Test
+	@DisplayName("GET /properites/{id_property}/location/{id_location} is FOUND")
+	@WithMockUser(roles = "admin")
+	void getPropertyLocation() throws Exception {
+		Location loc1 = new Location(1,1,"Town1","City1","Region1","Country1");
+		Location loc2 = new Location(2,2,"Town2","City2","Region2","Country2");
+		Location loc3 = new Location(3,3,"Town3","City3","Region3","Country3");
+
+		List<Location> list = new ArrayList<Location>();
+		list.add(loc1);
+		list.add(loc2);
+		list.add(loc3);
+	
+		doReturn(loc3).when(service).getPropertyLocation(3,3);
 
 		mockMvc.perform(get("/properties/{id_property}/location/{id_location}",3,3))
 
@@ -118,41 +166,39 @@ class LocationControllerTest {
 	
 	
 	@Test
-	@DisplayName("POST /properties/{id_property}/location is SUCCESSFUL")
-	void addUserSuccess() throws Exception {
+	@DisplayName("POST /users/{id_user}/properties/{id_property}/location is SUCCESSFUL")
+	@WithMockUser(roles = "host")
+	void savePropertyLocation() throws Exception {
 		Location loc = new Location(1,1,"Town1","City1","Region1","Country1");
-		doReturn(loc).when(service).saveLocation(loc);	
 		
-		mockMvc.perform(post("/properties/{id_property}/location",1)
+		ResponseEntity<String> response = new ResponseEntity<String>("Successfully Added Property Location", HttpStatus.CREATED);
+		doReturn(response).when(service).savePropertyLocation(1,loc,1);	
+		
+		mockMvc.perform(post("/users/{id_user}/properties/{id_property}/location",1,1)
+			.with(csrf())
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(asJsonString(loc)))
 		
-			.andExpect(status().isCreated());
-			//.andExpect(header().string(HttpHeaders.LOCATION,"/location"));
+			.andExpect(status().isOk());
 	}
 	
 	@Test
 	@DisplayName("PATCH /location/1 is SUCCESSFUL")
+	@WithMockUser(roles = "host")
 	void updateUserSuccess() throws Exception{
-		Location locFind = new Location(1,1,"Town1","City1","Region1","Country1");
+		
 		Location locPut = new Location(1,1,"Town22","City1","Region1","Country1");
-		doReturn(locFind).when(service).getLocation(1,1);
-		doReturn(locPut).when(service).saveLocation(locPut);
+		
+		ResponseEntity<String> response = new ResponseEntity<String>("Successfully Updated Property Location", HttpStatus.CREATED);
+		
+		doReturn(response).when(service).updatePropertyLocation(locPut, 1, 1);
 		
 		mockMvc.perform(patch("/properties/{id_property}/location/{id_location}",1,1)
+				.with(csrf())
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(asJsonString(locPut)))
 			
-				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-		
-				.andExpect(jsonPath("$.id_location").value(1))
-				.andExpect(jsonPath("$.id_property").value(1))
-				.andExpect(jsonPath("$.town").value("Town22"))
-				.andExpect(jsonPath("$.city").value("City1"))
-				.andExpect(jsonPath("$.region").value("Region1"))
-				.andExpect(jsonPath("$.country").value("Country1"));
-			
+				.andExpect(status().isOk());
 	}
 	
 	public String asJsonString(final Object obj) {

@@ -1,0 +1,135 @@
+pipeline{
+ 	agent any
+ 	
+ 	stages{
+		stage("Checkout Stage") {
+			steps{
+				git branch: 'feature1', url: 'https://github.com/DevQui/Forent'
+			}
+		}
+		
+		stage("Compile Stage") {
+			steps{
+				withMaven(maven: 'maven_3_6_3'){
+					sh 'mvn clean compile -DskipTests=true'
+				}
+			}
+		}
+		
+		stage("Unit Testing"){
+            steps{
+                withMaven(maven : 'maven_3_6_3'){
+                    sh 'mvn clean test jacoco:report'
+                    //sleep time: 1, unit: 'MINUTES'
+                }
+            }
+            post{
+                success{
+                   publishHTML(target: [
+                       allowMissing:false,
+                       alwaysLinkToLastBuild: false,
+                       keepAll: true,
+                       reportDir: 'target/site/jacoco',
+                       reportFiles: 'index.html',
+                       reportName: 'Jacoco Report'
+                    ])
+                }
+            }
+        }
+        
+        stage("Build .jar file Stage") {
+			steps{
+				withMaven(maven: 'maven_3_6_3'){
+				    sh 'mvn package'
+				    stash includes: 'target/*.jar', name: 'targetfiles'
+				}
+			}
+		}
+		
+		stage("Postman/Newman Testing Stage"){
+		    parallel{
+                stage("Run API"){
+                    steps{
+                        withMaven(maven: 'maven_3_6_3'){
+                            sh 'mvn spring-boot:run &'
+                        }
+                    }
+                }
+                stage('Postman Test'){
+                    steps{
+                        dir('postman'){
+                            //sleep time: 2, unit: 'MINUTES'
+                            sh "newman run Forent.postman_collection_3.json"
+                            sh "newman run Forent.postman_collection_3.json -r htmlextra --reporter-htmlextra-export HTMLReport/forent_newman_report.html"
+                        }
+                    }
+                    post{
+                        success{
+                            publishHTML( target: [
+                                allowMissing:false,
+                                alwaysLinkToLastBuild: true,
+                                keepAll: true,
+                                reportDir: 'postman/HTMLReport',
+                                reportFiles: 'forent_newman_report.html',
+                                reportName: 'Postman Report'
+                            ])
+                        }
+                    }
+                }
+            }
+		}
+		
+		stage("JMeter Testing"){
+            parallel{
+                stage("Run API"){
+                    steps{
+                        sleep time: 10, unit: 'SECONDS'
+                        withMaven(maven: 'maven_3_6_3'){
+                            sh 'mvn spring-boot:run &'
+                        }
+                    }
+                }
+                stage("Jmeter Testing"){
+                    steps{
+                        dir('jmeter'){
+                                sleep time: 10, unit: 'SECONDS'
+                                 //sh 'jmeter -n -f -t Forent-Jmeter.jmx -l results.jtl -e -o HTMLReport'
+                                sh '/home/devorh/Documents/softwares/apache-jmeter-5.3/bin/jmeter.sh  -n -t /home/devorh/Documents/Proj/forent/jmeter/forent_jmeter.jmx -l test.jtl'
+                        }
+                    }
+                    post{
+                        success{
+                            publishHTML( target: [
+                                allowMissing:false,
+                                alwaysLinkToLastBuild: false,
+                                keepAll: true,
+                                reportDir: 'jmeter/HTMLReport',
+                                reportFiles: 'index.html',
+                                reportName: 'JMeter Report'
+                            ])
+                        }
+                    }
+                }
+            }
+        }
+		
+		stage("Build Docker Images Stage"){
+            steps{
+                sh 'docker build -t forent-api:latest .'
+                sh 'docker tag forent-api dquisido/forent:latest'
+                //sh 'docker tag forent-api dquisido/forent:$BUILD_NUMBER'
+            }
+        }
+   
+        
+        stage("Push to Dockerhub"){
+            steps{
+                
+                withDockerRegistry([credentialsId: "18cdac66-f749-45ea-8f9c-b02489a2218d", url: '']) {
+                    sh 'docker push dquisido/forent:latest'
+                }   
+            }
+        }
+
+	}
+}

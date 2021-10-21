@@ -1,0 +1,74 @@
+version: '3.3'
+
+services:
+ #Spring Boot API
+ forent:
+  container_name: forent-app
+  #image: forent-app:v1
+  image: dquisido/forent:latest
+  build:
+   context: .
+   dockerfile: Dockerfile
+  restart: on-failure
+  networks:
+   - forentnet
+  ports:
+   - "8090:8090"
+  environment:
+   SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/rentals
+   SPRING_DATASOURCE_PASSWORD: password
+   SPRING_DATASOURCE_USERNAME: forent_user
+   authUrl: http://keycloak:8080/auth
+  depends_on:
+   - mysql
+   - keycloak
+  links:
+   - mysql:3306
+   - keycloak:8080
+  volumes:
+   - ./data:/srv
+  
+ #Mysql
+ mysql:
+  container_name: forent-mysql
+  image: forent-mysql:latest
+  command: --default-authentication-plugin=mysql_native_password
+  build:
+   context: .
+   dockerfile: mysql/Dockerfile
+  networks:
+   - forentnet
+  ports:
+   - "6033:3306"
+  volumes:
+   - my-db:/var/lib/mysql
+ 
+ #Keycloak
+ keycloak:
+  container_name: forent-keycloak-security
+  image: forent-keycloak-security:latest
+  build:
+   context: .
+   dockerfile: keycloak/Dockerfile
+  networks:
+   - forentnet
+  ports:
+   - "8080:8080"
+  environment:
+   DB_VENDOR: MYSQL
+   DB_ADDR: mysql
+   DB_PORT: 3306
+   DB_DATABASE: rentals
+   DB_USER: forent_user
+   DB_PASSWORD: password
+   KEYCLOAK_IMPORT: "/forent_realm.json -Dkeycloak.profile.feature.upload_scripts=enabled"
+ 
+   
+networks:
+ forentnet:
+
+volumes:
+ my-db:
+  driver: local
+ keycloak-db:
+  driver: local

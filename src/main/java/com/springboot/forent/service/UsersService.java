@@ -5,9 +5,12 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
+import com.springboot.forent.exception.DataNotFoundException;
+import com.springboot.forent.exception.NoDataFoundException;
 import com.springboot.forent.model.Users;
 import com.springboot.forent.repository.UsersRepository;
 
@@ -17,25 +20,47 @@ public class UsersService {
 	private UsersRepository usersRepository;
 	
 	public List<Users> listAllUsers(){
-		return (List<Users>) usersRepository.findAll();
+		List<Users> users =  (List<Users>) usersRepository.findAll();
+		if(!users.isEmpty()) {
+			return users;
+		}else {
+			throw new NoDataFoundException();
+		}
 	}
 		
-	public Users saveUser(Users user) {
-		OffsetDateTime current = OffsetDateTime.now();
-		String created_datetime = current.toString();	
-		user.setCreated_datetime(created_datetime);
-		if(StringUtils.isEmpty(user.getFirst_name()) || StringUtils.isEmpty(user.getLast_name()) || 
-				StringUtils.isEmpty(user.getEmail()) || StringUtils.isEmpty(user.getPhone_number()) ||
-				StringUtils.isEmpty(user.getUser_password())) {
-    		throw new NoSuchElementException();
-    	}
+	public ResponseEntity<String> saveUser(Users user) {
+		OffsetDateTime created_datetime = OffsetDateTime.now();
+		//String created_datetime = current.toString();
 		
-        return usersRepository.save(user);
+		Integer saveUserStatus = usersRepository.saveUser(user.getType(), user.getFirst_name(),
+				user.getMiddle_name(), user.getLast_name(), user.getEmail(), user.getPhone_number(),
+				user.getUser_password(), created_datetime);
+		
+		if(saveUserStatus > 0) {
+			return new ResponseEntity<String>("Successfully Added User", HttpStatus.CREATED);
+		}else {
+			throw new NoDataFoundException();
+		}
+    }
+	
+	public ResponseEntity<String> updateUser(Users user) {
+		OffsetDateTime updated_datetime = OffsetDateTime.now();
+		//String created_datetime = current.toString();
+		
+		Integer saveUserStatus = usersRepository.updateUser(user.getId_user(), user.getType(), user.getFirst_name(),
+				user.getMiddle_name(), user.getLast_name(), user.getEmail(), user.getPhone_number(),
+				user.getUser_password(), updated_datetime);
+		
+		if(saveUserStatus > 0) {
+			return new ResponseEntity<String>("Successfully Added User", HttpStatus.OK);
+		}else {
+			throw new NoDataFoundException();
+		}
     }
 
     public Users getUser(Integer id) {
     	if(usersRepository.findById(id).get() == null) {
-    		throw new NoSuchElementException();
+    		throw new DataNotFoundException(id);
     	}
         return usersRepository.findById(id).get();
     }

@@ -1,0 +1,1080 @@
+---
+openapi: 3.0.0
+info:
+  title: ForRnt
+  description: This is an API where the users can find the propertied for rent given from the selected location
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/DevQui/ForRentAPI/1.0.0
+  description: SwaggerHub API Auto Mocking
+paths:
+  /properties:
+    get:
+      tags:
+      - Properties
+      description: Get information of properties from the database.
+      parameters:
+      - name: bodyLimit
+        in: query
+        description: The number of properties returned
+        required: false
+        style: form
+        explode: true
+        schema:
+          $ref: '#/components/schemas/BodyLimit'
+      - name: pageLimit
+        in: query
+        description: The number of properties per page
+        required: false
+        style: form
+        explode: true
+        schema:
+          $ref: '#/components/schemas/PageLimit'
+      responses:
+        "200":
+          description: Successfully pulled the list of properties.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Properties'
+        "204":
+          description: Successful Request. No Data was retrieved. Empty Response.
+        "400":
+          description: Invalid Request. Please check syntax of the request and check required fields.
+        "503":
+          description: Service Unavailable. Server cannot handle the request. Please check again later.
+    post:
+      tags:
+      - Properties
+      description: (HOST ONLY) Create a new property in the database
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Property'
+        required: true
+      responses:
+        "201":
+          description: Successfully created a new property.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Property'
+        "400":
+          description: Invalid Request. Please check syntax of the request and check required fields.
+        "401":
+          description: User unauthorized to create property.
+        "503":
+          description: Service Unavailable. Server cannot handle the request. Please check again later.
+      security:
+      - bearerAuth: []
+  /properties/{id_property}:
+    get:
+      tags:
+      - Properties
+      description: Get the id of the specific property
+      parameters:
+      - name: id_property
+        in: path
+        description: The ID of the property
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+          example: 989411
+      responses:
+        "200":
+          description: Successfully pulled information of the  specific property
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Property'
+        "503":
+          description: Service Unavailable. Server cannot handle the request. Please check again later.
+    put:
+      tags:
+      - Properties
+      description: (ADMIN and HOST ONLY) Update the specific property
+      parameters:
+      - name: id_property
+        in: path
+        description: The ID of the property
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+          example: 989411
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Property'
+        required: true
+      responses:
+        "200":
+          description: Successfully updated the property
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Property'
+        "400":
+          description: Invalid Request. Please check syntax of the request and check required fields.
+        "401":
+          description: User unauthorized to update property.
+        "503":
+          description: Service Unavailable. Server cannot handle the request. Please check again later.
+      security:
+      - bearerAuth: []
+    delete:
+      tags:
+      - Properties
+      description: (ADMIN and HOST ONLY) Remove the selected property
+      parameters:
+      - name: id_property
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/Property'
+      responses:
+        "200":
+          description: Successfully removed selected property
+        "401":
+          description: User unauthorized to delete the property
+      security:
+      - bearerAuth: []
+  /properties/{id_property}/reviews:
+    get:
+      tags:
+      - Properties
+      description: Get the reviews of the specific property
+      parameters:
+      - name: id_property
+        in: path
+        description: The ID of the property
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+          example: 989411
+      responses:
+        "200":
+          description: Successfully pulled reviews the selected property
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertyCommentReviews'
+        "204":
+          description: Successful Request. No Data was retrieved. Empty Response.
+        "503":
+          description: Service Unavailable. Server cannot handle the request. Please check again later.
+    post:
+      tags:
+      - Properties
+      description: (TENANT ONLY) Add review to the selected property
+      parameters:
+      - name: id_property
+        in: path
+        description: The ID of the property
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+          example: 989411
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PropertyCommentReview'
+      responses:
+        "200":
+          description: Successfully created review of the specific property
+        "401":
+          description: User unauthorized to add review to property
+        "503":
+          description: Service Unavailable. Server cannot handle the request. Please check again later.
+      security:
+      - bearerAuth: []
+    delete:
+      tags:
+      - Properties
+      description: (ADMIN and TENANT ONLY) Remove the review of the selected property
+      parameters:
+      - name: id_property
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/PropertyCommentReview'
+      responses:
+        "200":
+          description: Successfully removed review of the selected property
+        "401":
+          description: User unauthorized to delete review.
+        "503":
+          description: Service Unavailable. Server cannot handle the request. Please check again later.
+      security:
+      - bearerAuth: []
+  /properties/{id_property}/amenities:
+    post:
+      tags:
+      - Amenities
+      description: (HOST ONLY) Add amenities to property
+      parameters:
+      - name: id_property
+        in: path
+        description: The ID of the property
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+          example: 989411
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Property'
+        required: true
+      responses:
+        "201":
+          description: Successfully created a new property.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Property'
+        "400":
+          description: Invalid Request. Please check syntax of the request and check required fields.
+        "401":
+          description: User unauthorized to create property.
+      security:
+      - bearerAuth: []
+    patch:
+      tags:
+      - Amenities
+      description: (HOST ONLY) Update amenities to property
+      parameters:
+      - name: id_property
+        in: path
+        description: The ID of the property
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+          example: 989411
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Property'
+        required: true
+      responses:
+        "200":
+          description: Successfully updated property.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Property'
+        "400":
+          description: Invalid Request. Please check syntax of the request and check required fields.
+        "401":
+          description: User unauthorized to create property.
+  /users:
+    get:
+      tags:
+      - Users
+      description: (ADMIN ONLY) Get information of all users from the database
+      parameters:
+      - name: bodyLimit
+        in: query
+        description: The number of users returned
+        required: false
+        style: form
+        explode: true
+        schema:
+          maximum: 200
+          minimum: 10
+          type: integer
+          example: 15
+      - name: pageLimit
+        in: query
+        description: The number of users per page
+        required: false
+        style: form
+        explode: true
+        schema:
+          maximum: 20
+          minimum: 10
+          type: integer
+          example: 15
+      responses:
+        "200":
+          description: Successful pull of user info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Users'
+        "204":
+          description: Successful Request. No Data was retrieved. Empty Response.
+        "503":
+          description: Service Unavailable. Server cannot handle the request. Please check again later.
+      security:
+      - bearerAuth: []
+  /registration:
+    post:
+      tags:
+      - Users
+      description: Create a new user in the database
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        "201":
+          description: Successfully created a new user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        "400":
+          description: Invalid Request. Please check syntax of the request and check required fields.
+        "503":
+          description: Service Unavailable. Server cannot handle the request. Please check again later.
+  /users/{id_user}:
+    get:
+      tags:
+      - Users
+      description: (ADMIN and LOGGED IN USER ONLY) Get the id of the specific user
+      parameters:
+      - name: id_user
+        in: path
+        description: The ID of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+          example: 98801211
+      responses:
+        "200":
+          description: Successfully pulled the specific user info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        "204":
+          description: Successful Request. No Data was retrieved. Empty Response.
+        "401":
+          description: User unauthorized to get user information.
+        "503":
+          description: Service Unavailable. Server cannot handle the request. Please check again later.
+      security:
+      - bearerAuth: []
+    put:
+      tags:
+      - Users
+      description: (ADMIN and LOGGED IN USER ONLY) Update the specific user in the database
+      parameters:
+      - name: id_user
+        in: path
+        description: The ID of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+          example: 98801211
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        "200":
+          description: Successfully updated the user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        "400":
+          description: Invalid Request. Please check syntax of the request and check required fields.
+        "401":
+          description: User unauthorized to update user information.
+        "503":
+          description: Service Unavailable. Server cannot handle the request. Please check again later.
+      security:
+      - bearerAuth: []
+    delete:
+      tags:
+      - Users
+      description: (ADMIN ONLY) Remove the selected user
+      parameters:
+      - name: id_user
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/User'
+      responses:
+        "200":
+          description: Successfully removed selected User
+        "401":
+          description: User unauthorized to delete selected user.
+        "503":
+          description: Service Unavailable. Server cannot handle the request. Please check again later.
+      security:
+      - bearerAuth: []
+  /users/{id_user}/properties:
+    get:
+      tags:
+      - Users
+      description: (ADMIN AND HOST ONLY) Get all properties of the user
+      parameters:
+      - name: id_user
+        in: path
+        description: ID of the Host
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+          example: 98801211
+      responses:
+        "200":
+          description: Successfully pulled the properties of the user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Properties'
+        "204":
+          description: Successful Request. No Data was retrieved. Empty Response.
+        "401":
+          description: User unauthorized to get information.
+        "503":
+          description: Service Unavailable. Server cannot handle the request. Please check again later.
+      security:
+      - bearerAuth: []
+  /users/{id_user}/favorites:
+    get:
+      tags:
+      - Users
+      description: (ADMIN and TENANT ONLY) Get the favorites of the specific user
+      parameters:
+      - name: id_user
+        in: path
+        description: The ID of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+          example: 98801211
+      responses:
+        "200":
+          description: Successfully pulled the specific favorites info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserFavorites'
+        "204":
+          description: Successful Request. No Data was retrieved. Empty Response.
+        "401":
+          description: User unauthorized to get information.
+        "503":
+          description: Service Unavailable. Server cannot handle the request. Please check again later.
+      security:
+      - bearerAuth: []
+    post:
+      tags:
+      - Users
+      description: (TENANT ONLY) Add selected property to favorites
+      parameters:
+      - name: id_user
+        in: path
+        description: The ID of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+          example: 98801211
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserFavorite'
+      responses:
+        "200":
+          description: Successfully added property to favorites.
+        "401":
+          description: User unauthorized to add favorite to user's list.
+        "503":
+          description: Service Unavailable. Server cannot handle the request. Please check again later.
+      security:
+      - bearerAuth: []
+    delete:
+      tags:
+      - Users
+      description: (ADMIN and TENANT ONLY) Remove the selected property from the favorites
+      parameters:
+      - name: id_user
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/UserFavorite'
+      responses:
+        "200":
+          description: Successfully removed the selected property from the favorites
+        "401":
+          description: User unauthorized to delete property.
+        "503":
+          description: Service Unavailable. Server cannot handle the request. Please check again later.
+      security:
+      - bearerAuth: []
+  /users/{id_user}/schedule:
+    get:
+      tags:
+      - Users
+      description: (ADMIN and LOGGED IN USER ONLY) Get the booking schedule of the user.
+      parameters:
+      - name: id_user
+        in: path
+        description: The ID of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+          example: 98801211
+      responses:
+        "200":
+          description: Successfully pulled the booking schedule of the tenant
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schedules'
+        "204":
+          description: Successful Request. No Data was retrieved. Empty Response.
+        "401":
+          description: User unauthorized to get user information.
+        "503":
+          description: Service Unavailable. Server cannot handle the request. Please check again later.
+      security:
+      - bearerAuth: []
+    put:
+      tags:
+      - Users
+      description: (ADMIN and TENANT ONLY) Update the booking schedule of the tenant
+      parameters:
+      - name: id_user
+        in: path
+        description: The ID of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+          example: 98801211
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Schedules'
+        required: true
+      responses:
+        "200":
+          description: Successfully updated the booking schedule of the tenant
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schedules'
+        "400":
+          description: Invalid Request. Please check syntax of the request and check required fields.
+        "401":
+          description: User unauthorized to update user information.
+        "503":
+          description: Service Unavailable. Server cannot handle the request. Please check again later.
+      security:
+      - bearerAuth: []
+    post:
+      tags:
+      - Users
+      description: (TENANT ONLY) Add booking schedule to the tenant
+      parameters:
+      - name: id_user
+        in: path
+        description: The ID of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+          example: 98801211
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Schedules'
+      responses:
+        "200":
+          description: Successfully created a booking schedule.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schedules'
+        "409":
+          description: There was a conflict with your request and the current status of the schedule.
+        "401":
+          description: User unauthorized to add schedule to user's schedule.
+        "503":
+          description: Service Unavailable. Server cannot handle the request. Please check again later.
+      security:
+      - bearerAuth: []
+    delete:
+      tags:
+      - Users
+      description: (ADMIN and TENANT ONLY) Remove the booking schedule of the tenant.
+      parameters:
+      - name: id_user
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/Schedules'
+      responses:
+        "200":
+          description: Successfully removed the booking schedule of the tenant.
+        "401":
+          description: User unauthorized to delete schedule of the tenant.
+        "503":
+          description: Service Unavailable. Server cannot handle the request. Please check again later.
+      security:
+      - bearerAuth: []
+  /schedules:
+    get:
+      tags:
+      - Schedules
+      description: Get the list of properties that is vacant for the selected dates or schedule.
+      parameters:
+      - name: scheduleFrom
+        in: query
+        description: Date From
+        required: true
+        style: form
+        explode: true
+        schema:
+          $ref: '#/components/schemas/ScheduleDate'
+      - name: scheduleTo
+        in: query
+        description: Date To
+        required: true
+        style: form
+        explode: true
+        schema:
+          $ref: '#/components/schemas/ScheduleDate'
+      responses:
+        "200":
+          description: Successfully pulled list of properties
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Properties'
+        "204":
+          description: Successful Request. No Data was retrieved. Empty
+        "503":
+          description: Service Unavailable. Server cannot handle the request. Please check again later.
+  /favorites:
+    get:
+      tags:
+      - Favorites
+      description: Get all favorited properties.
+      parameters:
+      - name: id_user
+        in: query
+        description: ID of the user who created the favorites list
+        required: true
+        style: form
+        explode: true
+        schema:
+          $ref: '#/components/schemas/User'
+      responses:
+        "200":
+          description: Successfully pulled list of favorited properties
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Properties'
+        "204":
+          description: Successful Request. No Data was retrieved. Empty
+        "503":
+          description: Service Unavailable. Server cannot handle the request. Please check again later.
+      security:
+      - bearerAuth: []
+    post:
+      tags:
+      - Favorites
+      description: (TENANT ONLY) Add property to the favorites list.
+      parameters:
+      - name: id_user
+        in: query
+        description: ID of the user who owns and who will add a property to the favorites list.
+        required: true
+        style: form
+        explode: true
+        schema:
+          $ref: '#/components/schemas/Properties'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Properties'
+      responses:
+        "200":
+          description: Successfully created a booking schedule.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Property'
+        "409":
+          description: There was a conflict with your request and the current status of the schedule.
+        "401":
+          description: User unauthorized to add schedule to user's schedule.
+        "503":
+          description: Service Unavailable. Server cannot handle the request. Please check again later.
+      security:
+      - bearerAuth: []
+  /favorites/{id_favorite}:
+    delete:
+      tags:
+      - Favorites
+      description: (TENANT ONLY) Delete the selected property from the favorites list.
+      parameters:
+      - name: id_favorite
+        in: path
+        description: ID of the favorited property
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/User'
+      responses:
+        "200":
+          description: Successfully removed the booking schedule of the tenant.
+        "401":
+          description: User unauthorized to delete schedule of the tenant.
+        "503":
+          description: Service Unavailable. Server cannot handle the request. Please check again later.
+      security:
+      - bearerAuth: []
+  /location:
+    get:
+      tags:
+      - Location
+      description: Get the list of properties from the inputted location
+      parameters:
+      - name: town
+        in: query
+        description: Barangay of the possible property to rent
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: Poblacion
+      - name: city
+        in: query
+        description: City of the possible property to rent
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: Mandaue City
+      - name: province
+        in: query
+        description: Province of the possible property to rent
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: Cebu
+      - name: region
+        in: query
+        description: Region of the possible property to rent
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: Visayas
+      - name: country
+        in: query
+        description: Country of the possible property to rent
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: Philippines
+      responses:
+        "200":
+          description: Successfully pulled list of properties
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Properties'
+        "204":
+          description: Successful Request. No Data was retrieved. Empty Response.
+        "503":
+          description: Service Unavailable. Server cannot handle the request. Please check again later.
+components:
+  schemas:
+    BodyLimit:
+      maximum: 200
+      minimum: 1
+      type: integer
+      example: 15
+    PageLimit:
+      maximum: 10
+      minimum: 1
+      type: integer
+      example: 5
+    Properties:
+      type: array
+      description: Array of Property info
+      items:
+        $ref: '#/components/schemas/Property'
+    Property:
+      properties:
+        id_property:
+          type: integer
+          format: int32
+          example: 989411
+        type:
+          type: string
+          format: enum - apartment - condominium - detached - bungalow
+          example: detached
+          default: apartment
+        name:
+          type: string
+          example: Block Apartment
+        description:
+          type: string
+          example: This Apartment has a nice mountain and sea view
+        price:
+          type: integer
+          format: float
+        reviews:
+          $ref: '#/components/schemas/Property_reviews'
+        gallery:
+          $ref: '#/components/schemas/PropertyGallery'
+        amenities:
+          $ref: '#/components/schemas/Property_amenities'
+        user:
+          $ref: '#/components/schemas/User'
+        location:
+          $ref: '#/components/schemas/Location'
+        schedule:
+          $ref: '#/components/schemas/Schedules'
+      description: Model containing Property info
+    Other_Amenities:
+      type: string
+      description: Other amenity included in the property
+      example: Microwave, Fire Extinguisher, Wifi, Netflix.
+    PropertyGallery:
+      type: array
+      description: Array of Property Images
+      items:
+        $ref: '#/components/schemas/PropertyImage'
+    PropertyImage:
+      type: integer
+      description: ID of the image of the selected property
+      format: int32
+      example: 9282732
+    PropertyCommentReviews:
+      type: array
+      description: Array of Property Reviews
+      items:
+        $ref: '#/components/schemas/PropertyCommentReview'
+    PropertyCommentReview:
+      type: string
+      description: Review of the selected property
+      example: Close to the mall
+    Users:
+      type: array
+      description: Array of Users info
+      items:
+        $ref: '#/components/schemas/User'
+    User:
+      properties:
+        id_user:
+          type: integer
+          format: int32
+          example: 98801211
+        type:
+          type: string
+          format: enum - host - tenant - admin
+          example: host
+        first_name:
+          type: string
+          example: John
+        middle_name:
+          type: string
+          example: Person
+        last_name:
+          type: string
+          example: Doe
+        user_contact_info:
+          $ref: '#/components/schemas/User_user_contact_info'
+        favorites:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserFavorites'
+        schedules:
+          $ref: '#/components/schemas/Properties'
+      description: Model containing User info
+    UserFavorites:
+      type: array
+      description: Array of User Favorited Properties
+      items:
+        $ref: '#/components/schemas/UserFavorite'
+    UserFavorite:
+      properties:
+        id_favorite:
+          type: integer
+          format: int32
+          example: 2
+        id_property:
+          type: integer
+          format: int32
+          example: 989411
+      description: Model of User Favorite Property
+    Location:
+      properties:
+        id_location:
+          type: integer
+          format: int32
+        barangay:
+          type: string
+          example: Poblacion
+        city:
+          type: string
+          example: Mandaue
+        province:
+          type: string
+          example: Cebu
+        region:
+          type: string
+          example: Visayas
+        country:
+          type: string
+          example: Philippines
+        zip_code:
+          type: integer
+          format: int32
+          example: 6000
+        id_property:
+          $ref: '#/components/schemas/Property'
+      description: Model of the Location
+    Schedules:
+      properties:
+        id_schedule:
+          type: integer
+          format: int32
+          example: 1
+        id_property:
+          type: integer
+          format: int32
+          example: 1
+        id_user:
+          type: integer
+          format: int32
+          example: 2
+        id_host:
+          type: integer
+          format: int32
+          example: 5
+        schedule_dates:
+          $ref: '#/components/schemas/ScheduleDate'
+      description: Array of the Schedules of a property
+    ScheduleDate:
+      properties:
+        schedule_date_from:
+          type: string
+          format: date
+        schedule_date_to:
+          type: string
+          format: date
+      description: Model of the Schedule of a property
+    Property_reviews:
+      type: object
+      properties:
+        rating:
+          type: integer
+          format: int32
+          example: 4
+        comment:
+          $ref: '#/components/schemas/PropertyCommentReviews'
+        tenant:
+          $ref: '#/components/schemas/User'
+    Property_amenities:
+      type: object
+      properties:
+        rooms:
+          type: integer
+          format: int32
+          example: 2
+        toilets:
+          type: integer
+          format: int32
+          example: 3
+        beds:
+          type: integer
+          format: int32
+          example: 5
+        property_other_amenities:
+          $ref: '#/components/schemas/Other_Amenities'
+    User_user_contact_info:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          example: johndoe@gmail.com
+        phone:
+          type: string
+          example: +69490000001
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

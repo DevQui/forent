@@ -1,5 +1,6 @@
 package com.springboot.forent.model;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,21 +12,31 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 @Table(name="users")
 @Entity
 public class Users {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //to generation strategies for the values of primary keys.
 	private int id_user;
+	@NotBlank(message = "User Type should not be blank or null")
 	private String type;
+	@NotBlank(message = "User First Name should not be blank or null")
 	private String first_name;
 	private String middle_name;
+	@NotBlank(message = "User Last Name should not be blank or null")
 	private String last_name;
+	@Email(message = "Please enter valid email")
 	private String email;
+	@NotBlank(message = "User Phone Number should not be blank or null")
 	private String phone_number;
+	@NotBlank(message = "User Password should not be blank or null")
 	private String user_password;
-	private String created_datetime;
-	private String updated_datetime;
+
+	private OffsetDateTime created_datetime;
+	private OffsetDateTime updated_datetime;
 	
 	@OneToMany(targetEntity = Favorites.class, cascade=CascadeType.ALL)
 	@JoinColumn(name = "id_user")
@@ -35,11 +46,11 @@ public class Users {
 	@JoinColumn(name = "users_id_user")
 	private List<Properties> properties;
 	
-	public Users() {
+	public Users(){
 	}
-
+	
 	public Users(int id_user, String type, String first_name, String middle_name, String last_name, String email, String phone_number,
-			String user_password, String created_datetime) {
+			String user_password, OffsetDateTime created_datetime) {
 		this.id_user = id_user;
 		this.type = type;
 		this.first_name = first_name;
@@ -51,6 +62,18 @@ public class Users {
 		this.created_datetime = created_datetime;
 	}
 
+	public Users(String type, String first_name, String middle_name, String last_name, String email, String phone_number,
+			String user_password) {
+		this.type = type;
+		this.first_name = first_name;
+		this.middle_name = middle_name;
+		this.last_name = last_name;
+		this.email = email;
+		this.phone_number = phone_number;
+		this.user_password = user_password;
+	}
+
+	
 	//setters and getters
 	public int getId_user() {
 		return id_user;
@@ -116,19 +139,19 @@ public class Users {
 		this.user_password = user_password;
 	}
 
-	public String getCreated_datetime() {
+	public OffsetDateTime getCreated_datetime() {
 		return created_datetime;
 	}
 
-	public void setCreated_datetime(String created_datetime) {
+	public void setCreated_datetime(OffsetDateTime created_datetime) {
 		this.created_datetime = created_datetime;
 	}
 
-	public String getUpdated_datetime() {
+	public OffsetDateTime getUpdated_datetime() {
 		return updated_datetime;
 	}
 
-	public void setUpdated_datetime(String updated_datetime) {
+	public void setUpdated_datetime(OffsetDateTime updated_datetime) {
 		this.updated_datetime = updated_datetime;
 	}
 

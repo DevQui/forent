@@ -1,0 +1,2301 @@
+{
+	"info": {
+		"_postman_id": "2cd34f11-7ad8-43f1-84cb-37283d5ff3e3",
+		"name": "Forent Copy 2",
+		"description": "All requests related to users",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "HOST",
+			"item": [
+				{
+					"name": "host_login",
+					"item": [
+						{
+							"name": "Get host login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "2d893b62-ae30-4507-ad49-2cf756a27bc1",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"var json = pm.response.json();;",
+											"var token_host =  json[\"access_token\"];",
+											"var refresh_token_host = json[\"refresh_token\"];",
+											"pm.environment.set(\"access_token_host\", token_host);",
+											"pm.environment.set(\"refresh_token_host\", refresh_token_host);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "client_id",
+											"value": "forent",
+											"type": "text"
+										},
+										{
+											"key": "client_secret",
+											"value": "4bfb1902-b2c2-4083-b2c2-02b3b98fcec3",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "username",
+											"value": "forent_host",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "hostpassword",
+											"type": "text"
+										},
+										{
+											"key": "grant_type",
+											"value": "password",
+											"type": "text"
+										},
+										{
+											"key": "client_secret",
+											"value": "5a7a9552-3677-4624-acb4-b8da1f2b8556",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "scope",
+											"value": "openid",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{keycloak}}/realms/forentkeycloak/protocol/openid-connect/token",
+									"host": [
+										"{{keycloak}}"
+									],
+									"path": [
+										"realms",
+										"forentkeycloak",
+										"protocol",
+										"openid-connect",
+										"token"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "host_user",
+					"item": [
+						{
+							"name": "Add host",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "6916b513-107d-40b9-b5c4-1c9074a73208",
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"type\": \"host\",\n    \"first_name\": \"HOST\",\n    \"middle_name\": \"Narvaez\",\n    \"last_name\": \"Quisido\",\n    \"email\": \"quisido@gmail.com\",\n    \"phone_number\": \"+699111111111\",\n    \"user_password\": \"password123\"\n    \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/registration",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get specific user",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1e36c056-783d-40f0-8072-9d813a95a893",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token_host}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/{{userId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update user",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "6fedc442-1a2a-44dc-9aca-7f8878cd1ef5",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token_host}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"type\": \"host\",\n    \"first_name\": \"HOST Bor121\",\n    \"middle_name\": \"Narvaez\",\n    \"last_name\": \"Quisido\",\n    \"email\": \"qdevorah01499@gmail.com\",\n    \"phone_number\": \"+699111111111\",\n    \"user_password\": \"password123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/{{userId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "host_properties",
+					"item": [
+						{
+							"name": "Add Property",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "4b57408d-aa8a-48ed-af1c-f790a300b8b5",
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token_host}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"type\" : \"apartment\",\n    \"name\" : \"apartment1\",\n    \"description\": \"apartment1\",\n    \"price\" : 1999.00\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/{{userId}}/properties",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"{{userId}}",
+										"properties"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get host's list of properties",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "6d7cc26c-d0a5-4ca0-8971-6d0611a9a8c4",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token_host}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/{{userId}}/properties",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"{{userId}}",
+										"properties"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get user's specific owned property",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "e37dc655-a39d-45c2-a775-0e9608f617bc",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token_host}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/{{userId}}/properties/{{propertyId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"{{userId}}",
+										"properties",
+										"{{propertyId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Property",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a3574564-edb8-4260-9bdc-d1304fdf8182",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token_host}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"type\": \"apartment\",\n    \"name\": \"UPDATED apartment1\",\n    \"description\": \"This is Apartment No. 1\",\n    \"price\": 1999.0\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/{{userId}}/properties/{{propertyId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"{{userId}}",
+										"properties",
+										"{{propertyId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "host_amenities",
+					"item": [
+						{
+							"name": "Add Amenity",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "96b03781-b1fa-4005-a3b4-ef46ab3b2da7",
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token_host}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id_property\" : 1,\n    \"rooms\": 2,\n    \"toilets\": 1,\n    \"beds\": 2,\n    \"other_amenities\": \"Wifi, Cable\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/properties/{{propertyId}}/amenities",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"properties",
+										"{{propertyId}}",
+										"amenities"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Amenity",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "0f492006-287f-47e6-90e1-5e99cbcfb3bb",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token_host}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"rooms\": 1,\n    \"toilets\": 1,\n    \"beds\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/properties/{{propertyId}}/amenities/{{amenitiesId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"properties",
+										"{{propertyId}}",
+										"amenities",
+										"{{amenitiesId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "host_location",
+					"item": [
+						{
+							"name": "Add Location",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "6df17528-a51e-4fbc-ad61-84ece9abf41e",
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token_host}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{   \n    \"town\": \"Town\",\n    \"city\": \"City\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/properties/{{propertyId}}/location",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"properties",
+										"{{propertyId}}",
+										"location"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Location",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "35938c71-66e6-4a29-a8d0-a51e2310e313",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token_host}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"town\": \"Town1\",\n    \"city\": \"City1\",\n    \"region\": \"Region\",\n    \"country\": \"Country\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/properties/{{propertyId}}/location/{{locationId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"properties",
+										"{{propertyId}}",
+										"location",
+										"{{locationId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "TENANT",
+			"item": [
+				{
+					"name": "tenant_login",
+					"item": [
+						{
+							"name": "Get tenant login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "fa4ac445-5883-4e9b-80d5-666ffe945106",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"var json = pm.response.json();;",
+											"var token_tenant =  json[\"access_token\"];",
+											"var refresh_token_tenant = json[\"refresh_token\"];",
+											"pm.environment.set(\"access_token_tenant\", token_tenant);",
+											"pm.environment.set(\"refresh_token_tenant\", refresh_token_tenant);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "client_id",
+											"value": "forent",
+											"type": "text"
+										},
+										{
+											"key": "client_secret",
+											"value": "4bfb1902-b2c2-4083-b2c2-02b3b98fcec3",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "username",
+											"value": "forent_tenant",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "tenantpassword",
+											"type": "text"
+										},
+										{
+											"key": "grant_type",
+											"value": "password",
+											"type": "text"
+										},
+										{
+											"key": "scope",
+											"value": "openid",
+											"type": "text"
+										},
+										{
+											"key": "client_secret",
+											"value": "5a7a9552-3677-4624-acb4-b8da1f2b8556",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{keycloak}}/realms/forentkeycloak/protocol/openid-connect/token",
+									"host": [
+										"{{keycloak}}"
+									],
+									"path": [
+										"realms",
+										"forentkeycloak",
+										"protocol",
+										"openid-connect",
+										"token"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "tenant_user",
+					"item": [
+						{
+							"name": "Add tenant",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1eadfc67-5d79-4728-8c4a-f6d23219105d",
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"type\": \"tenant\",\n    \"first_name\": \"TENANT\",\n    \"middle_name\": \"Narvaez\",\n    \"last_name\": \"Quisido\",\n    \"email\": \"quisido@gmail.com\",\n    \"phone_number\": \"+699111111111\",\n    \"user_password\": \"password123\"\n    \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/registration",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get tenant info",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "ada493dd-ad19-48a7-b2d0-98b10ea902b2",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token_tenant}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/{{userId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update tenant",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "4dc0cb51-d611-435e-bc12-092a864c2ea0",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token_tenant}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"type\": \"tenant\",\n    \"first_name\": \"TENANT Devorah\",\n    \"middle_name\": \"Narvaez\",\n    \"last_name\": \"Quisido\",\n    \"email\": \"qdevorah01499@gmail.com\",\n    \"phone_number\": \"+699111111111\",\n    \"user_password\": \"password123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/{{userId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "tenant_favorites",
+					"item": [
+						{
+							"name": "Add Favorite Property",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "61f8b93a-a93c-4914-8c3b-250ab07be91f",
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token_tenant}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/{{userId}}/properties/{{propertyId}}/favorites",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"{{userId}}",
+										"properties",
+										"{{propertyId}}",
+										"favorites"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of favorite properties",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "02c75a8f-48a9-46c1-a883-488f9b1d5618",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token_tenant}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/{{userId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get specific favorite",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "e802a6e5-f09f-4691-927b-9638a7817cfb",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token_tenant}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/{{userId}}/favorites/{{favoriteId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"{{userId}}",
+										"favorites",
+										"{{favoriteId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "tenant_schedule",
+					"item": [
+						{
+							"name": "Add Schedule",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "e6ae4ace-0786-4974-8852-e36db59678b2",
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token_tenant}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"schedule_date_from\": \"2020-11-11\",\n    \"schedule_date_to\": \"2020-11-12\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/{{userId}}/properties/{{propertyId}}/schedules",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"{{userId}}",
+										"properties",
+										"{{propertyId}}",
+										"schedules"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get specific tenant's list schedules",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a807067b-8716-428f-93c0-8e92520bd2b8",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token_tenant}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/{{userId}}/schedules",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"{{userId}}",
+										"schedules"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get specific tenant's specific schedule",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "fd0a1fcb-8419-4156-8d56-fcee035ea4fc",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token_tenant}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/{{userId}}/schedules/{{scheduleId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"{{userId}}",
+										"schedules",
+										"{{scheduleId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "tenant_reviews",
+					"item": [
+						{
+							"name": "Add Review",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "81d5dc87-65bb-4f34-9785-369c6014d805",
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token_tenant}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"rating\": 3,\n    \"comment\": \"So-so place\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/{{userId}}/properties/{{propertyId}}/reviews",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"{{userId}}",
+										"properties",
+										"{{propertyId}}",
+										"reviews"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "host_schedule",
+			"item": [
+				{
+					"name": "Update Schedule Status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7aea99c7-c480-4790-9789-456d3e568e8c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token_host}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/{{userId}}/properties/{{propertyId}}/schedules/{{scheduleId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"{{userId}}",
+								"properties",
+								"{{propertyId}}",
+								"schedules",
+								"{{scheduleId}}"
+							]
+						},
+						"description": "Update Schedule Status for Accepting Booking Schedule Request"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "ADMIN",
+			"item": [
+				{
+					"name": "admin_login",
+					"item": [
+						{
+							"name": "Get admin login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1cbeb573-47c0-47f8-8d29-5c08e31a6124",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"var json = pm.response.json();;",
+											"var token_admin =  json[\"access_token\"];",
+											"var refresh_token_admin = json[\"refresh_token\"];",
+											"pm.environment.set(\"access_token_admin\", token_admin);",
+											"pm.environment.set(\"refresh_token_admin\", refresh_token_admin);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "client_id",
+											"value": "forent",
+											"type": "text"
+										},
+										{
+											"key": "client_secret",
+											"value": "4bfb1902-b2c2-4083-b2c2-02b3b98fcec3",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "username",
+											"value": "forent_admin",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "adminpassword",
+											"type": "text"
+										},
+										{
+											"key": "grant_type",
+											"value": "password",
+											"type": "text"
+										},
+										{
+											"key": "scope",
+											"value": "openid",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "client_secret",
+											"value": "5a7a9552-3677-4624-acb4-b8da1f2b8556",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{keycloak}}/realms/forentkeycloak/protocol/openid-connect/token",
+									"host": [
+										"{{keycloak}}"
+									],
+									"path": [
+										"realms",
+										"forentkeycloak",
+										"protocol",
+										"openid-connect",
+										"token"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "admin_user",
+					"item": [
+						{
+							"name": "Get list of users",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "2fcd4957-b76b-4fc8-bc0c-43c26514315b",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get specific user",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "7e915cea-50dc-4f86-9587-6c9d79b9c5f4",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/{{userId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "admin_schedule",
+					"item": [
+						{
+							"name": "Get a list of schedules",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "97ba1574-c746-4480-b2b2-19c7e837ee4b",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/schedules",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"schedules"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get a specific Schedule",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "ef232964-b062-4e11-b8d2-de081c2121a9",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/schedules/{{scheduleId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"schedules",
+										"{{scheduleId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get specific tenant's specific schedule",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "9626ce59-78d7-4abc-b147-5fa1435b5082",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/{{userId}}/schedules/{{scheduleId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"{{userId}}",
+										"schedules",
+										"{{scheduleId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "admin_amenities",
+					"item": [
+						{
+							"name": "Get a property amenity",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "24879230-935a-4cca-9796-9993f41ca1e3",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/properties/{{propertyId}}/amenities/{{amenitiesId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"properties",
+										"{{propertyId}}",
+										"amenities",
+										"{{amenitiesId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "admin_reviews",
+					"item": [
+						{
+							"name": "Get list of all reviews",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "6f50e561-2277-4db4-80d3-3b1446caca1f",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/reviews",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reviews"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get specific review",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "ace7302a-9167-4222-9f4b-2bc02d5a996f",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/reviews/{{reviewId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reviews",
+										"{{reviewId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "COMMONS",
+			"item": [
+				{
+					"name": "Properties",
+					"item": [
+						{
+							"name": "Get list of properties",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "bdbcdda6-1346-43b3-ac62-20b9276604b4",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/properties",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"properties"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get specific property",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "fff28038-2fca-4edf-a68d-626698e889c7",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/properties/{{propertyId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"properties",
+										"{{propertyId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Location",
+					"item": [
+						{
+							"name": "Get specific location",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "0f9250ee-bdff-4807-a3a6-f2cc2bf70baa",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/location/{{locationId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"location",
+										"{{locationId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get specific property's location",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "f2a0caa1-0ec8-4e4a-8e22-4b879cce43ef",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/properties/{{propertyId}}/location/{{locationId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"properties",
+										"{{propertyId}}",
+										"location",
+										"{{locationId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get specific property's location without specifiying id_location",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1d0e1bb4-92a3-4a09-bb68-2120cf06e792",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/properties/{{propertyId}}/location",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"properties",
+										"{{propertyId}}",
+										"location"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get a list of locations",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "32c08840-96b5-4baa-a2ec-e36e295dc16e",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/location",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"location"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Reviews",
+					"item": [
+						{
+							"name": "Get a list of specific property reviews",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "c1f0a30a-aece-44af-a8b5-c813dcd6b0a7",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/properties/{{propertyId}}/reviews",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"properties",
+										"{{propertyId}}",
+										"reviews"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get a specific review of the property",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "6b1f1ff3-4974-4d90-a99a-fde97a3df3f1",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/properties/{{propertyId}}/reviews/{{reviewId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"properties",
+										"{{propertyId}}",
+										"reviews",
+										"{{reviewId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Schedules",
+					"item": [
+						{
+							"name": "Get specific property's list of schedules",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "5c33132d-57f0-46fd-a0d3-be6f73e03d3b",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/properties/{{propertyId}}/schedules",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"properties",
+										"{{propertyId}}",
+										"schedules"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get specific property's specific schedule",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "c0eac0af-0171-4dec-bc7c-ea477c510c45",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/properties/{{propertyId}}/schedules/{{scheduleId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"properties",
+										"{{propertyId}}",
+										"schedules",
+										"{{scheduleId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "66ad6022-18db-4f6e-ad25-bcd88411e47d",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "c9180cfe-224b-4275-86ec-38a596244ce5",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "df30265d-c086-4d5e-ac66-049cbd3f6f2b",
+				"type": "text/javascript",
+				"exec": [
+					"var userId = pm.environment.get(\"userId\");",
+					"",
+					"if( !userId) {",
+					"    pm.environment.set(\"userId\", 1);",
+					"}",
+					"",
+					"var propertyId = pm.environment.get(\"propertyId\");",
+					"",
+					"if( !propertyId) {",
+					"    pm.environment.set(\"propertyId\", 1);",
+					"}",
+					"",
+					"var amenitiesId = pm.environment.get(\"amenitiesId\");",
+					"",
+					"if( !amenitiesId) {",
+					"    pm.environment.set(\"amenitiesId\", 1);",
+					"}",
+					"",
+					"var locationId = pm.environment.get(\"locationId\");",
+					"",
+					"if( !locationId) {",
+					"    pm.environment.set(\"locationId\", 1);",
+					"}",
+					"",
+					"var reviewId = pm.environment.get(\"reviewId\");",
+					"",
+					"if( !reviewId) {",
+					"    pm.environment.set(\"reviewId\", 1);",
+					"}",
+					"",
+					"var scheduleId = pm.environment.get(\"scheduleId\");",
+					"",
+					"if( !scheduleId) {",
+					"    pm.environment.set(\"scheduleId\", 1);",
+					"}",
+					"",
+					"var favoriteId = pm.environment.get(\"favoriteId\");",
+					"",
+					"if( !favoriteId) {",
+					"    pm.environment.set(\"favoriteId\", 1);",
+					"}",
+					"",
+					"var scheduleId = pm.environment.get(\"scheduleId\");",
+					"",
+					"if( !scheduleId) {",
+					"    pm.environment.set(\"scheduleId\", 1);",
+					"}"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "f3e5ddeb-08d7-4d7b-9a0c-59f1883797d8",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "d7dddcf3-ee43-4630-bb18-9f2eaca2017f",
+			"key": "baseUrl",
+			"value": "http://localhost:8090"
+		},
+		{
+			"id": "27b85e49-78ce-4ea8-8152-bac9d5f36ecd",
+			"key": "keycloak",
+			"value": "http://localhost:8080/auth"
+		},
+		{
+			"id": "b41c8b6c-234d-4760-b0b9-059dc183b8d4",
+			"key": "userId",
+			"value": "{{userId}}",
+			"disabled": true
+		}
+	],
+	"protocolProfileBehavior": {}
+}

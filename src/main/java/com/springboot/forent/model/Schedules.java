@@ -14,20 +14,24 @@ public class Schedules {
 	private int id_schedule;
 	private int id_property;
 	private int id_user;
+	private int status;
 	private String schedule_date_from;
 	private String schedule_date_to;
 	
 	public Schedules() {	
 	}
 	
-	public Schedules(int id_schedule, int id_property, int id_user, String schedule_date_from,
+	public Schedules(int id_schedule, int id_property, int id_user, int status, String schedule_date_from,
 			String schedule_date_to) {
+		super();
 		this.id_schedule = id_schedule;
 		this.id_property = id_property;
 		this.id_user = id_user;
+		this.status = status;
 		this.schedule_date_from = schedule_date_from;
 		this.schedule_date_to = schedule_date_to;
 	}
+
 
 	public int getId_schedule() {
 		return id_schedule;
@@ -51,8 +55,16 @@ public class Schedules {
 
 	public void setId_user(int id_user) {
 		this.id_user = id_user;
-	}	
+	}
 	
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
 	public String getSchedule_date_from() {
 		return schedule_date_from;
 	}
