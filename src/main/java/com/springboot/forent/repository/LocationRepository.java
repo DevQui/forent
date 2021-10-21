@@ -25,10 +25,10 @@ public interface LocationRepository extends CrudRepository<Location, Integer>{
 	@Query(nativeQuery = true, value ="INSERT INTO location(" +
 			"id_property, town, city, region, country) " + 
 		"SELECT  ?1, ?2, ?3, ?4, ?5 FROM properties " + 
-		"WHERE EXISTS (SELECT id_property FROM properties WHERE id_property = ?1) " +
+		"WHERE EXISTS (SELECT id_property FROM properties WHERE id_property = ?1 AND users_id_user = ?6) " +
 		"AND NOT EXISTS( SELECT id_property FROM location WHERE id_property = ?1)" +
  		"LIMIT 1")
-	void savePropertyLocation(Integer id_property, String town, String city, String region, String country);
+	void savePropertyLocation(Integer id_property, String town, String city, String region, String country, Integer id_user);
 
 	@Transactional
 	@Modifying(clearAutomatically = true)

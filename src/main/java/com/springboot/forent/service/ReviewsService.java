@@ -49,12 +49,12 @@ public class ReviewsService {
 		
    	}   
 
-	public ResponseEntity<String> deleteReview(Integer id_property, Integer id) {
-	   Integer deletedReviewStatus = reviewsRepository.deleteReviewFromProperty(id_property, id);
+	public ResponseEntity<String> deleteReview(Integer id_property, Integer id_review, Integer id_user) {
+	   Integer deletedReviewStatus = reviewsRepository.deleteReviewFromProperty(id_property, id_review, id_user);
        if(deletedReviewStatus > 0) {
     	   return new ResponseEntity<String>("Successfully Deleted Review", HttpStatus.OK); 
        }else {
-    	   throw new DataNotFoundException(id);
+    	   throw new DataNotFoundException(id_review);
        }
 	}
 
@@ -77,4 +77,23 @@ public class ReviewsService {
 		}
 		
 	}
+
+	public List<Reviews> listAllReviewsOfUser(Integer id_user) {
+		List<Reviews> reviews = (List<Reviews>) reviewsRepository.listAllReviewsOfUser(id_user);
+		if(!reviews.isEmpty()) {
+			return reviews;
+		}else {
+			throw new NoDataFoundException();
+		}
+	}
+
+	public Reviews getReviewOfUser(Integer id_user, Integer id_review) {
+		try{
+			Reviews review = reviewsRepository.getReviewOfUser(id_user, id_review);
+			return review;
+		}catch(Exception ex){
+			throw new DataNotFoundException(id_review);
+		}
+	}
+
 }

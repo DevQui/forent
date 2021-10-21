@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.forent.model.Reviews;
@@ -45,8 +46,24 @@ public class ReviewsController {
 		return reviewsService.saveReview(id_user, id_property,review);
     }
 	
-    @DeleteMapping("/properties/{id_property}/reviews/{id_review}")
-    public ResponseEntity<String> delete(@PathVariable Integer id_property, @PathVariable Integer id_review) {
-        return reviewsService.deleteReview(id_property, id_review);
+    @DeleteMapping("/users/{id_user}/properties/{id_property}/reviews/{id_review}")
+    public ResponseEntity<String> delete(@PathVariable Integer id_property, @PathVariable Integer id_review, @PathVariable Integer id_user) {
+        return reviewsService.deleteReview(id_property, id_review, id_user);
     }
+    
+    @DeleteMapping("/users/{id_user}/properties/{id_property}/reviews")
+    public ResponseEntity<String> deleteReview(@PathVariable Integer id_property, @RequestParam Integer id_review, @PathVariable Integer id_user) {
+        return reviewsService.deleteReview(id_property, id_review, id_user);
+    }
+    
+    @GetMapping("users/{id_user}/reviews")
+    public List<Reviews> listAllReviewsOfUser(@PathVariable Integer id_user) {
+        return reviewsService.listAllReviewsOfUser(id_user);
+    }
+	
+	@GetMapping("users/{id_user}/reviews/{id_review}")
+    public Reviews getReviewOfUser(@PathVariable Integer id_user, @PathVariable Integer id_review) {
+        return reviewsService.getReviewOfUser(id_user, id_review);
+    }
+	
 }

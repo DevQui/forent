@@ -144,9 +144,9 @@ class ReviewsServiceTest {
 		Reviews review1 = new Reviews(1, 1, 4, "Awesome host", created_datetime);
 		Integer deleteReviewStatus = 1;
 		
-		doReturn(deleteReviewStatus).when(repo).deleteReviewFromProperty(review1.getIdProperty(), review1.getIdReview());
+		doReturn(deleteReviewStatus).when(repo).deleteReviewFromProperty(review1.getIdProperty(), review1.getIdReview(), review1.getId_user());
 		
-		ResponseEntity<String> response = service.deleteReview(review1.getIdProperty(), review1.getIdReview());
+		ResponseEntity<String> response = service.deleteReview(review1.getIdProperty(), review1.getIdReview(), review1.getId_user());
 		
 		Assertions.assertEquals(response.getStatusCodeValue(), 200);
 	}
@@ -201,7 +201,7 @@ class ReviewsServiceTest {
 	@WithMockUser(roles = "tenant")
 	void deleteReviewNOTFOUND() throws DataNotFoundException {
 		Assertions.assertThrows(DataNotFoundException.class, () -> {
-			service.deleteReview(1,1);
+			service.deleteReview(1,1,1);
 		  });
 	}
 }

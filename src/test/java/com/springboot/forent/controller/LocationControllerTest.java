@@ -166,15 +166,15 @@ class LocationControllerTest {
 	
 	
 	@Test
-	@DisplayName("POST /properties/{id_property}/location is SUCCESSFUL")
+	@DisplayName("POST /users/{id_user}/properties/{id_property}/location is SUCCESSFUL")
 	@WithMockUser(roles = "host")
 	void savePropertyLocation() throws Exception {
 		Location loc = new Location(1,1,"Town1","City1","Region1","Country1");
 		
 		ResponseEntity<String> response = new ResponseEntity<String>("Successfully Added Property Location", HttpStatus.CREATED);
-		doReturn(response).when(service).savePropertyLocation(1,loc);	
+		doReturn(response).when(service).savePropertyLocation(1,loc,1);	
 		
-		mockMvc.perform(post("/properties/{id_property}/location",1)
+		mockMvc.perform(post("/users/{id_user}/properties/{id_property}/location",1,1)
 			.with(csrf())
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(asJsonString(loc)))

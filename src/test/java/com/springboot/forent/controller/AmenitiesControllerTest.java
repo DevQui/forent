@@ -105,15 +105,16 @@ class AmenitiesControllerTest{
 	
 	
 	@Test
-	@DisplayName("POST /properties/{id_property}/amenities is SUCCESSFUL")
+	@DisplayName("POST /users/{id_user}/properties/{id_property}/amenities is SUCCESSFUL")
 	@WithMockUser(roles = "host")
 	void saveAmenities() throws Exception {
 		Amenities amenity = new Amenities(1, 1, 2, 1, 2, "Wifi, Cable");
+		Integer user_id = 1;
 		ResponseEntity<String> response = new ResponseEntity<String>("Successfully Added Amenity", HttpStatus.CREATED);
 		
-		doReturn(response).when(service).saveAmenities(1,amenity);	
+		doReturn(response).when(service).saveAmenities(1,amenity, user_id);	
 		
-		mockMvc.perform(post("/properties/{id_property}/amenities",1)
+		mockMvc.perform(post("/users/{id_user}/properties/{id_property}/amenities",1,1)
 			.with(csrf())
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(asJsonString(amenity)))
@@ -127,10 +128,10 @@ class AmenitiesControllerTest{
 	void updateAmenitiesSuccess() throws Exception{
 		
 		Amenities amenityPut = new Amenities(1, 1, 3, 2, 1, "Wifi, Cable");
-		
+		Integer user_id = 1;
 		ResponseEntity<String>response = new ResponseEntity<String>("Successfully Updated Amenity", HttpStatus.OK);
 		
-		doReturn(response).when(service).saveAmenities(1, amenityPut);
+		doReturn(response).when(service).saveAmenities(1, amenityPut, user_id);
 		
 		mockMvc.perform(patch("/properties/{id_property}/amenities/{id}",1,1)
 				.with(csrf())

@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.springboot.forent.exception.DataNotFoundException;
+import com.springboot.forent.exception.NoDataFoundException;
 import com.springboot.forent.model.Amenities;
 import com.springboot.forent.repository.AmenitiesRepository;
 import com.springboot.forent.repository.PropertiesRepository;
@@ -25,7 +26,7 @@ public class AmenitiesService {
 		if(!amenities.isEmpty()) {
 			return amenities;
 		}else {
-			throw new DataNotFoundException(id_property);
+			throw new NoDataFoundException();	
 		} 
 	}
 	
@@ -39,12 +40,15 @@ public class AmenitiesService {
         
     }
 	
-	public ResponseEntity<String> saveAmenities(Integer id_property, Amenities amenities) {
-		amenitiesRepository.saveAmenity(id_property, amenities.getRooms(),
-		amenities.getToilets(), amenities.getBeds(), amenities.getOther_amenities());
-		
-		propertiesRepository.setAmenitiesId(id_property);
-		return new ResponseEntity<String>("Successfully Added Amenity", HttpStatus.CREATED);
+	public ResponseEntity<String> saveAmenities(Integer id_property, Amenities amenities, Integer id_user) {
+		Integer saveStatus = amenitiesRepository.saveAmenity(id_property, amenities.getRooms(),
+		amenities.getToilets(), amenities.getBeds(), amenities.getOther_amenities(), id_user);
+		if(saveStatus > 0) {
+			propertiesRepository.setAmenitiesId(id_property);
+			return new ResponseEntity<String>("Successfully Added Amenity", HttpStatus.CREATED);
+		}else {
+			throw new DataNotFoundException(id_property);
+		}
 	
     }
 

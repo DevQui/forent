@@ -251,15 +251,15 @@ class SchedulesControllerTest {
 	}
 	
 	@Test
-	@DisplayName("DELETE /users/{id_user}/properties/{id_property}/schedules/{id_schedule} SUCCESS")
+	@DisplayName("DELETE /users/{id_user}/schedules/{id_schedule} SUCCESS")
 	@WithMockUser(roles = "tenant")
 	void deleteSchedule() throws Exception{
 		Schedules schedule = new Schedules(1, 1, 1, 0, "2020-11-01", "2020-11-02");
 		ResponseEntity<String> response = new ResponseEntity<String>("Schedule Deleted", HttpStatus.OK);
 		
-		doReturn(response).when(service).deleteSchedule(1, 1, 1);
+		doReturn(response).when(service).deleteSchedule(1, 1);
 		
-		mockMvc.perform(delete("/users/{id_user}/properties/{id_property}/schedules/{id_schedule}",1,1,1)
+		mockMvc.perform(delete("/users/{id_user}/schedules/{id_schedule}",1,1)
 				.with(csrf())
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(asJsonString(schedule)))

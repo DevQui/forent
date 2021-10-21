@@ -73,10 +73,19 @@ public class SchedulesService {
 		}else {
 			throw new DataNotFoundException(id_schedule);
 		}
-	}  
+	}
     
-    public ResponseEntity<String> deleteSchedule(Integer id_user, Integer id_property, Integer id_schedule) {
-        Integer isDeleted = schedulesRepository.deleteSchedule(id_user, id_property, id_schedule);
+    public ResponseEntity<String> updateSchedule2(Integer id_user, Integer id_property, Integer id_schedule) {
+		Integer updated = schedulesRepository.acceptSchedule2(id_user, id_property, id_schedule, 1);
+		if(updated > 0) {
+			return new ResponseEntity<String>("Booking Schedule Request Accepted", HttpStatus.OK);
+		}else {
+			throw new DataNotFoundException(id_schedule);
+		}
+	}
+    
+    public ResponseEntity<String> deleteSchedule(Integer id_user, Integer id_schedule) {
+        Integer isDeleted = schedulesRepository.deleteSchedule(id_user, id_schedule);
     	if(isDeleted > 0) {
     		return new ResponseEntity<String>("Schedule Deleted", HttpStatus.OK);
     	}else{

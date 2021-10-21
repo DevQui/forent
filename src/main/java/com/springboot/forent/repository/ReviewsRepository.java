@@ -1,5 +1,7 @@
 package com.springboot.forent.repository;
 
+
+
 import java.time.OffsetDateTime;
 import java.util.List;
 
@@ -22,8 +24,8 @@ public interface ReviewsRepository extends CrudRepository<Reviews, Integer>{
 	
 	@Transactional
 	@Modifying(clearAutomatically = true)
-	@Query("DELETE FROM Reviews r WHERE r.id_property = ?1 AND r.id_review = ?2")
-	Integer deleteReviewFromProperty(Integer id_property, Integer id);
+	@Query("DELETE FROM Reviews r WHERE r.id_property = ?1 AND r.id_review = ?2 AND r.id_user = ?3")
+	Integer deleteReviewFromProperty(Integer id_property, Integer id, Integer id_user);
 
 	@Transactional
 	@Modifying(clearAutomatically = true)
@@ -34,4 +36,10 @@ public interface ReviewsRepository extends CrudRepository<Reviews, Integer>{
 		"EXISTS (SELECT id_user FROM users WHERE id_user = ?2)" +
 		"LIMIT 1")
 	Integer saveReview(Integer id_property, int id_user, int rating, String comment, OffsetDateTime created_datetime);
+
+	@Query("SELECT r FROM Reviews r WHERE r.id_user = ?1")
+	List<Reviews> listAllReviewsOfUser(Integer id_user);
+
+	@Query("SELECT r FROM Reviews r WHERE r.id_user = ?1 AND id_review = ?2")
+	Reviews getReviewOfUser(Integer id_user, Integer id_review);
 }

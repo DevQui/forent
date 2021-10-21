@@ -29,9 +29,9 @@ public class AmenitiesController {
         return amenitiesService.getPropertyAmenities(id_property, id_amenity);
 	}	
 	
-	@PostMapping("/properties/{id_property}/amenities")
-	public ResponseEntity<String> saveAmenities(@RequestBody Amenities amenities, @PathVariable Integer id_property) {
-        return amenitiesService.saveAmenities(id_property, amenities);
+	@PostMapping("/users/{id_user}/properties/{id_property}/amenities")
+	public ResponseEntity<String> saveAmenities(@RequestBody Amenities amenities, @PathVariable Integer id_property, @PathVariable Integer id_user) {
+        return amenitiesService.saveAmenities(id_property, amenities, id_user);
     }	
 	
 	@PatchMapping("/properties/{id_property}/amenities/{id_amenity}")

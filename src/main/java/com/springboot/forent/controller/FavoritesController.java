@@ -18,6 +18,16 @@ public class FavoritesController {
 	@Autowired
     private FavoritesService favoritesService;
 	
+	@GetMapping("/favorites")
+    public List<Favorites> listAllFavoriteProperties(){
+        return favoritesService.listAllUserFavoriteProperties();
+    }
+	
+	@GetMapping("/favorites/{id_favorite}")
+    public Favorites getSpecificFavoriteProperty(@PathVariable Integer id_favorite){
+        return favoritesService.getSpecificFavoriteProperty(id_favorite);
+    }
+	
 	@GetMapping("/users/{id_user}/favorites")
     public List<Favorites> listAllUserFavorites(@PathVariable Integer id_user) {
         return favoritesService.listAllUserFavorites(id_user);

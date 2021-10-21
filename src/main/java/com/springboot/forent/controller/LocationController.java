@@ -42,9 +42,9 @@ public class LocationController {
 	}	
 	
 	
-	@PostMapping("/properties/{id_property}/location")
-	public ResponseEntity<String> addPropertyLocation(@RequestBody @Valid Location location, @PathVariable Integer id_property) {
-		return locationService.savePropertyLocation(id_property, location);
+	@PostMapping("/users/{id_user}/properties/{id_property}/location")
+	public ResponseEntity<String> addPropertyLocation(@RequestBody @Valid Location location, @PathVariable Integer id_property, @PathVariable Integer id_user) {
+		return locationService.savePropertyLocation(id_property, location, id_user);
     }
 	
 	@PatchMapping("/properties/{id_property}/location/{id_location}")

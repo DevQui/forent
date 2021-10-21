@@ -198,9 +198,9 @@ class SchedulesServiceTest {
 	void deleteSchedule() throws Exception{
 		Schedules schedule = new Schedules(3, 2, 3, 0, "2020-11-01", "2020-11-04");
 		Integer deletedStatus = 1;
-		doReturn(deletedStatus).when(repo).deleteSchedule(schedule.getId_user(), schedule.getId_property(), schedule.getId_schedule());
+		doReturn(deletedStatus).when(repo).deleteSchedule(schedule.getId_user(), schedule.getId_schedule());
 		
-		ResponseEntity<String> deletedSchedule = service.deleteSchedule(schedule.getId_user(), schedule.getId_property(), schedule.getId_schedule());
+		ResponseEntity<String> deletedSchedule = service.deleteSchedule(schedule.getId_user(), schedule.getId_schedule());
 		
 		Assertions.assertEquals(deletedSchedule.getStatusCodeValue(), 200);	
 	}
@@ -257,7 +257,7 @@ class SchedulesServiceTest {
 	@DisplayName("TEST deleteScheduleNOTFOUND")
 	void deleteScheduleNOTFOUND() throws DataNotFoundException {
 		Assertions.assertThrows(DataNotFoundException.class, () -> {
-			service.deleteSchedule(1,1,1);
+			service.deleteSchedule(1,1);
 		  });
 	}
 	

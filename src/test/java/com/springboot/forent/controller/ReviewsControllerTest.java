@@ -195,15 +195,15 @@ class ReviewsControllerTest {
 	}*/
 	
 	@Test
-	@DisplayName("DELETE /properties/{id_property}/reviews/1 SUCCESS")
+	@DisplayName("DELETE /users/{id_user}/properties/{id_property}/reviews/{id_review} SUCCESS")
 	@WithMockUser(roles = "tenant")
 	void deleteReviews() throws Exception{
 		Reviews review = new Reviews(1, 1, 4, "Awesome host", created_datetime);
 		ResponseEntity<String> response = new ResponseEntity<String>("Successfully Deleted Review", HttpStatus.OK);
 		
-		doReturn(response).when(service).deleteReview(1,1);
+		doReturn(response).when(service).deleteReview(1,1,1);
 		
-		mockMvc.perform(delete("/properties/{id_property}/reviews/{id}",1,1)
+		mockMvc.perform(delete("/users/{id_user}/properties/{id_property}/reviews/{id_review}",1,1,1)
 				.with(csrf())
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(asJsonString(review)))

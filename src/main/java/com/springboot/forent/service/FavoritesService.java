@@ -52,4 +52,22 @@ public class FavoritesService {
     		throw new DataNotFoundException(id_favorite);
     	}
     }
+
+	public List<Favorites> listAllUserFavoriteProperties() {
+		List<Favorites> favorites = favoritesRepository.listAllUserFavoriteProperties();
+		if(!favorites.isEmpty()) {
+			return favorites;
+		}else {
+			throw new NoDataFoundException();
+		}
+	}
+
+	public Favorites getSpecificFavoriteProperty(Integer id_favorite) {
+		Favorites fave = favoritesRepository.getSpecificFavoriteProperty(id_favorite);
+        if(fave != null) {
+        	return fave;
+        }else {
+        	throw new DataNotFoundException(id_favorite);
+        }
+	}
 }

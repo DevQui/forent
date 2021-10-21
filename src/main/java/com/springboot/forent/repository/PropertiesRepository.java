@@ -57,7 +57,7 @@ public interface PropertiesRepository extends CrudRepository<Properties, Integer
 	@Query(nativeQuery = true, value ="INSERT INTO properties( " +
 			"users_id_user, type, name, description, price, created_datetime) " + 
 		"SELECT  ?1, ?2, ?3, ?4, ?5, ?6 FROM users " + 
-		"WHERE EXISTS (SELECT id_user FROM users WHERE id_user = ?1) " +
+		"WHERE EXISTS (SELECT id_user FROM users WHERE id_user = ?1 AND type = 'host') " +
 		"LIMIT 1")
 	Integer saveProperty(Integer id_user, String type, String name, String description, Float price,
 			OffsetDateTime created_datetime);

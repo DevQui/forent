@@ -141,13 +141,13 @@ class UsersControllerTest {
 	}
 	
 	@Test
-	@DisplayName("DELETE /users/1 SUCCESS")
+	@DisplayName("DELETE /users/{id} SUCCESS")
 	@WithMockUser(roles = "host")
 	void deleteUser() throws Exception{
 		Users user = new Users(1, "host","John", "Middle Name", "Last-Name-John", "john@gmail.com", "+6911111111111", "password123",created_datetime);
 		doReturn("User deleted").when(service).deleteUser(1);
 		
-		mockMvc.perform(delete("/users/1")
+		mockMvc.perform(delete("/users/{id}",1)
 				.with(csrf())
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(asJsonString(user)))

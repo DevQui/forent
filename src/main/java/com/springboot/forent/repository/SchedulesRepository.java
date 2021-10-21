@@ -39,12 +39,17 @@ public interface SchedulesRepository extends CrudRepository<Schedules, Integer>{
 
 	@Transactional
 	@Modifying(clearAutomatically = true)
-	@Query("DELETE Schedules WHERE id_user = ?1 AND id_property = ?2 AND id_schedule = ?3")
-	Integer deleteSchedule(Integer id_user, Integer id_property, Integer id_schedule);
+	@Query("DELETE Schedules WHERE id_user = ?1 AND id_schedule = ?2")
+	Integer deleteSchedule(Integer id_user, Integer id_schedule);
 
 	@Query("SELECT sched FROM Schedules sched WHERE sched.id_schedule = ?1")
 	Schedules getScheduleById(Integer id_schedule);
 	
 	@Query("SELECT sched FROM Schedules sched WHERE sched.id_property = ?1 AND sched.id_schedule = ?2")
 	Schedules getPropertySchedule(Integer id_property, Integer id_schedule);
+
+	@Transactional
+	@Modifying(clearAutomatically = true)
+	@Query("UPDATE Schedules SET status = ?4 WHERE id_user = ?1 AND id_property =?2 AND id_schedule = ?3")
+	Integer acceptSchedule2(Integer id_user, Integer id_property, Integer id_schedule, int status);
 }

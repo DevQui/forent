@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.forent.model.Schedules;
@@ -65,9 +66,14 @@ public class SchedulesController {
     public ResponseEntity<String> updateSchedule(@PathVariable Integer id_user, @PathVariable Integer id_property, @PathVariable Integer id_schedule) { 
     	return schedulesService.updateSchedule(id_user, id_property, id_schedule);
     }
+	
+	@PatchMapping("/users/{id_user}/properties/{id_property}/schedules")
+    public ResponseEntity<String> updateSchedule2(@PathVariable Integer id_user, @PathVariable Integer id_property, @RequestParam Integer id_schedule) { 
+    	return schedulesService.updateSchedule2(id_user, id_property, id_schedule);
+    }
 	 
-    @DeleteMapping("/users/{id_user}/properties/{id_property}/schedules/{id_schedule}")
-    public ResponseEntity<String> delete(@PathVariable Integer id_user, @PathVariable Integer id_property, @PathVariable Integer id_schedule) {
-        return schedulesService.deleteSchedule(id_user, id_property, id_schedule);
+    @DeleteMapping("/users/{id_user}/schedules/{id_schedule}")
+    public ResponseEntity<String> delete(@PathVariable Integer id_user, @PathVariable Integer id_schedule) {
+        return schedulesService.deleteSchedule(id_user, id_schedule);
     }
 }

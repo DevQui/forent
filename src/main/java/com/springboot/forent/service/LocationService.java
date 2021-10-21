@@ -39,9 +39,9 @@ public class LocationService {
         }
 	}
 	
-	public ResponseEntity<String> savePropertyLocation(Integer id_property, Location location) {
+	public ResponseEntity<String> savePropertyLocation(Integer id_property, Location location, Integer id_user) {
 		locationRepository.savePropertyLocation(id_property, location.getTown(), 
-		location.getCity(), location.getRegion(), location.getCountry());
+		location.getCity(), location.getRegion(), location.getCountry(), id_user);
 	
 		propertiesRepository.setLocationId(id_property);
 		return new ResponseEntity<String>("Successfully Added Location", HttpStatus.CREATED);

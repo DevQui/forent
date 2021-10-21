@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.springboot.forent.exception.DataNotFoundException;
 import com.springboot.forent.exception.NoDataFoundException;
 import com.springboot.forent.model.Users;
 import com.springboot.forent.repository.UsersRepository;
@@ -59,7 +60,7 @@ public class UsersService {
 
     public Users getUser(Integer id) {
     	if(usersRepository.findById(id).get() == null) {
-    		throw new NoSuchElementException();
+    		throw new DataNotFoundException(id);
     	}
         return usersRepository.findById(id).get();
     }

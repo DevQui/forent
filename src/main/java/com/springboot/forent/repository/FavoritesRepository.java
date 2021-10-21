@@ -30,4 +30,10 @@ public interface FavoritesRepository extends CrudRepository<Favorites, Integer>{
 			"WHERE EXISTS(SELECT id_user FROM users WHERE id_user = ?1) AND "+
 			"EXISTS(SELECT id_property FROM properties WHERE id_property = ?2) LIMIT 1")
 	Integer savePropertyToFavorites(Integer id_user, Integer id_property);
+
+	@Query("SELECT fave FROM Favorites fave")
+	List<Favorites> listAllUserFavoriteProperties();
+
+	@Query("SELECT fave FROM Favorites fave WHERE id_favorite = ?1")
+	Favorites getSpecificFavoriteProperty(Integer id_favorite);
 }

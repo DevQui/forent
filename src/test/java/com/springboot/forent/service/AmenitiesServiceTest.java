@@ -19,6 +19,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.springboot.forent.exception.DataNotFoundException;
+import com.springboot.forent.exception.NoDataFoundException;
 import com.springboot.forent.model.Amenities;
 import com.springboot.forent.repository.AmenitiesRepository;
 import com.springboot.forent.repository.PropertiesRepository;
@@ -81,11 +82,15 @@ class AmenitiesServiceTest {
 	@DisplayName("TEST saveAmenity")
 	void saveAmenity() throws Exception{
 		Amenities amenity = new Amenities(1, 1, 2, 1, 2, "Wifi, Cable");
+		Integer user_id = 1;
+		Integer saveProperty = 1;
 		
-		Mockito.doNothing().when(repo).saveAmenity(amenity.getId_property(), amenity.getRooms(),
-				amenity.getToilets(), amenity.getBeds(), amenity.getOther_amenities());
+		doReturn(saveProperty).when(repo).saveAmenity(amenity.getId_property(), amenity.getRooms(),
+				amenity.getToilets(), amenity.getBeds(), amenity.getOther_amenities(), user_id);
+		//Mockito.doNothing().when(repo).saveAmenity(amenity.getId_property(), amenity.getRooms(),
+		//		amenity.getToilets(), amenity.getBeds(), amenity.getOther_amenities(), user_id);
 		
-		ResponseEntity<String> addedAmenity = service.saveAmenities(1, amenity);
+		ResponseEntity<String> addedAmenity = service.saveAmenities(1, amenity, user_id);
 		
 		Assertions.assertEquals(addedAmenity.getStatusCodeValue(), 201);
 	}
@@ -107,8 +112,8 @@ class AmenitiesServiceTest {
 	
 	@Test
 	@DisplayName("TEST listPropertyAmenitiesNORESULT")
-	void listPropertyAmenitiesNORESULT() throws DataNotFoundException {
-		Assertions.assertThrows(DataNotFoundException.class, () -> {
+	void listPropertyAmenitiesNORESULT() throws NoDataFoundException {
+		Assertions.assertThrows(NoDataFoundException.class, () -> {
 			service.listPropertyAmenities(1);
 		  });
 	}

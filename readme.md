@@ -78,6 +78,18 @@ localhost: 8080
 3. Add client "forent"
 ```
 
+**Install MySQL** to be able to access the database
+Personally, I'm using Workbench for my database.
+```bash
+Connection Name: Rentals
+Hostname: the_default_ip_address_or_change_to_localhost
+Username: root
+Password: your_password_here_or_if_you_prefer_leave_this_empty
+```
+
+If you modify any of the configurations, make sure you modify the "application.properties" in the src>main>resources
+- Import the "forent_db.sql" file found in the mysql folder.
+
 ## Docker Hub
 [Docker Hub Repository](https://hub.docker.com/repository/docker/dquisido/forent)
 

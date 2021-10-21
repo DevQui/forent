@@ -109,11 +109,12 @@ class LocationServiceTest {
 	@DisplayName("TEST savePropertyLocation")
 	void savePropertyLocation() throws Exception{
 		Location loc = new Location(1,1,"Town1","City1","Region1","Country1");
+		Integer location_id = 1;
 		
 		Mockito.doNothing().when(repo).savePropertyLocation(loc.getId_property(), loc.getTown(),
-				loc.getCity(), loc.getRegion(), loc.getCountry());
+				loc.getCity(), loc.getRegion(), loc.getCountry(),location_id);
 		
-		ResponseEntity<String> response  = service.savePropertyLocation(1,loc);
+		ResponseEntity<String> response  = service.savePropertyLocation(1,loc,location_id);
 		
 		Assertions.assertEquals(response.getStatusCodeValue(), 201);
 	}
@@ -123,10 +124,12 @@ class LocationServiceTest {
 	void updatePropertyLocation() throws Exception{
 		Location loc = new Location(1,1,"Town1","City1","Region1","Country1");
 		Integer updatePropertyLocationStatus = 1;
+		Integer location_id = 1;
+		
 		doReturn(updatePropertyLocationStatus).when(repo).updatePropertyLocation(loc.getId_location(), 
 				loc.getId_property(), loc.getTown(), loc.getCity(), loc.getRegion(), loc.getCountry());
 		
-		ResponseEntity<String> response  = service.updatePropertyLocation(loc,1,1);
+		ResponseEntity<String> response  = service.updatePropertyLocation(loc,1,location_id);
 		
 		Assertions.assertEquals(response.getStatusCodeValue(), 200);
 	}
